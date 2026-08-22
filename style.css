@@ -325,6 +325,15 @@ a:hover {
         url("images/Plume Navi Button.jpg");
 }
 
+.card.crook {
+    background-image:
+        linear-gradient(
+            rgba(8, 10, 8, 0.25),
+            rgba(8, 10, 8, 0.78)
+        ),
+        url("images/Crook Navi Button.jpg");
+}
+
 
 /* ================================
    CARD HOVER
