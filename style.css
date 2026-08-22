@@ -26,19 +26,23 @@ body {
 /* HEADER */
 
 header {
+    position: relative;
+
     text-align: center;
-    padding: 90px 20px 70px;
+    padding: 110px 20px 90px;
 
     background:
         linear-gradient(
-            rgba(5, 7, 5, 0.45),
-            rgba(5, 7, 5, 0.78)
+            rgba(5, 7, 5, 0.35),
+            rgba(5, 7, 5, 0.65)
         ),
         url("Ozyleme Web Banner.jpg");
 
-    background-size: cover;
-    background-position: center;
+    background-size: 100% auto;
+    background-position: center center;
     background-repeat: no-repeat;
+
+    background-color: #0d0f0c;
 
     border-bottom: 1px solid #5d251f;
 }
@@ -56,12 +60,17 @@ header h1 {
 }
 
 header p {
-    margin-top: 10px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 20%;
+
+    margin: 0;
 
     color: #8d927a;
     font-style: italic;
-
     letter-spacing: 0.12em;
+    text-align: center;
 }
 
 
