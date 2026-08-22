@@ -3,6 +3,11 @@
    Base Website Theme
    ================================ */
 
+
+/* ================================
+   GLOBAL
+   ================================ */
+
 * {
     box-sizing: border-box;
 }
@@ -13,8 +18,15 @@ html {
 
 body {
     margin: 0;
+
     background:
-        radial-gradient(circle at top, #273126 0%, #151713 35%, #090a08 100%);
+        radial-gradient(
+            circle at top,
+            #273126 0%,
+            #151713 35%,
+            #090a08 100%
+        );
+
     color: #d8d0bc;
 
     font-family: Georgia, "Times New Roman", serif;
@@ -23,15 +35,19 @@ body {
     min-height: 100vh;
 }
 
-/* HEADER */
+
+/* ================================
+   HEADER / BANNER
+   ================================ */
 
 header {
     position: relative;
+
     width: 100%;
     aspect-ratio: 3 / 1;
-    min-height: 220px;
 
     padding: 0;
+    overflow: hidden;
 
     background:
         linear-gradient(
@@ -41,7 +57,7 @@ header {
         url("Ozyleme Web Banner.jpg");
 
     background-size: cover;
-    background-position: center;
+    background-position: center center;
     background-repeat: no-repeat;
 
     background-color: #0d0f0c;
@@ -50,20 +66,25 @@ header {
 }
 
 
-/* MAIN TITLE */
+/* Main OZYLEME title */
 
 header h1 {
     position: absolute;
 
-    left: 0;
-    right: 0;
+    left: 50%;
     top: 28%;
 
+    transform: translateX(-50%);
+
+    width: 100%;
     margin: 0;
+    padding: 0 20px;
 
     text-align: center;
 
     font-size: clamp(2.5rem, 8vw, 6.5rem);
+    font-weight: normal;
+
     letter-spacing: 0.18em;
 
     color: #e0d6b8;
@@ -75,38 +96,60 @@ header h1 {
 }
 
 
-/* TAGLINE */
+/* Realm of the Dark Dragon tagline */
 
 header p {
     position: absolute;
 
-    left: 0;
-    right: 0;
+    left: 50%;
     bottom: 18%;
 
+    transform: translateX(-50%);
+
+    width: 100%;
     margin: 0;
+    padding: 0 20px;
 
     text-align: center;
 
     color: #8d927a;
-    font-style: italic;
 
     font-size: clamp(0.8rem, 2vw, 1.1rem);
+    font-style: italic;
+
     letter-spacing: 0.12em;
 
-   /* Desktop tagline adjustment */
+    text-shadow:
+        0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+
+/* Desktop tagline adjustment */
+
 @media (min-width: 768px) {
+
     header p {
         bottom: 21%;
-        font-size: clamp(1rem, 2.6vw, 1.45rem);
+
+        font-size: clamp(
+            1rem,
+            2.6vw,
+            1.45rem
+        );
     }
 }
 
-/* NAVIGATION */
+
+/* ================================
+   NAVIGATION
+   ================================ */
 
 nav {
     display: flex;
+
     justify-content: center;
+    align-items: center;
+
     flex-wrap: wrap;
 
     padding: 12px;
@@ -117,6 +160,7 @@ nav {
 
     position: sticky;
     top: 0;
+
     z-index: 100;
 }
 
@@ -129,11 +173,15 @@ nav a {
     margin: 2px;
 
     font-size: 0.95rem;
+
     letter-spacing: 0.08em;
 
     border-bottom: 1px solid transparent;
 
-    transition: 0.2s;
+    transition:
+        color 0.2s,
+        background 0.2s,
+        border-color 0.2s;
 }
 
 nav a:hover {
@@ -141,11 +189,14 @@ nav a:hover {
 
     border-bottom-color: #742f27;
 
-    background: rgba(110, 45, 35, 0.12);
+    background:
+        rgba(110, 45, 35, 0.12);
 }
 
 
-/* MAIN CONTENT */
+/* ================================
+   MAIN CONTENT
+   ================================ */
 
 main {
     max-width: 1100px;
@@ -159,13 +210,17 @@ main > p {
     max-width: 800px;
 }
 
+
+/* ================================
+   HEADINGS
+   ================================ */
+
 h2 {
     margin-top: 50px;
 
     color: #b4ad93;
 
     font-size: 2rem;
-
     font-weight: normal;
 
     letter-spacing: 0.07em;
@@ -188,7 +243,9 @@ h3 {
 }
 
 
-/* LINKS */
+/* ================================
+   LINKS
+   ================================ */
 
 a {
     color: #a99c72;
@@ -199,7 +256,9 @@ a:hover {
 }
 
 
-/* CARD GRID */
+/* ================================
+   CARD GRID
+   ================================ */
 
 .cards {
     display: grid;
@@ -239,111 +298,171 @@ a:hover {
     transition:
         transform 0.2s,
         border-color 0.2s,
-        background 0.2s;
+        background 0.2s,
+        box-shadow 0.2s;
 }
 
 .card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px);
 
-    border-color: #71352d;
+    color: #ddd4b8;
+
+    border-color: #74372f;
 
     background:
         linear-gradient(
             145deg,
-            rgba(57, 59, 47, 0.85),
-            rgba(20, 20, 16, 0.98)
+            rgba(59, 61, 49, 0.85),
+            rgba(22, 23, 18, 0.98)
         );
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.45),
+        inset 0 0 25px rgba(90, 35, 28, 0.08);
 }
 
 .card h3 {
     margin-top: 0;
+    margin-bottom: 10px;
 
-    font-size: 1.3rem;
+    color: #c5bda1;
 }
 
 .card p {
-    color: #908b7b;
+    margin-bottom: 0;
+
+    color: #999481;
 
     font-size: 0.95rem;
 }
 
 
-/* DECORATIVE DIVIDER */
+/* ================================
+   DIVIDERS
+   ================================ */
 
-.divider {
-    width: 60%;
+hr {
+    margin: 50px 0;
 
-    height: 1px;
-
-    margin: 50px auto;
-
-    background:
-        linear-gradient(
-            to right,
-            transparent,
-            #632b26,
-            transparent
-        );
+    border: 0;
+    border-top: 1px solid #474337;
 }
 
 
-/* QUOTES / LORE */
+/* ================================
+   BLOCKQUOTES / LORE TEXT
+   ================================ */
 
 blockquote {
     margin: 35px 0;
 
-    padding: 20px 25px;
+    padding:
+        18px
+        25px;
 
-    background: rgba(20, 22, 18, 0.75);
+    color: #aba48e;
 
-    border-left: 3px solid #6c3029;
+    background:
+        rgba(0, 0, 0, 0.18);
 
-    color: #aaa48f;
+    border-left: 3px solid #6f3029;
 
     font-style: italic;
 }
 
 
-/* FOOTER */
+/* ================================
+   IMAGES
+   ================================ */
 
-footer {
-    text-align: center;
-
-    padding: 35px 20px;
-
-    color: #66685c;
-
-    background: #080908;
-
-    border-top: 1px solid #302f28;
-
-    font-size: 0.85rem;
-
-    letter-spacing: 0.08em;
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 
-/* MOBILE */
+/* ================================
+   FOOTER
+   ================================ */
 
-@media (max-width: 650px) {
+footer {
+    padding: 35px 20px;
+
+    text-align: center;
+
+    color: #777665;
+
+    background: #090a08;
+
+    border-top: 1px solid #373a30;
+
+    font-size: 0.85rem;
+
+    letter-spacing: 0.06em;
+}
+
+
+/* ================================
+   PHONE / SMALL SCREEN
+   ================================ */
+
+@media (max-width: 767px) {
 
     header {
-        padding-top: 45px;
+        aspect-ratio: 3 / 1;
+        min-height: 180px;
     }
 
     header h1 {
+        top: 27%;
+
+        font-size:
+            clamp(2rem, 10vw, 4rem);
+
+        letter-spacing: 0.12em;
+    }
+
+    header p {
+        bottom: 18%;
+
+        font-size:
+            clamp(0.75rem, 3vw, 1rem);
+
         letter-spacing: 0.08em;
+    }
+
+    nav {
+        padding: 8px;
+    }
+
+    nav a {
+        padding: 7px 10px;
+
+        font-size: 0.85rem;
     }
 
     main {
         padding:
-            35px 20px
-            70px;
+            35px
+            20px
+            60px;
     }
 
-    nav a {
-        padding: 7px 9px;
-        font-size: 0.8rem;
+    h2 {
+        margin-top: 35px;
+
+        font-size: 1.6rem;
     }
 
+    .cards {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+    .card {
+        min-height: auto;
+
+        padding: 20px;
+    }
 }
