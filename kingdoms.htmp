@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The Eight Kingdoms | Ozyleme</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+<header>
+    <h1>OZYLEME</h1>
+    <p>The Eight Kingdoms Beneath the Hollow Sun</p>
+</header>
+
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="kingdoms.html" aria-current="page">Kingdoms</a>
+    <a href="#">Peoples</a>
+    <a href="#">Gods</a>
+    <a href="#">Calendar</a>
+    <a href="#">Bestiary</a>
+    <a href="#">Player Guide</a>
+</nav>
+
+
+<main>
+
+    <section>
+
+        <h2>The Eight Kingdoms</h2>
+
+        <p>
+            Ozyleme is divided among eight kingdoms, each marked by its own
+            ancient symbol, customs, peoples, and relationship to the powers
+            that watch over the world.
+        </p>
+
+        <p>
+            Their borders divide the land, but they do not divide its history.
+            War, migration, old bargains, divine interference, and the shadow
+            of the Dragon King have shaped every one of them.
+        </p>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- KINGDOM DIRECTORY -->
+
+    <section>
+
+        <h2>Kingdom Directory</h2>
+
+        <div class="cards">
+
+            <a class="card" href="#plume">
+                <h3>Plume</h3>
+                <p>Symbol: The Feather</p>
+            </a>
+
+            <a class="card" href="#kettle">
+                <h3>Kettle</h3>
+                <p>Symbol: The Cauldron</p>
+            </a>
+
+            <a class="card" href="#loop">
+                <h3>Loop</h3>
+                <p>Symbol: The Ring</p>
+            </a>
+
+            <a class="card" href="#torch">
+                <h3>Torch</h3>
+                <p>Symbol: The Lantern</p>
+            </a>
+
+            <a class="card" href="#vial">
+                <h3>Vial</h3>
+                <p>Symbol: The Flagon</p>
+            </a>
+
+            <a class="card" href="#hook">
+                <h3>Hook</h3>
+                <p>Symbol: The Hook</p>
+            </a>
+
+            <a class="card" href="#bell">
+                <h3>Bell</h3>
+                <p>Symbol: The Bell</p>
+            </a>
+
+            <a class="card" href="#crook">
+                <h3>Crook</h3>
+                <p>Symbol: The Staff</p>
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- PLUME -->
+
+    <section id="plume">
+
+        <h2>Plume</h2>
+
+        <h3>Symbol: The Feather</h3>
+
+        <p>
+            Plume was a great human kingdom and once stood as one of the
+            foremost seats of knowledge in Ozyleme.
+        </p>
+
+        <p>
+            Its history is closely associated with the Giver. Libraries,
+            learning, scholarship, and the preservation of knowledge were
+            central to its identity.
+        </p>
+
+        <p>
+            Plume's greatness did not protect it forever. The kingdom was
+            ultimately destroyed by the Seer, leaving its legacy scattered
+            among ruins, survivors, and whatever knowledge escaped the fall.
+        </p>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- KETTLE -->
+
+    <section id="kettle">
+
+        <h2>Kettle</h2>
+
+        <h3>Symbol: The Cauldron</h3>
+
+        <p>
+            Kettle is a heavily forested realm watched over by the Ravager.
+            Its deep woods are both a resource and a danger.
+        </p>
+
+        <p>
+            Forest Elves dwell within these lands. Their relationship with
+            neighboring peoples is often hostile, and they have been known
+            to abduct workers who venture too deeply into their territory.
+        </p>
+
+        <p>
+            Settlements exist beneath the shadow of enormous forests where
+            paths disappear, old boundaries become uncertain, and travelers
+            are rarely certain whether they are being watched.
+        </p>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- LOOP -->
+
+    <section id="loop">
+
+        <h2>Loop</h2>
+
+        <h3>Symbol: The Ring</h3>
+
+        <p>
+            Loop is watched by the Tormentor and is a land shaped by spectacle,
+            illusion, ritual, and strange celebration.
+        </p>
+
+        <p>
+            Three great calderas mark the kingdom and form some of its most
+            recognizable features.
+        </p>
+
+        <p>
+            Carnivals and celebrations are an important part of life in Loop,
+            although outsiders may find them unsettling. Many resemble
+            funerals more than festivals.
+        </p>
+
+        <p>
+            Death, mourning, grotesque pageantry, masks, remembrance, and
+            macabre humor can all become reasons for celebration. What appears
+            dreadful to a visitor may be entirely ordinary revelry to the
+            people of Loop.
+        </p>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- TORCH -->
+
+    <section id="torch">
+
+        <h2>Torch</h2>
+
+        <h3>Symbol: The Lantern</h3>
+
+        <p>
+            Torch is the great seat of the High Elves and is watched over by
+            the Inflictor.
+        </p>
+
+        <p>
+            The kingdom holds an important place in the history of magic,
+            craftsmanship, and the strange powers that have shaped Ozyleme.
+        </p>
+
+        <p>
+            Among the creations associated with the High Elves are the
+            Dragon Forged, metallic beings made as guardians and servants.
+            Some endure long after the purposes for which they were created
+            have been forgotten.
+        </p>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- VIAL -->
+
+    <section id="vial">
+
+        <h2>Vial</h2>
+
+        <h3>Symbol: The Flagon</h3>
+
+        <p>
+            Vial is a land known for its hearty Goliath population.
+            Much of ordinary life revolves around farming, labor, family,
+            and survival upon the land.
+        </p>
+
+        <p>
+            The people of Vial are often associated with physical endurance
+            and the practical demands of rural life rather than the grandeur
+            found in some of Ozyleme's other kingdoms.
+        </p>
+
+        <p>
+            Orcs have also established settlements within some of Vial's
+            forests, adding another people and another history to the region.
+        </p>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- HOOK -->
+
+    <section id="hook">
+
+        <h2>Hook</h2>
+
+        <h3>Symbol: The Hook</h3>
+
+        <p>
+            Hook is strongly associated with its coastlines and the peoples
+            who have lived along them.
+        </p>
+
+        <p>
+            Orcs were once widely regarded as a people of the sea. Though
+            their history has changed, Orc tribes still maintain settlements
+            along the coasts of Hook.
+        </p>
+
+        <p>
+            These coastal tribes preserve a connection to an older Orcish
+            identity that predates many of their inland settlements.
+        </p>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- BELL -->
+
+    <section id="bell">
+
+        <h2>Bell</h2>
+
+        <h3>Symbol: The Bell</h3>
+
+        <p>
+            Bell is one of the eight kingdoms of Ozyleme.
+        </p>
+
+        <p>
+            Its deeper history, peoples, customs, and relationship with the
+            powers of the world will be recorded here as the Chronicle of
+            Ozyleme grows.
+        </p>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- CROOK -->
+
+    <section id="crook">
+
+        <h2>Crook</h2>
+
+        <h3>Symbol: The Staff</h3>
+
+        <p>
+            Crook is inhabited primarily by humans, but its grasslands and
+            wild places are also home to communities of feral Halflings.
+        </p>
+
+        <p>
+            These Halflings have adapted to a harsher existence than many
+            outsiders expect from their kind. Some live in savage bands upon
+            the plains and have developed cultures shaped by hunger,
+            territorial survival, and the dangers of the open country.
+        </p>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <section>
+
+        <h2>Beyond the Kingdoms</h2>
+
+        <p>
+            The kingdoms are only one part of Ozyleme. Beyond their settled
+            lands lie ancient wildernesses, strange colonies, ruined places,
+            the Black Sand Desert of Doom, and the distant Spires of Sadness.
+        </p>
+
+        <p>
+            Closest to those central mountains are scattered Gnomish
+            settlements. Some Gnomes serve the Dragon King and construct
+            ruthless traps intended to prevent travelers from approaching
+            the Spires.
+        </p>
+
+        <p>
+            Others have abandoned such service for their own experiments,
+            inventions, obsessions, and curiosities.
+        </p>
+
+    </section>
+
+
+</main>
+
+
+<footer>
+    <p>The World of Ozyleme</p>
+</footer>
+
+
+</body>
+
+</html>
