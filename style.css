@@ -35,7 +35,7 @@ header {
             rgba(5, 7, 5, 0.45),
             rgba(5, 7, 5, 0.78)
         ),
-        url("banner.jpg");
+        url("banner.png");
 
     background-size: cover;
     background-position: center;
