@@ -302,6 +302,19 @@ a:hover {
         box-shadow 0.2s;
 }
 
+.card.plume {
+    background-image:
+        linear-gradient(
+            rgba(8, 10, 8, 0.25),
+            rgba(8, 10, 8, 0.78)
+        ),
+        url("images/Plume Navi Button.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .card:hover {
     transform: translateY(-4px);
 
