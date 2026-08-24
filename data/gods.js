@@ -2,31 +2,20 @@
    OZYLEME GOD DATA
    =========================================================
 
-   PLAYER-VISIBLE STRUCTURE
-
-   name
-   kingdom
-   keeper
-   role
-   element
-   domains
-   doctrine
-   sin
-   symbol
-   offering
-   taboo
-   outline
-   lore
+   This file contains the player-visible information
+   for the Gods page.
 
    IMPORTANT:
-   Anything placed in this file can potentially be viewed
-   by players through the website source.
+   This data is publicly accessible through the website.
+   Do not place secret campaign information here.
 
-   Keep secret lore out of this file.
+   cardClass connects each god to the existing kingdom
+   navigation image in style.css.
+
    ========================================================= */
 
 
-const godsData = {
+window.godsData = {
 
 
     /* =====================================================
@@ -38,6 +27,8 @@ const godsData = {
         name: "The Giver",
 
         kingdom: "Plume",
+
+        cardClass: "plume",
 
         keeper: "The Kingdom of Plume",
 
@@ -51,7 +42,8 @@ const godsData = {
             "Knowledge"
         ],
 
-        doctrine: "Give what another cannot provide for themselves.",
+        doctrine:
+            "Give what another cannot provide for themselves.",
 
         sin: "None",
 
@@ -98,6 +90,8 @@ const godsData = {
 
         kingdom: "Kettle",
 
+        cardClass: "kettle",
+
         keeper: "The Kingdom of Kettle",
 
         role: "Master of Shadows",
@@ -110,7 +104,8 @@ const godsData = {
             "Nature"
         ],
 
-        doctrine: "Nothing remains possessed forever.",
+        doctrine:
+            "Nothing remains possessed forever.",
 
         sin: "Greed",
 
@@ -156,6 +151,8 @@ const godsData = {
 
         kingdom: "Loop",
 
+        cardClass: "loop",
+
         keeper: "The Kingdom of Loop",
 
         role: "Master of Flame",
@@ -167,7 +164,8 @@ const godsData = {
             "Trickery"
         ],
 
-        doctrine: "A life unfelt is a life wasted.",
+        doctrine:
+            "A life unfelt is a life wasted.",
 
         sin: "Lust",
 
@@ -213,6 +211,8 @@ const godsData = {
 
         kingdom: "Torch",
 
+        cardClass: "torch",
+
         keeper: "The Kingdom of Torch",
 
         role: "Master of Radiance",
@@ -226,7 +226,8 @@ const godsData = {
             "Arcana"
         ],
 
-        doctrine: "Knowledge exists to overcome limitation.",
+        doctrine:
+            "Knowledge exists to overcome limitation.",
 
         sin: "Sloth",
 
@@ -276,6 +277,8 @@ const godsData = {
 
         kingdom: "Vial",
 
+        cardClass: "vial",
+
         keeper: "The Kingdom of Vial",
 
         role: "Master of Reaping",
@@ -288,7 +291,8 @@ const godsData = {
             "Grave"
         ],
 
-        doctrine: "Everything that grows must eventually be harvested.",
+        doctrine:
+            "Everything that grows must eventually be harvested.",
 
         sin: "Gluttony",
 
@@ -336,6 +340,8 @@ const godsData = {
 
         kingdom: "Hook",
 
+        cardClass: "hook",
+
         keeper: "The Kingdom of Hook",
 
         role: "Master of Depths",
@@ -349,7 +355,8 @@ const godsData = {
             "Arcana"
         ],
 
-        doctrine: "Nothing should remain unseen forever.",
+        doctrine:
+            "Nothing should remain unseen forever.",
 
         sin: "Envy",
 
@@ -398,6 +405,8 @@ const godsData = {
 
         kingdom: "Bell",
 
+        cardClass: "bell",
+
         keeper: "The Kingdom of Bell",
 
         role: "Master of Mountains",
@@ -410,7 +419,8 @@ const godsData = {
             "Forge"
         ],
 
-        doctrine: "Everything possesses a proper place.",
+        doctrine:
+            "Everything possesses a proper place.",
 
         sin: "Pride",
 
@@ -456,6 +466,8 @@ const godsData = {
 
         kingdom: "Crook",
 
+        cardClass: "crook",
+
         keeper: "The Kingdom of Crook",
 
         role: "Master of Skies",
@@ -468,7 +480,8 @@ const godsData = {
             "Order"
         ],
 
-        doctrine: "What should not remain must be removed.",
+        doctrine:
+            "What should not remain must be removed.",
 
         sin: "Wrath",
 
