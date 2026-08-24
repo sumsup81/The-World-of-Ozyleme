@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-
 <body>
 
 
@@ -154,7 +153,6 @@
 
 <script>
 
-
     /* =====================================================
        GET PAGE ELEMENTS
        ===================================================== */
@@ -167,204 +165,189 @@
 
 
     /* =====================================================
-       GET GOD IDS
+       MAKE SURE GOD DATA LOADED
        ===================================================== */
 
-    const godIds =
-        Object.keys(godsData);
+    if (typeof godsData === "undefined") {
 
-    const finalGod =
-        godIds[godIds.length - 1];
-
-
-    /* =====================================================
-       CREATE EACH GOD
-       ===================================================== */
-
-    Object.entries(godsData).forEach(([godId, god]) => {
-
-
-        /* =================================================
-           DIRECTORY CARD
-           ================================================= */
-
-        const godCard =
-            document.createElement("a");
-
-        godCard.className =
-            `card ${godId}`;
-
-        godCard.href =
-            `#${godId}`;
-
-
-        godCard.innerHTML = `
-
-            <h3>
-                ${god.name}
-            </h3>
-
+        godsDirectory.innerHTML = `
             <p>
-                ${god.kingdom}
+                God data could not be loaded.
+                Check that data/gods.js exists and is spelled correctly.
             </p>
-
         `;
 
-
-        godsDirectory.appendChild(godCard);
-
+    } else {
 
 
         /* =================================================
-           GOD PROFILE
+           GET GOD IDS
            ================================================= */
 
-        const godProfile =
-            document.createElement("section");
+        const godIds =
+            Object.keys(godsData);
 
-        godProfile.className =
-            "god-profile";
-
-        godProfile.id =
-            godId;
+        const finalGod =
+            godIds[godIds.length - 1];
 
 
-        godProfile.innerHTML = `
+        /* =================================================
+           CREATE EACH GOD
+           ================================================= */
+
+        Object.entries(godsData).forEach(([godId, god]) => {
 
 
-            <!-- GOD NAME -->
+            /* =============================================
+               DIRECTORY CARD
+               ============================================= */
 
-            <div class="god-heading">
+            const godCard =
+                document.createElement("a");
 
-                <h2>
-                    ${god.name}
-                </h2>
+            godCard.className =
+                `card ${godId}`;
 
-                <h3>
-                    Keeper: ${god.keeper}
-                </h3>
+            godCard.href =
+                `#${godId}`;
 
-            </div>
+            godCard.innerHTML = `
+                <h3>${god.name}</h3>
+                <p>${god.kingdom}</p>
+            `;
 
-
-
-            <!-- OPENING DESCRIPTION -->
-
-            <div class="god-section god-outline">
-
-                <p>
-                    ${god.outline.trim()}
-                </p>
-
-            </div>
+            godsDirectory.appendChild(godCard);
 
 
+            /* =============================================
+               GOD PROFILE
+               ============================================= */
 
-            <!-- GOD FACTS -->
+            const godProfile =
+                document.createElement("section");
 
-            <div class="god-facts">
+            godProfile.className =
+                "god-profile";
+
+            godProfile.id =
+                godId;
 
 
-                <!-- ROLE -->
+            godProfile.innerHTML = `
 
-                <div class="god-fact">
+                <!-- GOD NAME -->
 
-                    <h4>
-                        Role
-                    </h4>
+                <div class="god-heading">
+
+                    <h2>
+                        ${god.name}
+                    </h2>
+
+                    <h3>
+                        Keeper: ${god.keeper}
+                    </h3>
+
+                </div>
+
+
+                <!-- OPENING DESCRIPTION -->
+
+                <div class="god-section god-outline">
 
                     <p>
-                        ${god.role}
+                        ${god.outline.trim()}
                     </p>
 
                 </div>
 
 
+                <!-- GOD FACTS -->
 
-                <!-- ELEMENT -->
-
-                <div class="god-fact">
-
-                    <h4>
-                        Element
-                    </h4>
-
-                    <p>
-                        ${god.element}
-                    </p>
-
-                </div>
+                <div class="god-facts">
 
 
+                    <!-- ROLE -->
 
-                <!-- DOMAINS -->
+                    <div class="god-fact">
 
-                <div class="god-fact">
+                        <h4>
+                            Role
+                        </h4>
 
-                    <h4>
-                        Domains
-                    </h4>
+                        <p>
+                            ${god.role}
+                        </p>
 
-                    <p>
-                        ${god.domains.join(", ")}
-                    </p>
-
-                </div>
-
+                    </div>
 
 
-                <!-- DOCTRINE -->
+                    <!-- ELEMENT -->
 
-                <div class="god-fact">
+                    <div class="god-fact">
 
-                    <h4>
-                        Doctrine
-                    </h4>
+                        <h4>
+                            Element
+                        </h4>
 
-                    <p>
-                        ${god.doctrine}
-                    </p>
+                        <p>
+                            ${god.element}
+                        </p>
 
-                </div>
-
-
-
-                <!-- SIN -->
-
-                <div class="god-fact">
-
-                    <h4>
-                        Sin
-                    </h4>
-
-                    <p>
-                        ${god.sin}
-                    </p>
-
-                </div>
+                    </div>
 
 
+                    <!-- DOMAINS -->
 
-                <!-- SYMBOL -->
+                    <div class="god-fact">
 
-                <div class="god-fact">
+                        <h4>
+                            Domains
+                        </h4>
 
-                    <h4>
-                        Symbol
-                    </h4>
+                        <p>
+                            ${god.domains.join(", ")}
+                        </p>
 
-                    <p>
-                        ${god.symbol}
-                    </p>
-
-                </div>
-
+                    </div>
 
 
-                <!-- OFFERING -->
+                    <!-- DOCTRINE -->
 
-                <div class="god-fact">
+                    <div class="god-fact">
 
-                    <h4>
-                        Offering
-                    </
+                        <h4>
+                            Doctrine
+                        </h4>
+
+                        <p>
+                            ${god.doctrine}
+                        </p>
+
+                    </div>
+
+
+                    <!-- SIN -->
+
+                    <div class="god-fact">
+
+                        <h4>
+                            Sin
+                        </h4>
+
+                        <p>
+                            ${god.sin}
+                        </p>
+
+                    </div>
+
+
+                    <!-- SYMBOL -->
+
+                    <div class="god-fact">
+
+                        <h4>
+                            Symbol
+                        </h4>
+
+                        <p>
+                           
