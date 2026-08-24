@@ -3,75 +3,1022 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Character Builder | Ozyleme</title>
 
     <link rel="stylesheet" href="style.css">
+
+
+    <!-- =====================================================
+         CHARACTER BUILDER PAGE STYLES
+         These override older builder styles in style.css.
+         ===================================================== -->
+
+    <style>
+
+        .character-builder-page {
+            background: #151512;
+        }
+
+
+        .character-builder-page .character-builder {
+            width: min(1450px, calc(100% - 28px));
+            margin: 0 auto;
+            padding: 34px 0 70px;
+        }
+
+
+        .character-builder-page .builder-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 20px;
+
+            margin-bottom: 22px;
+            padding-bottom: 16px;
+
+            border-bottom: 1px solid #45453a;
+        }
+
+
+        .character-builder-page .builder-top h2 {
+            margin: 0;
+
+            color: #d8d0bc;
+
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: normal;
+
+            letter-spacing: 0.08em;
+        }
+
+
+        .character-builder-page .builder-top p {
+            margin: 4px 0 0;
+
+            color: #888471;
+        }
+
+
+        .character-builder-page .back-link {
+            flex-shrink: 0;
+
+            padding: 9px 14px;
+
+            color: #aaa48f;
+            background: #10110e;
+
+            border: 1px solid #444438;
+
+            text-decoration: none;
+        }
+
+
+        .character-builder-page .back-link:hover {
+            color: #e0d7bb;
+
+            border-color: #70352f;
+        }
+
+
+
+        /* =====================================================
+           MAIN SHEET
+           ===================================================== */
+
+        .character-builder-page .character-sheet {
+            display: grid;
+            gap: 14px;
+        }
+
+
+        .character-builder-page .sheet-panel {
+            padding: 14px;
+
+            background: #11120f;
+
+            border: 1px solid #47473b;
+
+            box-shadow:
+                0 8px 22px rgba(0, 0, 0, 0.25),
+                inset 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .character-builder-page .panel-heading {
+            margin: -14px -14px 14px;
+            padding: 8px 12px;
+
+            color: #c7bea2;
+            background: #1c1d18;
+
+            border-bottom: 1px solid #47473b;
+
+            font-size: 0.84rem;
+            font-weight: normal;
+
+            letter-spacing: 0.13em;
+
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+
+
+        /* =====================================================
+           FORMS
+           ===================================================== */
+
+        .character-builder-page label {
+            color: #918d7b;
+
+            font-size: 0.72rem;
+
+            letter-spacing: 0.07em;
+
+            text-transform: uppercase;
+        }
+
+
+        .character-builder-page input,
+        .character-builder-page select,
+        .character-builder-page textarea {
+            width: 100%;
+
+            color: #ddd4bb;
+            background: #191a16;
+
+            border: 1px solid #48483d;
+            border-radius: 0;
+
+            outline: none;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 0.95rem;
+
+            box-sizing: border-box;
+        }
+
+
+        .character-builder-page input,
+        .character-builder-page select {
+            height: 42px;
+
+            padding: 7px 9px;
+        }
+
+
+        .character-builder-page textarea {
+            display: block;
+
+            padding: 10px 11px;
+
+            line-height: 1.5;
+
+            resize: vertical;
+        }
+
+
+        .character-builder-page input:focus,
+        .character-builder-page select:focus,
+        .character-builder-page textarea:focus {
+            border-color: #7a4840;
+
+            background: #1e1f1a;
+
+            box-shadow:
+                0 0 0 1px rgba(122, 72, 64, 0.25);
+        }
+
+
+        .character-builder-page input[readonly] {
+            color: #d5c59e;
+
+            background: #141511;
+
+            cursor: default;
+        }
+
+
+        .character-builder-page [hidden] {
+            display: none !important;
+        }
+
+
+        .character-builder-page .custom-entry {
+            margin-top: 6px;
+        }
+
+
+
+        /* =====================================================
+           IDENTITY
+           ===================================================== */
+
+        .character-builder-page .identity-panel {
+            display: grid;
+
+            grid-template-columns:
+                minmax(270px, 1.2fr)
+                minmax(600px, 3fr);
+
+            gap: 16px;
+        }
+
+
+        .character-builder-page .character-name-area {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            padding-right: 16px;
+
+            border-right: 1px solid #3d3e34;
+        }
+
+
+        .character-builder-page .character-name-area input {
+            height: 58px;
+
+            margin-top: 5px;
+
+            font-size: 1.35rem;
+        }
+
+
+        .character-builder-page .identity-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(120px, 1fr));
+
+            gap: 10px;
+        }
+
+
+        .character-builder-page .field label {
+            display: block;
+
+            margin-bottom: 4px;
+        }
+
+
+
+        /* =====================================================
+           TOP STAT BAR
+           ===================================================== */
+
+        .character-builder-page .stat-bar {
+            display: grid;
+
+            grid-template-columns:
+                0.65fr
+                repeat(5, 1fr)
+                1.4fr;
+
+            gap: 8px;
+        }
+
+
+        .character-builder-page .stat-box {
+            min-width: 0;
+
+            padding: 9px;
+
+            text-align: center;
+
+            background: #11120f;
+
+            border: 1px solid #47473b;
+        }
+
+
+        .character-builder-page .stat-box > label {
+            display: block;
+
+            min-height: 30px;
+
+            margin-bottom: 5px;
+
+            line-height: 1.15;
+        }
+
+
+        .character-builder-page .stat-box input {
+            text-align: center;
+
+            font-size: 1.16rem;
+        }
+
+
+        .character-builder-page .inspiration-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .character-builder-page .inspiration-box input {
+            width: 22px;
+            height: 22px;
+
+            accent-color: #77372f;
+        }
+
+
+        .character-builder-page .hp-line {
+            display: grid;
+
+            grid-template-columns:
+                1fr auto 1fr;
+
+            align-items: center;
+
+            gap: 5px;
+        }
+
+
+        .character-builder-page .hp-line span {
+            color: #716f61;
+        }
+
+
+
+        /* =====================================================
+           MAIN THREE-COLUMN LAYOUT
+           ===================================================== */
+
+        .character-builder-page .main-sheet-grid {
+            display: grid;
+
+            grid-template-columns:
+                minmax(240px, 0.85fr)
+                minmax(350px, 1.2fr)
+                minmax(430px, 1.65fr);
+
+            gap: 14px;
+
+            align-items: start;
+        }
+
+
+        .character-builder-page .column {
+            display: grid;
+
+            gap: 14px;
+        }
+
+
+
+        /* =====================================================
+           ABILITY SCORES
+           ===================================================== */
+
+        .character-builder-page .ability-card {
+            overflow: hidden;
+
+            background: #11120f;
+
+            border: 1px solid #47473b;
+        }
+
+
+        .character-builder-page .ability-name {
+            padding: 7px 10px;
+
+            color: #c7bea2;
+            background: #1c1d18;
+
+            border-bottom: 1px solid #47473b;
+
+            text-align: center;
+
+            font-size: 0.8rem;
+
+            letter-spacing: 0.12em;
+
+            text-transform: uppercase;
+        }
+
+
+        .character-builder-page .ability-main {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 7px;
+
+            padding: 9px;
+        }
+
+
+        .character-builder-page .ability-main label {
+            display: block;
+
+            text-align: center;
+        }
+
+
+        .character-builder-page .ability-main input {
+            margin-top: 4px;
+
+            text-align: center;
+
+            font-size: 1.2rem;
+        }
+
+
+        .character-builder-page .save-row {
+            display: grid;
+
+            grid-template-columns:
+                auto
+                1fr
+                48px;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 7px 9px;
+
+            border-top: 1px solid #34352d;
+        }
+
+
+        .character-builder-page .save-row input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+
+            margin: 0;
+
+            accent-color: #78382f;
+        }
+
+
+        .character-builder-page .save-row span {
+            color: #aaa48f;
+
+            font-size: 0.82rem;
+        }
+
+
+        .character-builder-page .save-value {
+            color: #dbd1b4;
+
+            text-align: right;
+
+            font-size: 1rem;
+        }
+
+
+
+        /* =====================================================
+           SKILLS
+           ===================================================== */
+
+        .character-builder-page .skills-header,
+        .character-builder-page .skill-row {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                38px
+                40px
+                40px
+                48px;
+
+            align-items: center;
+
+            gap: 5px;
+        }
+
+
+        .character-builder-page .skills-header {
+            padding: 0 5px 6px;
+
+            color: #68675a;
+
+            font-size: 0.62rem;
+
+            text-align: center;
+
+            text-transform: uppercase;
+        }
+
+
+        .character-builder-page .skills-header span:first-child {
+            text-align: left;
+        }
+
+
+        .character-builder-page .skill-row {
+            min-height: 34px;
+
+            padding: 4px 5px;
+
+            border-top: 1px solid #313229;
+        }
+
+
+        .character-builder-page .skill-name {
+            color: #aaa48f;
+
+            font-size: 0.81rem;
+        }
+
+
+        .character-builder-page .skill-ability {
+            color: #6f6e60;
+
+            font-size: 0.7rem;
+
+            text-align: center;
+        }
+
+
+        .character-builder-page .skill-row input[type="checkbox"] {
+            width: 15px;
+            height: 15px;
+
+            margin: auto;
+
+            accent-color: #78382f;
+        }
+
+
+        .character-builder-page .skill-total {
+            color: #ded4b8;
+
+            font-size: 0.95rem;
+
+            text-align: right;
+        }
+
+
+
+        /* =====================================================
+           NUMBER STEPPERS
+           ===================================================== */
+
+        .character-builder-page .number-stepper {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1fr)
+                26px;
+
+            width: 100%;
+
+            background: #191a16;
+
+            border: 1px solid #48483d;
+        }
+
+
+        .character-builder-page .number-stepper input {
+            height: 40px;
+
+            padding: 6px;
+
+            border: 0;
+
+            text-align: center;
+
+            -moz-appearance: textfield;
+        }
+
+
+        .character-builder-page .number-stepper input::-webkit-inner-spin-button,
+        .character-builder-page .number-stepper input::-webkit-outer-spin-button {
+            margin: 0;
+
+            -webkit-appearance: none;
+        }
+
+
+        .character-builder-page .stepper-buttons {
+            display: grid;
+
+            grid-template-rows:
+                1fr 1fr;
+
+            border-left: 1px solid #48483d;
+        }
+
+
+        .character-builder-page .stepper-buttons button {
+            min-width: 0;
+            padding: 0;
+
+            color: #9f9985;
+            background: #22231e;
+
+            border: 0;
+
+            font-size: 0.62rem;
+
+            line-height: 1;
+
+            cursor: pointer;
+        }
+
+
+        .character-builder-page .stepper-buttons button:first-child {
+            border-bottom: 1px solid #48483d;
+        }
+
+
+        .character-builder-page .stepper-buttons button:hover {
+            color: #e0d7bb;
+
+            background: #302d27;
+        }
+
+
+
+        /* =====================================================
+           DEATH SAVES
+           ===================================================== */
+
+        .character-builder-page .death-save-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 10px;
+        }
+
+
+        .character-builder-page .death-group {
+            padding: 9px;
+
+            background: #171814;
+
+            border: 1px solid #3c3d33;
+        }
+
+
+        .character-builder-page .death-group strong {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #999481;
+
+            font-size: 0.72rem;
+            font-weight: normal;
+
+            letter-spacing: 0.08em;
+
+            text-transform: uppercase;
+        }
+
+
+        .character-builder-page .death-checks {
+            display: flex;
+
+            gap: 10px;
+        }
+
+
+        .character-builder-page .death-checks input {
+            width: 19px;
+            height: 19px;
+
+            accent-color: #78382f;
+        }
+
+
+
+        /* =====================================================
+           ATTACKS
+           ===================================================== */
+
+        .character-builder-page .attack-header,
+        .character-builder-page .attack-row {
+            display: grid;
+
+            grid-template-columns:
+                1.2fr
+                0.55fr
+                1fr;
+
+            gap: 6px;
+        }
+
+
+        .character-builder-page .attack-header {
+            padding-bottom: 5px;
+
+            color: #68675a;
+
+            font-size: 0.62rem;
+
+            text-transform: uppercase;
+        }
+
+
+        .character-builder-page .attack-row {
+            margin-bottom: 6px;
+        }
+
+
+        .character-builder-page .attack-row:last-child {
+            margin-bottom: 0;
+        }
+
+
+
+        /* =====================================================
+           SPELLCASTING
+           ===================================================== */
+
+        .character-builder-page .spell-grid {
+            display: grid;
+
+            grid-template-columns:
+                1.4fr 1fr 1fr;
+
+            gap: 8px;
+        }
+
+
+        .character-builder-page .spell-result {
+            padding: 8px;
+
+            text-align: center;
+
+            background: #171814;
+
+            border: 1px solid #3c3d33;
+        }
+
+
+        .character-builder-page .spell-result span {
+            display: block;
+
+            margin-bottom: 4px;
+
+            color: #777466;
+
+            font-size: 0.63rem;
+
+            text-transform: uppercase;
+        }
+
+
+        .character-builder-page .spell-result strong {
+            color: #ddd3b6;
+
+            font-size: 1.2rem;
+            font-weight: normal;
+        }
+
+
+
+        /* =====================================================
+           LOWER SHEET
+           ===================================================== */
+
+        .character-builder-page .three-panel-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 14px;
+        }
+
+
+        .character-builder-page .two-panel-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 14px;
+        }
+
+
+
+        /* =====================================================
+           MOBILE
+           ===================================================== */
+
+        @media (max-width: 1150px) {
+
+            .character-builder-page .identity-panel {
+                grid-template-columns: 1fr;
+            }
+
+
+            .character-builder-page .character-name-area {
+                padding-right: 0;
+                padding-bottom: 14px;
+
+                border-right: 0;
+                border-bottom: 1px solid #3d3e34;
+            }
+
+
+            .character-builder-page .main-sheet-grid {
+                grid-template-columns:
+                    minmax(230px, 0.8fr)
+                    minmax(380px, 1.3fr);
+            }
+
+
+            .character-builder-page .main-sheet-grid > .column:last-child {
+                grid-column: 1 / -1;
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+
+        @media (max-width: 800px) {
+
+            .character-builder-page .identity-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+
+            .character-builder-page .stat-bar {
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+
+
+            .character-builder-page .main-sheet-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .character-builder-page .main-sheet-grid > .column:last-child {
+                grid-column: auto;
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .character-builder-page .three-panel-grid,
+            .character-builder-page .two-panel-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+
+        @media (max-width: 520px) {
+
+            .character-builder-page .character-builder {
+                width: calc(100% - 14px);
+            }
+
+
+            .character-builder-page .builder-top {
+                display: block;
+            }
+
+
+            .character-builder-page .back-link {
+                display: inline-block;
+
+                margin-top: 12px;
+            }
+
+
+            .character-builder-page .identity-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .character-builder-page .stat-bar {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+
+            .character-builder-page .hp-box {
+                grid-column: 1 / -1;
+            }
+
+        }
+
+    </style>
+
 </head>
 
 
-<body>
 
-    <!-- ================================
-         HEADER
-         ================================ -->
+<body class="character-builder-page">
+
+
+    <!-- =====================================================
+         OZYLEME HEADER
+         ===================================================== -->
 
     <header>
+
         <h1>OZYLEME</h1>
+
         <p>Realm of the Dark Dragon</p>
+
     </header>
 
 
-    <!-- ================================
-         NAVIGATION
-         ================================ -->
+
+    <!-- =====================================================
+         MAIN SITE NAVIGATION
+         ===================================================== -->
 
     <nav>
+
         <a href="index.html">Home</a>
+
         <a href="kingdoms.html">Kingdoms</a>
+
         <a href="species.html">Species</a>
+
         <a href="people.html">People</a>
+
         <a href="gods.html">Gods</a>
+
         <a href="bestiary.html">Bestiary</a>
+
         <a href="classes.html">Classes</a>
+
         <a href="player-guide.html">Player Guide</a>
+
     </nav>
 
 
-    <!-- ================================
+
+    <!-- =====================================================
          CHARACTER BUILDER
-         ================================ -->
+         ===================================================== -->
 
     <main class="character-builder">
 
-        <div class="builder-heading">
+
+        <div class="builder-top">
 
             <div>
+
                 <h2>Character Builder</h2>
 
                 <p>
                     Create a character for the Realm of Ozyleme.
                 </p>
+
             </div>
 
-            <a class="return-guide" href="player-guide.html">
+
+            <a
+                class="back-link"
+                href="player-guide.html"
+            >
                 ← Player Guide
             </a>
 
         </div>
 
 
-        <form id="characterForm">
+
+        <form
+            id="characterForm"
+            class="character-sheet"
+            autocomplete="off"
+        >
 
 
-            <!-- ==================================
-                 IDENTITY
-                 ================================== -->
+
+            <!-- =================================================
+                 CHARACTER IDENTITY
+                 ================================================= -->
 
             <section class="sheet-panel identity-panel">
 
-                <div class="identity-name">
+
+                <div class="character-name-area">
 
                     <label for="characterName">
                         Character Name
@@ -81,31 +1028,32 @@
                         type="text"
                         id="characterName"
                         name="characterName"
-                        autocomplete="off"
                     >
 
                 </div>
 
 
-                <div class="identity-details">
+
+                <div class="identity-grid">
 
 
-                    <div class="sheet-field">
+                    <div class="field">
 
-                        <label for="background">
-                            Background
+                        <label for="playerName">
+                            Player
                         </label>
 
                         <input
                             type="text"
-                            id="background"
-                            name="background"
+                            id="playerName"
+                            name="playerName"
                         >
 
                     </div>
 
 
-                    <div class="sheet-field">
+
+                    <div class="field">
 
                         <label for="characterClass">
                             Class
@@ -117,7 +1065,7 @@
                         >
 
                             <option value="">
-                                Select Class
+                                Choose Class
                             </option>
 
                             <option>Barbarian</option>
@@ -140,9 +1088,9 @@
                         </select>
 
                         <input
-                            class="custom-entry"
                             type="text"
                             id="customClass"
+                            class="custom-entry"
                             name="customClass"
                             placeholder="Enter class"
                             hidden
@@ -151,70 +1099,46 @@
                     </div>
 
 
-                    <div class="sheet-field">
+
+                    <div class="field">
 
                         <label for="level">
                             Level
                         </label>
 
-                        <input
-                            type="number"
+                        <select
                             id="level"
                             name="level"
-                            value="1"
-                            min="1"
-                            max="20"
                         >
 
-                    </div>
-
-
-                    <div class="sheet-field">
-
-                        <label for="species">
-                            Species
-                        </label>
-
-                        <select
-                            id="species"
-                            name="species"
-                        >
-
-                            <option value="">
-                                Select Species
-                            </option>
-
-                            <option>Aasimar</option>
-                            <option>Dwarf</option>
-                            <option>Elf</option>
-                            <option>Gnome</option>
-                            <option>Goliath</option>
-                            <option>Halfling</option>
-                            <option>Human</option>
-                            <option>Orc</option>
-
-                            <option>Dragon Forged</option>
-                            <option>Reborn</option>
-
-                            <option value="Other">
-                                Other
-                            </option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
 
                         </select>
 
-                        <input
-                            class="custom-entry"
-                            type="text"
-                            id="customSpecies"
-                            name="customSpecies"
-                            placeholder="Enter species"
-                            hidden
-                        >
-
                     </div>
 
 
-                    <div class="sheet-field">
+
+                    <div class="field">
 
                         <label for="subclass">
                             Subclass
@@ -229,7 +1153,107 @@
                     </div>
 
 
-                    <div class="sheet-field">
+
+                    <div class="field">
+
+                        <label for="species">
+                            Species
+                        </label>
+
+                        <select
+                            id="species"
+                            name="species"
+                        >
+
+                            <option value="">
+                                Choose Species
+                            </option>
+
+                            <option>Aasimar</option>
+                            <option>Dragon Forged</option>
+                            <option>Dwarf</option>
+                            <option>Elf</option>
+                            <option>Gnome</option>
+                            <option>Goliath</option>
+                            <option>Halfling</option>
+                            <option>Hexblood</option>
+                            <option>Human</option>
+                            <option>Orc</option>
+                            <option>Reborn</option>
+                            <option>Shifter</option>
+                            <option>Tiefling</option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                        <input
+                            type="text"
+                            id="customSpecies"
+                            class="custom-entry"
+                            name="customSpecies"
+                            placeholder="Enter species"
+                            hidden
+                        >
+
+                    </div>
+
+
+
+                    <div class="field">
+
+                        <label for="background">
+                            Background
+                        </label>
+
+                        <select
+                            id="background"
+                            name="background"
+                        >
+
+                            <option value="">
+                                Choose Background
+                            </option>
+
+                            <option>Acolyte</option>
+                            <option>Artisan</option>
+                            <option>Charlatan</option>
+                            <option>Criminal</option>
+                            <option>Entertainer</option>
+                            <option>Farmer</option>
+                            <option>Guard</option>
+                            <option>Guide</option>
+                            <option>Hermit</option>
+                            <option>Merchant</option>
+                            <option>Noble</option>
+                            <option>Sage</option>
+                            <option>Sailor</option>
+                            <option>Scribe</option>
+                            <option>Soldier</option>
+                            <option>Wayfarer</option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                        <input
+                            type="text"
+                            id="customBackground"
+                            class="custom-entry"
+                            name="customBackground"
+                            placeholder="Enter background"
+                            hidden
+                        >
+
+                    </div>
+
+
+
+                    <div class="field">
 
                         <label for="homeland">
                             Kingdom / Homeland
@@ -241,7 +1265,7 @@
                         >
 
                             <option value="">
-                                Select Homeland
+                                Choose Homeland
                             </option>
 
                             <option>Plume</option>
@@ -260,9 +1284,9 @@
                         </select>
 
                         <input
-                            class="custom-entry"
                             type="text"
                             id="customHomeland"
+                            class="custom-entry"
                             name="customHomeland"
                             placeholder="Enter homeland"
                             hidden
@@ -271,38 +1295,72 @@
                     </div>
 
 
+
+                    <div class="field">
+
+                        <label for="alignment">
+                            Alignment / Outlook
+                        </label>
+
+                        <input
+                            type="text"
+                            id="alignment"
+                            name="alignment"
+                        >
+
+                    </div>
+
+
                 </div>
 
             </section>
 
 
 
-            <!-- ==================================
-                 COMBAT BAR
-                 ================================== -->
+            <!-- =================================================
+                 TOP STAT BAR
+                 ================================================= -->
 
-            <section class="combat-bar">
+            <section class="stat-bar">
 
 
-                <div class="combat-box">
+                <div class="stat-box inspiration-box">
 
-                    <label>
-                        Proficiency
+                    <label for="inspiration">
+                        Inspiration
                     </label>
 
                     <input
-                        type="number"
-                        id="proficiencyBonus"
-                        name="proficiencyBonus"
-                        placeholder="+2"
+                        type="checkbox"
+                        id="inspiration"
+                        name="inspiration"
                     >
 
                 </div>
 
 
-                <div class="combat-box">
 
-                    <label>
+                <div class="stat-box">
+
+                    <label for="proficiencyBonus">
+                        Proficiency
+                    </label>
+
+                    <input
+                        type="text"
+                        id="proficiencyBonus"
+                        name="proficiencyBonus"
+                        value="+2"
+                        readonly
+                    >
+
+                </div>
+
+
+
+                <div class="stat-box">
+
+                    <label for="armorClass">
                         Armor Class
                     </label>
 
@@ -310,29 +1368,36 @@
                         type="number"
                         id="armorClass"
                         name="armorClass"
+                        value="10"
+                        min="0"
+                        max="40"
+                        data-stepper
                     >
 
                 </div>
 
 
-                <div class="combat-box">
 
-                    <label>
+                <div class="stat-box">
+
+                    <label for="initiative">
                         Initiative
                     </label>
 
                     <input
-                        type="number"
+                        type="text"
                         id="initiative"
                         name="initiative"
+                        readonly
                     >
 
                 </div>
 
 
-                <div class="combat-box">
 
-                    <label>
+                <div class="stat-box">
+
+                    <label for="speed">
                         Speed
                     </label>
 
@@ -340,40 +1405,50 @@
                         type="number"
                         id="speed"
                         name="speed"
-                        placeholder="30"
+                        value="30"
+                        min="0"
+                        max="300"
+                        step="5"
+                        data-stepper
                     >
 
                 </div>
 
 
-                <div class="combat-box">
 
-                    <label>
+                <div class="stat-box">
+
+                    <label for="passivePerception">
                         Passive Perception
                     </label>
 
                     <input
-                        type="number"
+                        type="text"
                         id="passivePerception"
                         name="passivePerception"
+                        readonly
                     >
 
                 </div>
 
 
-                <div class="combat-box hp-box">
+
+                <div class="stat-box hp-box">
 
                     <label>
                         Hit Points
                     </label>
 
-                    <div class="hp-fields">
+                    <div class="hp-line">
 
                         <input
                             type="number"
                             id="currentHP"
                             name="currentHP"
-                            placeholder="Current"
+                            value="0"
+                            min="0"
+                            max="999"
+                            data-stepper
                         >
 
                         <span>/</span>
@@ -382,7 +1457,10 @@
                             type="number"
                             id="maxHP"
                             name="maxHP"
-                            placeholder="Max"
+                            value="0"
+                            min="0"
+                            max="999"
+                            data-stepper
                         >
 
                     </div>
@@ -394,27 +1472,30 @@
 
 
 
-            <!-- ==================================
-                 MAIN SHEET
-                 ================================== -->
+            <!-- =================================================
+                 MAIN BODY
+                 ================================================= -->
 
-            <div class="sheet-main">
+            <div class="main-sheet-grid">
 
 
-                <!-- ================================
-                     LEFT COLUMN
-                     ================================ -->
 
-                <div class="sheet-left">
+                <!-- =============================================
+                     ABILITY SCORES
+                     ============================================= -->
+
+                <div class="column">
 
 
                     <!-- STRENGTH -->
 
                     <section class="ability-card">
 
-                        <h3>Strength</h3>
+                        <div class="ability-name">
+                            Strength
+                        </div>
 
-                        <div class="ability-values">
+                        <div class="ability-main">
 
                             <label>
                                 Score
@@ -426,8 +1507,11 @@
                                     value="10"
                                     min="1"
                                     max="30"
+                                    data-stepper
                                 >
+
                             </label>
+
 
                             <label>
                                 Modifier
@@ -437,33 +1521,31 @@
                                     id="strengthModifier"
                                     readonly
                                 >
+
                             </label>
 
                         </div>
 
 
-                        <label class="skill-line">
+                        <div class="save-row">
 
                             <input
                                 type="checkbox"
-                                name="strengthSaveProficiency"
+                                class="save-prof"
+                                data-ability="strength"
+                                id="strengthSaveProf"
                             >
 
-                            Saving Throw
+                            <span>Saving Throw</span>
 
-                        </label>
-
-
-                        <label class="skill-line">
-
-                            <input
-                                type="checkbox"
-                                name="athleticsProficiency"
+                            <strong
+                                class="save-value"
+                                id="strengthSave"
                             >
+                                +0
+                            </strong>
 
-                            Athletics
-
-                        </label>
+                        </div>
 
                     </section>
 
@@ -473,9 +1555,11 @@
 
                     <section class="ability-card">
 
-                        <h3>Dexterity</h3>
+                        <div class="ability-name">
+                            Dexterity
+                        </div>
 
-                        <div class="ability-values">
+                        <div class="ability-main">
 
                             <label>
                                 Score
@@ -487,8 +1571,11 @@
                                     value="10"
                                     min="1"
                                     max="30"
+                                    data-stepper
                                 >
+
                             </label>
+
 
                             <label>
                                 Modifier
@@ -498,30 +1585,31 @@
                                     id="dexterityModifier"
                                     readonly
                                 >
+
                             </label>
 
                         </div>
 
 
-                        <label class="skill-line">
-                            <input type="checkbox">
-                            Saving Throw
-                        </label>
+                        <div class="save-row">
 
-                        <label class="skill-line">
-                            <input type="checkbox">
-                            Acrobatics
-                        </label>
+                            <input
+                                type="checkbox"
+                                class="save-prof"
+                                data-ability="dexterity"
+                                id="dexteritySaveProf"
+                            >
 
-                        <label class="skill-line">
-                            <input type="checkbox">
-                            Sleight of Hand
-                        </label>
+                            <span>Saving Throw</span>
 
-                        <label class="skill-line">
-                            <input type="checkbox">
-                            Stealth
-                        </label>
+                            <strong
+                                class="save-value"
+                                id="dexteritySave"
+                            >
+                                +0
+                            </strong>
+
+                        </div>
 
                     </section>
 
@@ -531,9 +1619,11 @@
 
                     <section class="ability-card">
 
-                        <h3>Constitution</h3>
+                        <div class="ability-name">
+                            Constitution
+                        </div>
 
-                        <div class="ability-values">
+                        <div class="ability-main">
 
                             <label>
                                 Score
@@ -545,8 +1635,11 @@
                                     value="10"
                                     min="1"
                                     max="30"
+                                    data-stepper
                                 >
+
                             </label>
+
 
                             <label>
                                 Modifier
@@ -556,15 +1649,31 @@
                                     id="constitutionModifier"
                                     readonly
                                 >
+
                             </label>
 
                         </div>
 
 
-                        <label class="skill-line">
-                            <input type="checkbox">
-                            Saving Throw
-                        </label>
+                        <div class="save-row">
+
+                            <input
+                                type="checkbox"
+                                class="save-prof"
+                                data-ability="constitution"
+                                id="constitutionSaveProf"
+                            >
+
+                            <span>Saving Throw</span>
+
+                            <strong
+                                class="save-value"
+                                id="constitutionSave"
+                            >
+                                +0
+                            </strong>
+
+                        </div>
 
                     </section>
 
@@ -574,9 +1683,11 @@
 
                     <section class="ability-card">
 
-                        <h3>Intelligence</h3>
+                        <div class="ability-name">
+                            Intelligence
+                        </div>
 
-                        <div class="ability-values">
+                        <div class="ability-main">
 
                             <label>
                                 Score
@@ -588,8 +1699,11 @@
                                     value="10"
                                     min="1"
                                     max="30"
+                                    data-stepper
                                 >
+
                             </label>
+
 
                             <label>
                                 Modifier
@@ -599,40 +1713,31 @@
                                     id="intelligenceModifier"
                                     readonly
                                 >
+
                             </label>
 
                         </div>
 
 
-                        <label class="skill-line">
-                            <input type="checkbox">
-                            Saving Throw
-                        </label>
+                        <div class="save-row">
 
-                        <label class="skill-line">
-                            <input type="checkbox">
-                            Arcana
-                        </label>
+                            <input
+                                type="checkbox"
+                                class="save-prof"
+                                data-ability="intelligence"
+                                id="intelligenceSaveProf"
+                            >
 
-                        <label class="skill-line">
-                            <input type="checkbox">
-                            History
-                        </label>
+                            <span>Saving Throw</span>
 
-                        <label class="skill-line">
-                            <input type="checkbox">
-                            Investigation
-                        </label>
+                            <strong
+                                class="save-value"
+                                id="intelligenceSave"
+                            >
+                                +0
+                            </strong>
 
-                        <label class="skill-line">
-                            <input type="checkbox">
-                            Nature
-                        </label>
-
-                        <label class="skill-line">
-                            <input type="checkbox">
-                            Religion
-                        </label>
+                        </div>
 
                     </section>
 
@@ -642,9 +1747,11 @@
 
                     <section class="ability-card">
 
-                        <h3>Wisdom</h3>
+                        <div class="ability-name">
+                            Wisdom
+                        </div>
 
-                        <div class="ability-values">
+                        <div class="ability-main">
 
                             <label>
                                 Score
@@ -656,8 +1763,11 @@
                                     value="10"
                                     min="1"
                                     max="30"
+                                    data-stepper
                                 >
+
                             </label>
+
 
                             <label>
                                 Modifier
@@ -667,40 +1777,31 @@
                                     id="wisdomModifier"
                                     readonly
                                 >
+
                             </label>
 
                         </div>
 
 
-                        <label class="skill-line">
-                            <input type="checkbox">
-                            Saving Throw
-                        </label>
+                        <div class="save-row">
 
-                        <label class="skill-line">
-                            <input type="checkbox">
-                            Animal Handling
-                        </label>
+                            <input
+                                type="checkbox"
+                                class="save-prof"
+                                data-ability="wisdom"
+                                id="wisdomSaveProf"
+                            >
 
-                        <label class="skill-line">
-                            <input type="checkbox">
-                            Insight
-                        </label>
+                            <span>Saving Throw</span>
 
-                        <label class="skill-line">
-                            <input type="checkbox">
-                            Medicine
-                        </label>
+                            <strong
+                                class="save-value"
+                                id="wisdomSave"
+                            >
+                                +0
+                            </strong>
 
-                        <label class="skill-line">
-                            <input type="checkbox">
-                            Perception
-                        </label>
-
-                        <label class="skill-line">
-                            <input type="checkbox">
-                            Survival
-                        </label>
+                        </div>
 
                     </section>
 
@@ -710,9 +1811,11 @@
 
                     <section class="ability-card">
 
-                        <h3>Charisma</h3>
+                        <div class="ability-name">
+                            Charisma
+                        </div>
 
-                        <div class="ability-values">
+                        <div class="ability-main">
 
                             <label>
                                 Score
@@ -724,8 +1827,11 @@
                                     value="10"
                                     min="1"
                                     max="30"
+                                    data-stepper
                                 >
+
                             </label>
+
 
                             <label>
                                 Modifier
@@ -735,35 +1841,31 @@
                                     id="charismaModifier"
                                     readonly
                                 >
+
                             </label>
 
                         </div>
 
 
-                        <label class="skill-line">
-                            <input type="checkbox">
-                            Saving Throw
-                        </label>
+                        <div class="save-row">
 
-                        <label class="skill-line">
-                            <input type="checkbox">
-                            Deception
-                        </label>
+                            <input
+                                type="checkbox"
+                                class="save-prof"
+                                data-ability="charisma"
+                                id="charismaSaveProf"
+                            >
 
-                        <label class="skill-line">
-                            <input type="checkbox">
-                            Intimidation
-                        </label>
+                            <span>Saving Throw</span>
 
-                        <label class="skill-line">
-                            <input type="checkbox">
-                            Performance
-                        </label>
+                            <strong
+                                class="save-value"
+                                id="charismaSave"
+                            >
+                                +0
+                            </strong>
 
-                        <label class="skill-line">
-                            <input type="checkbox">
-                            Persuasion
-                        </label>
+                        </div>
 
                     </section>
 
@@ -772,105 +1874,758 @@
 
 
 
-                <!-- ================================
-                     RIGHT SIDE
-                     ================================ -->
+                <!-- =============================================
+                     SKILLS
+                     ============================================= -->
 
-                <div class="sheet-right">
-
-
-                    <!-- WEAPONS -->
+                <div class="column">
 
                     <section class="sheet-panel">
 
-                        <h3 class="panel-title">
+                        <h3 class="panel-heading">
+                            Skills
+                        </h3>
+
+
+                        <div class="skills-header">
+
+                            <span>Skill</span>
+
+                            <span>Stat</span>
+
+                            <span>Prof</span>
+
+                            <span>Exp</span>
+
+                            <span>Total</span>
+
+                        </div>
+
+
+                        <div
+                            class="skill-row"
+                            data-skill="acrobatics"
+                            data-ability="dexterity"
+                        >
+                            <span class="skill-name">
+                                Acrobatics
+                            </span>
+
+                            <span class="skill-ability">
+                                DEX
+                            </span>
+
+                            <input
+                                type="checkbox"
+                                class="skill-prof"
+                            >
+
+                            <input
+                                type="checkbox"
+                                class="skill-exp"
+                            >
+
+                            <strong class="skill-total">
+                                +0
+                            </strong>
+                        </div>
+
+
+                        <div
+                            class="skill-row"
+                            data-skill="animalHandling"
+                            data-ability="wisdom"
+                        >
+                            <span class="skill-name">
+                                Animal Handling
+                            </span>
+
+                            <span class="skill-ability">
+                                WIS
+                            </span>
+
+                            <input
+                                type="checkbox"
+                                class="skill-prof"
+                            >
+
+                            <input
+                                type="checkbox"
+                                class="skill-exp"
+                            >
+
+                            <strong class="skill-total">
+                                +0
+                            </strong>
+                        </div>
+
+
+                        <div
+                            class="skill-row"
+                            data-skill="arcana"
+                            data-ability="intelligence"
+                        >
+                            <span class="skill-name">
+                                Arcana
+                            </span>
+
+                            <span class="skill-ability">
+                                INT
+                            </span>
+
+                            <input
+                                type="checkbox"
+                                class="skill-prof"
+                            >
+
+                            <input
+                                type="checkbox"
+                                class="skill-exp"
+                            >
+
+                            <strong class="skill-total">
+                                +0
+                            </strong>
+                        </div>
+
+
+                        <div
+                            class="skill-row"
+                            data-skill="athletics"
+                            data-ability="strength"
+                        >
+                            <span class="skill-name">
+                                Athletics
+                            </span>
+
+                            <span class="skill-ability">
+                                STR
+                            </span>
+
+                            <input
+                                type="checkbox"
+                                class="skill-prof"
+                            >
+
+                            <input
+                                type="checkbox"
+                                class="skill-exp"
+                            >
+
+                            <strong class="skill-total">
+                                +0
+                            </strong>
+                        </div>
+
+
+                        <div
+                            class="skill-row"
+                            data-skill="deception"
+                            data-ability="charisma"
+                        >
+                            <span class="skill-name">
+                                Deception
+                            </span>
+
+                            <span class="skill-ability">
+                                CHA
+                            </span>
+
+                            <input
+                                type="checkbox"
+                                class="skill-prof"
+                            >
+
+                            <input
+                                type="checkbox"
+                                class="skill-exp"
+                            >
+
+                            <strong class="skill-total">
+                                +0
+                            </strong>
+                        </div>
+
+
+                        <div
+                            class="skill-row"
+                            data-skill="history"
+                            data-ability="intelligence"
+                        >
+                            <span class="skill-name">
+                                History
+                            </span>
+
+                            <span class="skill-ability">
+                                INT
+                            </span>
+
+                            <input
+                                type="checkbox"
+                                class="skill-prof"
+                            >
+
+                            <input
+                                type="checkbox"
+                                class="skill-exp"
+                            >
+
+                            <strong class="skill-total">
+                                +0
+                            </strong>
+                        </div>
+
+
+                        <div
+                            class="skill-row"
+                            data-skill="insight"
+                            data-ability="wisdom"
+                        >
+                            <span class="skill-name">
+                                Insight
+                            </span>
+
+                            <span class="skill-ability">
+                                WIS
+                            </span>
+
+                            <input
+                                type="checkbox"
+                                class="skill-prof"
+                            >
+
+                            <input
+                                type="checkbox"
+                                class="skill-exp"
+                            >
+
+                            <strong class="skill-total">
+                                +0
+                            </strong>
+                        </div>
+
+
+                        <div
+                            class="skill-row"
+                            data-skill="intimidation"
+                            data-ability="charisma"
+                        >
+                            <span class="skill-name">
+                                Intimidation
+                            </span>
+
+                            <span class="skill-ability">
+                                CHA
+                            </span>
+
+                            <input
+                                type="checkbox"
+                                class="skill-prof"
+                            >
+
+                            <input
+                                type="checkbox"
+                                class="skill-exp"
+                            >
+
+                            <strong class="skill-total">
+                                +0
+                            </strong>
+                        </div>
+
+
+                        <div
+                            class="skill-row"
+                            data-skill="investigation"
+                            data-ability="intelligence"
+                        >
+                            <span class="skill-name">
+                                Investigation
+                            </span>
+
+                            <span class="skill-ability">
+                                INT
+                            </span>
+
+                            <input
+                                type="checkbox"
+                                class="skill-prof"
+                            >
+
+                            <input
+                                type="checkbox"
+                                class="skill-exp"
+                            >
+
+                            <strong class="skill-total">
+                                +0
+                            </strong>
+                        </div>
+
+
+                        <div
+                            class="skill-row"
+                            data-skill="medicine"
+                            data-ability="wisdom"
+                        >
+                            <span class="skill-name">
+                                Medicine
+                            </span>
+
+                            <span class="skill-ability">
+                                WIS
+                            </span>
+
+                            <input
+                                type="checkbox"
+                                class="skill-prof"
+                            >
+
+                            <input
+                                type="checkbox"
+                                class="skill-exp"
+                            >
+
+                            <strong class="skill-total">
+                                +0
+                            </strong>
+                        </div>
+
+
+                        <div
+                            class="skill-row"
+                            data-skill="nature"
+                            data-ability="intelligence"
+                        >
+                            <span class="skill-name">
+                                Nature
+                            </span>
+
+                            <span class="skill-ability">
+                                INT
+                            </span>
+
+                            <input
+                                type="checkbox"
+                                class="skill-prof"
+                            >
+
+                            <input
+                                type="checkbox"
+                                class="skill-exp"
+                            >
+
+                            <strong class="skill-total">
+                                +0
+                            </strong>
+                        </div>
+
+
+                        <div
+                            class="skill-row"
+                            data-skill="perception"
+                            data-ability="wisdom"
+                        >
+                            <span class="skill-name">
+                                Perception
+                            </span>
+
+                            <span class="skill-ability">
+                                WIS
+                            </span>
+
+                            <input
+                                type="checkbox"
+                                class="skill-prof"
+                            >
+
+                            <input
+                                type="checkbox"
+                                class="skill-exp"
+                            >
+
+                            <strong class="skill-total">
+                                +0
+                            </strong>
+                        </div>
+
+
+                        <div
+                            class="skill-row"
+                            data-skill="performance"
+                            data-ability="charisma"
+                        >
+                            <span class="skill-name">
+                                Performance
+                            </span>
+
+                            <span class="skill-ability">
+                                CHA
+                            </span>
+
+                            <input
+                                type="checkbox"
+                                class="skill-prof"
+                            >
+
+                            <input
+                                type="checkbox"
+                                class="skill-exp"
+                            >
+
+                            <strong class="skill-total">
+                                +0
+                            </strong>
+                        </div>
+
+
+                        <div
+                            class="skill-row"
+                            data-skill="persuasion"
+                            data-ability="charisma"
+                        >
+                            <span class="skill-name">
+                                Persuasion
+                            </span>
+
+                            <span class="skill-ability">
+                                CHA
+                            </span>
+
+                            <input
+                                type="checkbox"
+                                class="skill-prof"
+                            >
+
+                            <input
+                                type="checkbox"
+                                class="skill-exp"
+                            >
+
+                            <strong class="skill-total">
+                                +0
+                            </strong>
+                        </div>
+
+
+                        <div
+                            class="skill-row"
+                            data-skill="religion"
+                            data-ability="intelligence"
+                        >
+                            <span class="skill-name">
+                                Religion
+                            </span>
+
+                            <span class="skill-ability">
+                                INT
+                            </span>
+
+                            <input
+                                type="checkbox"
+                                class="skill-prof"
+                            >
+
+                            <input
+                                type="checkbox"
+                                class="skill-exp"
+                            >
+
+                            <strong class="skill-total">
+                                +0
+                            </strong>
+                        </div>
+
+
+                        <div
+                            class="skill-row"
+                            data-skill="sleightOfHand"
+                            data-ability="dexterity"
+                        >
+                            <span class="skill-name">
+                                Sleight of Hand
+                            </span>
+
+                            <span class="skill-ability">
+                                DEX
+                            </span>
+
+                            <input
+                                type="checkbox"
+                                class="skill-prof"
+                            >
+
+                            <input
+                                type="checkbox"
+                                class="skill-exp"
+                            >
+
+                            <strong class="skill-total">
+                                +0
+                            </strong>
+                        </div>
+
+
+                        <div
+                            class="skill-row"
+                            data-skill="stealth"
+                            data-ability="dexterity"
+                        >
+                            <span class="skill-name">
+                                Stealth
+                            </span>
+
+                            <span class="skill-ability">
+                                DEX
+                            </span>
+
+                            <input
+                                type="checkbox"
+                                class="skill-prof"
+                            >
+
+                            <input
+                                type="checkbox"
+                                class="skill-exp"
+                            >
+
+                            <strong class="skill-total">
+                                +0
+                            </strong>
+                        </div>
+
+
+                        <div
+                            class="skill-row"
+                            data-skill="survival"
+                            data-ability="wisdom"
+                        >
+                            <span class="skill-name">
+                                Survival
+                            </span>
+
+                            <span class="skill-ability">
+                                WIS
+                            </span>
+
+                            <input
+                                type="checkbox"
+                                class="skill-prof"
+                            >
+
+                            <input
+                                type="checkbox"
+                                class="skill-exp"
+                            >
+
+                            <strong class="skill-total">
+                                +0
+                            </strong>
+                        </div>
+
+
+                    </section>
+
+
+
+                    <section class="sheet-panel">
+
+                        <h3 class="panel-heading">
+                            Death Saves
+                        </h3>
+
+                        <div class="death-save-grid">
+
+                            <div class="death-group">
+
+                                <strong>
+                                    Successes
+                                </strong>
+
+                                <div class="death-checks">
+
+                                    <input type="checkbox">
+                                    <input type="checkbox">
+                                    <input type="checkbox">
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="death-group">
+
+                                <strong>
+                                    Failures
+                                </strong>
+
+                                <div class="death-checks">
+
+                                    <input type="checkbox">
+                                    <input type="checkbox">
+                                    <input type="checkbox">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+
+                    <section class="sheet-panel">
+
+                        <h3 class="panel-heading">
+                            Hit Dice
+                        </h3>
+
+                        <div class="two-panel-grid">
+
+                            <div class="field">
+
+                                <label for="hitDice">
+                                    Hit Dice
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="hitDice"
+                                    name="hitDice"
+                                    placeholder="Example: 5d8"
+                                >
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label for="tempHP">
+                                    Temporary HP
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="tempHP"
+                                    name="tempHP"
+                                    value="0"
+                                    min="0"
+                                    max="999"
+                                    data-stepper
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                </div>
+
+
+
+                <!-- =============================================
+                     COMBAT / FEATURES
+                     ============================================= -->
+
+                <div class="column">
+
+
+                    <section class="sheet-panel">
+
+                        <h3 class="panel-heading">
                             Weapons & Attacks
                         </h3>
 
-                        <div class="weapon-header">
+
+                        <div class="attack-header">
 
                             <span>Name</span>
-                            <span>Attack / DC</span>
-                            <span>Damage & Type</span>
+
+                            <span>Attack</span>
+
+                            <span>Damage / Type</span>
 
                         </div>
 
 
-                        <div class="weapon-row">
+                        <div class="attack-row">
 
                             <input
                                 type="text"
-                                name="weapon1Name"
+                                name="attack1Name"
                             >
 
                             <input
                                 type="text"
-                                name="weapon1Attack"
+                                name="attack1Bonus"
                             >
 
                             <input
                                 type="text"
-                                name="weapon1Damage"
-                            >
-
-                        </div>
-
-
-                        <div class="weapon-row">
-
-                            <input
-                                type="text"
-                                name="weapon2Name"
-                            >
-
-                            <input
-                                type="text"
-                                name="weapon2Attack"
-                            >
-
-                            <input
-                                type="text"
-                                name="weapon2Damage"
+                                name="attack1Damage"
                             >
 
                         </div>
 
 
-                        <div class="weapon-row">
+                        <div class="attack-row">
 
                             <input
                                 type="text"
-                                name="weapon3Name"
+                                name="attack2Name"
                             >
 
                             <input
                                 type="text"
-                                name="weapon3Attack"
+                                name="attack2Bonus"
                             >
 
                             <input
                                 type="text"
-                                name="weapon3Damage"
+                                name="attack2Damage"
                             >
 
                         </div>
 
 
-                        <div class="weapon-row">
+                        <div class="attack-row">
 
                             <input
                                 type="text"
-                                name="weapon4Name"
+                                name="attack3Name"
                             >
 
                             <input
                                 type="text"
-                                name="weapon4Attack"
+                                name="attack3Bonus"
                             >
 
                             <input
                                 type="text"
-                                name="weapon4Damage"
+                                name="attack3Damage"
+                            >
+
+                        </div>
+
+
+                        <div class="attack-row">
+
+                            <input
+                                type="text"
+                                name="attack4Name"
+                            >
+
+                            <input
+                                type="text"
+                                name="attack4Bonus"
+                            >
+
+                            <input
+                                type="text"
+                                name="attack4Damage"
                             >
 
                         </div>
@@ -879,18 +2634,88 @@
 
 
 
-                    <!-- FEATURES -->
+                    <section class="sheet-panel">
+
+                        <h3 class="panel-heading">
+                            Spellcasting
+                        </h3>
+
+
+                        <div class="spell-grid">
+
+                            <div class="field">
+
+                                <label for="spellAbility">
+                                    Ability
+                                </label>
+
+                                <select
+                                    id="spellAbility"
+                                    name="spellAbility"
+                                >
+
+                                    <option value="">
+                                        None
+                                    </option>
+
+                                    <option value="intelligence">
+                                        Intelligence
+                                    </option>
+
+                                    <option value="wisdom">
+                                        Wisdom
+                                    </option>
+
+                                    <option value="charisma">
+                                        Charisma
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="spell-result">
+
+                                <span>
+                                    Spell Save DC
+                                </span>
+
+                                <strong id="spellSaveDC">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div class="spell-result">
+
+                                <span>
+                                    Spell Attack
+                                </span>
+
+                                <strong id="spellAttack">
+                                    —
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
 
                     <section class="sheet-panel">
 
-                        <h3 class="panel-title">
+                        <h3 class="panel-heading">
                             Class Features
                         </h3>
 
                         <textarea
                             id="classFeatures"
                             name="classFeatures"
-                            rows="11"
+                            rows="10"
                             placeholder="Class abilities, subclass features, resources, and other features..."
                         ></textarea>
 
@@ -898,58 +2723,56 @@
 
 
 
-                    <div class="two-panel-row">
+                    <section class="sheet-panel">
+
+                        <h3 class="panel-heading">
+                            Species Traits
+                        </h3>
+
+                        <textarea
+                            id="speciesTraits"
+                            name="speciesTraits"
+                            rows="8"
+                            placeholder="Species traits and inherited abilities..."
+                        ></textarea>
+
+                    </section>
 
 
-                        <section class="sheet-panel">
 
-                            <h3 class="panel-title">
-                                Species Traits
-                            </h3>
+                    <section class="sheet-panel">
 
-                            <textarea
-                                id="speciesTraits"
-                                name="speciesTraits"
-                                rows="9"
-                            ></textarea>
+                        <h3 class="panel-heading">
+                            Feats
+                        </h3>
 
-                        </section>
+                        <textarea
+                            id="feats"
+                            name="feats"
+                            rows="7"
+                            placeholder="Origin feats, general feats, epic boons, and other feats..."
+                        ></textarea>
 
-
-                        <section class="sheet-panel">
-
-                            <h3 class="panel-title">
-                                Feats
-                            </h3>
-
-                            <textarea
-                                id="feats"
-                                name="feats"
-                                rows="9"
-                            ></textarea>
-
-                        </section>
-
-
-                    </div>
+                    </section>
 
 
                 </div>
+
 
             </div>
 
 
 
-            <!-- ==================================
-                 CHARACTER DETAILS
-                 ================================== -->
+            <!-- =================================================
+                 PERSONALITY
+                 ================================================= -->
 
-            <div class="details-grid">
+            <div class="three-panel-grid">
 
 
                 <section class="sheet-panel">
 
-                    <h3 class="panel-title">
+                    <h3 class="panel-heading">
                         Appearance
                     </h3>
 
@@ -957,7 +2780,7 @@
                         id="appearance"
                         name="appearance"
                         rows="7"
-                        placeholder="Physical appearance, clothing, distinguishing marks..."
+                        placeholder="Physical appearance, clothing, scars, markings..."
                     ></textarea>
 
                 </section>
@@ -966,13 +2789,30 @@
 
                 <section class="sheet-panel">
 
-                    <h3 class="panel-title">
+                    <h3 class="panel-heading">
                         Personality
                     </h3>
 
                     <textarea
                         id="personality"
                         name="personality"
+                        rows="7"
+                        placeholder="Habits, mannerisms, temperament..."
+                    ></textarea>
+
+                </section>
+
+
+
+                <section class="sheet-panel">
+
+                    <h3 class="panel-heading">
+                        Ideals
+                    </h3>
+
+                    <textarea
+                        id="ideals"
+                        name="ideals"
                         rows="7"
                     ></textarea>
 
@@ -982,30 +2822,14 @@
 
                 <section class="sheet-panel">
 
-                    <h3 class="panel-title">
-                        Ideals
-                    </h3>
-
-                    <textarea
-                        id="ideals"
-                        name="ideals"
-                        rows="5"
-                    ></textarea>
-
-                </section>
-
-
-
-                <section class="sheet-panel">
-
-                    <h3 class="panel-title">
+                    <h3 class="panel-heading">
                         Bonds
                     </h3>
 
                     <textarea
                         id="bonds"
                         name="bonds"
-                        rows="5"
+                        rows="6"
                     ></textarea>
 
                 </section>
@@ -1014,14 +2838,14 @@
 
                 <section class="sheet-panel">
 
-                    <h3 class="panel-title">
+                    <h3 class="panel-heading">
                         Flaws
                     </h3>
 
                     <textarea
                         id="flaws"
                         name="flaws"
-                        rows="5"
+                        rows="6"
                     ></textarea>
 
                 </section>
@@ -1030,14 +2854,14 @@
 
                 <section class="sheet-panel">
 
-                    <h3 class="panel-title">
+                    <h3 class="panel-heading">
                         Languages
                     </h3>
 
                     <textarea
                         id="languages"
                         name="languages"
-                        rows="5"
+                        rows="6"
                     ></textarea>
 
                 </section>
@@ -1047,41 +2871,41 @@
 
 
 
-            <!-- ==================================
-                 LOWER SHEET
-                 ================================== -->
+            <!-- =================================================
+                 EQUIPMENT / PROFICIENCIES
+                 ================================================= -->
 
-            <div class="lower-grid">
-
-
-                <section class="sheet-panel">
-
-                    <h3 class="panel-title">
-                        Backstory
-                    </h3>
-
-                    <textarea
-                        id="backstory"
-                        name="backstory"
-                        rows="12"
-                        placeholder="Where did you come from? What has Ozyleme taken from you? What keeps you moving?"
-                    ></textarea>
-
-                </section>
-
+            <div class="two-panel-grid">
 
 
                 <section class="sheet-panel">
 
-                    <h3 class="panel-title">
+                    <h3 class="panel-heading">
                         Equipment
                     </h3>
 
                     <textarea
                         id="equipment"
                         name="equipment"
-                        rows="12"
-                        placeholder="Weapons, armor, tools, possessions, treasures..."
+                        rows="11"
+                        placeholder="Weapons, armor, tools, adventuring gear, treasures..."
+                    ></textarea>
+
+                </section>
+
+
+
+                <section class="sheet-panel">
+
+                    <h3 class="panel-heading">
+                        Training & Proficiencies
+                    </h3>
+
+                    <textarea
+                        id="proficiencies"
+                        name="proficiencies"
+                        rows="11"
+                        placeholder="Armor, weapons, tools, instruments, vehicles..."
                     ></textarea>
 
                 </section>
@@ -1091,24 +2915,24 @@
 
 
 
-            <!-- ==================================
-                 PROFICIENCIES / NOTES
-                 ================================== -->
+            <!-- =================================================
+                 BACKSTORY / NOTES
+                 ================================================= -->
 
-            <div class="lower-grid">
+            <div class="two-panel-grid">
 
 
                 <section class="sheet-panel">
 
-                    <h3 class="panel-title">
-                        Training & Proficiencies
+                    <h3 class="panel-heading">
+                        Backstory
                     </h3>
 
                     <textarea
-                        id="proficiencies"
-                        name="proficiencies"
-                        rows="8"
-                        placeholder="Armor, weapons, tools, instruments, vehicles..."
+                        id="backstory"
+                        name="backstory"
+                        rows="13"
+                        placeholder="Where did your character come from? What brought them into the darkness of Ozyleme?"
                     ></textarea>
 
                 </section>
@@ -1117,15 +2941,15 @@
 
                 <section class="sheet-panel">
 
-                    <h3 class="panel-title">
-                        Additional Notes
+                    <h3 class="panel-heading">
+                        Notes
                     </h3>
 
                     <textarea
                         id="notes"
                         name="notes"
-                        rows="8"
-                        placeholder="Allies, enemies, secrets, curses, discoveries..."
+                        rows="13"
+                        placeholder="Allies, enemies, secrets, curses, discoveries, goals..."
                     ></textarea>
 
                 </section>
@@ -1150,17 +2974,67 @@
 
 
 
-    <!-- ==================================
-         CHARACTER BUILDER SCRIPT
-         ================================== -->
+    <!-- =====================================================
+         CHARACTER BUILDER LOGIC
+         ===================================================== -->
 
     <script>
 
-        /* ================================
-           CUSTOM DROPDOWN ENTRIES
-           ================================ */
 
-        function enableCustomField(selectId, fieldId) {
+        /* =====================================================
+           HELPERS
+           ===================================================== */
+
+        function signedNumber(number) {
+
+            if (number >= 0) {
+                return "+" + number;
+            }
+
+            return String(number);
+
+        }
+
+
+
+        function getAbilityModifier(ability) {
+
+            const score =
+                parseInt(
+                    document.getElementById(ability).value
+                ) || 10;
+
+            return Math.floor(
+                (score - 10) / 2
+            );
+
+        }
+
+
+
+        function getProficiencyBonus() {
+
+            const level =
+                parseInt(
+                    document.getElementById("level").value
+                ) || 1;
+
+            return 2 + Math.floor(
+                (level - 1) / 4
+            );
+
+        }
+
+
+
+        /* =====================================================
+           CUSTOM DROPDOWNS
+           ===================================================== */
+
+        function setupCustomSelect(
+            selectId,
+            fieldId
+        ) {
 
             const select =
                 document.getElementById(selectId);
@@ -1169,48 +3043,224 @@
                 document.getElementById(fieldId);
 
 
-            select.addEventListener("change", function () {
+            select.addEventListener(
+                "change",
+                function () {
 
-                if (this.value === "Other") {
+                    if (select.value === "Other") {
 
-                    field.hidden = false;
-                    field.value = "";
-                    field.focus();
+                        field.hidden = false;
 
-                } else {
+                        field.value = "";
 
-                    field.hidden = true;
-                    field.value = "";
+                        field.focus();
+
+                    }
+
+                    else {
+
+                        field.hidden = true;
+
+                        field.value = "";
+
+                    }
 
                 }
-
-            });
+            );
 
         }
 
 
-        enableCustomField(
-            "species",
-            "customSpecies"
-        );
 
-        enableCustomField(
+        setupCustomSelect(
             "characterClass",
             "customClass"
         );
 
-        enableCustomField(
+
+        setupCustomSelect(
+            "species",
+            "customSpecies"
+        );
+
+
+        setupCustomSelect(
+            "background",
+            "customBackground"
+        );
+
+
+        setupCustomSelect(
             "homeland",
             "customHomeland"
         );
 
 
 
-        /* ================================
-           ABILITY MODIFIERS
-           ================================ */
+        /* =====================================================
+           CUSTOM NUMBER ARROW BOXES
+           ===================================================== */
 
-        const abilityScores = [
+        document
+            .querySelectorAll(
+                'input[type="number"][data-stepper]'
+            )
+            .forEach(function (input) {
+
+
+                const wrapper =
+                    document.createElement("div");
+
+
+                wrapper.className =
+                    "number-stepper";
+
+
+                input.parentNode.insertBefore(
+                    wrapper,
+                    input
+                );
+
+
+                wrapper.appendChild(input);
+
+
+                const buttons =
+                    document.createElement("div");
+
+
+                buttons.className =
+                    "stepper-buttons";
+
+
+                const up =
+                    document.createElement("button");
+
+
+                up.type = "button";
+
+                up.innerHTML = "▲";
+
+                up.setAttribute(
+                    "aria-label",
+                    "Increase"
+                );
+
+
+                const down =
+                    document.createElement("button");
+
+
+                down.type = "button";
+
+                down.innerHTML = "▼";
+
+                down.setAttribute(
+                    "aria-label",
+                    "Decrease"
+                );
+
+
+                buttons.appendChild(up);
+
+                buttons.appendChild(down);
+
+                wrapper.appendChild(buttons);
+
+
+
+                function changeValue(direction) {
+
+                    let current =
+                        Number(input.value);
+
+
+                    const step =
+                        Number(input.step) || 1;
+
+
+                    const min =
+                        input.min !== ""
+                            ? Number(input.min)
+                            : -Infinity;
+
+
+                    const max =
+                        input.max !== ""
+                            ? Number(input.max)
+                            : Infinity;
+
+
+                    if (isNaN(current)) {
+
+                        current =
+                            Number.isFinite(min)
+                                ? min
+                                : 0;
+
+                    }
+
+
+                    current +=
+                        direction * step;
+
+
+                    current =
+                        Math.min(
+                            max,
+                            Math.max(
+                                min,
+                                current
+                            )
+                        );
+
+
+                    input.value =
+                        current;
+
+
+                    input.dispatchEvent(
+                        new Event(
+                            "input",
+                            {
+                                bubbles: true
+                            }
+                        )
+                    );
+
+                }
+
+
+
+                up.addEventListener(
+                    "click",
+                    function () {
+
+                        changeValue(1);
+
+                    }
+                );
+
+
+                down.addEventListener(
+                    "click",
+                    function () {
+
+                        changeValue(-1);
+
+                    }
+                );
+
+
+            });
+
+
+
+        /* =====================================================
+           ABILITY SCORES
+           ===================================================== */
+
+        const abilities = [
             "strength",
             "dexterity",
             "constitution",
@@ -1220,57 +3270,470 @@
         ];
 
 
-        function calculateModifier(score) {
 
-            const modifier =
-                Math.floor((score - 10) / 2);
+        function updateAbilityModifiers() {
 
-            if (modifier >= 0) {
-                return "+" + modifier;
-            }
+            abilities.forEach(
+                function (ability) {
 
-            return modifier;
+                    const modifier =
+                        getAbilityModifier(
+                            ability
+                        );
+
+
+                    document.getElementById(
+                        ability + "Modifier"
+                    ).value =
+                        signedNumber(
+                            modifier
+                        );
+
+                }
+            );
 
         }
 
 
-        abilityScores.forEach(function (ability) {
 
-            const scoreField =
-                document.getElementById(ability);
+        /* =====================================================
+           PROFICIENCY
+           ===================================================== */
 
-            const modifierField =
-                document.getElementById(
-                    ability + "Modifier"
+        function updateProficiency() {
+
+            const bonus =
+                getProficiencyBonus();
+
+
+            document.getElementById(
+                "proficiencyBonus"
+            ).value =
+                signedNumber(
+                    bonus
+                );
+
+        }
+
+
+
+        /* =====================================================
+           SAVING THROWS
+           ===================================================== */
+
+        function updateSavingThrows() {
+
+            const proficiency =
+                getProficiencyBonus();
+
+
+            document
+                .querySelectorAll(
+                    ".save-prof"
+                )
+                .forEach(
+                    function (checkbox) {
+
+                        const ability =
+                            checkbox.dataset.ability;
+
+
+                        let total =
+                            getAbilityModifier(
+                                ability
+                            );
+
+
+                        if (
+                            checkbox.checked
+                        ) {
+
+                            total +=
+                                proficiency;
+
+                        }
+
+
+                        document.getElementById(
+                            ability + "Save"
+                        ).textContent =
+                            signedNumber(
+                                total
+                            );
+
+                    }
+                );
+
+        }
+
+
+
+        /* =====================================================
+           SKILLS
+           ===================================================== */
+
+        function updateSkills() {
+
+            const proficiency =
+                getProficiencyBonus();
+
+
+            document
+                .querySelectorAll(
+                    ".skill-row"
+                )
+                .forEach(
+                    function (row) {
+
+                        const ability =
+                            row.dataset.ability;
+
+
+                        const prof =
+                            row.querySelector(
+                                ".skill-prof"
+                            );
+
+
+                        const expertise =
+                            row.querySelector(
+                                ".skill-exp"
+                            );
+
+
+                        if (
+                            expertise.checked
+                        ) {
+
+                            prof.checked =
+                                true;
+
+                        }
+
+
+                        let total =
+                            getAbilityModifier(
+                                ability
+                            );
+
+
+                        if (
+                            prof.checked
+                        ) {
+
+                            total +=
+                                proficiency;
+
+                        }
+
+
+                        if (
+                            expertise.checked
+                        ) {
+
+                            total +=
+                                proficiency;
+
+                        }
+
+
+                        row.querySelector(
+                            ".skill-total"
+                        ).textContent =
+                            signedNumber(
+                                total
+                            );
+
+                    }
+                );
+
+        }
+
+
+
+        /* =====================================================
+           INITIATIVE
+           ===================================================== */
+
+        function updateInitiative() {
+
+            document.getElementById(
+                "initiative"
+            ).value =
+                signedNumber(
+                    getAbilityModifier(
+                        "dexterity"
+                    )
+                );
+
+        }
+
+
+
+        /* =====================================================
+           PASSIVE PERCEPTION
+           ===================================================== */
+
+        function updatePassivePerception() {
+
+            const perceptionRow =
+                document.querySelector(
+                    '[data-skill="perception"]'
                 );
 
 
-            function updateModifier() {
+            const displayed =
+                parseInt(
+                    perceptionRow
+                        .querySelector(
+                            ".skill-total"
+                        )
+                        .textContent
+                ) || 0;
 
-                const score =
-                    parseInt(scoreField.value);
 
-                if (isNaN(score)) {
+            document.getElementById(
+                "passivePerception"
+            ).value =
+                10 + displayed;
 
-                    modifierField.value = "";
+        }
 
-                    return;
-                }
 
-                modifierField.value =
-                    calculateModifier(score);
+
+        /* =====================================================
+           SPELLCASTING
+           ===================================================== */
+
+        function updateSpellcasting() {
+
+            const ability =
+                document.getElementById(
+                    "spellAbility"
+                ).value;
+
+
+            const dc =
+                document.getElementById(
+                    "spellSaveDC"
+                );
+
+
+            const attack =
+                document.getElementById(
+                    "spellAttack"
+                );
+
+
+            if (!ability) {
+
+                dc.textContent = "—";
+
+                attack.textContent = "—";
+
+                return;
 
             }
 
 
-            scoreField.addEventListener(
-                "input",
-                updateModifier
+            const modifier =
+                getAbilityModifier(
+                    ability
+                );
+
+
+            const proficiency =
+                getProficiencyBonus();
+
+
+            dc.textContent =
+                8 +
+                modifier +
+                proficiency;
+
+
+            attack.textContent =
+                signedNumber(
+                    modifier +
+                    proficiency
+                );
+
+        }
+
+
+
+        /* =====================================================
+           UPDATE EVERYTHING
+           ===================================================== */
+
+        function updateCharacterMath() {
+
+            updateProficiency();
+
+            updateAbilityModifiers();
+
+            updateSavingThrows();
+
+            updateSkills();
+
+            updateInitiative();
+
+            updatePassivePerception();
+
+            updateSpellcasting();
+
+        }
+
+
+
+        /* =====================================================
+           EVENT LISTENERS
+           ===================================================== */
+
+        abilities.forEach(
+            function (ability) {
+
+                document
+                    .getElementById(
+                        ability
+                    )
+                    .addEventListener(
+                        "input",
+                        updateCharacterMath
+                    );
+
+            }
+        );
+
+
+
+        document
+            .getElementById(
+                "level"
+            )
+            .addEventListener(
+                "change",
+                updateCharacterMath
             );
 
-            updateModifier();
 
-        });
+
+        document
+            .querySelectorAll(
+                ".save-prof"
+            )
+            .forEach(
+                function (checkbox) {
+
+                    checkbox.addEventListener(
+                        "change",
+                        updateCharacterMath
+                    );
+
+                }
+            );
+
+
+
+        document
+            .querySelectorAll(
+                ".skill-prof"
+            )
+            .forEach(
+                function (checkbox) {
+
+                    checkbox.addEventListener(
+                        "change",
+                        function () {
+
+                            const row =
+                                checkbox.closest(
+                                    ".skill-row"
+                                );
+
+
+                            const expertise =
+                                row.querySelector(
+                                    ".skill-exp"
+                                );
+
+
+                            if (
+                                !checkbox.checked
+                            ) {
+
+                                expertise.checked =
+                                    false;
+
+                            }
+
+
+                            updateCharacterMath();
+
+                        }
+                    );
+
+                }
+            );
+
+
+
+        document
+            .querySelectorAll(
+                ".skill-exp"
+            )
+            .forEach(
+                function (checkbox) {
+
+                    checkbox.addEventListener(
+                        "change",
+                        function () {
+
+                            const row =
+                                checkbox.closest(
+                                    ".skill-row"
+                                );
+
+
+                            if (
+                                checkbox.checked
+                            ) {
+
+                                row.querySelector(
+                                    ".skill-prof"
+                                ).checked =
+                                    true;
+
+                            }
+
+
+                            updateCharacterMath();
+
+                        }
+                    );
+
+                }
+            );
+
+
+
+        document
+            .getElementById(
+                "spellAbility"
+            )
+            .addEventListener(
+                "change",
+                updateCharacterMath
+            );
+
+
+
+        /* =====================================================
+           FIRST PAGE LOAD
+           ===================================================== */
+
+        updateCharacterMath();
+
 
     </script>
 
