@@ -648,3 +648,31 @@ footer {
     }
 
 }
+/* ================================
+   PAGE TRANSITIONS
+   ================================ */
+
+body {
+    opacity: 0;
+
+    transition:
+        opacity 0.35s ease-in-out;
+}
+
+body.page-loaded {
+    opacity: 1;
+}
+
+body.page-leaving {
+    opacity: 0;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+    body {
+        opacity: 1;
+        transition: none;
+    }
+
+}
