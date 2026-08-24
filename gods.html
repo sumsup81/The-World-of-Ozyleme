@@ -71,12 +71,12 @@
         <p>
             Eight gods hold power across the kingdoms of Ozyleme.
             Each is bound to a force of the world and holds mastery
-            over a particular domain.
+            over a particular role within the order of the lands.
         </p>
 
         <p>
             They are worshipped, feared, bargained with, celebrated,
-            and cursed by the people who live beneath the hollow sun.
+            and cursed by those who live beneath the hollow sun.
             Yet even the gods exist beneath the authority of the
             Dragon King.
         </p>
@@ -89,7 +89,7 @@
 
     <!-- ================================
          GOD DIRECTORY
-         JavaScript fills this area.
+         FILLED BY JAVASCRIPT
          ================================ -->
 
     <section class="gods-directory">
@@ -106,16 +106,28 @@
 
     <!-- ================================
          GOD PROFILES
-         JavaScript fills this area.
+         FILLED BY JAVASCRIPT
          ================================ -->
 
     <div id="god-profiles"></div>
 
 
+    <!-- ================================
+         NO JAVASCRIPT MESSAGE
+         ================================ -->
+
     <noscript>
-        <p>
-            This page requires JavaScript to display the gods of Ozyleme.
-        </p>
+
+        <section>
+
+            <h2>The Gods of Ozyleme</h2>
+
+            <p>
+                JavaScript must be enabled to display the gods of Ozyleme.
+            </p>
+
+        </section>
+
     </noscript>
 
 
@@ -144,61 +156,95 @@
 
 <script>
 
-    /* Get the two empty areas from the HTML */
+    /* =====================================================
+       GET PAGE ELEMENTS
+       ===================================================== */
 
-    const godsDirectory = document.getElementById("gods-directory");
+    const godsDirectory =
+        document.getElementById("gods-directory");
 
-    const godProfiles = document.getElementById("god-profiles");
+    const godProfiles =
+        document.getElementById("god-profiles");
 
 
-    /* Go through every god in gods.js */
+    /* =====================================================
+       CREATE EACH GOD
+       ===================================================== */
 
     Object.entries(godsData).forEach(([godId, god]) => {
 
 
-        /* =========================================
+        /* =================================================
            DIRECTORY CARD
-           ========================================= */
+           ================================================= */
 
-        const godCard = document.createElement("a");
+        const godCard =
+            document.createElement("a");
 
-        godCard.className = `card ${godId}`;
+        godCard.className =
+            `card ${godId}`;
 
-        godCard.href = `#${godId}`;
+        godCard.href =
+            `#${godId}`;
+
 
         godCard.innerHTML = `
-            <h3>${god.name}</h3>
-            <p>${god.kingdom}</p>
+
+            <h3>
+                ${god.name}
+            </h3>
+
+            <p>
+                ${god.kingdom}
+            </p>
+
         `;
+
 
         godsDirectory.appendChild(godCard);
 
 
-        /* =========================================
+
+        /* =================================================
            GOD PROFILE
-           ========================================= */
+           ================================================= */
 
-        const godProfile = document.createElement("section");
+        const godProfile =
+            document.createElement("section");
 
-        godProfile.className = "god-profile";
+        godProfile.className =
+            "god-profile";
 
-        godProfile.id = godId;
+        godProfile.id =
+            godId;
 
 
         godProfile.innerHTML = `
 
+
+            <!-- GOD NAME -->
+
             <div class="god-heading">
 
-                <h2>${god.name}</h2>
+                <h2>
+                    ${god.name}
+                </h2>
 
-                <h3>${god.role}</h3>
+                <h3>
+                    Keeper: ${god.keeper}
+                </h3>
 
             </div>
 
 
+
+            <!-- GENERAL OUTLINE -->
+
             <div class="god-section">
 
-                <h3>General Outline</h3>
+                <h3>
+                    General Outline
+                </h3>
 
                 <p>
                     ${god.outline.trim()}
@@ -207,32 +253,71 @@
             </div>
 
 
+
+            <!-- GOD FACTS -->
+
             <div class="god-facts">
 
 
+                <!-- SYMBOL -->
+
                 <div class="god-fact">
 
-                    <h4>Symbol</h4>
+                    <h4>
+                        Symbol
+                    </h4>
 
-                    <p>${god.symbol}</p>
+                    <p>
+                        ${god.symbol}
+                    </p>
 
                 </div>
 
 
+
+                <!-- ROLE -->
+
                 <div class="god-fact">
 
-                    <h4>Domain</h4>
+                    <h4>
+                        Role
+                    </h4>
 
-                    <p>${god.domain}</p>
+                    <p>
+                        ${god.role}
+                    </p>
 
                 </div>
 
 
+
+                <!-- ELEMENT -->
+
                 <div class="god-fact">
 
-                    <h4>Element</h4>
+                    <h4>
+                        Element
+                    </h4>
 
-                    <p>${god.element}</p>
+                    <p>
+                        ${god.element}
+                    </p>
+
+                </div>
+
+
+
+                <!-- DOMAIN -->
+
+                <div class="god-fact">
+
+                    <h4>
+                        Domain
+                    </h4>
+
+                    <p>
+                        ${god.domain}
+                    </p>
 
                 </div>
 
@@ -240,9 +325,14 @@
             </div>
 
 
+
+            <!-- LORE -->
+
             <div class="god-section">
 
-                <h3>Lore</h3>
+                <h3>
+                    Lore
+                </h3>
 
                 <p>
                     ${god.lore.trim()}
@@ -250,31 +340,37 @@
 
             </div>
 
+
         `;
 
 
         godProfiles.appendChild(godProfile);
 
 
-        /* =========================================
-           DIVIDER AFTER EACH GOD
-           Except the final god
-           ========================================= */
 
-        const godIds = Object.keys(godsData);
+        /* =================================================
+           DIVIDER BETWEEN GODS
+           ================================================= */
 
-        const finalGod = godIds[godIds.length - 1];
+        const godIds =
+            Object.keys(godsData);
+
+        const finalGod =
+            godIds[godIds.length - 1];
 
 
         if (godId !== finalGod) {
 
-            const divider = document.createElement("div");
+            const divider =
+                document.createElement("div");
 
-            divider.className = "divider";
+            divider.className =
+                "divider";
 
             godProfiles.appendChild(divider);
 
         }
+
 
     });
 
