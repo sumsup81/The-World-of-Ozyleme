@@ -2,12 +2,12 @@
    OZYLEME GOD DATA
    =========================================================
 
-   This file contains the written information for gods.html.
+   This file contains the player-visible information
+   displayed on gods.html.
 
    IMPORTANT:
-   Keep player-visible secrets OUT of this file.
-   Anything written here can technically be viewed by visitors
-   through the website's source files.
+   Do not place secret lore in this file.
+   Visitors can technically view JavaScript source files.
    ========================================================= */
 
 
@@ -22,18 +22,20 @@ const godsData = {
 
         name: "The Giver",
 
-        role: "Keeper of Plume",
-
         kingdom: "Plume",
+
+        keeper: "The Kingdom of Plume",
+
+        role: "Master of None",
 
         symbol: "[To Be Recorded]",
 
-        domain: "Master of None",
-
         element: "Unknown",
 
+        domain: "[To Be Recorded]",
+
         outline: `
-            The Giver is the ancient Keeper associated with Plume.
+            The Giver is the ancient god associated with Plume.
             Among the gods of Ozyleme, the Giver occupies a strange
             and uncertain place, traditionally said to hold mastery
             over no known force.
@@ -55,20 +57,23 @@ const godsData = {
 
         name: "The Ravager",
 
-        role: "Keeper of Kettle",
-
         kingdom: "Kettle",
+
+        keeper: "The Kingdom of Kettle",
+
+        role: "Master of Shadows",
 
         symbol: "[To Be Recorded]",
 
-        domain: "Master of Shadows",
-
         element: "Shadow",
 
+        domain: "[To Be Recorded]",
+
         outline: `
-            The Ravager is the Keeper associated with Kettle,
-            its deep forests, and the darkness that gathers
-            beneath their ancient canopy.
+            The Ravager is associated with Kettle, its deep forests,
+            and the darkness that gathers beneath their ancient canopy.
+            Shadow is not merely an absence beneath the Ravager.
+            It is what remains when something has been taken away.
         `,
 
         lore: `
@@ -87,18 +92,20 @@ const godsData = {
 
         name: "The Tormentor",
 
-        role: "Keeper of Loop",
-
         kingdom: "Loop",
+
+        keeper: "The Kingdom of Loop",
+
+        role: "Master of Flame",
 
         symbol: "[To Be Recorded]",
 
-        domain: "Master of Flame",
-
         element: "Fire",
 
+        domain: "[To Be Recorded]",
+
         outline: `
-            The Tormentor is the Keeper of Loop, a land of spectacle,
+            The Tormentor is associated with Loop, a land of spectacle,
             revelry, ritual, sensation, illusion, and celebrations
             that may resemble funerals as readily as festivals.
         `,
@@ -119,21 +126,24 @@ const godsData = {
 
         name: "The Inflictor",
 
-        role: "Keeper of Torch",
-
         kingdom: "Torch",
+
+        keeper: "The Kingdom of Torch",
+
+        role: "Master of Radiance",
 
         symbol: "[To Be Recorded]",
 
-        domain: "Master of Radiance",
-
         element: "Radiance",
 
+        domain: "[To Be Recorded]",
+
         outline: `
-            The Inflictor is the Keeper associated with Torch
-            and its High Elves. The Inflictor embodies brilliance,
-            discovery, invention, and the terrible consequences
-            that knowledge may create.
+            The Inflictor is associated with Torch and its High Elves.
+            The Inflictor embodies brilliance, discovery, invention,
+            and the terrible consequences that knowledge may create.
+            Radiance is understood less as holy light and more as a
+            dangerous force capable of transformation and destruction.
         `,
 
         lore: `
@@ -152,20 +162,21 @@ const godsData = {
 
         name: "The Harvester",
 
-        role: "Keeper of Vial",
-
         kingdom: "Vial",
+
+        keeper: "The Kingdom of Vial",
+
+        role: "Master of Reaping",
 
         symbol: "[To Be Recorded]",
 
-        domain: "Master of Reaping",
-
         element: "Death",
 
+        domain: "[To Be Recorded]",
+
         outline: `
-            The Harvester is the Keeper associated with Vial.
-            The Harvester governs the inevitable taking that waits
-            at the end of mortal existence.
+            The Harvester is associated with Vial and the inevitable
+            taking that waits at the end of mortal existence.
         `,
 
         lore: `
@@ -184,20 +195,22 @@ const godsData = {
 
         name: "The Seer",
 
-        role: "Watcher of Hook",
-
         kingdom: "Hook",
+
+        keeper: "The Kingdom of Hook",
+
+        role: "Master of Depths",
 
         symbol: "[To Be Recorded]",
 
-        domain: "Master of Depths",
-
         element: "Water",
 
+        domain: "[To Be Recorded]",
+
         outline: `
-            The Seer is the Watcher associated with Hook.
-            Unlike the Keepers, the Seer is defined by watching,
-            perceiving, and knowing what lies beneath the surface.
+            The Seer watches over Hook and is associated with what lies
+            beneath the surface, whether beneath the waters, beneath
+            appearances, or beneath what mortals believe they understand.
         `,
 
         lore: `
@@ -216,20 +229,22 @@ const godsData = {
 
         name: "The Dominator",
 
-        role: "Keeper of Bell",
-
         kingdom: "Bell",
+
+        keeper: "The Kingdom of Bell",
+
+        role: "Master of Mountains",
 
         symbol: "[To Be Recorded]",
 
-        domain: "Master of Mountains",
-
         element: "Earth",
 
+        domain: "[To Be Recorded]",
+
         outline: `
-            The Dominator is the Keeper associated with Bell
-            and the immense stone places that rise above the
-            lands of Ozyleme.
+            The Dominator is associated with Bell and the immense
+            mountains and stone places that rise above the lands
+            of Ozyleme.
         `,
 
         lore: `
@@ -248,21 +263,22 @@ const godsData = {
 
         name: "The Banisher",
 
-        role: "Keeper of Crook",
-
         kingdom: "Crook",
+
+        keeper: "The Kingdom of Crook",
+
+        role: "Master of Skies",
 
         symbol: "[To Be Recorded]",
 
-        domain: "Master of Skies",
-
         element: "Air",
 
+        domain: "[To Be Recorded]",
+
         outline: `
-            The Banisher is the Keeper associated with Crook.
-            The Banisher commands the open skies and embodies
-            a force that drives away, scatters, and destroys
-            what it considers unworthy to remain.
+            The Banisher is associated with Crook and the open skies.
+            The Banisher embodies a force that drives away, scatters,
+            destroys, and seeks to eradicate through overwhelming force.
         `,
 
         lore: `
