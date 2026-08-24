@@ -1,7 +1,35 @@
 /* ================================
    OZYLEME
-   Base Website Theme
+   MASTER WEBSITE THEME
    ================================ */
+
+
+/* ================================
+   THEME COLORS
+   ================================ */
+
+:root {
+    --bg-top: #24231f;
+    --bg-middle: #151512;
+    --bg-bottom: #090a08;
+
+    --surface-dark: #0d0f0c;
+    --surface-mid: #25251f;
+
+    --text-main: #d8d0bc;
+    --text-soft: #aaa48f;
+    --text-muted: #8f8a79;
+    --text-heading: #c5bda1;
+
+    --border: #47473b;
+    --border-soft: #373a30;
+
+    --accent-red: #74372f;
+    --accent-red-dark: #5d251f;
+
+    --shadow:
+        0 8px 25px rgba(0, 0, 0, 0.35);
+}
 
 
 /* ================================
@@ -19,20 +47,61 @@ html {
 body {
     margin: 0;
 
+    min-height: 100vh;
+
     background:
         radial-gradient(
             circle at top,
-            #273126 0%,
-            #151713 35%,
-            #090a08 100%
+            var(--bg-top) 0%,
+            var(--bg-middle) 38%,
+            var(--bg-bottom) 100%
         );
 
-    color: #d8d0bc;
+    color: var(--text-main);
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
     line-height: 1.7;
 
-    min-height: 100vh;
+    opacity: 1;
+
+    transition:
+        opacity 0.35s ease-in-out;
+}
+
+
+/* ================================
+   PAGE TRANSITIONS
+   ================================ */
+
+body.page-entering {
+    opacity: 0;
+}
+
+body.page-loaded {
+    opacity: 1;
+}
+
+body.page-leaving {
+    opacity: 0;
+}
+
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    body {
+        opacity: 1 !important;
+        transition: none !important;
+    }
 }
 
 
@@ -47,6 +116,7 @@ header {
     aspect-ratio: 3 / 1;
 
     padding: 0;
+
     overflow: hidden;
 
     background:
@@ -60,13 +130,14 @@ header {
     background-position: center center;
     background-repeat: no-repeat;
 
-    background-color: #0d0f0c;
+    background-color: var(--surface-dark);
 
-    border-bottom: 1px solid #5d251f;
+    border-bottom:
+        1px solid var(--accent-red-dark);
 }
 
 
-/* Main OZYLEME title */
+/* OZYLEME title */
 
 header h1 {
     position: absolute;
@@ -77,12 +148,15 @@ header h1 {
     transform: translateX(-50%);
 
     width: 100%;
+
     margin: 0;
     padding: 0 20px;
 
     text-align: center;
 
-    font-size: clamp(2.5rem, 8vw, 6.5rem);
+    font-size:
+        clamp(2.5rem, 8vw, 6.5rem);
+
     font-weight: normal;
 
     letter-spacing: 0.18em;
@@ -96,7 +170,7 @@ header h1 {
 }
 
 
-/* Realm of the Dark Dragon tagline */
+/* Realm of the Dark Dragon */
 
 header p {
     position: absolute;
@@ -107,14 +181,17 @@ header p {
     transform: translateX(-50%);
 
     width: 100%;
+
     margin: 0;
     padding: 0 20px;
 
     text-align: center;
 
-    color: #8d927a;
+    color: #96917e;
 
-    font-size: clamp(0.8rem, 2vw, 1.1rem);
+    font-size:
+        clamp(0.8rem, 2vw, 1.1rem);
+
     font-style: italic;
 
     letter-spacing: 0.12em;
@@ -124,18 +201,15 @@ header p {
 }
 
 
-/* Desktop tagline adjustment */
+/* Desktop tagline */
 
 @media (min-width: 768px) {
 
     header p {
         bottom: 21%;
 
-        font-size: clamp(
-            1rem,
-            2.6vw,
-            1.45rem
-        );
+        font-size:
+            clamp(1rem, 2.6vw, 1.45rem);
     }
 }
 
@@ -154,40 +228,46 @@ nav {
 
     padding: 12px;
 
-    background: #0d0f0c;
+    background: var(--surface-dark);
 
-    border-bottom: 1px solid #373a30;
+    border-bottom:
+        1px solid var(--border-soft);
 
     position: sticky;
+
     top: 0;
 
     z-index: 100;
 }
 
 nav a {
-    color: #aaa48f;
+    padding: 8px 15px;
+
+    margin: 2px;
+
+    color: var(--text-soft);
 
     text-decoration: none;
-
-    padding: 8px 15px;
-    margin: 2px;
 
     font-size: 0.95rem;
 
     letter-spacing: 0.08em;
 
-    border-bottom: 1px solid transparent;
+    border-bottom:
+        1px solid transparent;
 
     transition:
-        color 0.2s,
-        background 0.2s,
-        border-color 0.2s;
+        color 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
 }
 
-nav a:hover {
+nav a:hover,
+nav a[aria-current="page"] {
     color: #d8cfad;
 
-    border-bottom-color: #742f27;
+    border-bottom-color:
+        var(--accent-red);
 
     background:
         rgba(110, 45, 35, 0.12);
@@ -199,6 +279,8 @@ nav a:hover {
    ================================ */
 
 main {
+    width: 100%;
+
     max-width: 1100px;
 
     margin: 0 auto;
@@ -206,8 +288,13 @@ main {
     padding: 60px 30px 90px;
 }
 
-main > p {
-    max-width: 800px;
+section {
+    max-width: 100%;
+}
+
+main > p,
+section > p {
+    max-width: 850px;
 }
 
 
@@ -218,6 +305,8 @@ main > p {
 h2 {
     margin-top: 50px;
 
+    padding-bottom: 8px;
+
     color: #b4ad93;
 
     font-size: 2rem;
@@ -225,9 +314,8 @@ h2 {
 
     letter-spacing: 0.07em;
 
-    border-bottom: 1px solid #4b473b;
-
-    padding-bottom: 8px;
+    border-bottom:
+        1px solid #4b473b;
 }
 
 h2::first-letter {
@@ -235,7 +323,7 @@ h2::first-letter {
 }
 
 h3 {
-    color: #c1b99e;
+    color: var(--text-heading);
 
     font-weight: normal;
 
@@ -257,7 +345,7 @@ a:hover {
 
 
 /* ================================
-   CARD GRID
+   STANDARD CARD GRID
    ================================ */
 
 .cards {
@@ -272,43 +360,88 @@ a:hover {
 }
 
 
-/* Base card style */
+/* ================================
+   STANDARD CARDS
+   ================================ */
 
 .card {
     display: block;
+
     position: relative;
 
+    min-width: 0;
     min-height: 180px;
 
     padding: 24px;
 
-    text-decoration: none;
+    overflow: hidden;
 
     color: #cbc3ac;
+
+    text-decoration: none;
 
     background:
         linear-gradient(
             145deg,
-            rgba(49, 52, 42, 0.75),
-            rgba(17, 19, 15, 0.95)
+            rgba(44, 44, 37, 0.78),
+            rgba(16, 16, 14, 0.96)
         );
 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 
-    border: 1px solid #47473b;
-
-    overflow: hidden;
+    border:
+        1px solid var(--border);
 
     box-shadow:
-        0 8px 25px rgba(0, 0, 0, 0.35),
+        var(--shadow),
         inset 0 0 25px rgba(0, 0, 0, 0.25);
 
     transition:
-        transform 0.2s,
-        border-color 0.2s,
-        box-shadow 0.2s;
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform:
+        translateY(-4px);
+
+    color: #ddd4b8;
+
+    border-color:
+        var(--accent-red);
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.45),
+        inset 0 0 25px rgba(90, 35, 28, 0.15);
+}
+
+
+/* ================================
+   CARD TEXT
+   ================================ */
+
+.card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+
+    color: var(--text-heading);
+
+    text-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+.card p {
+    margin-bottom: 0;
+
+    color: var(--text-soft);
+
+    font-size: 0.95rem;
+
+    text-shadow:
+        0 1px 4px rgba(0, 0, 0, 0.9);
 }
 
 
@@ -336,89 +469,177 @@ a:hover {
 
 
 /* ================================
-   CARD HOVER
-   ================================ */
-
-.card:hover {
-    transform: translateY(-4px);
-
-    color: #ddd4b8;
-
-    border-color: #74372f;
-
-    box-shadow:
-        0 12px 30px rgba(0, 0, 0, 0.45),
-        inset 0 0 25px rgba(90, 35, 28, 0.15);
-}
-
-
-/* ================================
-   CARD TEXT
-   ================================ */
-
-.card h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-
-    color: #c5bda1;
-
-    text-shadow:
-        0 2px 4px rgba(0, 0, 0, 0.9);
-}
-
-.card p {
-    margin-bottom: 0;
-
-    color: #aaa48f;
-
-    font-size: 0.95rem;
-
-    text-shadow:
-        0 1px 4px rgba(0, 0, 0, 0.9);
-}
-
-
-/* ================================
    DIVIDERS
    ================================ */
+
+.divider {
+    width: 60%;
+
+    height: 1px;
+
+    margin: 50px auto;
+
+    background:
+        linear-gradient(
+            to right,
+            transparent,
+            #632b26,
+            transparent
+        );
+}
 
 hr {
     margin: 50px 0;
 
     border: 0;
-    border-top: 1px solid #474337;
+
+    border-top:
+        1px solid #474337;
 }
 
 
 /* ================================
-   BLOCKQUOTES / LORE TEXT
+   BLOCKQUOTES / LORE
    ================================ */
 
 blockquote {
     margin: 35px 0;
 
-    padding:
-        18px
-        25px;
+    padding: 18px 25px;
 
     color: #aba48e;
 
     background:
         rgba(0, 0, 0, 0.18);
 
-    border-left: 3px solid #6f3029;
+    border-left:
+        3px solid #6f3029;
 
     font-style: italic;
 }
 
 
 /* ================================
-   IMAGES
+   GENERAL IMAGES
    ================================ */
 
 img {
+    display: block;
+
     max-width: 100%;
+
     height: auto;
+}
+
+
+/* ================================
+   GOD NAVIGATION
+   ================================ */
+
+.god-nav {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-top: 35px;
+    margin-bottom: 55px;
+}
+
+.god-nav-card {
+    display: block;
+
+    width: 100%;
+    min-width: 0;
+
+    aspect-ratio: 3 / 4;
+
+    overflow: hidden;
+
+    background:
+        var(--surface-dark);
+
+    border:
+        1px solid var(--border);
+
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.45);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.god-nav-card img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.god-nav-card:hover {
+    transform:
+        translateY(-5px);
+
+    border-color:
+        var(--accent-red);
+
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.6);
+}
+
+
+/* ================================
+   GOD INFORMATION TEMPLATE
+   ================================ */
+
+.god-entry {
+    scroll-margin-top: 90px;
+}
+
+.god-template {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-top: 30px;
+}
+
+.god-field {
+    min-width: 0;
+
+    padding: 18px 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(43, 42, 36, 0.72),
+            rgba(15, 15, 13, 0.94)
+        );
+
+    border:
+        1px solid #403f36;
+}
+
+.god-field h3 {
+    margin-top: 0;
+    margin-bottom: 6px;
+
+    color: #bdb498;
+
+    font-size: 1rem;
+}
+
+.god-field p {
+    margin: 0;
+
+    color: var(--text-muted);
 }
 
 
@@ -435,11 +656,25 @@ footer {
 
     background: #090a08;
 
-    border-top: 1px solid #373a30;
+    border-top:
+        1px solid var(--border-soft);
 
     font-size: 0.85rem;
 
     letter-spacing: 0.06em;
+}
+
+
+/* ================================
+   TABLET
+   ================================ */
+
+@media (max-width: 850px) {
+
+    .god-nav {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
 }
 
 
@@ -451,6 +686,7 @@ footer {
 
     header {
         aspect-ratio: 3 / 1;
+
         min-height: 180px;
     }
 
@@ -506,135 +742,6 @@ footer {
 
         padding: 20px;
     }
-}
-
-/* ================================
-   GOD NAVIGATION
-   ================================ */
-
-.god-nav {
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, minmax(0, 1fr));
-
-    gap: 18px;
-
-    margin-top: 35px;
-    margin-bottom: 55px;
-}
-
-
-.god-nav-card {
-    display: block;
-
-    width: 100%;
-
-    aspect-ratio: 3 / 4;
-
-    overflow: hidden;
-
-    background: #090a08;
-
-    border: 1px solid #47473b;
-
-    box-shadow:
-        0 8px 22px rgba(0, 0, 0, 0.45);
-
-    transition:
-        transform 0.2s,
-        border-color 0.2s,
-        box-shadow 0.2s;
-}
-
-
-.god-nav-card img {
-    display: block;
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-}
-
-
-.god-nav-card:hover {
-    transform: translateY(-5px);
-
-    border-color: #74372f;
-
-    box-shadow:
-        0 12px 28px rgba(0, 0, 0, 0.6);
-}
-
-
-/* ================================
-   GOD INFORMATION TEMPLATE
-   ================================ */
-
-.god-entry {
-    scroll-margin-top: 90px;
-}
-
-
-.god-template {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-    gap: 16px;
-
-    margin-top: 30px;
-}
-
-
-.god-field {
-    padding: 18px 20px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(38, 41, 34, 0.65),
-            rgba(15, 16, 13, 0.9)
-        );
-
-    border: 1px solid #3f4036;
-}
-
-
-.god-field h3 {
-    margin-top: 0;
-    margin-bottom: 6px;
-
-    color: #bdb498;
-
-    font-size: 1rem;
-}
-
-
-.god-field p {
-    margin: 0;
-
-    color: #8f8a79;
-}
-
-
-/* GOD PAGE TABLET */
-
-@media (max-width: 850px) {
-
-    .god-nav {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-    }
-
-}
-
-
-/* GOD PAGE MOBILE */
-
-@media (max-width: 650px) {
 
     .god-nav {
         grid-template-columns:
@@ -645,34 +752,6 @@ footer {
 
     .god-template {
         grid-template-columns: 1fr;
-    }
-
-}
-/* ================================
-   PAGE TRANSITIONS
-   ================================ */
-
-body {
-    opacity: 0;
-
-    transition:
-        opacity 0.35s ease-in-out;
-}
-
-body.page-loaded {
-    opacity: 1;
-}
-
-body.page-leaving {
-    opacity: 0;
-}
-
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-
-    body {
-        opacity: 1;
-        transition: none;
     }
 
 }
