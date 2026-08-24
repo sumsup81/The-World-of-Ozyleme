@@ -1,1467 +1,406 @@
-/* =========================================================
-   OZYLEME
-   MAIN WEBSITE STYLESHEET
-   ========================================================= */
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-/* =========================================================
-   RESET / GLOBAL
-   ========================================================= */
+    <title>Gods | Ozyleme</title>
 
-* {
-    box-sizing: border-box;
-}
+    <link rel="stylesheet" href="style.css">
+</head>
 
-html {
-    scroll-behavior: smooth;
-}
+<body>
 
-body {
-    margin: 0;
 
-    background: #151512;
-    color: #d8d0bc;
+<!-- ================================
+     HEADER
+     ================================ -->
 
-    font-family: Georgia, "Times New Roman", serif;
-    line-height: 1.7;
+<header>
+    <h1></h1>
+    <p>The Gods Beneath the Hollow Sun</p>
+</header>
 
-    min-height: 100vh;
 
-    animation: pageFadeIn 0.4s ease-out;
-}
+<!-- ================================
+     NAVIGATION
+     ================================ -->
 
+<nav class="site-nav">
 
-/* =========================================================
-   PAGE FADE
-   CSS ONLY
-   ========================================================= */
+    <a class="nav-link" href="index.html">Home</a>
 
-@keyframes pageFadeIn {
+    <a class="nav-link" href="kingdoms.html">Kingdoms</a>
 
-    from {
-        opacity: 0;
-    }
+    <a class="nav-link" href="species.html">Species</a>
 
-    to {
-        opacity: 1;
-    }
+    <a class="nav-link" href="people.html">People</a>
 
-}
+    <a class="nav-link active"
+       href="gods.html"
+       aria-current="page">
+        Gods
+    </a>
 
-@media (prefers-reduced-motion: reduce) {
+    <a class="nav-link" href="bestiary.html">Bestiary</a>
 
-    body {
-        animation: none;
-    }
+    <a class="nav-link" href="classes.html">Classes</a>
 
-    html {
-        scroll-behavior: auto;
-    }
+    <a class="nav-link" href="player-guide.html">Player Guide</a>
 
-}
+</nav>
 
 
-/* =========================================================
-   HEADER / BANNER
-   ========================================================= */
+<!-- ================================
+     MAIN CONTENT
+     ================================ -->
 
-header {
-    position: relative;
+<main>
 
-    width: 100%;
-    aspect-ratio: 3 / 1;
 
-    padding: 0;
-    overflow: hidden;
+    <!-- ================================
+         INTRODUCTION
+         ================================ -->
 
-    background:
-        linear-gradient(
-            rgba(5, 5, 4, 0.30),
-            rgba(5, 5, 4, 0.68)
-        ),
-        url("Ozyleme Web Banner.jpg");
+    <section class="gods-intro">
 
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
+        <h2>The Eight Gods</h2>
 
-    background-color: #151512;
+        <p>
+            Eight gods hold power across the kingdoms of Ozyleme.
+            Each is bound to a force of the world and holds mastery
+            over a particular role within the order of the lands.
+        </p>
 
-    border-bottom: 1px solid #5d251f;
-}
+        <p>
+            They are worshipped, feared, bargained with, celebrated,
+            and cursed by those who live beneath the hollow sun.
+            Yet even the gods exist beneath the authority of the
+            Dragon King.
+        </p>
 
+    </section>
 
-/* Main OZYLEME title */
 
-header h1 {
-    position: absolute;
+    <div class="divider"></div>
 
-    left: 50%;
-    top: 28%;
 
-    transform: translateX(-50%);
+    <!-- ================================
+         GOD DIRECTORY
+         ================================ -->
 
-    width: 100%;
+    <section class="gods-directory" id="gods-top">
 
-    margin: 0;
-    padding: 0 20px;
+        <h2>The Gods of Ozyleme</h2>
 
-    text-align: center;
+        <div class="gods-grid" id="gods-directory"></div>
 
-    font-size: clamp(
-        2.5rem,
-        8vw,
-        6.5rem
-    );
+    </section>
 
-    font-weight: normal;
-    letter-spacing: 0.18em;
 
-    color: #e0d6b8;
+    <div class="divider"></div>
 
-    text-shadow:
-        0 2px 0 #000,
-        0 0 12px rgba(0, 0, 0, 0.85),
-        0 0 24px rgba(120, 40, 30, 0.35);
-}
 
+    <!-- ================================
+         GOD PROFILES
+         ================================ -->
 
-/* Header tagline */
+    <div id="god-profiles"></div>
 
-header p {
-    position: absolute;
 
-    left: 50%;
-    bottom: 18%;
+    <!-- ================================
+         NO JAVASCRIPT FALLBACK
+         ================================ -->
 
-    transform: translateX(-50%);
+    <noscript>
 
-    width: 100%;
+        <section>
 
-    margin: 0;
-    padding: 0 20px;
+            <h2>The Gods of Ozyleme</h2>
 
-    text-align: center;
+            <p>
+                JavaScript must be enabled to display the gods of Ozyleme.
+            </p>
 
-    color: #aaa58f;
+        </section>
 
-    font-size: clamp(
-        0.8rem,
-        2vw,
-        1.1rem
-    );
+    </noscript>
 
-    font-style: italic;
-    letter-spacing: 0.12em;
 
-    text-shadow:
-        0 1px 5px rgba(0, 0, 0, 0.95);
-}
+</main>
 
 
-/* Desktop tagline */
+<!-- ================================
+     FOOTER
+     ================================ -->
 
-@media (min-width: 768px) {
+<footer>
+    <p>The World of Ozyleme</p>
+</footer>
 
-    header p {
-        bottom: 21%;
 
-        font-size: clamp(
-            1rem,
-            2.6vw,
-            1.45rem
-        );
-    }
+<!-- ================================
+     LOAD GOD DATA
+     ================================ -->
 
-}
+<script src="data/gods.js"></script>
 
 
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
+<!-- ================================
+     BUILD GODS PAGE
+     ================================ -->
 
-nav {
-    position: sticky;
-    top: 0;
+<script>
 
-    z-index: 100;
+    const godsDirectory =
+        document.getElementById("gods-directory");
 
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    flex-wrap: wrap;
-
-    padding: 12px;
-
-    background: #10100e;
-
-    border-bottom: 1px solid #35342e;
-
-    box-shadow:
-        0 5px 15px rgba(0, 0, 0, 0.30);
-}
-
-nav a {
-    margin: 2px;
-
-    padding: 8px 15px;
-
-    color: #aaa48f;
-
-    text-decoration: none;
-
-    font-size: 0.95rem;
-    letter-spacing: 0.08em;
-
-    border-bottom: 1px solid transparent;
-
-    transition:
-        color 0.2s ease,
-        background-color 0.2s ease,
-        border-color 0.2s ease;
-}
-
-nav a:hover,
-nav a:focus {
-    color: #e0d6b8;
-
-    background-color: rgba(93, 37, 31, 0.16);
-
-    border-bottom-color: #74372f;
-}
-
-nav a.active {
-    color: #e0d6b8;
-
-    border-bottom-color: #74372f;
-
-    background-color:
-        rgba(93, 37, 31, 0.10);
-}
-
-
-/* =========================================================
-   MAIN CONTENT
-   ========================================================= */
-
-main {
-    width: min(
-        1100px,
-        calc(100% - 40px)
-    );
-
-    margin: 0 auto;
-
-    padding: 55px 0 80px;
-
-    background: transparent;
-}
-
-section {
-    margin-bottom: 65px;
-}
-
-
-/* =========================================================
-   HEADINGS
-   ========================================================= */
-
-h1,
-h2,
-h3,
-h4 {
-    font-weight: normal;
-}
-
-main h1,
-main h2 {
-    color: #d8cfb2;
-
-    letter-spacing: 0.08em;
-}
-
-main h1 {
-    margin-top: 0;
-
-    font-size: clamp(
-        2rem,
-        5vw,
-        3.4rem
-    );
-}
-
-main h2 {
-    margin-top: 0;
-    margin-bottom: 18px;
-
-    padding-bottom: 10px;
-
-    font-size: clamp(
-        1.6rem,
-        4vw,
-        2.4rem
-    );
-
-    border-bottom: 1px solid #413d34;
-}
-
-main h3 {
-    color: #c9c0a4;
-
-    letter-spacing: 0.04em;
-}
-
-
-/* =========================================================
-   TEXT
-   ========================================================= */
-
-p {
-    color: #aaa38f;
-}
-
-strong {
-    color: #d5ccb0;
-}
-
-em {
-    color: #b6ad96;
-}
-
-blockquote {
-    margin: 30px 0;
-
-    padding: 18px 25px;
-
-    border-left: 3px solid #6b3029;
-
-    background:
-        rgba(0, 0, 0, 0.15);
-
-    color: #b7af99;
-
-    font-style: italic;
-}
-
-
-/* =========================================================
-   LINKS
-   ========================================================= */
-
-main a {
-    color: #b78b7e;
-
-    transition:
-        color 0.2s ease;
-}
-
-main a:hover {
-    color: #d5b4a7;
-}
-
-
-/* =========================================================
-   STANDARD CARD GRID
-   ========================================================= */
-
-.cards {
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(230px, 1fr)
-        );
-
-    gap: 22px;
-
-    margin-top: 30px;
-}
-
-
-/* =========================================================
-   STANDARD CARD
-   ========================================================= */
-
-.card {
-    position: relative;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: flex-end;
-
-    min-height: 190px;
-
-    padding: 24px;
-
-    overflow: hidden;
-
-    text-decoration: none;
-
-    color: #cbc3ac;
-
-    background:
-        linear-gradient(
-            145deg,
-            #25241f,
-            #11110f
-        );
-
-    border: 1px solid #47443a;
-
-    box-shadow:
-        0 8px 25px rgba(0, 0, 0, 0.35),
-        inset 0 0 25px rgba(0, 0, 0, 0.20);
-
-    transition:
-        transform 0.2s ease,
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-
-/* Card background image */
-
-.card::before {
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 0;
-
-    background-image:
-        linear-gradient(
-            rgba(8, 8, 7, 0.18),
-            rgba(8, 8, 7, 0.82)
-        ),
-        var(--card-image, none);
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    transition:
-        transform 0.35s ease,
-        filter 0.25s ease;
-}
-
-
-/* Dark readability overlay */
-
-.card::after {
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 1;
-
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.04),
-            rgba(0, 0, 0, 0.12) 45%,
-            rgba(0, 0, 0, 0.72)
-        );
-
-    pointer-events: none;
-}
-
-
-/* Card text */
-
-.card h3,
-.card p {
-    position: relative;
-
-    z-index: 2;
-}
-
-.card h3 {
-    margin-top: 0;
-    margin-bottom: 8px;
-
-    color: #ddd3b6;
-
-    font-size: 1.35rem;
-
-    text-shadow:
-        0 2px 5px rgba(0, 0, 0, 0.95);
-}
-
-.card p {
-    margin: 0;
-
-    color: #aaa38d;
-
-    text-shadow:
-        0 2px 5px rgba(0, 0, 0, 0.95);
-}
-
-
-/* Card hover */
-
-.card:hover {
-    transform: translateY(-4px);
-
-    border-color: #74372f;
-
-    box-shadow:
-        0 12px 30px rgba(0, 0, 0, 0.48),
-        inset 0 0 25px rgba(90, 35, 28, 0.08);
-}
-
-.card:hover::before {
-    transform: scale(1.025);
-
-    filter: brightness(1.07);
-}
-
-
-/* =========================================================
-   KINGDOM CARD IMAGES
-   ========================================================= */
-
-.card.plume {
-    --card-image:
-        url("images/kingdoms/Plume Navi Button.jpg");
-}
-
-.card.kettle {
-    --card-image:
-        url("images/kingdoms/Kettle Navi Button.jpg");
-}
-
-.card.loop {
-    --card-image:
-        url("images/kingdoms/Loop Navi Button.jpg");
-}
-
-.card.torch {
-    --card-image:
-        url("images/kingdoms/Torch Navi Button.jpg");
-}
-
-.card.vial {
-    --card-image:
-        url("images/kingdoms/Vial Navi Button.jpg");
-}
-
-.card.hook {
-    --card-image:
-        url("images/kingdoms/Hook Navi Button.jpg");
-}
-
-.card.bell {
-    --card-image:
-        url("images/kingdoms/Bell Navi Button.jpg");
-}
-
-.card.crook {
-    --card-image:
-        url("images/kingdoms/Crook Navi Button.jpg");
-}
-
-
-/* =========================================================
-   GOD CARD IMAGES
-
-   SEPARATE FROM KINGDOM CARD IMAGES
-   ========================================================= */
-
-.card.giver {
-    --card-image:
-        url("images/gods/Giver Navi Button.jpg");
-}
-
-.card.ravager {
-    --card-image:
-        url("images/gods/Ravager Navi Button.jpg");
-}
-
-.card.tormentor {
-    --card-image:
-        url("images/gods/Tormentor Navi Button.jpg");
-}
-
-.card.inflictor {
-    --card-image:
-        url("images/gods/Inflictor Navi Button.jpg");
-}
-
-.card.harvester {
-    --card-image:
-        url("images/gods/Harvester Navi Button.jpg");
-}
-
-.card.seer {
-    --card-image:
-        url("images/gods/Seer Navi Button.jpg");
-}
-
-.card.dominator {
-    --card-image:
-        url("images/gods/Dominator Navi Button.jpg");
-}
-
-.card.banisher {
-    --card-image:
-        url("images/gods/Banisher Navi Button.jpg");
-}
-
-
-/* =========================================================
-   GODS PAGE
-   ========================================================= */
-
-.gods-intro {
-    margin-bottom: 55px;
-}
-
-.gods-directory {
-    scroll-margin-top: 90px;
-}
-
-
-/* =========================================================
-   GOD DIRECTORY
-   ALWAYS 4 COLUMNS x 2 ROWS
-   ========================================================= */
-
-.gods-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            4,
-            minmax(0, 1fr)
-        );
-
-    gap: 14px;
-
-    width: 100%;
-
-    margin-top: 28px;
-}
-
-
-/* God directory cards */
-
-.gods-grid .card {
-    min-width: 0;
-
-    min-height: 165px;
-
-    padding: 16px 10px;
-
-    text-align: center;
-
-    justify-content: flex-end;
-}
-
-.gods-grid .card h3 {
-    margin: 0;
-
-    font-size: clamp(
-        0.85rem,
-        2vw,
-        1.25rem
-    );
-
-    line-height: 1.25;
-
-    color: #ddd4b8;
-
-    letter-spacing: 0.03em;
-
-    word-break: normal;
-}
-
-.gods-grid .card p {
-    margin-top: 5px;
-
-    font-size: clamp(
-        0.7rem,
-        1.5vw,
-        0.9rem
-    );
-
-    font-style: italic;
-
-    line-height: 1.3;
-}
-
-
-/* =========================================================
-   GOD PROFILE
-   ========================================================= */
-
-.god-profile {
-    margin-bottom: 0;
-
-    padding-top: 8px;
-    padding-bottom: 8px;
-
-    scroll-margin-top: 90px;
-}
-
-
-/* God title */
-
-.god-heading {
-    margin-bottom: 28px;
-
-    padding-bottom: 18px;
-
-    border-bottom:
-        1px solid #3d3d34;
-}
-
-.god-heading h2 {
-    margin: 0 0 5px;
-
-    padding: 0;
-
-    border-bottom: none;
-
-    color: #d8cfb3;
-
-    font-size: clamp(
-        2rem,
-        5vw,
-        3.1rem
-    );
-
-    letter-spacing: 0.05em;
-}
-
-.god-heading h3 {
-    margin: 0;
-
-    color: #8f927c;
-
-    font-size: 1rem;
-
-    font-style: italic;
-
-    letter-spacing: 0.08em;
-}
-
-
-/* =========================================================
-   GOD OPENING DESCRIPTION
-   ========================================================= */
-
-.god-outline {
-    max-width: 900px;
-
-    margin-top: 0;
-    margin-bottom: 30px;
-}
-
-.god-outline p {
-    margin-top: 0;
-
-    color: #beb6a0;
-
-    font-size: 1.03rem;
-
-    white-space: pre-line;
-}
-
-
-/* =========================================================
-   GOD FACT GRID
-
-   Role
-   Element
-   Domains
-   Doctrine
-   Sin
-   Symbol
-   Offering
-   Taboo
-   ========================================================= */
-
-.god-facts {
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            2,
-            minmax(0, 1fr)
-        );
-
-    gap: 12px;
-
-    margin-top: 24px;
-    margin-bottom: 36px;
-}
-
-
-/* Individual god fact */
-
-.god-fact {
-    min-width: 0;
-
-    padding: 17px 18px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(36, 37, 31, 0.76),
-            rgba(15, 16, 13, 0.96)
-        );
-
-    border:
-        1px solid #404037;
-
-    box-shadow:
-        inset 0 0 20px rgba(0, 0, 0, 0.28),
-        0 5px 15px rgba(0, 0, 0, 0.20);
-}
-
-
-/* Fact title */
-
-.god-fact h4 {
-    margin: 0 0 7px;
-
-    color: #827d69;
-
-    font-size: 0.74rem;
-
-    letter-spacing: 0.16em;
-
-    text-transform: uppercase;
-}
-
-
-/* Fact content */
-
-.god-fact p {
-    margin: 0;
-
-    color: #d2cab0;
-
-    font-size: 1rem;
-
-    line-height: 1.5;
-}
-
-
-/* Doctrine */
-
-.god-fact:nth-child(4) p {
-    font-style: italic;
-
-    color: #c7bea5;
-}
-
-
-/* Sin */
-
-.god-fact:nth-child(5) p {
-    color: #c6b59c;
-}
-
-
-/* =========================================================
-   GOD LORE
-   ========================================================= */
-
-.god-section {
-    margin-top: 26px;
-    margin-bottom: 30px;
-}
-
-.god-section h3 {
-    margin-top: 0;
-    margin-bottom: 12px;
-
-    color: #b5ad94;
-
-    font-size: 1.12rem;
-
-    letter-spacing: 0.12em;
-
-    text-transform: uppercase;
-}
-
-.god-section p {
-    max-width: 900px;
-
-    margin-top: 0;
-
-    color: #b7af99;
-
-    white-space: pre-line;
-}
-
-
-/* =========================================================
-   RETURN TO THE GODS
-   ========================================================= */
-
-.god-back-link {
-    margin-top: 34px;
-
-    padding-top: 16px;
-
-    text-align: right;
-
-    border-top:
-        1px solid rgba(65, 61, 52, 0.55);
-}
-
-.god-back-link a {
-    display: inline-block;
-
-    color: #9d977f;
-
-    text-decoration: none;
-
-    font-size: 0.9rem;
-
-    letter-spacing: 0.08em;
-
-    transition:
-        color 0.2s ease,
-        transform 0.2s ease;
-}
-
-.god-back-link a:hover {
-    color: #d2cab0;
-
-    transform: translateY(-2px);
-}
-
-
-/* =========================================================
-   LORE / CONTENT PANELS
-   ========================================================= */
-
-.lore,
-.content-box,
-.info-box {
-    margin: 30px 0;
-
-    padding: 28px;
-
-    background:
-        rgba(0, 0, 0, 0.12);
-
-    border:
-        1px solid #39372f;
-
-    box-shadow:
-        inset 0 0 25px rgba(0, 0, 0, 0.15);
-}
-
-
-/* =========================================================
-   DIVIDERS
-   ========================================================= */
-
-.divider,
-hr {
-    width: 100%;
-
-    height: 1px;
-
-    margin: 48px 0;
-
-    border: 0;
-
-    background:
-        linear-gradient(
-            to right,
-            transparent,
-            #5b3029,
-            transparent
-        );
-}
-
-.god-profile + .divider {
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
-
-
-/* =========================================================
-   LISTS
-   ========================================================= */
-
-ul,
-ol {
-    color: #aaa38f;
-
-    padding-left: 28px;
-}
-
-li {
-    margin-bottom: 8px;
-}
-
-
-/* =========================================================
-   IMAGES
-   ========================================================= */
-
-main img {
-    display: block;
-
-    max-width: 100%;
-
-    height: auto;
-}
-
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
-footer {
-    padding: 35px 20px;
-
-    text-align: center;
-
-    background: #10100e;
-
-    border-top:
-        1px solid #35342e;
-
-    color: #777365;
-
-    font-size: 0.85rem;
-
-    letter-spacing: 0.06em;
-}
-
-footer p {
-    margin: 0;
-
-    color: #777365;
-}
-
-
-/* =========================================================
-   PEOPLE & BESTIARY
-   ========================================================= */
-
-.people-intro {
-    max-width: 1100px;
-
-    margin: 0 auto;
-
-    padding: 45px 25px 20px;
-}
-
-.people-intro h2 {
-    margin-top: 0;
-    margin-bottom: 10px;
-
-    color: #c5bda1;
-
-    font-weight: normal;
-
-    letter-spacing: 0.08em;
-}
-
-.people-intro p {
-    margin: 0;
-
-    color: #999481;
-}
-
-
-/* =========================================================
-   PEOPLE DIRECTORY
-   ========================================================= */
-
-.people-directory {
-    max-width: 1100px;
-
-    margin: 20px auto 60px;
-
-    padding: 0 25px;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            2,
-            minmax(0, 1fr)
-        );
-
-    column-gap: 50px;
-
-    row-gap: 0;
-}
-
-
-/* =========================================================
-   PERSON ENTRY
-   ========================================================= */
-
-.person-entry {
-    display: grid;
-
-    grid-template-columns:
-        95px 1fr;
-
-    gap: 18px;
-
-    padding: 24px 0;
-
-    border-bottom:
-        1px solid rgba(120, 115, 96, 0.35);
-}
-
-
-/* Portrait */
-
-.person-portrait {
-    width: 95px;
-    height: 95px;
-
-    aspect-ratio: 1 / 1;
-
-    object-fit: cover;
-
-    border:
-        1px solid #47473b;
-
-    background: #0d0f0c;
-}
-
-
-/* Person text */
-
-.person-info {
-    min-width: 0;
-}
-
-.person-info h3 {
-    margin: 0 0 8px;
-
-    color: #c5bda1;
-
-    font-size: 1.15rem;
-
-    font-weight: normal;
-
-    letter-spacing: 0.06em;
-}
-
-.person-info p {
-    margin: 0;
-
-    color: #999481;
-
-    font-size: 0.95rem;
-
-    line-height: 1.55;
-}
-
-
-/* Center divider */
-
-.person-entry:nth-child(odd) {
-    padding-right: 25px;
-
-    border-right:
-        1px solid rgba(120, 115, 96, 0.28);
-}
-
-.person-entry:nth-child(even) {
-    padding-left: 25px;
-}
-
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (max-width: 850px) {
-
-    .gods-grid {
-        gap: 9px;
-    }
-
-    .gods-grid .card {
-        min-height: 130px;
-
-        padding: 12px 7px;
-    }
-
-    .gods-grid .card h3 {
-        font-size: 0.9rem;
-    }
-
-    .gods-grid .card p {
-        font-size: 0.7rem;
-    }
-
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 767px) {
-
-
-    /* HEADER */
-
-    header {
-        aspect-ratio: 2 / 1;
-    }
-
-    header h1 {
-        top: 25%;
-
-        font-size: clamp(
-            2rem,
-            11vw,
-            4rem
-        );
-
-        letter-spacing: 0.12em;
-    }
-
-    header p {
-        bottom: 15%;
-
-        font-size: 0.8rem;
-
-        letter-spacing: 0.08em;
-    }
-
-
-    /* NAVIGATION */
-
-    nav {
-        padding: 8px 5px;
-    }
-
-    nav a {
-        padding: 7px 9px;
-
-        font-size: 0.8rem;
-
-        letter-spacing: 0.04em;
-    }
-
-
-    /* MAIN */
-
-    main {
-        width:
-            calc(100% - 28px);
-
-        padding-top: 35px;
-    }
-
-    section {
-        margin-bottom: 45px;
-    }
-
-
-    /* NORMAL CARDS */
-
-    .cards {
-        grid-template-columns: 1fr;
-
-        gap: 16px;
-    }
-
-    .cards .card {
-        min-height: 170px;
-    }
+    const godProfiles =
+        document.getElementById("god-profiles");
 
 
     /* =====================================================
-       GOD DIRECTORY
-       ALWAYS 4 ACROSS
+       CHECK DATA FILE
        ===================================================== */
 
-    .gods-grid {
-        grid-template-columns:
-            repeat(
-                4,
-                minmax(0, 1fr)
-            );
+    if (!window.godsData) {
 
-        gap: 5px;
+        godsDirectory.innerHTML = `
+            <p>
+                God data could not be loaded.
+                Check that data/gods.js exists and is spelled correctly.
+            </p>
+        `;
 
-        width: 100%;
+    } else {
 
-        margin-top: 20px;
+
+        const godIds =
+            Object.keys(window.godsData);
+
+        const finalGod =
+            godIds[godIds.length - 1];
+
+
+        /* =================================================
+           BUILD EACH GOD
+           ================================================= */
+
+        Object.entries(window.godsData).forEach(([godId, god]) => {
+
+
+            /* =============================================
+               GOD DIRECTORY CARD
+               ============================================= */
+
+            const godCard =
+                document.createElement("a");
+
+            godCard.className =
+                `card ${godId}`;
+
+            godCard.href =
+                `#${godId}`;
+
+            godCard.innerHTML = `
+                <h3>${god.name}</h3>
+                <p>${god.kingdom}</p>
+            `;
+
+            godsDirectory.appendChild(godCard);
+
+
+            /* =============================================
+               GOD PROFILE
+               ============================================= */
+
+            const godProfile =
+                document.createElement("section");
+
+            godProfile.className =
+                "god-profile";
+
+            godProfile.id =
+                godId;
+
+
+            godProfile.innerHTML = `
+
+                <!-- GOD NAME -->
+
+                <div class="god-heading">
+
+                    <h2>
+                        ${god.name}
+                    </h2>
+
+                    <h3>
+                        Keeper: ${god.keeper}
+                    </h3>
+
+                </div>
+
+
+                <!-- OPENING DESCRIPTION -->
+
+                <div class="god-section god-outline">
+
+                    <p>
+                        ${god.outline.trim()}
+                    </p>
+
+                </div>
+
+
+                <!-- GOD FACTS -->
+
+                <div class="god-facts">
+
+
+                    <div class="god-fact">
+
+                        <h4>Role</h4>
+
+                        <p>
+                            ${god.role}
+                        </p>
+
+                    </div>
+
+
+                    <div class="god-fact">
+
+                        <h4>Element</h4>
+
+                        <p>
+                            ${god.element}
+                        </p>
+
+                    </div>
+
+
+                    <div class="god-fact">
+
+                        <h4>Domains</h4>
+
+                        <p>
+                            ${god.domains.join(", ")}
+                        </p>
+
+                    </div>
+
+
+                    <div class="god-fact">
+
+                        <h4>Doctrine</h4>
+
+                        <p>
+                            ${god.doctrine}
+                        </p>
+
+                    </div>
+
+
+                    <div class="god-fact">
+
+                        <h4>Sin</h4>
+
+                        <p>
+                            ${god.sin}
+                        </p>
+
+                    </div>
+
+
+                    <div class="god-fact">
+
+                        <h4>Symbol</h4>
+
+                        <p>
+                            ${god.symbol}
+                        </p>
+
+                    </div>
+
+
+                    <div class="god-fact">
+
+                        <h4>Offering</h4>
+
+                        <p>
+                            ${god.offering}
+                        </p>
+
+                    </div>
+
+
+                    <div class="god-fact">
+
+                        <h4>Taboo</h4>
+
+                        <p>
+                            ${god.taboo}
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- LORE -->
+
+                <div class="god-section">
+
+                    <h3>Lore</h3>
+
+                    <p>
+                        ${god.lore.trim()}
+                    </p>
+
+                </div>
+
+
+                <!-- RETURN LINK -->
+
+                <div class="god-back-link">
+
+                    <a href="#gods-top">
+                        ↑ Return to the Gods
+                    </a>
+
+                </div>
+
+            `;
+
+
+            godProfiles.appendChild(godProfile);
+
+
+            /* =============================================
+               DIVIDER BETWEEN GODS
+               ============================================= */
+
+            if (godId !== finalGod) {
+
+                const divider =
+                    document.createElement("div");
+
+                divider.className =
+                    "divider";
+
+                godProfiles.appendChild(divider);
+
+            }
+
+        });
+
     }
 
-    .gods-grid .card {
-        min-height: 92px;
-
-        padding: 8px 3px;
-    }
-
-    .gods-grid .card h3 {
-        margin-bottom: 3px;
-
-        font-size: clamp(
-            0.60rem,
-            2.9vw,
-            0.78rem
-        );
-
-        line-height: 1.15;
-
-        letter-spacing: 0;
-    }
-
-    .gods-grid .card p {
-        margin-top: 2px;
-
-        font-size: clamp(
-            0.50rem,
-            2.2vw,
-            0.65rem
-        );
-
-        line-height: 1.2;
-    }
+</script>
 
 
-    /* GOD PROFILE */
+</body>
 
-    .god-heading {
-        margin-bottom: 22px;
-
-        padding-bottom: 14px;
-    }
-
-    .god-heading h2 {
-        font-size: 2rem;
-    }
-
-    .god-heading h3 {
-        font-size: 0.9rem;
-
-        line-height: 1.5;
-    }
-
-    .god-outline {
-        margin-bottom: 24px;
-    }
-
-    .god-outline p {
-        font-size: 0.98rem;
-    }
-
-
-    /* GOD FACTS */
-
-    .god-facts {
-        grid-template-columns: 1fr;
-
-        gap: 8px;
-
-        margin-top: 20px;
-        margin-bottom: 28px;
-    }
-
-    .god-fact {
-        padding: 13px 14px;
-    }
-
-    .god-fact h4 {
-        margin-bottom: 5px;
-
-        font-size: 0.7rem;
-    }
-
-    .god-fact p {
-        font-size: 0.95rem;
-    }
-
-
-    /* GOD LORE */
-
-    .god-section {
-        margin-top: 22px;
-        margin-bottom: 26px;
-    }
-
-    .god-section h3 {
-        font-size: 1rem;
-    }
-
-
-    /* RETURN LINK */
-
-    .god-back-link {
-        margin-top: 26px;
-
-        text-align: center;
-    }
-
-
-    /* CONTENT PANELS */
-
-    .lore,
-    .content-box,
-    .info-box {
-        padding: 20px;
-    }
-
-
-    /* DIVIDERS */
-
-    .divider,
-    hr {
-        margin: 38px 0;
-    }
-
-}
-
-
-/* =========================================================
-   PEOPLE / BESTIARY MOBILE
-   ========================================================= */
-
-@media (max-width: 700px) {
-
-    .people-directory {
-        grid-template-columns: 1fr;
-
-        padding: 0 20px;
-    }
-
-    .person-entry:nth-child(odd),
-    .person-entry:nth-child(even) {
-        padding-left: 0;
-        padding-right: 0;
-
-        border-right: none;
-    }
-
-    .person-entry {
-        grid-template-columns:
-            80px 1fr;
-    }
-
-    .person-portrait {
-        width: 80px;
-        height: 80px;
-    }
-
-}
+</html>
