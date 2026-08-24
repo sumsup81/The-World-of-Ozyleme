@@ -1797,3 +1797,413 @@ footer p {
     background: #312d27;
     border-color: #8a3c32;
 }
+/* =========================================================
+   GODS PAGE
+   ========================================================= */
+
+
+/* ================================
+   INTRODUCTION
+   ================================ */
+
+.gods-intro {
+    margin-bottom: 10px;
+}
+
+
+/* ================================
+   GOD DIRECTORY
+
+   IMPORTANT:
+   KEEP 4 COLUMNS X 2 ROWS
+   EVEN ON MOBILE
+   ================================ */
+
+.gods-directory {
+    margin-top: 10px;
+}
+
+.gods-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 14px;
+
+    margin-top: 28px;
+    margin-bottom: 10px;
+}
+
+
+/* God navigation cards */
+
+.gods-grid .card {
+    display: flex;
+
+    flex-direction: column;
+    justify-content: flex-end;
+
+    min-width: 0;
+    min-height: 150px;
+
+    padding: 16px 10px;
+
+    text-align: center;
+
+    overflow: hidden;
+
+    background-color: #11120f;
+
+    border: 1px solid #47473b;
+
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.4),
+        inset 0 0 25px rgba(0, 0, 0, 0.3);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        filter 0.2s ease;
+}
+
+
+/* God card title */
+
+.gods-grid .card h3 {
+    margin: 0;
+
+    color: #ddd4b8;
+
+    font-size: 1.1rem;
+    font-weight: normal;
+
+    letter-spacing: 0.04em;
+
+    text-shadow:
+        0 2px 4px #000,
+        0 0 8px rgba(0, 0, 0, 0.9);
+}
+
+
+/* Kingdom beneath god name */
+
+.gods-grid .card p {
+    margin: 4px 0 0;
+
+    color: #aaa48f;
+
+    font-size: 0.8rem;
+    font-style: italic;
+
+    text-shadow:
+        0 2px 4px #000;
+}
+
+
+/* Hover */
+
+.gods-grid .card:hover {
+    transform: translateY(-3px);
+
+    border-color: #74372f;
+
+    filter: brightness(1.08);
+}
+
+
+/* ================================
+   GOD PROFILE
+   ================================ */
+
+.god-profile {
+    padding-top: 8px;
+    padding-bottom: 8px;
+
+    scroll-margin-top: 90px;
+}
+
+
+/* Main god name area */
+
+.god-heading {
+    margin-bottom: 28px;
+
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid #3d3d34;
+}
+
+
+/* God name */
+
+.god-heading h2 {
+    margin-bottom: 4px;
+
+    color: #d8cfb3;
+
+    font-size: clamp(2rem, 5vw, 3.1rem);
+
+    font-weight: normal;
+
+    letter-spacing: 0.05em;
+}
+
+
+/* Keeper / Watcher title */
+
+.god-heading h3 {
+    margin: 0;
+
+    color: #8f927c;
+
+    font-size: 1rem;
+
+    font-weight: normal;
+    font-style: italic;
+
+    letter-spacing: 0.08em;
+}
+
+
+/* ================================
+   GENERAL OUTLINE / LORE
+   ================================ */
+
+.god-section {
+    margin-top: 24px;
+    margin-bottom: 28px;
+}
+
+
+/* Section labels */
+
+.god-section h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+
+    color: #b5ad94;
+
+    font-size: 1.15rem;
+    font-weight: normal;
+
+    letter-spacing: 0.1em;
+
+    text-transform: uppercase;
+}
+
+
+/* Text */
+
+.god-section p {
+    margin-top: 0;
+
+    color: #c1b9a4;
+
+    max-width: 850px;
+}
+
+
+/* ================================
+   SYMBOL / DOMAIN / ELEMENT
+   ================================ */
+
+.god-facts {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 14px;
+
+    margin-top: 28px;
+    margin-bottom: 32px;
+}
+
+
+/* Individual fact box */
+
+.god-fact {
+    min-width: 0;
+
+    padding: 18px 16px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(36, 37, 31, 0.75),
+            rgba(15, 16, 13, 0.95)
+        );
+
+    border: 1px solid #404037;
+
+    box-shadow:
+        inset 0 0 20px rgba(0, 0, 0, 0.28),
+        0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Fact label */
+
+.god-fact h4 {
+    margin: 0 0 6px;
+
+    color: #827d69;
+
+    font-size: 0.75rem;
+
+    font-weight: normal;
+
+    letter-spacing: 0.16em;
+
+    text-transform: uppercase;
+}
+
+
+/* Fact value */
+
+.god-fact p {
+    margin: 0;
+
+    color: #d2cab0;
+
+    font-size: 1rem;
+
+    line-height: 1.4;
+}
+
+
+/* ================================
+   GOD DIVIDERS
+   ================================ */
+
+.god-profile + .divider {
+    margin-top: 48px;
+    margin-bottom: 48px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+    .gods-grid {
+        gap: 9px;
+    }
+
+    .gods-grid .card {
+        min-height: 120px;
+
+        padding: 12px 6px;
+    }
+
+    .gods-grid .card h3 {
+        font-size: 0.9rem;
+    }
+
+    .gods-grid .card p {
+        font-size: 0.7rem;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /*
+       DO NOT CHANGE THIS TO 1 OR 2 COLUMNS.
+       GOD DIRECTORY REMAINS 4 X 2.
+    */
+
+    .gods-grid {
+        grid-template-columns: repeat(4, 1fr);
+
+        gap: 5px;
+
+        margin-top: 20px;
+    }
+
+
+    .gods-grid .card {
+        min-height: 88px;
+
+        padding: 8px 3px;
+    }
+
+
+    .gods-grid .card h3 {
+        font-size: 0.67rem;
+
+        line-height: 1.15;
+
+        letter-spacing: 0;
+    }
+
+
+    .gods-grid .card p {
+        margin-top: 3px;
+
+        font-size: 0.58rem;
+    }
+
+
+    /* God information boxes */
+
+    .god-facts {
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+
+        margin-top: 20px;
+        margin-bottom: 26px;
+    }
+
+
+    .god-fact {
+        padding: 13px 14px;
+    }
+
+
+    /*
+       On mobile, put the fact label and
+       value beside one another.
+    */
+
+    .god-fact h4 {
+        display: inline-block;
+
+        width: 85px;
+
+        margin: 0;
+
+        vertical-align: middle;
+    }
+
+
+    .god-fact p {
+        display: inline;
+
+        font-size: 0.95rem;
+    }
+
+
+    .god-heading {
+        margin-bottom: 22px;
+    }
+
+
+    .god-heading h2 {
+        font-size: 2rem;
+    }
+
+
+    .god-section {
+        margin-top: 20px;
+        margin-bottom: 24px;
+    }
+
+}
