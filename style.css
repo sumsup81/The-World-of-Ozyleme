@@ -46,6 +46,7 @@ body {
     to {
         opacity: 1;
     }
+
 }
 
 
@@ -58,6 +59,7 @@ body {
     html {
         scroll-behavior: auto;
     }
+
 }
 
 
@@ -91,7 +93,7 @@ header {
 }
 
 
-/* Main OZYLEME title */
+/* Header title */
 
 header h1 {
     position: absolute;
@@ -151,8 +153,6 @@ header p {
 }
 
 
-/* Desktop tagline */
-
 @media (min-width: 768px) {
 
     header p {
@@ -164,6 +164,7 @@ header p {
             1.45rem
         );
     }
+
 }
 
 
@@ -230,7 +231,7 @@ nav a:focus {
 }
 
 
-/* Active page */
+/* Active navigation page */
 
 .site-nav .active,
 .site-nav [aria-current="page"],
@@ -343,7 +344,7 @@ blockquote {
 
 
 /* =========================================================
-   LINKS
+   MAIN LINKS
    ========================================================= */
 
 main a {
@@ -360,7 +361,7 @@ main a:hover {
 
 /* =========================================================
    STANDARD CARD GRID
-   KINGDOMS / SPECIES / GENERAL CARDS
+   HOME / KINGDOMS / SPECIES / CLASSES
    ========================================================= */
 
 .cards {
@@ -416,7 +417,7 @@ main a:hover {
 }
 
 
-/* Card background image */
+/* Card image layer */
 
 .card::before {
     content: "";
@@ -443,7 +444,7 @@ main a:hover {
 }
 
 
-/* Dark readability overlay */
+/* Card readability layer */
 
 .card::after {
     content: "";
@@ -464,8 +465,6 @@ main a:hover {
     pointer-events: none;
 }
 
-
-/* Card text */
 
 .card h3,
 .card p {
@@ -497,8 +496,6 @@ main a:hover {
         0 2px 5px rgba(0, 0, 0, 0.95);
 }
 
-
-/* Card hover */
 
 .card:hover {
     transform: translateY(-4px);
@@ -573,10 +570,13 @@ main a:hover {
 
 /* =========================================================
    GODS GRID
-   ALWAYS 4 COLUMNS x 2 ROWS
-   INCLUDING MOBILE
 
-   DO NOT CHANGE TO AUTO-FIT
+   IMPORTANT:
+   ALWAYS FOUR COLUMNS.
+   DESKTOP = 4 x 2
+   MOBILE  = 4 x 2
+
+   DO NOT CHANGE THIS TO AUTO-FIT.
    ========================================================= */
 
 .gods-grid {
@@ -593,7 +593,7 @@ main a:hover {
 }
 
 
-/* God cards */
+/* Standard card version */
 
 .gods-grid .card {
     min-width: 0;
@@ -603,8 +603,6 @@ main a:hover {
     padding: 18px;
 }
 
-
-/* God card headings */
 
 .gods-grid .card h3 {
     font-size: clamp(
@@ -617,8 +615,6 @@ main a:hover {
 }
 
 
-/* God card text */
-
 .gods-grid .card p {
     font-size: clamp(
         0.7rem,
@@ -630,56 +626,160 @@ main a:hover {
 
 /* =========================================================
    GOD CARD IMAGES
-
-   Put God JPEGs in:
    images/gods/
    ========================================================= */
-
-/*
-
-Example:
 
 .card.giver {
     --card-image:
         url("images/gods/Giver Navi Button.jpg");
 }
 
+
 .card.ravager {
     --card-image:
         url("images/gods/Ravager Navi Button.jpg");
 }
+
 
 .card.tormentor {
     --card-image:
         url("images/gods/Tormentor Navi Button.jpg");
 }
 
+
 .card.inflictor {
     --card-image:
         url("images/gods/Inflictor Navi Button.jpg");
 }
+
 
 .card.harvester {
     --card-image:
         url("images/gods/Harvester Navi Button.jpg");
 }
 
+
 .card.seer {
     --card-image:
         url("images/gods/Seer Navi Button.jpg");
 }
+
 
 .card.dominator {
     --card-image:
         url("images/gods/Dominator Navi Button.jpg");
 }
 
+
 .card.banisher {
     --card-image:
         url("images/gods/Banisher Navi Button.jpg");
 }
 
-*/
+
+/* =========================================================
+   FALLBACK SUPPORT FOR GOD-CARD HTML
+
+   This allows older Gods HTML using:
+   class="god-card giver"
+
+   to still display correctly.
+   ========================================================= */
+
+.god-card {
+    display: block;
+
+    min-width: 0;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    color: #cbc3ac;
+}
+
+
+.god-image {
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    background-color: #0d0f0c;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border: 1px solid #47443a;
+}
+
+
+.god-card h3 {
+    margin: 10px 0 2px;
+
+    color: #ddd3b6;
+
+    font-size: 1rem;
+}
+
+
+.god-card p {
+    margin: 0;
+
+    color: #8d8979;
+
+    font-size: 0.8rem;
+}
+
+
+/* Old god-card image support */
+
+.god-card.giver .god-image {
+    background-image:
+        url("images/gods/Giver Navi Button.jpg");
+}
+
+
+.god-card.ravager .god-image {
+    background-image:
+        url("images/gods/Ravager Navi Button.jpg");
+}
+
+
+.god-card.tormentor .god-image {
+    background-image:
+        url("images/gods/Tormentor Navi Button.jpg");
+}
+
+
+.god-card.inflictor .god-image {
+    background-image:
+        url("images/gods/Inflictor Navi Button.jpg");
+}
+
+
+.god-card.harvester .god-image {
+    background-image:
+        url("images/gods/Harvester Navi Button.jpg");
+}
+
+
+.god-card.seer .god-image {
+    background-image:
+        url("images/gods/Seer Navi Button.jpg");
+}
+
+
+.god-card.dominator .god-image {
+    background-image:
+        url("images/gods/Dominator Navi Button.jpg");
+}
+
+
+.god-card.banisher .god-image {
+    background-image:
+        url("images/gods/Banisher Navi Button.jpg");
+}
 
 
 /* =========================================================
@@ -754,18 +854,13 @@ main img {
 
 
 /* =========================================================
-   PEOPLE & BESTIARY
-   INTRO
+   PEOPLE / BESTIARY INTRO
    ========================================================= */
 
 .page-intro,
 .people-intro,
 .bestiary-intro {
-    max-width: 1100px;
-
-    margin: 0 auto;
-
-    padding-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 
@@ -773,19 +868,13 @@ main img {
 .people-intro h2,
 .bestiary-intro h2 {
     margin-top: 0;
-    margin-bottom: 10px;
-
-    color: #c5bda1;
-
-    font-weight: normal;
-    letter-spacing: 0.08em;
 }
 
 
 .page-intro p,
 .people-intro p,
 .bestiary-intro p {
-    margin: 0;
+    margin-bottom: 0;
 
     color: #999481;
 }
@@ -793,7 +882,9 @@ main img {
 
 /* =========================================================
    PEOPLE DIRECTORY
-   TWO COLUMNS ON DESKTOP
+
+   DESKTOP:
+   TWO COLUMNS
    ========================================================= */
 
 .people-directory {
@@ -829,17 +920,15 @@ main img {
 }
 
 
-/* Portrait */
-
 .person-portrait {
     width: 95px;
     height: 95px;
 
     aspect-ratio: 1 / 1;
 
-    object-fit: cover;
-
     overflow: hidden;
+
+    object-fit: cover;
 
     border: 1px solid #47473b;
 
@@ -855,14 +944,10 @@ main img {
 }
 
 
-/* Text area */
-
 .person-info {
     min-width: 0;
 }
 
-
-/* Name */
 
 .person-info h3 {
     margin: 0 0 8px;
@@ -875,8 +960,6 @@ main img {
     letter-spacing: 0.06em;
 }
 
-
-/* Description */
 
 .person-info p {
     margin: 0;
@@ -905,6 +988,30 @@ main img {
 
 
 /* =========================================================
+   PEOPLE FALLBACK
+
+   Supports the earlier HTML using:
+   .person-heading
+   ========================================================= */
+
+.person-heading {
+    display: contents;
+}
+
+
+.person-heading h3 {
+    margin: 0 0 8px;
+
+    color: #c5bda1;
+
+    font-size: 1.15rem;
+    font-weight: normal;
+
+    letter-spacing: 0.06em;
+}
+
+
+/* =========================================================
    BESTIARY DIRECTORY
    SAME FORMAT AS PEOPLE
    ========================================================= */
@@ -924,8 +1031,6 @@ main img {
 }
 
 
-/* Bestiary entry */
-
 .bestiary-entry {
     display: grid;
 
@@ -940,17 +1045,15 @@ main img {
 }
 
 
-/* Creature portrait */
-
 .bestiary-portrait {
     width: 95px;
     height: 95px;
 
     aspect-ratio: 1 / 1;
 
-    object-fit: cover;
-
     overflow: hidden;
+
+    object-fit: cover;
 
     border: 1px solid #47473b;
 
@@ -965,8 +1068,6 @@ main img {
     object-fit: cover;
 }
 
-
-/* Creature information */
 
 .bestiary-info {
     min-width: 0;
@@ -996,8 +1097,6 @@ main img {
 }
 
 
-/* Center divider */
-
 .bestiary-entry:nth-child(odd) {
     padding-right: 25px;
 
@@ -1008,6 +1107,347 @@ main img {
 
 .bestiary-entry:nth-child(even) {
     padding-left: 25px;
+}
+
+
+/* =========================================================
+   PLAYER GUIDE
+   OZYLEME RULE
+   ========================================================= */
+
+.ozyleme-rule {
+    margin: 30px 0;
+
+    padding: 24px 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(93, 37, 31, 0.16),
+            rgba(12, 12, 10, 0.55)
+        );
+
+    border: 1px solid #6b3029;
+    border-left: 4px solid #74372f;
+}
+
+
+.ozyleme-rule h3 {
+    margin-top: 0;
+
+    color: #d8cfb2;
+
+    letter-spacing: 0.08em;
+}
+
+
+/* =========================================================
+   CHARACTER RESOURCES
+   ========================================================= */
+
+.character-resources {
+    margin: 35px 0;
+}
+
+
+.resource-buttons {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-top: 18px;
+}
+
+
+.resource-button {
+    display: inline-block;
+
+    padding: 11px 18px;
+
+    color: #d8cfb2;
+
+    text-decoration: none;
+
+    background: #10100e;
+
+    border: 1px solid #47443a;
+
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.resource-button:hover {
+    color: #e0d6b8;
+
+    background: #1b1815;
+
+    border-color: #74372f;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   POINT BUY CALCULATOR
+   ========================================================= */
+
+.point-buy-calculator {
+    margin-top: 40px;
+
+    padding: 30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1c1b17,
+            #0e0e0c
+        );
+
+    border: 1px solid #47443a;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.35),
+        inset 0 0 30px rgba(0, 0, 0, 0.18);
+}
+
+
+.calculator-heading h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+
+    color: #d8cfb2;
+
+    font-size: 1.5rem;
+
+    letter-spacing: 0.06em;
+}
+
+
+.calculator-heading p {
+    margin-top: 0;
+}
+
+
+.point-summary {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 12px;
+
+    margin: 25px 0 12px;
+}
+
+
+.point-summary > div {
+    padding: 15px;
+
+    text-align: center;
+
+    background: #10100e;
+
+    border: 1px solid #39372f;
+}
+
+
+.summary-label {
+    display: block;
+
+    color: #8f8977;
+
+    font-size: 0.78rem;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+}
+
+
+.point-summary strong {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #ddd3b6;
+
+    font-size: 1.55rem;
+}
+
+
+.point-status {
+    margin-bottom: 22px;
+
+    padding: 9px 12px;
+
+    color: #9f9b86;
+
+    text-align: center;
+
+    background: rgba(0, 0, 0, 0.18);
+
+    border: 1px solid #39372f;
+}
+
+
+.point-status.over-budget {
+    color: #d5a299;
+
+    border-color: #74372f;
+
+    background:
+        rgba(93, 37, 31, 0.18);
+}
+
+
+/* Ability rows */
+
+.ability-row {
+    display: grid;
+
+    grid-template-columns:
+        minmax(130px, 1fr)
+        100px
+        110px;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 13px 0;
+
+    border-bottom:
+        1px solid rgba(120, 115, 96, 0.22);
+}
+
+
+.ability-row label {
+    color: #c9c0a4;
+
+    letter-spacing: 0.04em;
+}
+
+
+.ability-row select,
+.ozyleme-bonus select {
+    width: 100%;
+
+    padding: 9px 10px;
+
+    color: #d8d0bc;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    background: #10100e;
+
+    border: 1px solid #47443a;
+
+    outline: none;
+}
+
+
+.ability-row select:focus,
+.ozyleme-bonus select:focus {
+    border-color: #74372f;
+}
+
+
+.final-score {
+    color: #8f8977;
+
+    font-size: 0.9rem;
+}
+
+
+.final-score strong {
+    color: #ddd3b6;
+}
+
+
+/* Ozyleme +1 */
+
+.ozyleme-bonus {
+    display: grid;
+
+    grid-template-columns:
+        minmax(180px, 1fr)
+        minmax(180px, 240px);
+
+    align-items: center;
+
+    gap: 18px;
+
+    margin-top: 25px;
+
+    padding: 18px;
+
+    background:
+        rgba(93, 37, 31, 0.10);
+
+    border: 1px solid #5b3029;
+}
+
+
+.ozyleme-bonus label {
+    color: #d8cfb2;
+
+    letter-spacing: 0.04em;
+}
+
+
+/* Calculator actions */
+
+.calculator-actions {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-top: 25px;
+}
+
+
+.calculator-actions button,
+.calculator-actions a {
+    padding: 10px 16px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 0.9rem;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    color: #c9c0a4;
+
+    background: #10100e;
+
+    border: 1px solid #47443a;
+}
+
+
+.calculator-actions button:hover,
+.calculator-actions a:hover {
+    color: #e0d6b8;
+
+    border-color: #74372f;
+
+    background: #1b1815;
 }
 
 
@@ -1046,7 +1486,7 @@ footer p {
 @media (max-width: 767px) {
 
 
-    /* Header */
+    /* HEADER */
 
     header {
         aspect-ratio: 2 / 1;
@@ -1075,7 +1515,7 @@ footer p {
     }
 
 
-    /* Navigation */
+    /* NAVIGATION */
 
     .site-nav,
     nav {
@@ -1093,7 +1533,7 @@ footer p {
     }
 
 
-    /* Main */
+    /* MAIN */
 
     main {
         width: calc(100% - 28px);
@@ -1126,10 +1566,8 @@ footer p {
 
     /* =====================================================
        GODS
-       ALWAYS FOUR ACROSS
-       EVEN ON MOBILE
 
-       DO NOT CHANGE THIS
+       MUST REMAIN FOUR ACROSS ON MOBILE
        ===================================================== */
 
     .gods-grid {
@@ -1175,7 +1613,31 @@ footer p {
     }
 
 
-    /* Lore boxes */
+    /* Old god-card system */
+
+    .god-card h3 {
+        font-size: clamp(
+            0.62rem,
+            3vw,
+            0.9rem
+        );
+
+        letter-spacing: 0;
+    }
+
+
+    .god-card p {
+        font-size: clamp(
+            0.52rem,
+            2.2vw,
+            0.7rem
+        );
+
+        line-height: 1.3;
+    }
+
+
+    /* CONTENT PANELS */
 
     .lore,
     .content-box,
@@ -1245,6 +1707,46 @@ footer p {
     .bestiary-portrait {
         width: 80px;
         height: 80px;
+    }
+
+
+    /* =====================================================
+       POINT BUY
+       ===================================================== */
+
+    .point-buy-calculator {
+        padding: 20px 16px;
+    }
+
+
+    .ability-row {
+        grid-template-columns:
+            1fr
+            70px;
+
+        gap: 8px;
+    }
+
+
+    .final-score {
+        grid-column: 1 / -1;
+
+        margin-top: -5px;
+    }
+
+
+    .ozyleme-bonus {
+        grid-template-columns: 1fr;
+    }
+
+
+    .resource-buttons {
+        flex-direction: column;
+    }
+
+
+    .resource-button {
+        width: 100%;
     }
 
 }
