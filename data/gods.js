@@ -65,7 +65,7 @@ const godsData = {
 
         symbol: "[To Be Recorded]",
 
-        element: "Shadow",
+        element: "Darkness",
 
         domain: "[To Be Recorded]",
 
@@ -170,7 +170,7 @@ const godsData = {
 
         symbol: "[To Be Recorded]",
 
-        element: "Death",
+        element: "Nature",
 
         domain: "[To Be Recorded]",
 
