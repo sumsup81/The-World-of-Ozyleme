@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Character Builder | Ozyleme</title>
@@ -14,45 +13,30 @@
 
 <body>
 
-
     <!-- ================================
          HEADER
          ================================ -->
 
     <header>
-
         <h1>OZYLEME</h1>
-
         <p>Realm of the Dark Dragon</p>
-
     </header>
 
 
-
     <!-- ================================
-         MAIN NAVIGATION
+         NAVIGATION
          ================================ -->
 
     <nav>
-
         <a href="index.html">Home</a>
-
         <a href="kingdoms.html">Kingdoms</a>
-
         <a href="species.html">Species</a>
-
         <a href="people.html">People</a>
-
         <a href="gods.html">Gods</a>
-
         <a href="bestiary.html">Bestiary</a>
-
         <a href="classes.html">Classes</a>
-
         <a href="player-guide.html">Player Guide</a>
-
     </nav>
-
 
 
     <!-- ================================
@@ -61,212 +45,230 @@
 
     <main class="character-builder">
 
-        <section class="builder-intro">
+        <div class="builder-heading">
 
-            <h2>Character Builder</h2>
+            <div>
+                <h2>Character Builder</h2>
 
-            <p>
-                Record your character for the Realm of Ozyleme.
-                Your choices will eventually be exportable as a
-                printable character sheet or a Foundry VTT character file.
-            </p>
+                <p>
+                    Create a character for the Realm of Ozyleme.
+                </p>
+            </div>
 
-            <p>
-                <a href="player-guide.html">← Return to the Player Guide</a>
-            </p>
+            <a class="return-guide" href="player-guide.html">
+                ← Player Guide
+            </a>
 
-        </section>
-
+        </div>
 
 
         <form id="characterForm">
 
 
-            <!-- ================================
-                 CHARACTER IDENTITY
-                 ================================ -->
+            <!-- ==================================
+                 IDENTITY
+                 ================================== -->
 
-            <section class="builder-section">
+            <section class="sheet-panel identity-panel">
 
-                <h2>Character</h2>
+                <div class="identity-name">
 
-                <div class="builder-grid">
-
-                    <label>
+                    <label for="characterName">
                         Character Name
-                        <input
-                            type="text"
-                            id="characterName"
-                            name="characterName"
-                        >
                     </label>
 
+                    <input
+                        type="text"
+                        id="characterName"
+                        name="characterName"
+                        autocomplete="off"
+                    >
 
-                    <label>
-                        Player Name
-                        <input
-                            type="text"
-                            id="playerName"
-                            name="playerName"
-                        >
-                    </label>
-
-
-                    <label>
-                        Species
-                        <input
-                            type="text"
-                            id="species"
-                            name="species"
-                        >
-                    </label>
+                </div>
 
 
-                    <label>
-                        Class
-                        <input
-                            type="text"
-                            id="characterClass"
-                            name="characterClass"
-                        >
-                    </label>
+                <div class="identity-details">
 
 
-                    <label>
-                        Subclass
-                        <input
-                            type="text"
-                            id="subclass"
-                            name="subclass"
-                        >
-                    </label>
+                    <div class="sheet-field">
 
+                        <label for="background">
+                            Background
+                        </label>
 
-                    <label>
-                        Level
-                        <input
-                            type="number"
-                            id="level"
-                            name="level"
-                            min="1"
-                            max="20"
-                            value="1"
-                        >
-                    </label>
-
-
-                    <label>
-                        Background
                         <input
                             type="text"
                             id="background"
                             name="background"
                         >
-                    </label>
+
+                    </div>
 
 
-                    <label>
-                        Kingdom / Homeland
+                    <div class="sheet-field">
+
+                        <label for="characterClass">
+                            Class
+                        </label>
+
+                        <select
+                            id="characterClass"
+                            name="characterClass"
+                        >
+
+                            <option value="">
+                                Select Class
+                            </option>
+
+                            <option>Barbarian</option>
+                            <option>Bard</option>
+                            <option>Cleric</option>
+                            <option>Druid</option>
+                            <option>Fighter</option>
+                            <option>Monk</option>
+                            <option>Paladin</option>
+                            <option>Ranger</option>
+                            <option>Rogue</option>
+                            <option>Sorcerer</option>
+                            <option>Warlock</option>
+                            <option>Wizard</option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                        <input
+                            class="custom-entry"
+                            type="text"
+                            id="customClass"
+                            name="customClass"
+                            placeholder="Enter class"
+                            hidden
+                        >
+
+                    </div>
+
+
+                    <div class="sheet-field">
+
+                        <label for="level">
+                            Level
+                        </label>
+
+                        <input
+                            type="number"
+                            id="level"
+                            name="level"
+                            value="1"
+                            min="1"
+                            max="20"
+                        >
+
+                    </div>
+
+
+                    <div class="sheet-field">
+
+                        <label for="species">
+                            Species
+                        </label>
+
+                        <select
+                            id="species"
+                            name="species"
+                        >
+
+                            <option value="">
+                                Select Species
+                            </option>
+
+                            <option>Aasimar</option>
+                            <option>Dwarf</option>
+                            <option>Elf</option>
+                            <option>Gnome</option>
+                            <option>Goliath</option>
+                            <option>Halfling</option>
+                            <option>Human</option>
+                            <option>Orc</option>
+
+                            <option>Dragon Forged</option>
+                            <option>Reborn</option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                        <input
+                            class="custom-entry"
+                            type="text"
+                            id="customSpecies"
+                            name="customSpecies"
+                            placeholder="Enter species"
+                            hidden
+                        >
+
+                    </div>
+
+
+                    <div class="sheet-field">
+
+                        <label for="subclass">
+                            Subclass
+                        </label>
+
                         <input
                             type="text"
+                            id="subclass"
+                            name="subclass"
+                        >
+
+                    </div>
+
+
+                    <div class="sheet-field">
+
+                        <label for="homeland">
+                            Kingdom / Homeland
+                        </label>
+
+                        <select
                             id="homeland"
                             name="homeland"
                         >
-                    </label>
 
-                </div>
+                            <option value="">
+                                Select Homeland
+                            </option>
 
-            </section>
+                            <option>Plume</option>
+                            <option>Kettle</option>
+                            <option>Loop</option>
+                            <option>Torch</option>
+                            <option>Vial</option>
+                            <option>Hook</option>
+                            <option>Bell</option>
+                            <option>Crook</option>
 
+                            <option value="Other">
+                                Other
+                            </option>
 
+                        </select>
 
-            <!-- ================================
-                 ABILITY SCORES
-                 ================================ -->
-
-            <section class="builder-section">
-
-                <h2>Ability Scores</h2>
-
-                <div class="ability-grid">
-
-
-                    <label>
-                        Strength
                         <input
-                            type="number"
-                            id="strength"
-                            name="strength"
-                            min="1"
-                            max="30"
-                            value="10"
+                            class="custom-entry"
+                            type="text"
+                            id="customHomeland"
+                            name="customHomeland"
+                            placeholder="Enter homeland"
+                            hidden
                         >
-                    </label>
 
-
-                    <label>
-                        Dexterity
-                        <input
-                            type="number"
-                            id="dexterity"
-                            name="dexterity"
-                            min="1"
-                            max="30"
-                            value="10"
-                        >
-                    </label>
-
-
-                    <label>
-                        Constitution
-                        <input
-                            type="number"
-                            id="constitution"
-                            name="constitution"
-                            min="1"
-                            max="30"
-                            value="10"
-                        >
-                    </label>
-
-
-                    <label>
-                        Intelligence
-                        <input
-                            type="number"
-                            id="intelligence"
-                            name="intelligence"
-                            min="1"
-                            max="30"
-                            value="10"
-                        >
-                    </label>
-
-
-                    <label>
-                        Wisdom
-                        <input
-                            type="number"
-                            id="wisdom"
-                            name="wisdom"
-                            min="1"
-                            max="30"
-                            value="10"
-                        >
-                    </label>
-
-
-                    <label>
-                        Charisma
-                        <input
-                            type="number"
-                            id="charisma"
-                            name="charisma"
-                            min="1"
-                            max="30"
-                            value="10"
-                        >
-                    </label>
+                    </div>
 
 
                 </div>
@@ -275,278 +277,868 @@
 
 
 
-            <!-- ================================
-                 COMBAT
-                 ================================ -->
+            <!-- ==================================
+                 COMBAT BAR
+                 ================================== -->
 
-            <section class="builder-section">
+            <section class="combat-bar">
 
-                <h2>Combat</h2>
 
-                <div class="builder-grid">
+                <div class="combat-box">
+
+                    <label>
+                        Proficiency
+                    </label>
+
+                    <input
+                        type="number"
+                        id="proficiencyBonus"
+                        name="proficiencyBonus"
+                        placeholder="+2"
+                    >
+
+                </div>
+
+
+                <div class="combat-box">
 
                     <label>
                         Armor Class
-                        <input
-                            type="number"
-                            id="armorClass"
-                            name="armorClass"
-                        >
                     </label>
 
+                    <input
+                        type="number"
+                        id="armorClass"
+                        name="armorClass"
+                    >
+
+                </div>
+
+
+                <div class="combat-box">
 
                     <label>
-                        Maximum Hit Points
-                        <input
-                            type="number"
-                            id="maxHP"
-                            name="maxHP"
-                        >
+                        Initiative
                     </label>
 
+                    <input
+                        type="number"
+                        id="initiative"
+                        name="initiative"
+                    >
+
+                </div>
+
+
+                <div class="combat-box">
 
                     <label>
-                        Current Hit Points
+                        Speed
+                    </label>
+
+                    <input
+                        type="number"
+                        id="speed"
+                        name="speed"
+                        placeholder="30"
+                    >
+
+                </div>
+
+
+                <div class="combat-box">
+
+                    <label>
+                        Passive Perception
+                    </label>
+
+                    <input
+                        type="number"
+                        id="passivePerception"
+                        name="passivePerception"
+                    >
+
+                </div>
+
+
+                <div class="combat-box hp-box">
+
+                    <label>
+                        Hit Points
+                    </label>
+
+                    <div class="hp-fields">
+
                         <input
                             type="number"
                             id="currentHP"
                             name="currentHP"
+                            placeholder="Current"
                         >
-                    </label>
 
+                        <span>/</span>
 
-                    <label>
-                        Temporary Hit Points
                         <input
                             type="number"
-                            id="tempHP"
-                            name="tempHP"
+                            id="maxHP"
+                            name="maxHP"
+                            placeholder="Max"
                         >
-                    </label>
 
-
-                    <label>
-                        Speed
-                        <input
-                            type="number"
-                            id="speed"
-                            name="speed"
-                        >
-                    </label>
-
-
-                    <label>
-                        Initiative
-                        <input
-                            type="number"
-                            id="initiative"
-                            name="initiative"
-                        >
-                    </label>
-
-
-                    <label>
-                        Proficiency Bonus
-                        <input
-                            type="number"
-                            id="proficiencyBonus"
-                            name="proficiencyBonus"
-                        >
-                    </label>
-
-
-                    <label>
-                        Passive Perception
-                        <input
-                            type="number"
-                            id="passivePerception"
-                            name="passivePerception"
-                        >
-                    </label>
+                    </div>
 
                 </div>
+
 
             </section>
 
 
 
-            <!-- ================================
-                 CHARACTER DESCRIPTION
-                 ================================ -->
+            <!-- ==================================
+                 MAIN SHEET
+                 ================================== -->
 
-            <section class="builder-section">
-
-                <h2>Description</h2>
+            <div class="sheet-main">
 
 
-                <label>
-                    Appearance
+                <!-- ================================
+                     LEFT COLUMN
+                     ================================ -->
+
+                <div class="sheet-left">
+
+
+                    <!-- STRENGTH -->
+
+                    <section class="ability-card">
+
+                        <h3>Strength</h3>
+
+                        <div class="ability-values">
+
+                            <label>
+                                Score
+
+                                <input
+                                    type="number"
+                                    id="strength"
+                                    name="strength"
+                                    value="10"
+                                    min="1"
+                                    max="30"
+                                >
+                            </label>
+
+                            <label>
+                                Modifier
+
+                                <input
+                                    type="text"
+                                    id="strengthModifier"
+                                    readonly
+                                >
+                            </label>
+
+                        </div>
+
+
+                        <label class="skill-line">
+
+                            <input
+                                type="checkbox"
+                                name="strengthSaveProficiency"
+                            >
+
+                            Saving Throw
+
+                        </label>
+
+
+                        <label class="skill-line">
+
+                            <input
+                                type="checkbox"
+                                name="athleticsProficiency"
+                            >
+
+                            Athletics
+
+                        </label>
+
+                    </section>
+
+
+
+                    <!-- DEXTERITY -->
+
+                    <section class="ability-card">
+
+                        <h3>Dexterity</h3>
+
+                        <div class="ability-values">
+
+                            <label>
+                                Score
+
+                                <input
+                                    type="number"
+                                    id="dexterity"
+                                    name="dexterity"
+                                    value="10"
+                                    min="1"
+                                    max="30"
+                                >
+                            </label>
+
+                            <label>
+                                Modifier
+
+                                <input
+                                    type="text"
+                                    id="dexterityModifier"
+                                    readonly
+                                >
+                            </label>
+
+                        </div>
+
+
+                        <label class="skill-line">
+                            <input type="checkbox">
+                            Saving Throw
+                        </label>
+
+                        <label class="skill-line">
+                            <input type="checkbox">
+                            Acrobatics
+                        </label>
+
+                        <label class="skill-line">
+                            <input type="checkbox">
+                            Sleight of Hand
+                        </label>
+
+                        <label class="skill-line">
+                            <input type="checkbox">
+                            Stealth
+                        </label>
+
+                    </section>
+
+
+
+                    <!-- CONSTITUTION -->
+
+                    <section class="ability-card">
+
+                        <h3>Constitution</h3>
+
+                        <div class="ability-values">
+
+                            <label>
+                                Score
+
+                                <input
+                                    type="number"
+                                    id="constitution"
+                                    name="constitution"
+                                    value="10"
+                                    min="1"
+                                    max="30"
+                                >
+                            </label>
+
+                            <label>
+                                Modifier
+
+                                <input
+                                    type="text"
+                                    id="constitutionModifier"
+                                    readonly
+                                >
+                            </label>
+
+                        </div>
+
+
+                        <label class="skill-line">
+                            <input type="checkbox">
+                            Saving Throw
+                        </label>
+
+                    </section>
+
+
+
+                    <!-- INTELLIGENCE -->
+
+                    <section class="ability-card">
+
+                        <h3>Intelligence</h3>
+
+                        <div class="ability-values">
+
+                            <label>
+                                Score
+
+                                <input
+                                    type="number"
+                                    id="intelligence"
+                                    name="intelligence"
+                                    value="10"
+                                    min="1"
+                                    max="30"
+                                >
+                            </label>
+
+                            <label>
+                                Modifier
+
+                                <input
+                                    type="text"
+                                    id="intelligenceModifier"
+                                    readonly
+                                >
+                            </label>
+
+                        </div>
+
+
+                        <label class="skill-line">
+                            <input type="checkbox">
+                            Saving Throw
+                        </label>
+
+                        <label class="skill-line">
+                            <input type="checkbox">
+                            Arcana
+                        </label>
+
+                        <label class="skill-line">
+                            <input type="checkbox">
+                            History
+                        </label>
+
+                        <label class="skill-line">
+                            <input type="checkbox">
+                            Investigation
+                        </label>
+
+                        <label class="skill-line">
+                            <input type="checkbox">
+                            Nature
+                        </label>
+
+                        <label class="skill-line">
+                            <input type="checkbox">
+                            Religion
+                        </label>
+
+                    </section>
+
+
+
+                    <!-- WISDOM -->
+
+                    <section class="ability-card">
+
+                        <h3>Wisdom</h3>
+
+                        <div class="ability-values">
+
+                            <label>
+                                Score
+
+                                <input
+                                    type="number"
+                                    id="wisdom"
+                                    name="wisdom"
+                                    value="10"
+                                    min="1"
+                                    max="30"
+                                >
+                            </label>
+
+                            <label>
+                                Modifier
+
+                                <input
+                                    type="text"
+                                    id="wisdomModifier"
+                                    readonly
+                                >
+                            </label>
+
+                        </div>
+
+
+                        <label class="skill-line">
+                            <input type="checkbox">
+                            Saving Throw
+                        </label>
+
+                        <label class="skill-line">
+                            <input type="checkbox">
+                            Animal Handling
+                        </label>
+
+                        <label class="skill-line">
+                            <input type="checkbox">
+                            Insight
+                        </label>
+
+                        <label class="skill-line">
+                            <input type="checkbox">
+                            Medicine
+                        </label>
+
+                        <label class="skill-line">
+                            <input type="checkbox">
+                            Perception
+                        </label>
+
+                        <label class="skill-line">
+                            <input type="checkbox">
+                            Survival
+                        </label>
+
+                    </section>
+
+
+
+                    <!-- CHARISMA -->
+
+                    <section class="ability-card">
+
+                        <h3>Charisma</h3>
+
+                        <div class="ability-values">
+
+                            <label>
+                                Score
+
+                                <input
+                                    type="number"
+                                    id="charisma"
+                                    name="charisma"
+                                    value="10"
+                                    min="1"
+                                    max="30"
+                                >
+                            </label>
+
+                            <label>
+                                Modifier
+
+                                <input
+                                    type="text"
+                                    id="charismaModifier"
+                                    readonly
+                                >
+                            </label>
+
+                        </div>
+
+
+                        <label class="skill-line">
+                            <input type="checkbox">
+                            Saving Throw
+                        </label>
+
+                        <label class="skill-line">
+                            <input type="checkbox">
+                            Deception
+                        </label>
+
+                        <label class="skill-line">
+                            <input type="checkbox">
+                            Intimidation
+                        </label>
+
+                        <label class="skill-line">
+                            <input type="checkbox">
+                            Performance
+                        </label>
+
+                        <label class="skill-line">
+                            <input type="checkbox">
+                            Persuasion
+                        </label>
+
+                    </section>
+
+
+                </div>
+
+
+
+                <!-- ================================
+                     RIGHT SIDE
+                     ================================ -->
+
+                <div class="sheet-right">
+
+
+                    <!-- WEAPONS -->
+
+                    <section class="sheet-panel">
+
+                        <h3 class="panel-title">
+                            Weapons & Attacks
+                        </h3>
+
+                        <div class="weapon-header">
+
+                            <span>Name</span>
+                            <span>Attack / DC</span>
+                            <span>Damage & Type</span>
+
+                        </div>
+
+
+                        <div class="weapon-row">
+
+                            <input
+                                type="text"
+                                name="weapon1Name"
+                            >
+
+                            <input
+                                type="text"
+                                name="weapon1Attack"
+                            >
+
+                            <input
+                                type="text"
+                                name="weapon1Damage"
+                            >
+
+                        </div>
+
+
+                        <div class="weapon-row">
+
+                            <input
+                                type="text"
+                                name="weapon2Name"
+                            >
+
+                            <input
+                                type="text"
+                                name="weapon2Attack"
+                            >
+
+                            <input
+                                type="text"
+                                name="weapon2Damage"
+                            >
+
+                        </div>
+
+
+                        <div class="weapon-row">
+
+                            <input
+                                type="text"
+                                name="weapon3Name"
+                            >
+
+                            <input
+                                type="text"
+                                name="weapon3Attack"
+                            >
+
+                            <input
+                                type="text"
+                                name="weapon3Damage"
+                            >
+
+                        </div>
+
+
+                        <div class="weapon-row">
+
+                            <input
+                                type="text"
+                                name="weapon4Name"
+                            >
+
+                            <input
+                                type="text"
+                                name="weapon4Attack"
+                            >
+
+                            <input
+                                type="text"
+                                name="weapon4Damage"
+                            >
+
+                        </div>
+
+                    </section>
+
+
+
+                    <!-- FEATURES -->
+
+                    <section class="sheet-panel">
+
+                        <h3 class="panel-title">
+                            Class Features
+                        </h3>
+
+                        <textarea
+                            id="classFeatures"
+                            name="classFeatures"
+                            rows="11"
+                            placeholder="Class abilities, subclass features, resources, and other features..."
+                        ></textarea>
+
+                    </section>
+
+
+
+                    <div class="two-panel-row">
+
+
+                        <section class="sheet-panel">
+
+                            <h3 class="panel-title">
+                                Species Traits
+                            </h3>
+
+                            <textarea
+                                id="speciesTraits"
+                                name="speciesTraits"
+                                rows="9"
+                            ></textarea>
+
+                        </section>
+
+
+                        <section class="sheet-panel">
+
+                            <h3 class="panel-title">
+                                Feats
+                            </h3>
+
+                            <textarea
+                                id="feats"
+                                name="feats"
+                                rows="9"
+                            ></textarea>
+
+                        </section>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==================================
+                 CHARACTER DETAILS
+                 ================================== -->
+
+            <div class="details-grid">
+
+
+                <section class="sheet-panel">
+
+                    <h3 class="panel-title">
+                        Appearance
+                    </h3>
 
                     <textarea
                         id="appearance"
                         name="appearance"
-                        rows="5"
-                        placeholder="Describe your character's appearance..."
+                        rows="7"
+                        placeholder="Physical appearance, clothing, distinguishing marks..."
                     ></textarea>
 
-                </label>
+                </section>
 
 
-                <label>
-                    Personality
+
+                <section class="sheet-panel">
+
+                    <h3 class="panel-title">
+                        Personality
+                    </h3>
 
                     <textarea
                         id="personality"
                         name="personality"
-                        rows="5"
-                        placeholder="Describe your character's personality..."
+                        rows="7"
                     ></textarea>
 
-                </label>
+                </section>
 
 
-                <label>
-                    Ideals
+
+                <section class="sheet-panel">
+
+                    <h3 class="panel-title">
+                        Ideals
+                    </h3>
 
                     <textarea
                         id="ideals"
                         name="ideals"
-                        rows="4"
+                        rows="5"
                     ></textarea>
 
-                </label>
+                </section>
 
 
-                <label>
-                    Bonds
+
+                <section class="sheet-panel">
+
+                    <h3 class="panel-title">
+                        Bonds
+                    </h3>
 
                     <textarea
                         id="bonds"
                         name="bonds"
-                        rows="4"
+                        rows="5"
                     ></textarea>
 
-                </label>
+                </section>
 
 
-                <label>
-                    Flaws
+
+                <section class="sheet-panel">
+
+                    <h3 class="panel-title">
+                        Flaws
+                    </h3>
 
                     <textarea
                         id="flaws"
                         name="flaws"
-                        rows="4"
+                        rows="5"
                     ></textarea>
 
-                </label>
-
-            </section>
+                </section>
 
 
 
-            <!-- ================================
-                 BACKSTORY
-                 ================================ -->
+                <section class="sheet-panel">
 
-            <section class="builder-section">
+                    <h3 class="panel-title">
+                        Languages
+                    </h3>
 
-                <h2>Backstory</h2>
+                    <textarea
+                        id="languages"
+                        name="languages"
+                        rows="5"
+                    ></textarea>
 
-                <textarea
-                    id="backstory"
-                    name="backstory"
-                    rows="10"
-                    placeholder="Where did your character come from? What brought them into the darkness of Ozyleme?"
-                ></textarea>
-
-            </section>
+                </section>
 
 
-
-            <!-- ================================
-                 FEATURES
-                 ================================ -->
-
-            <section class="builder-section">
-
-                <h2>Features & Traits</h2>
-
-                <textarea
-                    id="features"
-                    name="features"
-                    rows="10"
-                    placeholder="Species traits, class features, feats, supernatural gifts, curses, or other abilities..."
-                ></textarea>
-
-            </section>
+            </div>
 
 
 
-            <!-- ================================
-                 EQUIPMENT
-                 ================================ -->
+            <!-- ==================================
+                 LOWER SHEET
+                 ================================== -->
 
-            <section class="builder-section">
-
-                <h2>Equipment</h2>
-
-                <textarea
-                    id="equipment"
-                    name="equipment"
-                    rows="10"
-                    placeholder="Weapons, armor, adventuring gear, treasures, and possessions..."
-                ></textarea>
-
-            </section>
+            <div class="lower-grid">
 
 
+                <section class="sheet-panel">
 
-            <!-- ================================
-                 NOTES
-                 ================================ -->
+                    <h3 class="panel-title">
+                        Backstory
+                    </h3>
 
-            <section class="builder-section">
+                    <textarea
+                        id="backstory"
+                        name="backstory"
+                        rows="12"
+                        placeholder="Where did you come from? What has Ozyleme taken from you? What keeps you moving?"
+                    ></textarea>
 
-                <h2>Additional Notes</h2>
+                </section>
 
-                <textarea
-                    id="notes"
-                    name="notes"
-                    rows="8"
-                    placeholder="Allies, enemies, secrets, goals, discoveries, or other notes..."
-                ></textarea>
 
-            </section>
 
+                <section class="sheet-panel">
+
+                    <h3 class="panel-title">
+                        Equipment
+                    </h3>
+
+                    <textarea
+                        id="equipment"
+                        name="equipment"
+                        rows="12"
+                        placeholder="Weapons, armor, tools, possessions, treasures..."
+                    ></textarea>
+
+                </section>
+
+
+            </div>
+
+
+
+            <!-- ==================================
+                 PROFICIENCIES / NOTES
+                 ================================== -->
+
+            <div class="lower-grid">
+
+
+                <section class="sheet-panel">
+
+                    <h3 class="panel-title">
+                        Training & Proficiencies
+                    </h3>
+
+                    <textarea
+                        id="proficiencies"
+                        name="proficiencies"
+                        rows="8"
+                        placeholder="Armor, weapons, tools, instruments, vehicles..."
+                    ></textarea>
+
+                </section>
+
+
+
+                <section class="sheet-panel">
+
+                    <h3 class="panel-title">
+                        Additional Notes
+                    </h3>
+
+                    <textarea
+                        id="notes"
+                        name="notes"
+                        rows="8"
+                        placeholder="Allies, enemies, secrets, curses, discoveries..."
+                    ></textarea>
+
+                </section>
+
+
+            </div>
 
 
         </form>
 
-
-
-        <!-- ================================
-             FUTURE EXPORT AREA
-             ================================ -->
-
-        <section class="builder-section builder-export">
-
-            <h2>Character File</h2>
-
-            <p>
-                Saving, PDF export, and Foundry VTT export
-                will be added here.
-            </p>
-
-        </section>
-
-
     </main>
 
 
-
-    <!-- ================================
-         FOOTER
-         ================================ -->
 
     <footer>
 
@@ -555,6 +1147,132 @@
         </p>
 
     </footer>
+
+
+
+    <!-- ==================================
+         CHARACTER BUILDER SCRIPT
+         ================================== -->
+
+    <script>
+
+        /* ================================
+           CUSTOM DROPDOWN ENTRIES
+           ================================ */
+
+        function enableCustomField(selectId, fieldId) {
+
+            const select =
+                document.getElementById(selectId);
+
+            const field =
+                document.getElementById(fieldId);
+
+
+            select.addEventListener("change", function () {
+
+                if (this.value === "Other") {
+
+                    field.hidden = false;
+                    field.value = "";
+                    field.focus();
+
+                } else {
+
+                    field.hidden = true;
+                    field.value = "";
+
+                }
+
+            });
+
+        }
+
+
+        enableCustomField(
+            "species",
+            "customSpecies"
+        );
+
+        enableCustomField(
+            "characterClass",
+            "customClass"
+        );
+
+        enableCustomField(
+            "homeland",
+            "customHomeland"
+        );
+
+
+
+        /* ================================
+           ABILITY MODIFIERS
+           ================================ */
+
+        const abilityScores = [
+            "strength",
+            "dexterity",
+            "constitution",
+            "intelligence",
+            "wisdom",
+            "charisma"
+        ];
+
+
+        function calculateModifier(score) {
+
+            const modifier =
+                Math.floor((score - 10) / 2);
+
+            if (modifier >= 0) {
+                return "+" + modifier;
+            }
+
+            return modifier;
+
+        }
+
+
+        abilityScores.forEach(function (ability) {
+
+            const scoreField =
+                document.getElementById(ability);
+
+            const modifierField =
+                document.getElementById(
+                    ability + "Modifier"
+                );
+
+
+            function updateModifier() {
+
+                const score =
+                    parseInt(scoreField.value);
+
+                if (isNaN(score)) {
+
+                    modifierField.value = "";
+
+                    return;
+                }
+
+                modifierField.value =
+                    calculateModifier(score);
+
+            }
+
+
+            scoreField.addEventListener(
+                "input",
+                updateModifier
+            );
+
+            updateModifier();
+
+        });
+
+    </script>
 
 
 </body>
