@@ -1,6 +1,6 @@
 /* =========================================================
    OZYLEME
-   Main Website Stylesheet
+   MAIN WEBSITE STYLESHEET
    ========================================================= */
 
 
@@ -28,13 +28,13 @@ body {
 
     min-height: 100vh;
 
-    /* Simple page-load fade only */
-    animation: pageFadeIn 0.45s ease-out;
+    animation: pageFadeIn 0.4s ease-out;
 }
 
 
 /* =========================================================
    PAGE FADE
+   CSS ONLY
    ========================================================= */
 
 @keyframes pageFadeIn {
@@ -48,8 +48,6 @@ body {
     }
 }
 
-
-/* Respect accessibility settings */
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -93,7 +91,7 @@ header {
 }
 
 
-/* OZYLEME title */
+/* Main OZYLEME title */
 
 header h1 {
     position: absolute;
@@ -153,7 +151,7 @@ header p {
 }
 
 
-/* Desktop tagline adjustment */
+/* Desktop tagline */
 
 @media (min-width: 768px) {
 
@@ -229,7 +227,7 @@ nav a:focus {
 
 
 /* =========================================================
-   MAIN PAGE CONTENT
+   MAIN CONTENT
    ========================================================= */
 
 main {
@@ -242,8 +240,6 @@ main {
     background: transparent;
 }
 
-
-/* General sections */
 
 section {
     margin-bottom: 65px;
@@ -281,11 +277,11 @@ main h2 {
     margin-top: 0;
     margin-bottom: 18px;
 
+    padding-bottom: 10px;
+
     font-size: clamp(1.6rem, 4vw, 2.4rem);
 
     border-bottom: 1px solid #413d34;
-
-    padding-bottom: 10px;
 }
 
 
@@ -347,7 +343,8 @@ main a:hover {
 
 
 /* =========================================================
-   CARD GRID
+   STANDARD CARD GRID
+   KINGDOMS / GENERAL CARDS
    ========================================================= */
 
 .cards {
@@ -363,7 +360,7 @@ main a:hover {
 
 
 /* =========================================================
-   CARD
+   STANDARD CARD
    ========================================================= */
 
 .card {
@@ -403,12 +400,7 @@ main a:hover {
 }
 
 
-/*
-   Image layer.
-
-   Keeping the image on a pseudo-element prevents the
-   hover effect from accidentally replacing the image.
-*/
+/* Card background image */
 
 .card::before {
     content: "";
@@ -435,7 +427,7 @@ main a:hover {
 }
 
 
-/* Slight dark layer for readability */
+/* Dark readability overlay */
 
 .card::after {
     content: "";
@@ -448,7 +440,7 @@ main a:hover {
     background:
         linear-gradient(
             to bottom,
-            rgba(0, 0, 0, 0.05),
+            rgba(0, 0, 0, 0.04),
             rgba(0, 0, 0, 0.12) 45%,
             rgba(0, 0, 0, 0.72)
         );
@@ -457,7 +449,7 @@ main a:hover {
 }
 
 
-/* Keep card text above image */
+/* Card text */
 
 .card h3,
 .card p {
@@ -563,7 +555,82 @@ main a:hover {
 
 
 /* =========================================================
-   CONTENT / LORE PANELS
+   GODS GRID
+   ALWAYS 4 COLUMNS x 2 ROWS
+   INCLUDING MOBILE
+   ========================================================= */
+
+.gods-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 16px;
+
+    width: 100%;
+
+    margin-top: 30px;
+}
+
+
+/* God cards */
+
+.gods-grid .card {
+    min-width: 0;
+
+    min-height: 220px;
+
+    padding: 18px;
+}
+
+
+/* Slightly smaller text so four cards remain usable */
+
+.gods-grid .card h3 {
+    font-size: clamp(
+        0.85rem,
+        2vw,
+        1.3rem
+    );
+
+    word-break: normal;
+}
+
+
+.gods-grid .card p {
+    font-size: clamp(
+        0.7rem,
+        1.5vw,
+        0.95rem
+    );
+}
+
+
+/* =========================================================
+   GOD CARD IMAGES
+   Add your actual filenames here
+   ========================================================= */
+
+/*
+
+Example:
+
+.card.giver {
+    --card-image:
+        url("images/Giver Navi Button.jpg");
+}
+
+.card.seer {
+    --card-image:
+        url("images/Seer Navi Button.jpg");
+}
+
+*/
+
+
+/* =========================================================
+   LORE / CONTENT PANELS
    ========================================================= */
 
 .lore,
@@ -625,10 +692,10 @@ li {
    ========================================================= */
 
 main img {
+    display: block;
+
     max-width: 100%;
     height: auto;
-
-    display: block;
 }
 
 
@@ -708,10 +775,7 @@ footer p {
 
 
     main {
-        width: min(
-            100% - 28px,
-            1100px
-        );
+        width: calc(100% - 28px);
 
         padding-top: 35px;
     }
@@ -722,6 +786,8 @@ footer p {
     }
 
 
+    /* Normal cards become one column */
+
     .cards {
         grid-template-columns: 1fr;
 
@@ -729,8 +795,54 @@ footer p {
     }
 
 
-    .card {
+    .cards .card {
         min-height: 170px;
+    }
+
+
+    /* =====================================================
+       GODS STAY 4 ACROSS ON MOBILE
+       DO NOT CHANGE THIS TO 1 COLUMN
+       ===================================================== */
+
+    .gods-grid {
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+
+        gap: 6px;
+
+        width: 100%;
+    }
+
+
+    .gods-grid .card {
+        min-height: 145px;
+
+        padding: 8px;
+    }
+
+
+    .gods-grid .card h3 {
+        margin-bottom: 4px;
+
+        font-size: clamp(
+            0.62rem,
+            3vw,
+            0.9rem
+        );
+
+        letter-spacing: 0;
+    }
+
+
+    .gods-grid .card p {
+        font-size: clamp(
+            0.52rem,
+            2.2vw,
+            0.7rem
+        );
+
+        line-height: 1.3;
     }
 
 
