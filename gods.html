@@ -89,10 +89,9 @@
 
     <!-- ================================
          GOD DIRECTORY
-         FILLED BY JAVASCRIPT
          ================================ -->
 
-    <section class="gods-directory">
+    <section class="gods-directory" id="gods-top">
 
         <h2>The Gods of Ozyleme</h2>
 
@@ -106,7 +105,6 @@
 
     <!-- ================================
          GOD PROFILES
-         FILLED BY JAVASCRIPT
          ================================ -->
 
     <div id="god-profiles"></div>
@@ -156,6 +154,7 @@
 
 <script>
 
+
     /* =====================================================
        GET PAGE ELEMENTS
        ===================================================== */
@@ -165,6 +164,17 @@
 
     const godProfiles =
         document.getElementById("god-profiles");
+
+
+    /* =====================================================
+       GET GOD IDS
+       ===================================================== */
+
+    const godIds =
+        Object.keys(godsData);
+
+    const finalGod =
+        godIds[godIds.length - 1];
 
 
     /* =====================================================
@@ -238,13 +248,9 @@
 
 
 
-            <!-- GENERAL OUTLINE -->
+            <!-- OPENING DESCRIPTION -->
 
-            <div class="god-section">
-
-                <h3>
-                    General Outline
-                </h3>
+            <div class="god-section god-outline">
 
                 <p>
                     ${god.outline.trim()}
@@ -257,22 +263,6 @@
             <!-- GOD FACTS -->
 
             <div class="god-facts">
-
-
-                <!-- SYMBOL -->
-
-                <div class="god-fact">
-
-                    <h4>
-                        Symbol
-                    </h4>
-
-                    <p>
-                        ${god.symbol}
-                    </p>
-
-                </div>
-
 
 
                 <!-- ROLE -->
@@ -307,76 +297,74 @@
 
 
 
-                <!-- DOMAIN -->
+                <!-- DOMAINS -->
 
                 <div class="god-fact">
 
                     <h4>
-                        Domain
+                        Domains
                     </h4>
 
                     <p>
-                        ${god.domain}
+                        ${god.domains.join(", ")}
                     </p>
 
                 </div>
 
 
-            </div>
+
+                <!-- DOCTRINE -->
+
+                <div class="god-fact">
+
+                    <h4>
+                        Doctrine
+                    </h4>
+
+                    <p>
+                        ${god.doctrine}
+                    </p>
+
+                </div>
 
 
 
-            <!-- LORE -->
+                <!-- SIN -->
 
-            <div class="god-section">
+                <div class="god-fact">
 
-                <h3>
-                    Lore
-                </h3>
+                    <h4>
+                        Sin
+                    </h4>
 
-                <p>
-                    ${god.lore.trim()}
-                </p>
+                    <p>
+                        ${god.sin}
+                    </p>
 
-            </div>
-
-
-        `;
-
-
-        godProfiles.appendChild(godProfile);
+                </div>
 
 
 
-        /* =================================================
-           DIVIDER BETWEEN GODS
-           ================================================= */
+                <!-- SYMBOL -->
 
-        const godIds =
-            Object.keys(godsData);
+                <div class="god-fact">
 
-        const finalGod =
-            godIds[godIds.length - 1];
+                    <h4>
+                        Symbol
+                    </h4>
 
+                    <p>
+                        ${god.symbol}
+                    </p>
 
-        if (godId !== finalGod) {
-
-            const divider =
-                document.createElement("div");
-
-            divider.className =
-                "divider";
-
-            godProfiles.appendChild(divider);
-
-        }
+                </div>
 
 
-    });
 
-</script>
+                <!-- OFFERING -->
 
+                <div class="god-fact">
 
-</body>
-
-</html>
+                    <h4>
+                        Offering
+                    </
