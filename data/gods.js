@@ -1,16 +1,15 @@
 /* =========================================================
-   OZYLEME GOD DATA
+   OZYLEME
+   GOD DATA
    =========================================================
 
-   This file contains the player-visible information
-   for the Gods page.
+   PLAYER-VISIBLE DATA ONLY
 
    IMPORTANT:
-   This data is publicly accessible through the website.
-   Do not place secret campaign information here.
+   Anything placed in this file can potentially be viewed
+   by players through the website source.
 
-   cardClass connects each god to the existing kingdom
-   navigation image in style.css.
+   Keep secret lore out of this file.
 
    ========================================================= */
 
@@ -27,8 +26,6 @@ window.godsData = {
         name: "The Giver",
 
         kingdom: "Plume",
-
-        cardClass: "plume",
 
         keeper: "The Kingdom of Plume",
 
@@ -90,8 +87,6 @@ window.godsData = {
 
         kingdom: "Kettle",
 
-        cardClass: "kettle",
-
         keeper: "The Kingdom of Kettle",
 
         role: "Master of Shadows",
@@ -151,8 +146,6 @@ window.godsData = {
 
         kingdom: "Loop",
 
-        cardClass: "loop",
-
         keeper: "The Kingdom of Loop",
 
         role: "Master of Flame",
@@ -210,8 +203,6 @@ window.godsData = {
         name: "The Inflictor",
 
         kingdom: "Torch",
-
-        cardClass: "torch",
 
         keeper: "The Kingdom of Torch",
 
@@ -277,8 +268,6 @@ window.godsData = {
 
         kingdom: "Vial",
 
-        cardClass: "vial",
-
         keeper: "The Kingdom of Vial",
 
         role: "Master of Reaping",
@@ -339,8 +328,6 @@ window.godsData = {
         name: "The Seer",
 
         kingdom: "Hook",
-
-        cardClass: "hook",
 
         keeper: "The Kingdom of Hook",
 
@@ -405,8 +392,6 @@ window.godsData = {
 
         kingdom: "Bell",
 
-        cardClass: "bell",
-
         keeper: "The Kingdom of Bell",
 
         role: "Master of Mountains",
@@ -465,8 +450,6 @@ window.godsData = {
         name: "The Banisher",
 
         kingdom: "Crook",
-
-        cardClass: "crook",
 
         keeper: "The Kingdom of Crook",
 
