@@ -350,4 +350,99 @@
                         </h4>
 
                         <p>
-                           
+                            ${god.symbol}
+                        </p>
+
+                    </div>
+
+
+                    <!-- OFFERING -->
+
+                    <div class="god-fact">
+
+                        <h4>
+                            Offering
+                        </h4>
+
+                        <p>
+                            ${god.offering}
+                        </p>
+
+                    </div>
+
+
+                    <!-- TABOO -->
+
+                    <div class="god-fact">
+
+                        <h4>
+                            Taboo
+                        </h4>
+
+                        <p>
+                            ${god.taboo}
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- LORE -->
+
+                <div class="god-section">
+
+                    <h3>
+                        Lore
+                    </h3>
+
+                    <p>
+                        ${god.lore.trim()}
+                    </p>
+
+                </div>
+
+
+                <!-- RETURN LINK -->
+
+                <div class="god-back-link">
+
+                    <a href="#gods-top">
+                        ↑ Return to the Gods
+                    </a>
+
+                </div>
+
+            `;
+
+
+            godProfiles.appendChild(godProfile);
+
+
+            /* =============================================
+               DIVIDER BETWEEN GODS
+               ============================================= */
+
+            if (godId !== finalGod) {
+
+                const divider =
+                    document.createElement("div");
+
+                divider.className =
+                    "divider";
+
+                godProfiles.appendChild(divider);
+
+            }
+
+        });
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
