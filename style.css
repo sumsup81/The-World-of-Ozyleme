@@ -1,40 +1,12 @@
-/* ================================
+/* =========================================================
    OZYLEME
-   MASTER WEBSITE THEME
-   ================================ */
+   Main Website Stylesheet
+   ========================================================= */
 
 
-/* ================================
-   THEME COLORS
-   ================================ */
-
-:root {
-    --bg-top: #24231f;
-    --bg-middle: #151512;
-    --bg-bottom: #090a08;
-
-    --surface-dark: #0d0f0c;
-    --surface-mid: #25251f;
-
-    --text-main: #d8d0bc;
-    --text-soft: #aaa48f;
-    --text-muted: #8f8a79;
-    --text-heading: #c5bda1;
-
-    --border: #47473b;
-    --border-soft: #373a30;
-
-    --accent-red: #74372f;
-    --accent-red-dark: #5d251f;
-
-    --shadow:
-        0 8px 25px rgba(0, 0, 0, 0.35);
-}
-
-
-/* ================================
-   GLOBAL
-   ================================ */
+/* =========================================================
+   RESET / GLOBAL
+   ========================================================= */
 
 * {
     box-sizing: border-box;
@@ -47,67 +19,53 @@ html {
 body {
     margin: 0;
 
-    min-height: 100vh;
+    background: #151512;
 
-    background:
-        radial-gradient(
-            circle at top,
-            var(--bg-top) 0%,
-            var(--bg-middle) 38%,
-            var(--bg-bottom) 100%
-        );
+    color: #d8d0bc;
 
-    color: var(--text-main);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
+    font-family: Georgia, "Times New Roman", serif;
     line-height: 1.7;
 
-    opacity: 1;
+    min-height: 100vh;
 
-    transition:
-        opacity 0.35s ease-in-out;
+    /* Simple page-load fade only */
+    animation: pageFadeIn 0.45s ease-out;
 }
 
 
-/* ================================
-   PAGE TRANSITIONS
-   ================================ */
+/* =========================================================
+   PAGE FADE
+   ========================================================= */
 
-body.page-entering {
-    opacity: 0;
+@keyframes pageFadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
-body.page-loaded {
-    opacity: 1;
-}
 
-body.page-leaving {
-    opacity: 0;
-}
-
-
-/* Accessibility */
+/* Respect accessibility settings */
 
 @media (prefers-reduced-motion: reduce) {
+
+    body {
+        animation: none;
+    }
 
     html {
         scroll-behavior: auto;
     }
-
-    body {
-        opacity: 1 !important;
-        transition: none !important;
-    }
 }
 
 
-/* ================================
+/* =========================================================
    HEADER / BANNER
-   ================================ */
+   ========================================================= */
 
 header {
     position: relative;
@@ -116,13 +74,12 @@ header {
     aspect-ratio: 3 / 1;
 
     padding: 0;
-
     overflow: hidden;
 
     background:
         linear-gradient(
-            rgba(5, 7, 5, 0.35),
-            rgba(5, 7, 5, 0.65)
+            rgba(5, 5, 4, 0.30),
+            rgba(5, 5, 4, 0.68)
         ),
         url("Ozyleme Web Banner.jpg");
 
@@ -130,10 +87,9 @@ header {
     background-position: center center;
     background-repeat: no-repeat;
 
-    background-color: var(--surface-dark);
+    background-color: #151512;
 
-    border-bottom:
-        1px solid var(--accent-red-dark);
+    border-bottom: 1px solid #5d251f;
 }
 
 
@@ -154,9 +110,7 @@ header h1 {
 
     text-align: center;
 
-    font-size:
-        clamp(2.5rem, 8vw, 6.5rem);
-
+    font-size: clamp(2.5rem, 8vw, 6.5rem);
     font-weight: normal;
 
     letter-spacing: 0.18em;
@@ -165,8 +119,8 @@ header h1 {
 
     text-shadow:
         0 2px 0 #000,
-        0 0 12px rgba(0, 0, 0, 0.8),
-        0 0 24px rgba(120, 40, 30, 0.45);
+        0 0 12px rgba(0, 0, 0, 0.85),
+        0 0 24px rgba(120, 40, 30, 0.35);
 }
 
 
@@ -187,38 +141,44 @@ header p {
 
     text-align: center;
 
-    color: #96917e;
+    color: #aaa58f;
 
-    font-size:
-        clamp(0.8rem, 2vw, 1.1rem);
-
+    font-size: clamp(0.8rem, 2vw, 1.1rem);
     font-style: italic;
 
     letter-spacing: 0.12em;
 
     text-shadow:
-        0 1px 4px rgba(0, 0, 0, 0.9);
+        0 1px 5px rgba(0, 0, 0, 0.95);
 }
 
 
-/* Desktop tagline */
+/* Desktop tagline adjustment */
 
 @media (min-width: 768px) {
 
     header p {
         bottom: 21%;
 
-        font-size:
-            clamp(1rem, 2.6vw, 1.45rem);
+        font-size: clamp(
+            1rem,
+            2.6vw,
+            1.45rem
+        );
     }
 }
 
 
-/* ================================
+/* =========================================================
    NAVIGATION
-   ================================ */
+   ========================================================= */
 
 nav {
+    position: sticky;
+    top: 0;
+
+    z-index: 100;
+
     display: flex;
 
     justify-content: center;
@@ -228,125 +188,167 @@ nav {
 
     padding: 12px;
 
-    background: var(--surface-dark);
+    background: #10100e;
 
-    border-bottom:
-        1px solid var(--border-soft);
+    border-bottom: 1px solid #35342e;
 
-    position: sticky;
-
-    top: 0;
-
-    z-index: 100;
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.30);
 }
 
+
 nav a {
-    padding: 8px 15px;
-
-    margin: 2px;
-
-    color: var(--text-soft);
+    color: #aaa48f;
 
     text-decoration: none;
+
+    padding: 8px 15px;
+    margin: 2px;
 
     font-size: 0.95rem;
 
     letter-spacing: 0.08em;
 
-    border-bottom:
-        1px solid transparent;
+    border-bottom: 1px solid transparent;
 
     transition:
         color 0.2s ease,
-        background 0.2s ease,
+        background-color 0.2s ease,
         border-color 0.2s ease;
 }
 
+
 nav a:hover,
-nav a[aria-current="page"] {
-    color: #d8cfad;
+nav a:focus {
+    color: #e0d6b8;
 
-    border-bottom-color:
-        var(--accent-red);
+    background-color: rgba(93, 37, 31, 0.16);
 
-    background:
-        rgba(110, 45, 35, 0.12);
+    border-bottom-color: #74372f;
 }
 
 
-/* ================================
-   MAIN CONTENT
-   ================================ */
+/* =========================================================
+   MAIN PAGE CONTENT
+   ========================================================= */
 
 main {
-    width: 100%;
-
-    max-width: 1100px;
+    width: min(1100px, calc(100% - 40px));
 
     margin: 0 auto;
 
-    padding: 60px 30px 90px;
+    padding: 55px 0 80px;
+
+    background: transparent;
 }
+
+
+/* General sections */
 
 section {
-    max-width: 100%;
-}
-
-main > p,
-section > p {
-    max-width: 850px;
+    margin-bottom: 65px;
 }
 
 
-/* ================================
+/* =========================================================
    HEADINGS
-   ================================ */
+   ========================================================= */
 
-h2 {
-    margin-top: 50px;
-
-    padding-bottom: 8px;
-
-    color: #b4ad93;
-
-    font-size: 2rem;
+h1,
+h2,
+h3,
+h4 {
     font-weight: normal;
-
-    letter-spacing: 0.07em;
-
-    border-bottom:
-        1px solid #4b473b;
-}
-
-h2::first-letter {
-    color: #82362d;
-}
-
-h3 {
-    color: var(--text-heading);
-
-    font-weight: normal;
-
-    letter-spacing: 0.05em;
 }
 
 
-/* ================================
+main h1,
+main h2 {
+    color: #d8cfb2;
+
+    letter-spacing: 0.08em;
+}
+
+
+main h1 {
+    margin-top: 0;
+
+    font-size: clamp(2rem, 5vw, 3.4rem);
+}
+
+
+main h2 {
+    margin-top: 0;
+    margin-bottom: 18px;
+
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+
+    border-bottom: 1px solid #413d34;
+
+    padding-bottom: 10px;
+}
+
+
+main h3 {
+    color: #c9c0a4;
+
+    letter-spacing: 0.04em;
+}
+
+
+/* =========================================================
+   TEXT
+   ========================================================= */
+
+p {
+    color: #aaa38f;
+}
+
+
+strong {
+    color: #d5ccb0;
+}
+
+
+em {
+    color: #b6ad96;
+}
+
+
+blockquote {
+    margin: 30px 0;
+
+    padding: 18px 25px;
+
+    border-left: 3px solid #6b3029;
+
+    background: rgba(0, 0, 0, 0.15);
+
+    color: #b7af99;
+
+    font-style: italic;
+}
+
+
+/* =========================================================
    LINKS
-   ================================ */
+   ========================================================= */
 
-a {
-    color: #a99c72;
+main a {
+    color: #b78b7e;
+
+    transition: color 0.2s ease;
 }
 
-a:hover {
-    color: #d1bd83;
+
+main a:hover {
+    color: #d5b4a7;
 }
 
 
-/* ================================
-   STANDARD CARD GRID
-   ================================ */
+/* =========================================================
+   CARD GRID
+   ========================================================= */
 
 .cards {
     display: grid;
@@ -360,304 +362,290 @@ a:hover {
 }
 
 
-/* ================================
-   STANDARD CARDS
-   ================================ */
+/* =========================================================
+   CARD
+   ========================================================= */
 
 .card {
-    display: block;
-
     position: relative;
 
-    min-width: 0;
-    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    min-height: 190px;
 
     padding: 24px;
 
     overflow: hidden;
 
-    color: #cbc3ac;
-
     text-decoration: none;
+
+    color: #cbc3ac;
 
     background:
         linear-gradient(
             145deg,
-            rgba(44, 44, 37, 0.78),
-            rgba(16, 16, 14, 0.96)
+            #25241f,
+            #11110f
         );
+
+    border: 1px solid #47443a;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.35),
+        inset 0 0 25px rgba(0, 0, 0, 0.20);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/*
+   Image layer.
+
+   Keeping the image on a pseudo-element prevents the
+   hover effect from accidentally replacing the image.
+*/
+
+.card::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: 0;
+
+    background-image:
+        linear-gradient(
+            rgba(8, 8, 7, 0.18),
+            rgba(8, 8, 7, 0.82)
+        ),
+        var(--card-image, none);
 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 
-    border:
-        1px solid var(--border);
-
-    box-shadow:
-        var(--shadow),
-        inset 0 0 25px rgba(0, 0, 0, 0.25);
-
     transition:
-        transform 0.2s ease,
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.card:hover {
-    transform:
-        translateY(-4px);
-
-    color: #ddd4b8;
-
-    border-color:
-        var(--accent-red);
-
-    box-shadow:
-        0 12px 30px rgba(0, 0, 0, 0.45),
-        inset 0 0 25px rgba(90, 35, 28, 0.15);
+        transform 0.35s ease,
+        filter 0.25s ease;
 }
 
 
-/* ================================
-   CARD TEXT
-   ================================ */
+/* Slight dark layer for readability */
+
+.card::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: 1;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.05),
+            rgba(0, 0, 0, 0.12) 45%,
+            rgba(0, 0, 0, 0.72)
+        );
+
+    pointer-events: none;
+}
+
+
+/* Keep card text above image */
+
+.card h3,
+.card p {
+    position: relative;
+
+    z-index: 2;
+}
+
 
 .card h3 {
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 
-    color: var(--text-heading);
+    color: #ddd3b6;
+
+    font-size: 1.35rem;
 
     text-shadow:
-        0 2px 4px rgba(0, 0, 0, 0.9);
+        0 2px 5px rgba(0, 0, 0, 0.95);
 }
+
 
 .card p {
-    margin-bottom: 0;
+    margin: 0;
 
-    color: var(--text-soft);
-
-    font-size: 0.95rem;
+    color: #aaa38d;
 
     text-shadow:
-        0 1px 4px rgba(0, 0, 0, 0.9);
+        0 2px 5px rgba(0, 0, 0, 0.95);
 }
 
 
-/* ================================
+/* Card hover */
+
+.card:hover {
+    transform: translateY(-4px);
+
+    border-color: #74372f;
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.48),
+        inset 0 0 25px rgba(90, 35, 28, 0.08);
+}
+
+
+.card:hover::before {
+    transform: scale(1.025);
+
+    filter: brightness(1.07);
+}
+
+
+/* =========================================================
    KINGDOM CARD IMAGES
-   ================================ */
+   ========================================================= */
 
 .card.plume {
-    background-image:
-        linear-gradient(
-            rgba(8, 10, 8, 0.25),
-            rgba(8, 10, 8, 0.78)
-        ),
-        url("images/kingdoms/Plume Navi Button.jpg");
+    --card-image:
+        url("images/Plume Navi Button.jpg");
 }
+
+
+.card.kettle {
+    --card-image:
+        url("images/Kettle Navi Button.jpg");
+}
+
+
+.card.loop {
+    --card-image:
+        url("images/Loop Navi Button.jpg");
+}
+
+
+.card.torch {
+    --card-image:
+        url("images/Torch Navi Button.jpg");
+}
+
+
+.card.vial {
+    --card-image:
+        url("images/Vial Navi Button.jpg");
+}
+
+
+.card.hook {
+    --card-image:
+        url("images/Hook Navi Button.jpg");
+}
+
+
+.card.bell {
+    --card-image:
+        url("images/Bell Navi Button.jpg");
+}
+
 
 .card.crook {
-    background-image:
-        linear-gradient(
-            rgba(8, 10, 8, 0.25),
-            rgba(8, 10, 8, 0.78)
-        ),
-        url("images/kingdoms/Crook Navi Button.jpg");
+    --card-image:
+        url("images/Crook Navi Button.jpg");
 }
 
 
-/* ================================
+/* =========================================================
+   CONTENT / LORE PANELS
+   ========================================================= */
+
+.lore,
+.content-box,
+.info-box {
+    margin: 30px 0;
+
+    padding: 28px;
+
+    background: rgba(0, 0, 0, 0.12);
+
+    border: 1px solid #39372f;
+
+    box-shadow:
+        inset 0 0 25px rgba(0, 0, 0, 0.15);
+}
+
+
+/* =========================================================
    DIVIDERS
-   ================================ */
+   ========================================================= */
 
-.divider {
-    width: 60%;
-
+hr {
     height: 1px;
 
-    margin: 50px auto;
+    margin: 45px 0;
+
+    border: 0;
 
     background:
         linear-gradient(
             to right,
             transparent,
-            #632b26,
+            #5b3029,
             transparent
         );
 }
 
-hr {
-    margin: 50px 0;
 
-    border: 0;
+/* =========================================================
+   LISTS
+   ========================================================= */
 
-    border-top:
-        1px solid #474337;
+ul,
+ol {
+    color: #aaa38f;
+
+    padding-left: 28px;
 }
 
 
-/* ================================
-   BLOCKQUOTES / LORE
-   ================================ */
-
-blockquote {
-    margin: 35px 0;
-
-    padding: 18px 25px;
-
-    color: #aba48e;
-
-    background:
-        rgba(0, 0, 0, 0.18);
-
-    border-left:
-        3px solid #6f3029;
-
-    font-style: italic;
+li {
+    margin-bottom: 8px;
 }
 
 
-/* ================================
-   GENERAL IMAGES
-   ================================ */
+/* =========================================================
+   IMAGES
+   ========================================================= */
 
-img {
-    display: block;
-
+main img {
     max-width: 100%;
-
     height: auto;
-}
 
-
-/* ================================
-   GOD NAVIGATION
-   ================================ */
-
-.god-nav {
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, minmax(0, 1fr));
-
-    gap: 18px;
-
-    margin-top: 35px;
-    margin-bottom: 55px;
-}
-
-.god-nav-card {
     display: block;
-
-    width: 100%;
-    min-width: 0;
-
-    aspect-ratio: 3 / 4;
-
-    overflow: hidden;
-
-    background:
-        var(--surface-dark);
-
-    border:
-        1px solid var(--border);
-
-    box-shadow:
-        0 8px 22px rgba(0, 0, 0, 0.45);
-
-    transition:
-        transform 0.2s ease,
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.god-nav-card img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-}
-
-.god-nav-card:hover {
-    transform:
-        translateY(-5px);
-
-    border-color:
-        var(--accent-red);
-
-    box-shadow:
-        0 12px 28px rgba(0, 0, 0, 0.6);
 }
 
 
-/* ================================
-   GOD INFORMATION TEMPLATE
-   ================================ */
-
-.god-entry {
-    scroll-margin-top: 90px;
-}
-
-.god-template {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-    gap: 16px;
-
-    margin-top: 30px;
-}
-
-.god-field {
-    min-width: 0;
-
-    padding: 18px 20px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(43, 42, 36, 0.72),
-            rgba(15, 15, 13, 0.94)
-        );
-
-    border:
-        1px solid #403f36;
-}
-
-.god-field h3 {
-    margin-top: 0;
-    margin-bottom: 6px;
-
-    color: #bdb498;
-
-    font-size: 1rem;
-}
-
-.god-field p {
-    margin: 0;
-
-    color: var(--text-muted);
-}
-
-
-/* ================================
+/* =========================================================
    FOOTER
-   ================================ */
+   ========================================================= */
 
 footer {
     padding: 35px 20px;
 
     text-align: center;
 
-    color: #777665;
+    background: #10100e;
 
-    background: #090a08;
+    border-top: 1px solid #35342e;
 
-    border-top:
-        1px solid var(--border-soft);
+    color: #777365;
 
     font-size: 0.85rem;
 
@@ -665,71 +653,74 @@ footer {
 }
 
 
-/* ================================
-   TABLET
-   ================================ */
+footer p {
+    margin: 0;
 
-@media (max-width: 850px) {
-
-    .god-nav {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-    }
+    color: #777365;
 }
 
 
-/* ================================
-   PHONE / SMALL SCREEN
-   ================================ */
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
 @media (max-width: 767px) {
 
     header {
-        aspect-ratio: 3 / 1;
-
-        min-height: 180px;
+        aspect-ratio: 2 / 1;
     }
 
-    header h1 {
-        top: 27%;
 
-        font-size:
-            clamp(2rem, 10vw, 4rem);
+    header h1 {
+        top: 25%;
+
+        font-size: clamp(
+            2rem,
+            11vw,
+            4rem
+        );
 
         letter-spacing: 0.12em;
     }
 
-    header p {
-        bottom: 18%;
 
-        font-size:
-            clamp(0.75rem, 3vw, 1rem);
+    header p {
+        bottom: 15%;
+
+        font-size: 0.8rem;
 
         letter-spacing: 0.08em;
     }
 
+
     nav {
-        padding: 8px;
+        padding: 8px 5px;
     }
+
 
     nav a {
-        padding: 7px 10px;
+        padding: 7px 9px;
 
-        font-size: 0.85rem;
+        font-size: 0.8rem;
+
+        letter-spacing: 0.04em;
     }
+
 
     main {
-        padding:
-            35px
-            20px
-            60px;
+        width: min(
+            100% - 28px,
+            1100px
+        );
+
+        padding-top: 35px;
     }
 
-    h2 {
-        margin-top: 35px;
 
-        font-size: 1.6rem;
+    section {
+        margin-bottom: 45px;
     }
+
 
     .cards {
         grid-template-columns: 1fr;
@@ -737,21 +728,15 @@ footer {
         gap: 16px;
     }
 
-    .card {
-        min-height: auto;
 
+    .card {
+        min-height: 170px;
+    }
+
+
+    .lore,
+    .content-box,
+    .info-box {
         padding: 20px;
     }
-
-    .god-nav {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        gap: 10px;
-    }
-
-    .god-template {
-        grid-template-columns: 1fr;
-    }
-
 }
