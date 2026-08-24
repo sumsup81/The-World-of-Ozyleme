@@ -108,7 +108,7 @@ window.godsData = {
 
         offering: "TBD",
 
-        taboo: "TBD",
+        taboo: "Restoring a ruin",
 
         outline: `
             The Ravager is associated with Kettle, its ancient forests,
@@ -166,7 +166,7 @@ window.godsData = {
 
         offering: "TBD",
 
-        taboo: "TBD",
+        taboo: "Releasing a captive",
 
         outline: `
             The Tormentor is associated with Loop, a land of spectacle,
@@ -226,7 +226,7 @@ window.godsData = {
 
         offering: "TBD",
 
-        taboo: "TBD",
+        taboo: "Destroying something with bare hands",
 
         outline: `
             The Inflictor is associated with Torch and its wealthy
@@ -289,7 +289,7 @@ window.godsData = {
 
         offering: "TBD",
 
-        taboo: "TBD",
+        taboo: "Turning something inanimate",
 
         outline: `
             The Harvester is associated with Vial and the endless
@@ -351,7 +351,7 @@ window.godsData = {
 
         offering: "TBD",
 
-        taboo: "TBD",
+        taboo: "Taking a creatures eyes",
 
         outline: `
             The Seer is associated with Hook, deep waters,
@@ -413,7 +413,7 @@ window.godsData = {
 
         offering: "TBD",
 
-        taboo: "TBD",
+        taboo: "Admiting defeat without death",
 
         outline: `
             The Dominator is associated with Bell, mountains,
@@ -472,7 +472,7 @@ window.godsData = {
 
         offering: "TBD",
 
-        taboo: "TBD",
+        taboo: "Giving quarter to the exiled",
 
         outline: `
             The Banisher is associated with Crook and the open skies.
