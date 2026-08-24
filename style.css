@@ -12,21 +12,17 @@
     box-sizing: border-box;
 }
 
-
 html {
     scroll-behavior: smooth;
 }
-
 
 body {
     margin: 0;
 
     background: #151512;
-
     color: #d8d0bc;
 
     font-family: Georgia, "Times New Roman", serif;
-
     line-height: 1.7;
 
     min-height: 100vh;
@@ -52,7 +48,6 @@ body {
 
 }
 
-
 @media (prefers-reduced-motion: reduce) {
 
     body {
@@ -74,11 +69,9 @@ header {
     position: relative;
 
     width: 100%;
-
     aspect-ratio: 3 / 1;
 
     padding: 0;
-
     overflow: hidden;
 
     background:
@@ -89,9 +82,7 @@ header {
         url("Ozyleme Web Banner.jpg");
 
     background-size: cover;
-
     background-position: center center;
-
     background-repeat: no-repeat;
 
     background-color: #151512;
@@ -106,7 +97,6 @@ header h1 {
     position: absolute;
 
     left: 50%;
-
     top: 28%;
 
     transform: translateX(-50%);
@@ -114,7 +104,6 @@ header h1 {
     width: 100%;
 
     margin: 0;
-
     padding: 0 20px;
 
     text-align: center;
@@ -126,7 +115,6 @@ header h1 {
     );
 
     font-weight: normal;
-
     letter-spacing: 0.18em;
 
     color: #e0d6b8;
@@ -144,7 +132,6 @@ header p {
     position: absolute;
 
     left: 50%;
-
     bottom: 18%;
 
     transform: translateX(-50%);
@@ -152,7 +139,6 @@ header p {
     width: 100%;
 
     margin: 0;
-
     padding: 0 20px;
 
     text-align: center;
@@ -166,7 +152,6 @@ header p {
     );
 
     font-style: italic;
-
     letter-spacing: 0.12em;
 
     text-shadow:
@@ -197,7 +182,6 @@ header p {
 
 nav {
     position: sticky;
-
     top: 0;
 
     z-index: 100;
@@ -205,7 +189,6 @@ nav {
     display: flex;
 
     justify-content: center;
-
     align-items: center;
 
     flex-wrap: wrap;
@@ -220,7 +203,6 @@ nav {
         0 5px 15px rgba(0, 0, 0, 0.30);
 }
 
-
 nav a {
     margin: 2px;
 
@@ -231,7 +213,6 @@ nav a {
     text-decoration: none;
 
     font-size: 0.95rem;
-
     letter-spacing: 0.08em;
 
     border-bottom: 1px solid transparent;
@@ -242,7 +223,6 @@ nav a {
         border-color 0.2s ease;
 }
 
-
 nav a:hover,
 nav a:focus {
     color: #e0d6b8;
@@ -251,9 +231,6 @@ nav a:focus {
 
     border-bottom-color: #74372f;
 }
-
-
-/* Active page */
 
 nav a.active {
     color: #e0d6b8;
@@ -282,7 +259,6 @@ main {
     background: transparent;
 }
 
-
 section {
     margin-bottom: 65px;
 }
@@ -299,14 +275,12 @@ h4 {
     font-weight: normal;
 }
 
-
 main h1,
 main h2 {
     color: #d8cfb2;
 
     letter-spacing: 0.08em;
 }
-
 
 main h1 {
     margin-top: 0;
@@ -318,10 +292,8 @@ main h1 {
     );
 }
 
-
 main h2 {
     margin-top: 0;
-
     margin-bottom: 18px;
 
     padding-bottom: 10px;
@@ -334,7 +306,6 @@ main h2 {
 
     border-bottom: 1px solid #413d34;
 }
-
 
 main h3 {
     color: #c9c0a4;
@@ -351,16 +322,13 @@ p {
     color: #aaa38f;
 }
 
-
 strong {
     color: #d5ccb0;
 }
 
-
 em {
     color: #b6ad96;
 }
-
 
 blockquote {
     margin: 30px 0;
@@ -389,7 +357,6 @@ main a {
         color 0.2s ease;
 }
 
-
 main a:hover {
     color: #d5b4a7;
 }
@@ -397,7 +364,6 @@ main a:hover {
 
 /* =========================================================
    STANDARD CARD GRID
-   KINGDOMS / GENERAL CARDS
    ========================================================= */
 
 .cards {
@@ -458,7 +424,7 @@ main a:hover {
 }
 
 
-/* Card image layer */
+/* Card background image */
 
 .card::before {
     content: "";
@@ -477,9 +443,7 @@ main a:hover {
         var(--card-image, none);
 
     background-size: cover;
-
     background-position: center;
-
     background-repeat: no-repeat;
 
     transition:
@@ -488,7 +452,7 @@ main a:hover {
 }
 
 
-/* Dark readability layer */
+/* Dark readability overlay */
 
 .card::after {
     content: "";
@@ -520,10 +484,8 @@ main a:hover {
     z-index: 2;
 }
 
-
 .card h3 {
     margin-top: 0;
-
     margin-bottom: 8px;
 
     color: #ddd3b6;
@@ -533,7 +495,6 @@ main a:hover {
     text-shadow:
         0 2px 5px rgba(0, 0, 0, 0.95);
 }
-
 
 .card p {
     margin: 0;
@@ -557,7 +518,6 @@ main a:hover {
         inset 0 0 25px rgba(90, 35, 28, 0.08);
 }
 
-
 .card:hover::before {
     transform: scale(1.025);
 
@@ -571,49 +531,89 @@ main a:hover {
 
 .card.plume {
     --card-image:
-        url("images/Plume Navi Button.jpg");
+        url("images/kingdoms/Plume Navi Button.jpg");
 }
-
 
 .card.kettle {
     --card-image:
-        url("images/Kettle Navi Button.jpg");
+        url("images/kingdoms/Kettle Navi Button.jpg");
 }
-
 
 .card.loop {
     --card-image:
-        url("images/Loop Navi Button.jpg");
+        url("images/kingdoms/Loop Navi Button.jpg");
 }
-
 
 .card.torch {
     --card-image:
-        url("images/Torch Navi Button.jpg");
+        url("images/kingdoms/Torch Navi Button.jpg");
 }
-
 
 .card.vial {
     --card-image:
-        url("images/Vial Navi Button.jpg");
+        url("images/kingdoms/Vial Navi Button.jpg");
 }
-
 
 .card.hook {
     --card-image:
-        url("images/Hook Navi Button.jpg");
+        url("images/kingdoms/Hook Navi Button.jpg");
 }
-
 
 .card.bell {
     --card-image:
-        url("images/Bell Navi Button.jpg");
+        url("images/kingdoms/Bell Navi Button.jpg");
 }
-
 
 .card.crook {
     --card-image:
-        url("images/Crook Navi Button.jpg");
+        url("images/kingdoms/Crook Navi Button.jpg");
+}
+
+
+/* =========================================================
+   GOD CARD IMAGES
+
+   SEPARATE FROM KINGDOM CARD IMAGES
+   ========================================================= */
+
+.card.giver {
+    --card-image:
+        url("images/gods/Giver Navi Button.jpg");
+}
+
+.card.ravager {
+    --card-image:
+        url("images/gods/Ravager Navi Button.jpg");
+}
+
+.card.tormentor {
+    --card-image:
+        url("images/gods/Tormentor Navi Button.jpg");
+}
+
+.card.inflictor {
+    --card-image:
+        url("images/gods/Inflictor Navi Button.jpg");
+}
+
+.card.harvester {
+    --card-image:
+        url("images/gods/Harvester Navi Button.jpg");
+}
+
+.card.seer {
+    --card-image:
+        url("images/gods/Seer Navi Button.jpg");
+}
+
+.card.dominator {
+    --card-image:
+        url("images/gods/Dominator Navi Button.jpg");
+}
+
+.card.banisher {
+    --card-image:
+        url("images/gods/Banisher Navi Button.jpg");
 }
 
 
@@ -621,15 +621,9 @@ main a:hover {
    GODS PAGE
    ========================================================= */
 
-
-/* Gods introduction */
-
 .gods-intro {
     margin-bottom: 55px;
 }
-
-
-/* Directory anchor */
 
 .gods-directory {
     scroll-margin-top: 90px;
@@ -639,7 +633,6 @@ main a:hover {
 /* =========================================================
    GOD DIRECTORY
    ALWAYS 4 COLUMNS x 2 ROWS
-   INCLUDING MOBILE
    ========================================================= */
 
 .gods-grid {
@@ -659,7 +652,7 @@ main a:hover {
 }
 
 
-/* God navigation cards */
+/* God directory cards */
 
 .gods-grid .card {
     min-width: 0;
@@ -672,7 +665,6 @@ main a:hover {
 
     justify-content: flex-end;
 }
-
 
 .gods-grid .card h3 {
     margin: 0;
@@ -692,7 +684,6 @@ main a:hover {
     word-break: normal;
 }
 
-
 .gods-grid .card p {
     margin-top: 5px;
 
@@ -709,21 +700,20 @@ main a:hover {
 
 
 /* =========================================================
-   INDIVIDUAL GOD PROFILE
+   GOD PROFILE
    ========================================================= */
 
 .god-profile {
     margin-bottom: 0;
 
     padding-top: 8px;
-
     padding-bottom: 8px;
 
     scroll-margin-top: 90px;
 }
 
 
-/* God name / Keeper */
+/* God title */
 
 .god-heading {
     margin-bottom: 28px;
@@ -733,7 +723,6 @@ main a:hover {
     border-bottom:
         1px solid #3d3d34;
 }
-
 
 .god-heading h2 {
     margin: 0 0 5px;
@@ -752,7 +741,6 @@ main a:hover {
 
     letter-spacing: 0.05em;
 }
-
 
 .god-heading h3 {
     margin: 0;
@@ -775,10 +763,8 @@ main a:hover {
     max-width: 900px;
 
     margin-top: 0;
-
     margin-bottom: 30px;
 }
-
 
 .god-outline p {
     margin-top: 0;
@@ -816,7 +802,6 @@ main a:hover {
     gap: 12px;
 
     margin-top: 24px;
-
     margin-bottom: 36px;
 }
 
@@ -844,7 +829,7 @@ main a:hover {
 }
 
 
-/* Fact label */
+/* Fact title */
 
 .god-fact h4 {
     margin: 0 0 7px;
@@ -859,7 +844,7 @@ main a:hover {
 }
 
 
-/* Fact value */
+/* Fact content */
 
 .god-fact p {
     margin: 0;
@@ -872,7 +857,7 @@ main a:hover {
 }
 
 
-/* Give Doctrine a slightly different emphasis */
+/* Doctrine */
 
 .god-fact:nth-child(4) p {
     font-style: italic;
@@ -894,14 +879,11 @@ main a:hover {
 
 .god-section {
     margin-top: 26px;
-
     margin-bottom: 30px;
 }
 
-
 .god-section h3 {
     margin-top: 0;
-
     margin-bottom: 12px;
 
     color: #b5ad94;
@@ -912,7 +894,6 @@ main a:hover {
 
     text-transform: uppercase;
 }
-
 
 .god-section p {
     max-width: 900px;
@@ -940,7 +921,6 @@ main a:hover {
         1px solid rgba(65, 61, 52, 0.55);
 }
 
-
 .god-back-link a {
     display: inline-block;
 
@@ -956,7 +936,6 @@ main a:hover {
         color 0.2s ease,
         transform 0.2s ease;
 }
-
 
 .god-back-link a:hover {
     color: #d2cab0;
@@ -1010,12 +989,8 @@ hr {
         );
 }
 
-
-/* Slightly larger spacing between god profiles */
-
 .god-profile + .divider {
     margin-top: 50px;
-
     margin-bottom: 50px;
 }
 
@@ -1030,7 +1005,6 @@ ol {
 
     padding-left: 28px;
 }
-
 
 li {
     margin-bottom: 8px;
@@ -1071,7 +1045,6 @@ footer {
     letter-spacing: 0.06em;
 }
 
-
 footer p {
     margin: 0;
 
@@ -1091,10 +1064,8 @@ footer p {
     padding: 45px 25px 20px;
 }
 
-
 .people-intro h2 {
     margin-top: 0;
-
     margin-bottom: 10px;
 
     color: #c5bda1;
@@ -1103,7 +1074,6 @@ footer p {
 
     letter-spacing: 0.08em;
 }
-
 
 .people-intro p {
     margin: 0;
@@ -1160,7 +1130,6 @@ footer p {
 
 .person-portrait {
     width: 95px;
-
     height: 95px;
 
     aspect-ratio: 1 / 1;
@@ -1174,14 +1143,11 @@ footer p {
 }
 
 
-/* Text area */
+/* Person text */
 
 .person-info {
     min-width: 0;
 }
-
-
-/* Name */
 
 .person-info h3 {
     margin: 0 0 8px;
@@ -1194,9 +1160,6 @@ footer p {
 
     letter-spacing: 0.06em;
 }
-
-
-/* Description */
 
 .person-info p {
     margin: 0;
@@ -1218,7 +1181,6 @@ footer p {
         1px solid rgba(120, 115, 96, 0.28);
 }
 
-
 .person-entry:nth-child(even) {
     padding-left: 25px;
 }
@@ -1234,18 +1196,15 @@ footer p {
         gap: 9px;
     }
 
-
     .gods-grid .card {
         min-height: 130px;
 
         padding: 12px 7px;
     }
 
-
     .gods-grid .card h3 {
         font-size: 0.9rem;
     }
-
 
     .gods-grid .card p {
         font-size: 0.7rem;
@@ -1261,14 +1220,11 @@ footer p {
 @media (max-width: 767px) {
 
 
-    /* -------------------------------
-       HEADER
-       ------------------------------- */
+    /* HEADER */
 
     header {
         aspect-ratio: 2 / 1;
     }
-
 
     header h1 {
         top: 25%;
@@ -1282,7 +1238,6 @@ footer p {
         letter-spacing: 0.12em;
     }
 
-
     header p {
         bottom: 15%;
 
@@ -1292,14 +1247,11 @@ footer p {
     }
 
 
-    /* -------------------------------
-       NAVIGATION
-       ------------------------------- */
+    /* NAVIGATION */
 
     nav {
         padding: 8px 5px;
     }
-
 
     nav a {
         padding: 7px 9px;
@@ -1310,9 +1262,7 @@ footer p {
     }
 
 
-    /* -------------------------------
-       MAIN
-       ------------------------------- */
+    /* MAIN */
 
     main {
         width:
@@ -1321,22 +1271,18 @@ footer p {
         padding-top: 35px;
     }
 
-
     section {
         margin-bottom: 45px;
     }
 
 
-    /* -------------------------------
-       NORMAL CARDS
-       ------------------------------- */
+    /* NORMAL CARDS */
 
     .cards {
         grid-template-columns: 1fr;
 
         gap: 16px;
     }
-
 
     .cards .card {
         min-height: 170px;
@@ -1345,9 +1291,7 @@ footer p {
 
     /* =====================================================
        GOD DIRECTORY
-
-       MUST REMAIN FOUR ACROSS
-       DO NOT CHANGE TO 1 OR 2 COLUMNS
+       ALWAYS 4 ACROSS
        ===================================================== */
 
     .gods-grid {
@@ -1364,13 +1308,11 @@ footer p {
         margin-top: 20px;
     }
 
-
     .gods-grid .card {
         min-height: 92px;
 
         padding: 8px 3px;
     }
-
 
     .gods-grid .card h3 {
         margin-bottom: 3px;
@@ -1386,7 +1328,6 @@ footer p {
         letter-spacing: 0;
     }
 
-
     .gods-grid .card p {
         margin-top: 2px;
 
@@ -1400,9 +1341,7 @@ footer p {
     }
 
 
-    /* -------------------------------
-       GOD PROFILE
-       ------------------------------- */
+    /* GOD PROFILE */
 
     .god-heading {
         margin-bottom: 22px;
@@ -1410,11 +1349,9 @@ footer p {
         padding-bottom: 14px;
     }
 
-
     .god-heading h2 {
         font-size: 2rem;
     }
-
 
     .god-heading h3 {
         font-size: 0.9rem;
@@ -1422,21 +1359,16 @@ footer p {
         line-height: 1.5;
     }
 
-
     .god-outline {
         margin-bottom: 24px;
     }
-
 
     .god-outline p {
         font-size: 0.98rem;
     }
 
 
-    /* -------------------------------
-       GOD FACTS
-       SINGLE COLUMN ON MOBILE
-       ------------------------------- */
+    /* GOD FACTS */
 
     .god-facts {
         grid-template-columns: 1fr;
@@ -1444,15 +1376,12 @@ footer p {
         gap: 8px;
 
         margin-top: 20px;
-
         margin-bottom: 28px;
     }
-
 
     .god-fact {
         padding: 13px 14px;
     }
-
 
     .god-fact h4 {
         margin-bottom: 5px;
@@ -1460,31 +1389,24 @@ footer p {
         font-size: 0.7rem;
     }
 
-
     .god-fact p {
         font-size: 0.95rem;
     }
 
 
-    /* -------------------------------
-       GOD LORE
-       ------------------------------- */
+    /* GOD LORE */
 
     .god-section {
         margin-top: 22px;
-
         margin-bottom: 26px;
     }
-
 
     .god-section h3 {
         font-size: 1rem;
     }
 
 
-    /* -------------------------------
-       RETURN LINK
-       ------------------------------- */
+    /* RETURN LINK */
 
     .god-back-link {
         margin-top: 26px;
@@ -1493,9 +1415,7 @@ footer p {
     }
 
 
-    /* -------------------------------
-       CONTENT PANELS
-       ------------------------------- */
+    /* CONTENT PANELS */
 
     .lore,
     .content-box,
@@ -1504,9 +1424,7 @@ footer p {
     }
 
 
-    /* -------------------------------
-       DIVIDERS
-       ------------------------------- */
+    /* DIVIDERS */
 
     .divider,
     hr {
@@ -1528,26 +1446,21 @@ footer p {
         padding: 0 20px;
     }
 
-
     .person-entry:nth-child(odd),
     .person-entry:nth-child(even) {
         padding-left: 0;
-
         padding-right: 0;
 
         border-right: none;
     }
-
 
     .person-entry {
         grid-template-columns:
             80px 1fr;
     }
 
-
     .person-portrait {
         width: 80px;
-
         height: 80px;
     }
 
