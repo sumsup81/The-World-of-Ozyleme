@@ -1,4 +1,4 @@
-Hu/* =========================================================
+/* =========================================================
    OZYLEME
    MAIN WEBSITE STYLESHEET
    ========================================================= */
@@ -12,9 +12,11 @@ Hu/* =========================================================
     box-sizing: border-box;
 }
 
+
 html {
     scroll-behavior: smooth;
 }
+
 
 body {
     margin: 0;
@@ -24,6 +26,7 @@ body {
     color: #d8d0bc;
 
     font-family: Georgia, "Times New Roman", serif;
+
     line-height: 1.7;
 
     min-height: 100vh;
@@ -71,9 +74,11 @@ header {
     position: relative;
 
     width: 100%;
+
     aspect-ratio: 3 / 1;
 
     padding: 0;
+
     overflow: hidden;
 
     background:
@@ -84,7 +89,9 @@ header {
         url("Ozyleme Web Banner.jpg");
 
     background-size: cover;
+
     background-position: center center;
+
     background-repeat: no-repeat;
 
     background-color: #151512;
@@ -93,12 +100,13 @@ header {
 }
 
 
-/* Header title */
+/* Main OZYLEME title */
 
 header h1 {
     position: absolute;
 
     left: 50%;
+
     top: 28%;
 
     transform: translateX(-50%);
@@ -106,11 +114,17 @@ header h1 {
     width: 100%;
 
     margin: 0;
+
     padding: 0 20px;
 
     text-align: center;
 
-    font-size: clamp(2.5rem, 8vw, 6.5rem);
+    font-size: clamp(
+        2.5rem,
+        8vw,
+        6.5rem
+    );
+
     font-weight: normal;
 
     letter-spacing: 0.18em;
@@ -130,6 +144,7 @@ header p {
     position: absolute;
 
     left: 50%;
+
     bottom: 18%;
 
     transform: translateX(-50%);
@@ -137,13 +152,19 @@ header p {
     width: 100%;
 
     margin: 0;
+
     padding: 0 20px;
 
     text-align: center;
 
     color: #aaa58f;
 
-    font-size: clamp(0.8rem, 2vw, 1.1rem);
+    font-size: clamp(
+        0.8rem,
+        2vw,
+        1.1rem
+    );
+
     font-style: italic;
 
     letter-spacing: 0.12em;
@@ -152,6 +173,8 @@ header p {
         0 1px 5px rgba(0, 0, 0, 0.95);
 }
 
+
+/* Desktop tagline */
 
 @media (min-width: 768px) {
 
@@ -172,9 +195,9 @@ header p {
    NAVIGATION
    ========================================================= */
 
-.site-nav,
 nav {
     position: sticky;
+
     top: 0;
 
     z-index: 100;
@@ -182,6 +205,7 @@ nav {
     display: flex;
 
     justify-content: center;
+
     align-items: center;
 
     flex-wrap: wrap;
@@ -197,14 +221,14 @@ nav {
 }
 
 
-.site-nav a,
 nav a {
+    margin: 2px;
+
+    padding: 8px 15px;
+
     color: #aaa48f;
 
     text-decoration: none;
-
-    padding: 8px 15px;
-    margin: 2px;
 
     font-size: 0.95rem;
 
@@ -219,8 +243,6 @@ nav a {
 }
 
 
-.site-nav a:hover,
-.site-nav a:focus,
 nav a:hover,
 nav a:focus {
     color: #e0d6b8;
@@ -231,15 +253,15 @@ nav a:focus {
 }
 
 
-/* Active navigation page */
+/* Active page */
 
-.site-nav .active,
-.site-nav [aria-current="page"],
-nav .active,
-nav [aria-current="page"] {
+nav a.active {
     color: #e0d6b8;
 
     border-bottom-color: #74372f;
+
+    background-color:
+        rgba(93, 37, 31, 0.10);
 }
 
 
@@ -248,7 +270,10 @@ nav [aria-current="page"] {
    ========================================================= */
 
 main {
-    width: min(1100px, calc(100% - 40px));
+    width: min(
+        1100px,
+        calc(100% - 40px)
+    );
 
     margin: 0 auto;
 
@@ -286,17 +311,26 @@ main h2 {
 main h1 {
     margin-top: 0;
 
-    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-size: clamp(
+        2rem,
+        5vw,
+        3.4rem
+    );
 }
 
 
 main h2 {
     margin-top: 0;
+
     margin-bottom: 18px;
 
     padding-bottom: 10px;
 
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-size: clamp(
+        1.6rem,
+        4vw,
+        2.4rem
+    );
 
     border-bottom: 1px solid #413d34;
 }
@@ -335,7 +369,8 @@ blockquote {
 
     border-left: 3px solid #6b3029;
 
-    background: rgba(0, 0, 0, 0.15);
+    background:
+        rgba(0, 0, 0, 0.15);
 
     color: #b7af99;
 
@@ -344,13 +379,14 @@ blockquote {
 
 
 /* =========================================================
-   MAIN LINKS
+   LINKS
    ========================================================= */
 
 main a {
     color: #b78b7e;
 
-    transition: color 0.2s ease;
+    transition:
+        color 0.2s ease;
 }
 
 
@@ -361,14 +397,17 @@ main a:hover {
 
 /* =========================================================
    STANDARD CARD GRID
-   HOME / KINGDOMS / SPECIES / CLASSES
+   KINGDOMS / GENERAL CARDS
    ========================================================= */
 
 .cards {
     display: grid;
 
     grid-template-columns:
-        repeat(auto-fit, minmax(230px, 1fr));
+        repeat(
+            auto-fit,
+            minmax(230px, 1fr)
+        );
 
     gap: 22px;
 
@@ -384,7 +423,9 @@ main a:hover {
     position: relative;
 
     display: flex;
+
     flex-direction: column;
+
     justify-content: flex-end;
 
     min-height: 190px;
@@ -423,6 +464,7 @@ main a:hover {
     content: "";
 
     position: absolute;
+
     inset: 0;
 
     z-index: 0;
@@ -435,7 +477,9 @@ main a:hover {
         var(--card-image, none);
 
     background-size: cover;
+
     background-position: center;
+
     background-repeat: no-repeat;
 
     transition:
@@ -444,12 +488,13 @@ main a:hover {
 }
 
 
-/* Card readability layer */
+/* Dark readability layer */
 
 .card::after {
     content: "";
 
     position: absolute;
+
     inset: 0;
 
     z-index: 1;
@@ -466,6 +511,8 @@ main a:hover {
 }
 
 
+/* Card text */
+
 .card h3,
 .card p {
     position: relative;
@@ -476,6 +523,7 @@ main a:hover {
 
 .card h3 {
     margin-top: 0;
+
     margin-bottom: 8px;
 
     color: #ddd3b6;
@@ -497,6 +545,8 @@ main a:hover {
 }
 
 
+/* Card hover */
+
 .card:hover {
     transform: translateY(-4px);
 
@@ -517,268 +567,401 @@ main a:hover {
 
 /* =========================================================
    KINGDOM CARD IMAGES
-   images/kingdom/
    ========================================================= */
 
 .card.plume {
     --card-image:
-        url("images/kingdom/Plume Navi Button.jpg");
+        url("images/Plume Navi Button.jpg");
 }
 
 
 .card.kettle {
     --card-image:
-        url("images/kingdom/Kettle Navi Button.jpg");
+        url("images/Kettle Navi Button.jpg");
 }
 
 
 .card.loop {
     --card-image:
-        url("images/kingdom/Loop Navi Button.jpg");
+        url("images/Loop Navi Button.jpg");
 }
 
 
 .card.torch {
     --card-image:
-        url("images/kingdom/Torch Navi Button.jpg");
+        url("images/Torch Navi Button.jpg");
 }
 
 
 .card.vial {
     --card-image:
-        url("images/kingdom/Vial Navi Button.jpg");
+        url("images/Vial Navi Button.jpg");
 }
 
 
 .card.hook {
     --card-image:
-        url("images/kingdom/Hook Navi Button.jpg");
+        url("images/Hook Navi Button.jpg");
 }
 
 
 .card.bell {
     --card-image:
-        url("images/kingdom/Bell Navi Button.jpg");
+        url("images/Bell Navi Button.jpg");
 }
 
 
 .card.crook {
     --card-image:
-        url("images/kingdom/Crook Navi Button.jpg");
+        url("images/Crook Navi Button.jpg");
 }
 
 
 /* =========================================================
-   GODS GRID
+   GODS PAGE
+   ========================================================= */
 
-   IMPORTANT:
-   ALWAYS FOUR COLUMNS.
-   DESKTOP = 4 x 2
-   MOBILE  = 4 x 2
 
-   DO NOT CHANGE THIS TO AUTO-FIT.
+/* Gods introduction */
+
+.gods-intro {
+    margin-bottom: 55px;
+}
+
+
+/* Directory anchor */
+
+.gods-directory {
+    scroll-margin-top: 90px;
+}
+
+
+/* =========================================================
+   GOD DIRECTORY
+   ALWAYS 4 COLUMNS x 2 ROWS
+   INCLUDING MOBILE
    ========================================================= */
 
 .gods-grid {
     display: grid;
 
     grid-template-columns:
-        repeat(4, minmax(0, 1fr));
+        repeat(
+            4,
+            minmax(0, 1fr)
+        );
 
-    gap: 16px;
+    gap: 14px;
 
     width: 100%;
 
-    margin-top: 30px;
+    margin-top: 28px;
 }
 
 
-/* Standard card version */
+/* God navigation cards */
 
 .gods-grid .card {
     min-width: 0;
 
-    min-height: 220px;
+    min-height: 165px;
 
-    padding: 18px;
+    padding: 16px 10px;
+
+    text-align: center;
+
+    justify-content: flex-end;
 }
 
 
 .gods-grid .card h3 {
+    margin: 0;
+
     font-size: clamp(
         0.85rem,
         2vw,
-        1.3rem
+        1.25rem
     );
+
+    line-height: 1.25;
+
+    color: #ddd4b8;
+
+    letter-spacing: 0.03em;
 
     word-break: normal;
 }
 
 
 .gods-grid .card p {
+    margin-top: 5px;
+
     font-size: clamp(
         0.7rem,
         1.5vw,
-        0.95rem
+        0.9rem
     );
+
+    font-style: italic;
+
+    line-height: 1.3;
 }
 
 
 /* =========================================================
-   GOD CARD IMAGES
-   images/gods/
+   INDIVIDUAL GOD PROFILE
    ========================================================= */
 
-.card.giver {
-    --card-image:
-        url("images/gods/Giver Navi Button.jpg");
+.god-profile {
+    margin-bottom: 0;
+
+    padding-top: 8px;
+
+    padding-bottom: 8px;
+
+    scroll-margin-top: 90px;
 }
 
 
-.card.ravager {
-    --card-image:
-        url("images/gods/Ravager Navi Button.jpg");
+/* God name / Keeper */
+
+.god-heading {
+    margin-bottom: 28px;
+
+    padding-bottom: 18px;
+
+    border-bottom:
+        1px solid #3d3d34;
 }
 
 
-.card.tormentor {
-    --card-image:
-        url("images/gods/Tormentor Navi Button.jpg");
+.god-heading h2 {
+    margin: 0 0 5px;
+
+    padding: 0;
+
+    border-bottom: none;
+
+    color: #d8cfb3;
+
+    font-size: clamp(
+        2rem,
+        5vw,
+        3.1rem
+    );
+
+    letter-spacing: 0.05em;
 }
 
 
-.card.inflictor {
-    --card-image:
-        url("images/gods/Inflictor Navi Button.jpg");
-}
+.god-heading h3 {
+    margin: 0;
 
+    color: #8f927c;
 
-.card.harvester {
-    --card-image:
-        url("images/gods/Harvester Navi Button.jpg");
-}
+    font-size: 1rem;
 
+    font-style: italic;
 
-.card.seer {
-    --card-image:
-        url("images/gods/Seer Navi Button.jpg");
-}
-
-
-.card.dominator {
-    --card-image:
-        url("images/gods/Dominator Navi Button.jpg");
-}
-
-
-.card.banisher {
-    --card-image:
-        url("images/gods/Banisher Navi Button.jpg");
+    letter-spacing: 0.08em;
 }
 
 
 /* =========================================================
-   FALLBACK SUPPORT FOR GOD-CARD HTML
-
-   This allows older Gods HTML using:
-   class="god-card giver"
-
-   to still display correctly.
+   GOD OPENING DESCRIPTION
    ========================================================= */
 
-.god-card {
-    display: block;
+.god-outline {
+    max-width: 900px;
 
+    margin-top: 0;
+
+    margin-bottom: 30px;
+}
+
+
+.god-outline p {
+    margin-top: 0;
+
+    color: #beb6a0;
+
+    font-size: 1.03rem;
+
+    white-space: pre-line;
+}
+
+
+/* =========================================================
+   GOD FACT GRID
+
+   Role
+   Element
+   Domains
+   Doctrine
+   Sin
+   Symbol
+   Offering
+   Taboo
+   ========================================================= */
+
+.god-facts {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap: 12px;
+
+    margin-top: 24px;
+
+    margin-bottom: 36px;
+}
+
+
+/* Individual god fact */
+
+.god-fact {
     min-width: 0;
 
-    text-align: center;
+    padding: 17px 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(36, 37, 31, 0.76),
+            rgba(15, 16, 13, 0.96)
+        );
+
+    border:
+        1px solid #404037;
+
+    box-shadow:
+        inset 0 0 20px rgba(0, 0, 0, 0.28),
+        0 5px 15px rgba(0, 0, 0, 0.20);
+}
+
+
+/* Fact label */
+
+.god-fact h4 {
+    margin: 0 0 7px;
+
+    color: #827d69;
+
+    font-size: 0.74rem;
+
+    letter-spacing: 0.16em;
+
+    text-transform: uppercase;
+}
+
+
+/* Fact value */
+
+.god-fact p {
+    margin: 0;
+
+    color: #d2cab0;
+
+    font-size: 1rem;
+
+    line-height: 1.5;
+}
+
+
+/* Give Doctrine a slightly different emphasis */
+
+.god-fact:nth-child(4) p {
+    font-style: italic;
+
+    color: #c7bea5;
+}
+
+
+/* Sin */
+
+.god-fact:nth-child(5) p {
+    color: #c6b59c;
+}
+
+
+/* =========================================================
+   GOD LORE
+   ========================================================= */
+
+.god-section {
+    margin-top: 26px;
+
+    margin-bottom: 30px;
+}
+
+
+.god-section h3 {
+    margin-top: 0;
+
+    margin-bottom: 12px;
+
+    color: #b5ad94;
+
+    font-size: 1.12rem;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+}
+
+
+.god-section p {
+    max-width: 900px;
+
+    margin-top: 0;
+
+    color: #b7af99;
+
+    white-space: pre-line;
+}
+
+
+/* =========================================================
+   RETURN TO THE GODS
+   ========================================================= */
+
+.god-back-link {
+    margin-top: 34px;
+
+    padding-top: 16px;
+
+    text-align: right;
+
+    border-top:
+        1px solid rgba(65, 61, 52, 0.55);
+}
+
+
+.god-back-link a {
+    display: inline-block;
+
+    color: #9d977f;
 
     text-decoration: none;
 
-    color: #cbc3ac;
+    font-size: 0.9rem;
+
+    letter-spacing: 0.08em;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
 }
 
 
-.god-image {
-    width: 100%;
+.god-back-link a:hover {
+    color: #d2cab0;
 
-    aspect-ratio: 1 / 1;
-
-    background-color: #0d0f0c;
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    border: 1px solid #47443a;
-}
-
-
-.god-card h3 {
-    margin: 10px 0 2px;
-
-    color: #ddd3b6;
-
-    font-size: 1rem;
-}
-
-
-.god-card p {
-    margin: 0;
-
-    color: #8d8979;
-
-    font-size: 0.8rem;
-}
-
-
-/* Old god-card image support */
-
-.god-card.giver .god-image {
-    background-image:
-        url("images/gods/Giver Navi Button.jpg");
-}
-
-
-.god-card.ravager .god-image {
-    background-image:
-        url("images/gods/Ravager Navi Button.jpg");
-}
-
-
-.god-card.tormentor .god-image {
-    background-image:
-        url("images/gods/Tormentor Navi Button.jpg");
-}
-
-
-.god-card.inflictor .god-image {
-    background-image:
-        url("images/gods/Inflictor Navi Button.jpg");
-}
-
-
-.god-card.harvester .god-image {
-    background-image:
-        url("images/gods/Harvester Navi Button.jpg");
-}
-
-
-.god-card.seer .god-image {
-    background-image:
-        url("images/gods/Seer Navi Button.jpg");
-}
-
-
-.god-card.dominator .god-image {
-    background-image:
-        url("images/gods/Dominator Navi Button.jpg");
-}
-
-
-.god-card.banisher .god-image {
-    background-image:
-        url("images/gods/Banisher Navi Button.jpg");
+    transform: translateY(-2px);
 }
 
 
@@ -793,9 +976,11 @@ main a:hover {
 
     padding: 28px;
 
-    background: rgba(0, 0, 0, 0.12);
+    background:
+        rgba(0, 0, 0, 0.12);
 
-    border: 1px solid #39372f;
+    border:
+        1px solid #39372f;
 
     box-shadow:
         inset 0 0 25px rgba(0, 0, 0, 0.15);
@@ -808,9 +993,11 @@ main a:hover {
 
 .divider,
 hr {
+    width: 100%;
+
     height: 1px;
 
-    margin: 45px 0;
+    margin: 48px 0;
 
     border: 0;
 
@@ -821,6 +1008,15 @@ hr {
             #5b3029,
             transparent
         );
+}
+
+
+/* Slightly larger spacing between god profiles */
+
+.god-profile + .divider {
+    margin-top: 50px;
+
+    margin-bottom: 50px;
 }
 
 
@@ -849,32 +1045,68 @@ main img {
     display: block;
 
     max-width: 100%;
+
     height: auto;
 }
 
 
 /* =========================================================
-   PEOPLE / BESTIARY INTRO
+   FOOTER
    ========================================================= */
 
-.page-intro,
-.people-intro,
-.bestiary-intro {
-    margin-bottom: 30px;
+footer {
+    padding: 35px 20px;
+
+    text-align: center;
+
+    background: #10100e;
+
+    border-top:
+        1px solid #35342e;
+
+    color: #777365;
+
+    font-size: 0.85rem;
+
+    letter-spacing: 0.06em;
 }
 
 
-.page-intro h2,
-.people-intro h2,
-.bestiary-intro h2 {
+footer p {
+    margin: 0;
+
+    color: #777365;
+}
+
+
+/* =========================================================
+   PEOPLE & BESTIARY
+   ========================================================= */
+
+.people-intro {
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 45px 25px 20px;
+}
+
+
+.people-intro h2 {
     margin-top: 0;
+
+    margin-bottom: 10px;
+
+    color: #c5bda1;
+
+    font-weight: normal;
+
+    letter-spacing: 0.08em;
 }
 
 
-.page-intro p,
-.people-intro p,
-.bestiary-intro p {
-    margin-bottom: 0;
+.people-intro p {
+    margin: 0;
 
     color: #999481;
 }
@@ -882,22 +1114,25 @@ main img {
 
 /* =========================================================
    PEOPLE DIRECTORY
-
-   DESKTOP:
-   TWO COLUMNS
    ========================================================= */
 
 .people-directory {
-    width: 100%;
+    max-width: 1100px;
 
     margin: 20px auto 60px;
+
+    padding: 0 25px;
 
     display: grid;
 
     grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
 
     column-gap: 50px;
+
     row-gap: 0;
 }
 
@@ -909,7 +1144,8 @@ main img {
 .person-entry {
     display: grid;
 
-    grid-template-columns: 95px 1fr;
+    grid-template-columns:
+        95px 1fr;
 
     gap: 18px;
 
@@ -920,34 +1156,32 @@ main img {
 }
 
 
+/* Portrait */
+
 .person-portrait {
     width: 95px;
+
     height: 95px;
 
     aspect-ratio: 1 / 1;
 
-    overflow: hidden;
-
     object-fit: cover;
 
-    border: 1px solid #47473b;
+    border:
+        1px solid #47473b;
 
     background: #0d0f0c;
 }
 
 
-.person-portrait img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-}
-
+/* Text area */
 
 .person-info {
     min-width: 0;
 }
 
+
+/* Name */
 
 .person-info h3 {
     margin: 0 0 8px;
@@ -955,11 +1189,14 @@ main img {
     color: #c5bda1;
 
     font-size: 1.15rem;
+
     font-weight: normal;
 
     letter-spacing: 0.06em;
 }
 
+
+/* Description */
 
 .person-info p {
     margin: 0;
@@ -988,494 +1225,32 @@ main img {
 
 
 /* =========================================================
-   PEOPLE FALLBACK
-
-   Supports the earlier HTML using:
-   .person-heading
+   TABLET
    ========================================================= */
 
-.person-heading {
-    display: contents;
-}
+@media (max-width: 850px) {
 
+    .gods-grid {
+        gap: 9px;
+    }
 
-.person-heading h3 {
-    margin: 0 0 8px;
 
-    color: #c5bda1;
+    .gods-grid .card {
+        min-height: 130px;
 
-    font-size: 1.15rem;
-    font-weight: normal;
+        padding: 12px 7px;
+    }
 
-    letter-spacing: 0.06em;
-}
 
+    .gods-grid .card h3 {
+        font-size: 0.9rem;
+    }
 
-/* =========================================================
-   BESTIARY DIRECTORY
-   SAME FORMAT AS PEOPLE
-   ========================================================= */
 
-.bestiary-directory {
-    width: 100%;
+    .gods-grid .card p {
+        font-size: 0.7rem;
+    }
 
-    margin: 20px auto 60px;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-    column-gap: 50px;
-    row-gap: 0;
-}
-
-
-.bestiary-entry {
-    display: grid;
-
-    grid-template-columns: 95px 1fr;
-
-    gap: 18px;
-
-    padding: 24px 0;
-
-    border-bottom:
-        1px solid rgba(120, 115, 96, 0.35);
-}
-
-
-.bestiary-portrait {
-    width: 95px;
-    height: 95px;
-
-    aspect-ratio: 1 / 1;
-
-    overflow: hidden;
-
-    object-fit: cover;
-
-    border: 1px solid #47473b;
-
-    background: #0d0f0c;
-}
-
-
-.bestiary-portrait img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-}
-
-
-.bestiary-info {
-    min-width: 0;
-}
-
-
-.bestiary-info h3 {
-    margin: 0 0 8px;
-
-    color: #c5bda1;
-
-    font-size: 1.15rem;
-    font-weight: normal;
-
-    letter-spacing: 0.06em;
-}
-
-
-.bestiary-info p {
-    margin: 0;
-
-    color: #999481;
-
-    font-size: 0.95rem;
-
-    line-height: 1.55;
-}
-
-
-.bestiary-entry:nth-child(odd) {
-    padding-right: 25px;
-
-    border-right:
-        1px solid rgba(120, 115, 96, 0.28);
-}
-
-
-.bestiary-entry:nth-child(even) {
-    padding-left: 25px;
-}
-
-
-/* =========================================================
-   PLAYER GUIDE
-   OZYLEME RULE
-   ========================================================= */
-
-.ozyleme-rule {
-    margin: 30px 0;
-
-    padding: 24px 28px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(93, 37, 31, 0.16),
-            rgba(12, 12, 10, 0.55)
-        );
-
-    border: 1px solid #6b3029;
-    border-left: 4px solid #74372f;
-}
-
-
-.ozyleme-rule h3 {
-    margin-top: 0;
-
-    color: #d8cfb2;
-
-    letter-spacing: 0.08em;
-}
-
-
-/* =========================================================
-   CHARACTER RESOURCES
-   ========================================================= */
-
-.character-resources {
-    margin: 35px 0;
-}
-
-
-.resource-buttons {
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 12px;
-
-    margin-top: 18px;
-}
-
-
-.resource-button {
-    display: inline-block;
-
-    padding: 11px 18px;
-
-    color: #d8cfb2;
-
-    text-decoration: none;
-
-    background: #10100e;
-
-    border: 1px solid #47443a;
-
-    transition:
-        border-color 0.2s ease,
-        background-color 0.2s ease,
-        transform 0.2s ease;
-}
-
-
-.resource-button:hover {
-    color: #e0d6b8;
-
-    background: #1b1815;
-
-    border-color: #74372f;
-
-    transform: translateY(-2px);
-}
-
-
-/* =========================================================
-   POINT BUY CALCULATOR
-   ========================================================= */
-
-.point-buy-calculator {
-    margin-top: 40px;
-
-    padding: 30px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #1c1b17,
-            #0e0e0c
-        );
-
-    border: 1px solid #47443a;
-
-    box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.35),
-        inset 0 0 30px rgba(0, 0, 0, 0.18);
-}
-
-
-.calculator-heading h3 {
-    margin-top: 0;
-    margin-bottom: 8px;
-
-    color: #d8cfb2;
-
-    font-size: 1.5rem;
-
-    letter-spacing: 0.06em;
-}
-
-
-.calculator-heading p {
-    margin-top: 0;
-}
-
-
-.point-summary {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 12px;
-
-    margin: 25px 0 12px;
-}
-
-
-.point-summary > div {
-    padding: 15px;
-
-    text-align: center;
-
-    background: #10100e;
-
-    border: 1px solid #39372f;
-}
-
-
-.summary-label {
-    display: block;
-
-    color: #8f8977;
-
-    font-size: 0.78rem;
-
-    letter-spacing: 0.08em;
-
-    text-transform: uppercase;
-}
-
-
-.point-summary strong {
-    display: block;
-
-    margin-top: 3px;
-
-    color: #ddd3b6;
-
-    font-size: 1.55rem;
-}
-
-
-.point-status {
-    margin-bottom: 22px;
-
-    padding: 9px 12px;
-
-    color: #9f9b86;
-
-    text-align: center;
-
-    background: rgba(0, 0, 0, 0.18);
-
-    border: 1px solid #39372f;
-}
-
-
-.point-status.over-budget {
-    color: #d5a299;
-
-    border-color: #74372f;
-
-    background:
-        rgba(93, 37, 31, 0.18);
-}
-
-
-/* Ability rows */
-
-.ability-row {
-    display: grid;
-
-    grid-template-columns:
-        minmax(130px, 1fr)
-        100px
-        110px;
-
-    align-items: center;
-
-    gap: 14px;
-
-    padding: 13px 0;
-
-    border-bottom:
-        1px solid rgba(120, 115, 96, 0.22);
-}
-
-
-.ability-row label {
-    color: #c9c0a4;
-
-    letter-spacing: 0.04em;
-}
-
-
-.ability-row select,
-.ozyleme-bonus select {
-    width: 100%;
-
-    padding: 9px 10px;
-
-    color: #d8d0bc;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    background: #10100e;
-
-    border: 1px solid #47443a;
-
-    outline: none;
-}
-
-
-.ability-row select:focus,
-.ozyleme-bonus select:focus {
-    border-color: #74372f;
-}
-
-
-.final-score {
-    color: #8f8977;
-
-    font-size: 0.9rem;
-}
-
-
-.final-score strong {
-    color: #ddd3b6;
-}
-
-
-/* Ozyleme +1 */
-
-.ozyleme-bonus {
-    display: grid;
-
-    grid-template-columns:
-        minmax(180px, 1fr)
-        minmax(180px, 240px);
-
-    align-items: center;
-
-    gap: 18px;
-
-    margin-top: 25px;
-
-    padding: 18px;
-
-    background:
-        rgba(93, 37, 31, 0.10);
-
-    border: 1px solid #5b3029;
-}
-
-
-.ozyleme-bonus label {
-    color: #d8cfb2;
-
-    letter-spacing: 0.04em;
-}
-
-
-/* Calculator actions */
-
-.calculator-actions {
-    display: flex;
-
-    flex-wrap: wrap;
-
-    align-items: center;
-
-    gap: 15px;
-
-    margin-top: 25px;
-}
-
-
-.calculator-actions button,
-.calculator-actions a {
-    padding: 10px 16px;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size: 0.9rem;
-
-    text-decoration: none;
-
-    cursor: pointer;
-
-    color: #c9c0a4;
-
-    background: #10100e;
-
-    border: 1px solid #47443a;
-}
-
-
-.calculator-actions button:hover,
-.calculator-actions a:hover {
-    color: #e0d6b8;
-
-    border-color: #74372f;
-
-    background: #1b1815;
-}
-
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
-footer {
-    padding: 35px 20px;
-
-    text-align: center;
-
-    background: #10100e;
-
-    border-top: 1px solid #35342e;
-
-    color: #777365;
-
-    font-size: 0.85rem;
-
-    letter-spacing: 0.06em;
-}
-
-
-footer p {
-    margin: 0;
-
-    color: #777365;
 }
 
 
@@ -1486,7 +1261,9 @@ footer p {
 @media (max-width: 767px) {
 
 
-    /* HEADER */
+    /* -------------------------------
+       HEADER
+       ------------------------------- */
 
     header {
         aspect-ratio: 2 / 1;
@@ -1515,15 +1292,15 @@ footer p {
     }
 
 
-    /* NAVIGATION */
+    /* -------------------------------
+       NAVIGATION
+       ------------------------------- */
 
-    .site-nav,
     nav {
         padding: 8px 5px;
     }
 
 
-    .site-nav a,
     nav a {
         padding: 7px 9px;
 
@@ -1533,10 +1310,13 @@ footer p {
     }
 
 
-    /* MAIN */
+    /* -------------------------------
+       MAIN
+       ------------------------------- */
 
     main {
-        width: calc(100% - 28px);
+        width:
+            calc(100% - 28px);
 
         padding-top: 35px;
     }
@@ -1547,10 +1327,9 @@ footer p {
     }
 
 
-    /* =====================================================
+    /* -------------------------------
        NORMAL CARDS
-       ONE COLUMN ON MOBILE
-       ===================================================== */
+       ------------------------------- */
 
     .cards {
         grid-template-columns: 1fr;
@@ -1565,578 +1344,42 @@ footer p {
 
 
     /* =====================================================
-       GODS
+       GOD DIRECTORY
 
-       MUST REMAIN FOUR ACROSS ON MOBILE
+       MUST REMAIN FOUR ACROSS
+       DO NOT CHANGE TO 1 OR 2 COLUMNS
        ===================================================== */
 
     .gods-grid {
         grid-template-columns:
-            repeat(4, minmax(0, 1fr));
-
-        gap: 6px;
-
-        width: 100%;
-    }
-
-
-    .gods-grid .card {
-        min-width: 0;
-
-        min-height: 145px;
-
-        padding: 8px;
-    }
-
-
-    .gods-grid .card h3 {
-        margin-bottom: 4px;
-
-        font-size: clamp(
-            0.62rem,
-            3vw,
-            0.9rem
-        );
-
-        letter-spacing: 0;
-    }
-
-
-    .gods-grid .card p {
-        font-size: clamp(
-            0.52rem,
-            2.2vw,
-            0.7rem
-        );
-
-        line-height: 1.3;
-    }
-
-
-    /* Old god-card system */
-
-    .god-card h3 {
-        font-size: clamp(
-            0.62rem,
-            3vw,
-            0.9rem
-        );
-
-        letter-spacing: 0;
-    }
-
-
-    .god-card p {
-        font-size: clamp(
-            0.52rem,
-            2.2vw,
-            0.7rem
-        );
-
-        line-height: 1.3;
-    }
-
-
-    /* CONTENT PANELS */
-
-    .lore,
-    .content-box,
-    .info-box {
-        padding: 20px;
-    }
-
-
-    /* =====================================================
-       PEOPLE
-       ONE COLUMN ON MOBILE
-       ===================================================== */
-
-    .people-directory {
-        grid-template-columns: 1fr;
-
-        column-gap: 0;
-    }
-
-
-    .person-entry:nth-child(odd),
-    .person-entry:nth-child(even) {
-        padding-left: 0;
-        padding-right: 0;
-
-        border-right: none;
-    }
-
-
-    .person-entry {
-        grid-template-columns: 80px 1fr;
-    }
-
-
-    .person-portrait {
-        width: 80px;
-        height: 80px;
-    }
-
-
-    /* =====================================================
-       BESTIARY
-       ONE COLUMN ON MOBILE
-       ===================================================== */
-
-    .bestiary-directory {
-        grid-template-columns: 1fr;
-
-        column-gap: 0;
-    }
-
-
-    .bestiary-entry:nth-child(odd),
-    .bestiary-entry:nth-child(even) {
-        padding-left: 0;
-        padding-right: 0;
-
-        border-right: none;
-    }
-
-
-    .bestiary-entry {
-        grid-template-columns: 80px 1fr;
-    }
-
-
-    .bestiary-portrait {
-        width: 80px;
-        height: 80px;
-    }
-
-
-    /* =====================================================
-       POINT BUY
-       ===================================================== */
-
-    .point-buy-calculator {
-        padding: 20px 16px;
-    }
-
-
-    .ability-row {
-        grid-template-columns:
-            1fr
-            70px;
-
-        gap: 8px;
-    }
-
-
-    .final-score {
-        grid-column: 1 / -1;
-
-        margin-top: -5px;
-    }
-
-
-    .ozyleme-bonus {
-        grid-template-columns: 1fr;
-    }
-
-
-    .resource-buttons {
-        flex-direction: column;
-    }
-
-
-    .resource-button {
-        width: 100%;
-    }
-
-}
-/* ================================
-   CHARACTER BUILDER LINK
-   ================================ */
-
-.character-builder-link {
-    margin: 35px 0;
-    padding: 25px;
-
-    background: #11110f;
-
-    border: 1px solid #47473b;
-}
-
-.character-builder-link h2 {
-    margin-top: 0;
-
-    color: #c5bda1;
-}
-
-.character-builder-link p {
-    color: #999481;
-}
-
-.builder-button {
-    display: inline-block;
-
-    margin-top: 10px;
-    padding: 10px 18px;
-
-    color: #d8d0bc;
-    background: #25251f;
-
-    border: 1px solid #5d251f;
-
-    text-decoration: none;
-
-    transition:
-        background 0.2s,
-        border-color 0.2s,
-        color 0.2s;
-}
-
-.builder-button:hover {
-    color: #eee5ca;
-    background: #312d27;
-    border-color: #8a3c32;
-}
-/* =========================================================
-   GODS PAGE
-   ========================================================= */
-
-
-/* ================================
-   INTRODUCTION
-   ================================ */
-
-.gods-intro {
-    margin-bottom: 10px;
-}
-
-
-/* ================================
-   GOD DIRECTORY
-
-   IMPORTANT:
-   KEEP 4 COLUMNS X 2 ROWS
-   EVEN ON MOBILE
-   ================================ */
-
-.gods-directory {
-    margin-top: 10px;
-}
-
-.gods-grid {
-    display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
-    gap: 14px;
-
-    margin-top: 28px;
-    margin-bottom: 10px;
-}
-
-
-/* God navigation cards */
-
-.gods-grid .card {
-    display: flex;
-
-    flex-direction: column;
-    justify-content: flex-end;
-
-    min-width: 0;
-    min-height: 150px;
-
-    padding: 16px 10px;
-
-    text-align: center;
-
-    overflow: hidden;
-
-    background-color: #11120f;
-
-    border: 1px solid #47473b;
-
-    box-shadow:
-        0 8px 22px rgba(0, 0, 0, 0.4),
-        inset 0 0 25px rgba(0, 0, 0, 0.3);
-
-    transition:
-        transform 0.2s ease,
-        border-color 0.2s ease,
-        filter 0.2s ease;
-}
-
-
-/* God card title */
-
-.gods-grid .card h3 {
-    margin: 0;
-
-    color: #ddd4b8;
-
-    font-size: 1.1rem;
-    font-weight: normal;
-
-    letter-spacing: 0.04em;
-
-    text-shadow:
-        0 2px 4px #000,
-        0 0 8px rgba(0, 0, 0, 0.9);
-}
-
-
-/* Kingdom beneath god name */
-
-.gods-grid .card p {
-    margin: 4px 0 0;
-
-    color: #aaa48f;
-
-    font-size: 0.8rem;
-    font-style: italic;
-
-    text-shadow:
-        0 2px 4px #000;
-}
-
-
-/* Hover */
-
-.gods-grid .card:hover {
-    transform: translateY(-3px);
-
-    border-color: #74372f;
-
-    filter: brightness(1.08);
-}
-
-
-/* ================================
-   GOD PROFILE
-   ================================ */
-
-.god-profile {
-    padding-top: 8px;
-    padding-bottom: 8px;
-
-    scroll-margin-top: 90px;
-}
-
-
-/* Main god name area */
-
-.god-heading {
-    margin-bottom: 28px;
-
-    padding-bottom: 18px;
-
-    border-bottom: 1px solid #3d3d34;
-}
-
-
-/* God name */
-
-.god-heading h2 {
-    margin-bottom: 4px;
-
-    color: #d8cfb3;
-
-    font-size: clamp(2rem, 5vw, 3.1rem);
-
-    font-weight: normal;
-
-    letter-spacing: 0.05em;
-}
-
-
-/* Keeper / Watcher title */
-
-.god-heading h3 {
-    margin: 0;
-
-    color: #8f927c;
-
-    font-size: 1rem;
-
-    font-weight: normal;
-    font-style: italic;
-
-    letter-spacing: 0.08em;
-}
-
-
-/* ================================
-   GENERAL OUTLINE / LORE
-   ================================ */
-
-.god-section {
-    margin-top: 24px;
-    margin-bottom: 28px;
-}
-
-
-/* Section labels */
-
-.god-section h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-
-    color: #b5ad94;
-
-    font-size: 1.15rem;
-    font-weight: normal;
-
-    letter-spacing: 0.1em;
-
-    text-transform: uppercase;
-}
-
-
-/* Text */
-
-.god-section p {
-    margin-top: 0;
-
-    color: #c1b9a4;
-
-    max-width: 850px;
-}
-
-
-/* ================================
-   SYMBOL / DOMAIN / ELEMENT
-   ================================ */
-
-.god-facts {
-    display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 14px;
-
-    margin-top: 28px;
-    margin-bottom: 32px;
-}
-
-
-/* Individual fact box */
-
-.god-fact {
-    min-width: 0;
-
-    padding: 18px 16px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(36, 37, 31, 0.75),
-            rgba(15, 16, 13, 0.95)
-        );
-
-    border: 1px solid #404037;
-
-    box-shadow:
-        inset 0 0 20px rgba(0, 0, 0, 0.28),
-        0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-
-/* Fact label */
-
-.god-fact h4 {
-    margin: 0 0 6px;
-
-    color: #827d69;
-
-    font-size: 0.75rem;
-
-    font-weight: normal;
-
-    letter-spacing: 0.16em;
-
-    text-transform: uppercase;
-}
-
-
-/* Fact value */
-
-.god-fact p {
-    margin: 0;
-
-    color: #d2cab0;
-
-    font-size: 1rem;
-
-    line-height: 1.4;
-}
-
-
-/* ================================
-   GOD DIVIDERS
-   ================================ */
-
-.god-profile + .divider {
-    margin-top: 48px;
-    margin-bottom: 48px;
-}
-
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (max-width: 850px) {
-
-    .gods-grid {
-        gap: 9px;
-    }
-
-    .gods-grid .card {
-        min-height: 120px;
-
-        padding: 12px 6px;
-    }
-
-    .gods-grid .card h3 {
-        font-size: 0.9rem;
-    }
-
-    .gods-grid .card p {
-        font-size: 0.7rem;
-    }
-
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 600px) {
-
-    /*
-       DO NOT CHANGE THIS TO 1 OR 2 COLUMNS.
-       GOD DIRECTORY REMAINS 4 X 2.
-    */
-
-    .gods-grid {
-        grid-template-columns: repeat(4, 1fr);
+            repeat(
+                4,
+                minmax(0, 1fr)
+            );
 
         gap: 5px;
+
+        width: 100%;
 
         margin-top: 20px;
     }
 
 
     .gods-grid .card {
-        min-height: 88px;
+        min-height: 92px;
 
         padding: 8px 3px;
     }
 
 
     .gods-grid .card h3 {
-        font-size: 0.67rem;
+        margin-bottom: 3px;
+
+        font-size: clamp(
+            0.60rem,
+            2.9vw,
+            0.78rem
+        );
 
         line-height: 1.15;
 
@@ -2145,54 +1388,26 @@ footer p {
 
 
     .gods-grid .card p {
-        margin-top: 3px;
+        margin-top: 2px;
 
-        font-size: 0.58rem;
+        font-size: clamp(
+            0.50rem,
+            2.2vw,
+            0.65rem
+        );
+
+        line-height: 1.2;
     }
 
 
-    /* God information boxes */
-
-    .god-facts {
-        grid-template-columns: 1fr;
-
-        gap: 8px;
-
-        margin-top: 20px;
-        margin-bottom: 26px;
-    }
-
-
-    .god-fact {
-        padding: 13px 14px;
-    }
-
-
-    /*
-       On mobile, put the fact label and
-       value beside one another.
-    */
-
-    .god-fact h4 {
-        display: inline-block;
-
-        width: 85px;
-
-        margin: 0;
-
-        vertical-align: middle;
-    }
-
-
-    .god-fact p {
-        display: inline;
-
-        font-size: 0.95rem;
-    }
-
+    /* -------------------------------
+       GOD PROFILE
+       ------------------------------- */
 
     .god-heading {
         margin-bottom: 22px;
+
+        padding-bottom: 14px;
     }
 
 
@@ -2201,9 +1416,139 @@ footer p {
     }
 
 
-    .god-section {
-        margin-top: 20px;
+    .god-heading h3 {
+        font-size: 0.9rem;
+
+        line-height: 1.5;
+    }
+
+
+    .god-outline {
         margin-bottom: 24px;
+    }
+
+
+    .god-outline p {
+        font-size: 0.98rem;
+    }
+
+
+    /* -------------------------------
+       GOD FACTS
+       SINGLE COLUMN ON MOBILE
+       ------------------------------- */
+
+    .god-facts {
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+
+        margin-top: 20px;
+
+        margin-bottom: 28px;
+    }
+
+
+    .god-fact {
+        padding: 13px 14px;
+    }
+
+
+    .god-fact h4 {
+        margin-bottom: 5px;
+
+        font-size: 0.7rem;
+    }
+
+
+    .god-fact p {
+        font-size: 0.95rem;
+    }
+
+
+    /* -------------------------------
+       GOD LORE
+       ------------------------------- */
+
+    .god-section {
+        margin-top: 22px;
+
+        margin-bottom: 26px;
+    }
+
+
+    .god-section h3 {
+        font-size: 1rem;
+    }
+
+
+    /* -------------------------------
+       RETURN LINK
+       ------------------------------- */
+
+    .god-back-link {
+        margin-top: 26px;
+
+        text-align: center;
+    }
+
+
+    /* -------------------------------
+       CONTENT PANELS
+       ------------------------------- */
+
+    .lore,
+    .content-box,
+    .info-box {
+        padding: 20px;
+    }
+
+
+    /* -------------------------------
+       DIVIDERS
+       ------------------------------- */
+
+    .divider,
+    hr {
+        margin: 38px 0;
+    }
+
+}
+
+
+/* =========================================================
+   PEOPLE / BESTIARY MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .people-directory {
+        grid-template-columns: 1fr;
+
+        padding: 0 20px;
+    }
+
+
+    .person-entry:nth-child(odd),
+    .person-entry:nth-child(even) {
+        padding-left: 0;
+
+        padding-right: 0;
+
+        border-right: none;
+    }
+
+
+    .person-entry {
+        grid-template-columns:
+            80px 1fr;
+    }
+
+
+    .person-portrait {
+        width: 80px;
+
+        height: 80px;
     }
 
 }
