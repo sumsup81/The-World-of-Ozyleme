@@ -1,4 +1,4 @@
-/* =========================================================
+Hu/* =========================================================
    OZYLEME
    MAIN WEBSITE STYLESHEET
    ========================================================= */
@@ -1749,4 +1749,51 @@ footer p {
         width: 100%;
     }
 
+}
+/* ================================
+   CHARACTER BUILDER LINK
+   ================================ */
+
+.character-builder-link {
+    margin: 35px 0;
+    padding: 25px;
+
+    background: #11110f;
+
+    border: 1px solid #47473b;
+}
+
+.character-builder-link h2 {
+    margin-top: 0;
+
+    color: #c5bda1;
+}
+
+.character-builder-link p {
+    color: #999481;
+}
+
+.builder-button {
+    display: inline-block;
+
+    margin-top: 10px;
+    padding: 10px 18px;
+
+    color: #d8d0bc;
+    background: #25251f;
+
+    border: 1px solid #5d251f;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s,
+        border-color 0.2s,
+        color 0.2s;
+}
+
+.builder-button:hover {
+    color: #eee5ca;
+    background: #312d27;
+    border-color: #8a3c32;
 }
