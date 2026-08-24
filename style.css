@@ -852,3 +852,164 @@ footer p {
         padding: 20px;
     }
 }
+/* ================================
+   PEOPLE & BESTIARY
+   ================================ */
+
+.people-intro {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 45px 25px 20px;
+}
+
+.people-intro h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+
+    color: #c5bda1;
+
+    font-weight: normal;
+    letter-spacing: 0.08em;
+}
+
+.people-intro p {
+    margin: 0;
+
+    color: #999481;
+}
+
+
+/* ================================
+   PEOPLE DIRECTORY
+   ================================ */
+
+.people-directory {
+    max-width: 1100px;
+
+    margin: 20px auto 60px;
+    padding: 0 25px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    column-gap: 50px;
+    row-gap: 0;
+}
+
+
+/* ================================
+   INDIVIDUAL ENTRY
+   ================================ */
+
+.person-entry {
+    display: grid;
+
+    grid-template-columns: 95px 1fr;
+
+    gap: 18px;
+
+    padding: 24px 0;
+
+    border-bottom:
+        1px solid rgba(120, 115, 96, 0.35);
+}
+
+
+/* Portrait */
+
+.person-portrait {
+    width: 95px;
+    height: 95px;
+
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+
+    border: 1px solid #47473b;
+
+    background: #0d0f0c;
+}
+
+
+/* Text area */
+
+.person-info {
+    min-width: 0;
+}
+
+
+/* Name */
+
+.person-info h3 {
+    margin: 0 0 8px;
+
+    color: #c5bda1;
+
+    font-size: 1.15rem;
+    font-weight: normal;
+
+    letter-spacing: 0.06em;
+}
+
+
+/* Description */
+
+.person-info p {
+    margin: 0;
+
+    color: #999481;
+
+    font-size: 0.95rem;
+
+    line-height: 1.55;
+}
+
+
+/* ================================
+   CENTER DIVIDER
+   ================================ */
+
+.person-entry:nth-child(odd) {
+    padding-right: 25px;
+
+    border-right:
+        1px solid rgba(120, 115, 96, 0.28);
+}
+
+.person-entry:nth-child(even) {
+    padding-left: 25px;
+}
+
+
+/* ================================
+   MOBILE
+   ================================ */
+
+@media (max-width: 700px) {
+
+    .people-directory {
+        grid-template-columns: 1fr;
+
+        padding: 0 20px;
+    }
+
+    .person-entry:nth-child(odd),
+    .person-entry:nth-child(even) {
+        padding-left: 0;
+        padding-right: 0;
+
+        border-right: none;
+    }
+
+    .person-entry {
+        grid-template-columns: 80px 1fr;
+    }
+
+    .person-portrait {
+        width: 80px;
+        height: 80px;
+    }
+
+}
