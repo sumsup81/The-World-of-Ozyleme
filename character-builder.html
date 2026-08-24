@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Character Builder | Ozyleme</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+
+    <!-- ================================
+         HEADER
+         ================================ -->
+
+    <header>
+
+        <h1>OZYLEME</h1>
+
+        <p>Realm of the Dark Dragon</p>
+
+    </header>
+
+
+
+    <!-- ================================
+         MAIN NAVIGATION
+         ================================ -->
+
+    <nav>
+
+        <a href="index.html">Home</a>
+
+        <a href="kingdoms.html">Kingdoms</a>
+
+        <a href="species.html">Species</a>
+
+        <a href="people.html">People</a>
+
+        <a href="gods.html">Gods</a>
+
+        <a href="bestiary.html">Bestiary</a>
+
+        <a href="classes.html">Classes</a>
+
+        <a href="player-guide.html">Player Guide</a>
+
+    </nav>
+
+
+
+    <!-- ================================
+         CHARACTER BUILDER
+         ================================ -->
+
+    <main class="character-builder">
+
+        <section class="builder-intro">
+
+            <h2>Character Builder</h2>
+
+            <p>
+                Record your character for the Realm of Ozyleme.
+                Your choices will eventually be exportable as a
+                printable character sheet or a Foundry VTT character file.
+            </p>
+
+            <p>
+                <a href="player-guide.html">← Return to the Player Guide</a>
+            </p>
+
+        </section>
+
+
+
+        <form id="characterForm">
+
+
+            <!-- ================================
+                 CHARACTER IDENTITY
+                 ================================ -->
+
+            <section class="builder-section">
+
+                <h2>Character</h2>
+
+                <div class="builder-grid">
+
+                    <label>
+                        Character Name
+                        <input
+                            type="text"
+                            id="characterName"
+                            name="characterName"
+                        >
+                    </label>
+
+
+                    <label>
+                        Player Name
+                        <input
+                            type="text"
+                            id="playerName"
+                            name="playerName"
+                        >
+                    </label>
+
+
+                    <label>
+                        Species
+                        <input
+                            type="text"
+                            id="species"
+                            name="species"
+                        >
+                    </label>
+
+
+                    <label>
+                        Class
+                        <input
+                            type="text"
+                            id="characterClass"
+                            name="characterClass"
+                        >
+                    </label>
+
+
+                    <label>
+                        Subclass
+                        <input
+                            type="text"
+                            id="subclass"
+                            name="subclass"
+                        >
+                    </label>
+
+
+                    <label>
+                        Level
+                        <input
+                            type="number"
+                            id="level"
+                            name="level"
+                            min="1"
+                            max="20"
+                            value="1"
+                        >
+                    </label>
+
+
+                    <label>
+                        Background
+                        <input
+                            type="text"
+                            id="background"
+                            name="background"
+                        >
+                    </label>
+
+
+                    <label>
+                        Kingdom / Homeland
+                        <input
+                            type="text"
+                            id="homeland"
+                            name="homeland"
+                        >
+                    </label>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================================
+                 ABILITY SCORES
+                 ================================ -->
+
+            <section class="builder-section">
+
+                <h2>Ability Scores</h2>
+
+                <div class="ability-grid">
+
+
+                    <label>
+                        Strength
+                        <input
+                            type="number"
+                            id="strength"
+                            name="strength"
+                            min="1"
+                            max="30"
+                            value="10"
+                        >
+                    </label>
+
+
+                    <label>
+                        Dexterity
+                        <input
+                            type="number"
+                            id="dexterity"
+                            name="dexterity"
+                            min="1"
+                            max="30"
+                            value="10"
+                        >
+                    </label>
+
+
+                    <label>
+                        Constitution
+                        <input
+                            type="number"
+                            id="constitution"
+                            name="constitution"
+                            min="1"
+                            max="30"
+                            value="10"
+                        >
+                    </label>
+
+
+                    <label>
+                        Intelligence
+                        <input
+                            type="number"
+                            id="intelligence"
+                            name="intelligence"
+                            min="1"
+                            max="30"
+                            value="10"
+                        >
+                    </label>
+
+
+                    <label>
+                        Wisdom
+                        <input
+                            type="number"
+                            id="wisdom"
+                            name="wisdom"
+                            min="1"
+                            max="30"
+                            value="10"
+                        >
+                    </label>
+
+
+                    <label>
+                        Charisma
+                        <input
+                            type="number"
+                            id="charisma"
+                            name="charisma"
+                            min="1"
+                            max="30"
+                            value="10"
+                        >
+                    </label>
+
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================================
+                 COMBAT
+                 ================================ -->
+
+            <section class="builder-section">
+
+                <h2>Combat</h2>
+
+                <div class="builder-grid">
+
+                    <label>
+                        Armor Class
+                        <input
+                            type="number"
+                            id="armorClass"
+                            name="armorClass"
+                        >
+                    </label>
+
+
+                    <label>
+                        Maximum Hit Points
+                        <input
+                            type="number"
+                            id="maxHP"
+                            name="maxHP"
+                        >
+                    </label>
+
+
+                    <label>
+                        Current Hit Points
+                        <input
+                            type="number"
+                            id="currentHP"
+                            name="currentHP"
+                        >
+                    </label>
+
+
+                    <label>
+                        Temporary Hit Points
+                        <input
+                            type="number"
+                            id="tempHP"
+                            name="tempHP"
+                        >
+                    </label>
+
+
+                    <label>
+                        Speed
+                        <input
+                            type="number"
+                            id="speed"
+                            name="speed"
+                        >
+                    </label>
+
+
+                    <label>
+                        Initiative
+                        <input
+                            type="number"
+                            id="initiative"
+                            name="initiative"
+                        >
+                    </label>
+
+
+                    <label>
+                        Proficiency Bonus
+                        <input
+                            type="number"
+                            id="proficiencyBonus"
+                            name="proficiencyBonus"
+                        >
+                    </label>
+
+
+                    <label>
+                        Passive Perception
+                        <input
+                            type="number"
+                            id="passivePerception"
+                            name="passivePerception"
+                        >
+                    </label>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================================
+                 CHARACTER DESCRIPTION
+                 ================================ -->
+
+            <section class="builder-section">
+
+                <h2>Description</h2>
+
+
+                <label>
+                    Appearance
+
+                    <textarea
+                        id="appearance"
+                        name="appearance"
+                        rows="5"
+                        placeholder="Describe your character's appearance..."
+                    ></textarea>
+
+                </label>
+
+
+                <label>
+                    Personality
+
+                    <textarea
+                        id="personality"
+                        name="personality"
+                        rows="5"
+                        placeholder="Describe your character's personality..."
+                    ></textarea>
+
+                </label>
+
+
+                <label>
+                    Ideals
+
+                    <textarea
+                        id="ideals"
+                        name="ideals"
+                        rows="4"
+                    ></textarea>
+
+                </label>
+
+
+                <label>
+                    Bonds
+
+                    <textarea
+                        id="bonds"
+                        name="bonds"
+                        rows="4"
+                    ></textarea>
+
+                </label>
+
+
+                <label>
+                    Flaws
+
+                    <textarea
+                        id="flaws"
+                        name="flaws"
+                        rows="4"
+                    ></textarea>
+
+                </label>
+
+            </section>
+
+
+
+            <!-- ================================
+                 BACKSTORY
+                 ================================ -->
+
+            <section class="builder-section">
+
+                <h2>Backstory</h2>
+
+                <textarea
+                    id="backstory"
+                    name="backstory"
+                    rows="10"
+                    placeholder="Where did your character come from? What brought them into the darkness of Ozyleme?"
+                ></textarea>
+
+            </section>
+
+
+
+            <!-- ================================
+                 FEATURES
+                 ================================ -->
+
+            <section class="builder-section">
+
+                <h2>Features & Traits</h2>
+
+                <textarea
+                    id="features"
+                    name="features"
+                    rows="10"
+                    placeholder="Species traits, class features, feats, supernatural gifts, curses, or other abilities..."
+                ></textarea>
+
+            </section>
+
+
+
+            <!-- ================================
+                 EQUIPMENT
+                 ================================ -->
+
+            <section class="builder-section">
+
+                <h2>Equipment</h2>
+
+                <textarea
+                    id="equipment"
+                    name="equipment"
+                    rows="10"
+                    placeholder="Weapons, armor, adventuring gear, treasures, and possessions..."
+                ></textarea>
+
+            </section>
+
+
+
+            <!-- ================================
+                 NOTES
+                 ================================ -->
+
+            <section class="builder-section">
+
+                <h2>Additional Notes</h2>
+
+                <textarea
+                    id="notes"
+                    name="notes"
+                    rows="8"
+                    placeholder="Allies, enemies, secrets, goals, discoveries, or other notes..."
+                ></textarea>
+
+            </section>
+
+
+
+        </form>
+
+
+
+        <!-- ================================
+             FUTURE EXPORT AREA
+             ================================ -->
+
+        <section class="builder-section builder-export">
+
+            <h2>Character File</h2>
+
+            <p>
+                Saving, PDF export, and Foundry VTT export
+                will be added here.
+            </p>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ================================
+         FOOTER
+         ================================ -->
+
+    <footer>
+
+        <p>
+            Ozyleme — Realm of the Dark Dragon
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>
