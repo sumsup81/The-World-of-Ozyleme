@@ -5,109 +5,232 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>The Gods | Ozyleme</title>
+    <title>Gods | Ozyleme</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
+
 <body>
+
+
+<!-- ================================
+     HEADER
+     ================================ -->
 
 <header>
     <h1></h1>
-    <p>Realm of the Dark Dragon</p>
+    <p>The Powers Beneath the Dragon King</p>
 </header>
 
 
-<nav>
-    <a href="index.html">Home</a>
-    <a href="kingdoms.html">Kingdoms</a>
-    <a href="species.html">Species</a>
-    <a href="#">Peoples</a>
-    <a href="gods.html">Gods</a>
-    <a href="#">Calendar</a>
-    <a href="#">Bestiary</a>
-    <a href="#">Player Guide</a>
+<!-- ================================
+     NAVIGATION
+     ================================ -->
+
+<nav class="site-nav">
+
+    <a class="nav-link" href="index.html">Home</a>
+
+    <a class="nav-link" href="kingdoms.html">Kingdoms</a>
+
+    <a class="nav-link" href="species.html">Species</a>
+
+    <a class="nav-link" href="people.html">People</a>
+
+    <a class="nav-link active"
+       href="gods.html"
+       aria-current="page">
+        Gods
+    </a>
+
+    <a class="nav-link" href="bestiary.html">Bestiary</a>
+
+    <a class="nav-link" href="classes.html">Classes</a>
+
+    <a class="nav-link" href="player-guide.html">Player Guide</a>
+
 </nav>
 
 
+<!-- ================================
+     MAIN CONTENT
+     ================================ -->
+
 <main>
 
+
     <!-- ================================
-         GODS INTRODUCTION
+         INTRODUCTION
+         ================================ -->
+
+    <section>
+
+        <h2>The Eight Gods</h2>
+
+        <p>
+            Eight gods watch over the kingdoms of Ozyleme.
+            Each holds dominion over a different part of the world
+            and the lives of those who dwell beneath the hollow sun.
+        </p>
+
+        <p>
+            They are powerful, feared, worshipped, and bargained with,
+            yet even the gods exist beneath the shadow and authority
+            of the Dragon King.
+        </p>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- ================================
+         GOD DIRECTORY
+
+         IMPORTANT:
+         THIS GRID MUST ALWAYS REMAIN
+         4 COLUMNS X 2 ROWS.
+
+         DO NOT COLLAPSE ON MOBILE.
          ================================ -->
 
     <section>
 
         <h2>The Gods of Ozyleme</h2>
 
-        <p>
-            Eight gods watch over the kingdoms beneath the hollow sun.
-            Their names are spoken in prayer, fear, curses, celebration,
-            and desperation.
-        </p>
 
-        <p>
-            Select a god below to descend directly to their record.
-        </p>
-
-    </section>
+        <div class="gods-grid">
 
 
-    <!-- ================================
-         GOD NAVIGATION
-         ================================ -->
+            <!-- ================================
+                 THE GIVER
+                 PLUME
+                 ================================ -->
 
-    <section>
+            <a class="god-card giver" href="#giver">
 
-        <div class="god-nav">
+                <div class="god-image"></div>
 
-            <a class="god-nav-card" href="#giver">
-                <img
-                    src="images/gods/Giver Navi Button.jpg"
-                    alt="The Giver">
+                <h3>The Giver</h3>
+
+                <p>Plume</p>
+
             </a>
 
-            <a class="god-nav-card" href="#seer">
-                <img
-                    src="images/gods/Seer Navi Button.jpg"
-                    alt="The Seer">
+
+            <!-- ================================
+                 THE RAVAGER
+                 KETTLE
+                 ================================ -->
+
+            <a class="god-card ravager" href="#ravager">
+
+                <div class="god-image"></div>
+
+                <h3>The Ravager</h3>
+
+                <p>Kettle</p>
+
             </a>
 
-            <a class="god-nav-card" href="#dominator">
-                <img
-                    src="images/gods/Dominator Navi Button.jpg"
-                    alt="The Dominator">
+
+            <!-- ================================
+                 THE TORMENTOR
+                 LOOP
+                 ================================ -->
+
+            <a class="god-card tormentor" href="#tormentor">
+
+                <div class="god-image"></div>
+
+                <h3>The Tormentor</h3>
+
+                <p>Loop</p>
+
             </a>
 
-            <a class="god-nav-card" href="#tormentor">
-                <img
-                    src="images/gods/Tormentor Navi Button.jpg"
-                    alt="The Tormentor">
+
+            <!-- ================================
+                 THE INFLICTOR
+                 TORCH
+                 ================================ -->
+
+            <a class="god-card inflictor" href="#inflictor">
+
+                <div class="god-image"></div>
+
+                <h3>The Inflictor</h3>
+
+                <p>Torch</p>
+
             </a>
 
-            <a class="god-nav-card" href="#harvester">
-                <img
-                    src="images/gods/Harvester Navi Button.jpg"
-                    alt="The Harvester">
+
+            <!-- ================================
+                 THE HARVESTER
+                 VIAL
+                 ================================ -->
+
+            <a class="god-card harvester" href="#harvester">
+
+                <div class="god-image"></div>
+
+                <h3>The Harvester</h3>
+
+                <p>Vial</p>
+
             </a>
 
-            <a class="god-nav-card" href="#inflictor">
-                <img
-                    src="images/gods/Inflictor Navi Button.jpg"
-                    alt="The Inflictor">
+
+            <!-- ================================
+                 THE SEER
+                 HOOK
+                 ================================ -->
+
+            <a class="god-card seer" href="#seer">
+
+                <div class="god-image"></div>
+
+                <h3>The Seer</h3>
+
+                <p>Hook</p>
+
             </a>
 
-            <a class="god-nav-card" href="#banisher">
-                <img
-                    src="images/gods/Banisher Navi Button.jpg"
-                    alt="The Banisher">
+
+            <!-- ================================
+                 THE DOMINATOR
+                 BELL
+                 ================================ -->
+
+            <a class="god-card dominator" href="#dominator">
+
+                <div class="god-image"></div>
+
+                <h3>The Dominator</h3>
+
+                <p>Bell</p>
+
             </a>
 
-            <a class="god-nav-card" href="#ravager">
-                <img
-                    src="images/gods/Ravager Navi Button.jpg"
-                    alt="The Ravager">
+
+            <!-- ================================
+                 THE BANISHER
+                 CROOK
+                 ================================ -->
+
+            <a class="god-card banisher" href="#banisher">
+
+                <div class="god-image"></div>
+
+                <h3>The Banisher</h3>
+
+                <p>Crook</p>
+
             </a>
+
 
         </div>
 
@@ -121,415 +244,22 @@
          THE GIVER
          ================================ -->
 
-    <section class="god-entry" id="giver">
+    <section id="giver">
 
         <h2>The Giver</h2>
 
-        <div class="god-template">
-
-            <div class="god-field">
-                <h3>Watched Kingdom</h3>
-                <p>Plume</p>
-            </div>
-
-            <div class="god-field">
-                <h3>Known As</h3>
-                <p>—</p>
-            </div>
-
-            <div class="god-field">
-                <h3>Domain</h3>
-                <p>—</p>
-            </div>
-
-            <div class="god-field">
-                <h3>Symbol</h3>
-                <p>—</p>
-            </div>
-
-            <div class="god-field">
-                <h3>Appearance</h3>
-                <p>—</p>
-            </div>
-
-            <div class="god-field">
-                <h3>Temperament</h3>
-                <p>—</p>
-            </div>
-
-            <div class="god-field">
-                <h3>What the God Wants</h3>
-                <p>—</p>
-            </div>
-
-            <div class="god-field">
-                <h3>What the God Gives</h3>
-                <p>—</p>
-            </div>
-
-            <div class="god-field">
-                <h3>What the God Takes</h3>
-                <p>—</p>
-            </div>
-
-            <div class="god-field">
-                <h3>Worship</h3>
-                <p>—</p>
-            </div>
-
-            <div class="god-field">
-                <h3>Priests and Followers</h3>
-                <p>—</p>
-            </div>
-
-            <div class="god-field">
-                <h3>Sacrifices and Offerings</h3>
-                <p>—</p>
-            </div>
-
-            <div class="god-field">
-                <h3>Holy Places</h3>
-                <p>—</p>
-            </div>
-
-            <div class="god-field">
-                <h3>Taboos</h3>
-                <p>—</p>
-            </div>
-
-            <div class="god-field">
-                <h3>Signs of Favor</h3>
-                <p>—</p>
-            </div>
-
-            <div class="god-field">
-                <h3>Signs of Anger</h3>
-                <p>—</p>
-            </div>
-
-            <div class="god-field">
-                <h3>Relationship with the Dragon King</h3>
-                <p>—</p>
-            </div>
-
-            <div class="god-field">
-                <h3>Relationships with the Other Gods</h3>
-                <p>—</p>
-            </div>
-
-            <div class="god-field">
-                <h3>Relationship with Mortals</h3>
-                <p>—</p>
-            </div>
-
-            <div class="god-field">
-                <h3>Death and the Afterlife</h3>
-                <p>—</p>
-            </div>
-
-            <div class="god-field">
-                <h3>Common Prayer or Saying</h3>
-                <p>—</p>
-            </div>
-
-            <div class="god-field">
-                <h3>Stories and Legends</h3>
-                <p>—</p>
-            </div>
-
-            <div class="god-field">
-                <h3>Secrets</h3>
-                <p>—</p>
-            </div>
-
-            <div class="god-field">
-                <h3>How the God Interprets Its Name</h3>
-                <p>—</p>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <div class="divider"></div>
-
-
-    <!-- ================================
-         THE SEER
-         ================================ -->
-
-    <section class="god-entry" id="seer">
-
-        <h2>The Seer</h2>
-
-        <div class="god-template">
-
-            <div class="god-field">
-                <h3>Watched Kingdom</h3>
-                <p>Hook</p>
-            </div>
-
-            <div class="god-field"><h3>Known As</h3><p>—</p></div>
-            <div class="god-field"><h3>Domain</h3><p>—</p></div>
-            <div class="god-field"><h3>Symbol</h3><p>—</p></div>
-            <div class="god-field"><h3>Appearance</h3><p>—</p></div>
-            <div class="god-field"><h3>Temperament</h3><p>—</p></div>
-            <div class="god-field"><h3>What the God Wants</h3><p>—</p></div>
-            <div class="god-field"><h3>What the God Gives</h3><p>—</p></div>
-            <div class="god-field"><h3>What the God Takes</h3><p>—</p></div>
-            <div class="god-field"><h3>Worship</h3><p>—</p></div>
-            <div class="god-field"><h3>Priests and Followers</h3><p>—</p></div>
-            <div class="god-field"><h3>Sacrifices and Offerings</h3><p>—</p></div>
-            <div class="god-field"><h3>Holy Places</h3><p>—</p></div>
-            <div class="god-field"><h3>Taboos</h3><p>—</p></div>
-            <div class="god-field"><h3>Signs of Favor</h3><p>—</p></div>
-            <div class="god-field"><h3>Signs of Anger</h3><p>—</p></div>
-            <div class="god-field"><h3>Relationship with the Dragon King</h3><p>—</p></div>
-            <div class="god-field"><h3>Relationships with the Other Gods</h3><p>—</p></div>
-            <div class="god-field"><h3>Relationship with Mortals</h3><p>—</p></div>
-            <div class="god-field"><h3>Death and the Afterlife</h3><p>—</p></div>
-            <div class="god-field"><h3>Common Prayer or Saying</h3><p>—</p></div>
-            <div class="god-field"><h3>Stories and Legends</h3><p>—</p></div>
-            <div class="god-field"><h3>Secrets</h3><p>—</p></div>
-            <div class="god-field"><h3>How the God Interprets Its Name</h3><p>—</p></div>
-
-        </div>
-
-    </section>
-
-
-    <div class="divider"></div>
-
-
-    <!-- ================================
-         THE DOMINATOR
-         ================================ -->
-
-    <section class="god-entry" id="dominator">
-
-        <h2>The Dominator</h2>
-
-        <div class="god-template">
-
-            <div class="god-field">
-                <h3>Watched Kingdom</h3>
-                <p>Bell</p>
-            </div>
-
-            <div class="god-field"><h3>Known As the force under the mountains</h3><p>—</p></div>
-            <div class="god-field"><h3>Domain Forge and War</h3><p>—</p></div>
-            <div class="god-field"><h3>Symbol</h3><p>—</p></div>
-            <div class="god-field"><h3>Appearance</h3><p>—</p></div>
-            <div class="god-field"><h3>Temperament</h3><p>—</p></div>
-            <div class="god-field"><h3>What the God Wants</h3><p>—</p></div>
-            <div class="god-field"><h3>What the God Gives</h3><p>—</p></div>
-            <div class="god-field"><h3>What the God Takes</h3><p>—</p></div>
-            <div class="god-field"><h3>Worship</h3><p>—</p></div>
-            <div class="god-field"><h3>Priests and Followers</h3><p>—</p></div>
-            <div class="god-field"><h3>Sacrifices and Offerings</h3><p>—</p></div>
-            <div class="god-field"><h3>Holy Places</h3><p>—</p></div>
-            <div class="god-field"><h3>Taboos</h3><p>—</p></div>
-            <div class="god-field"><h3>Signs of Favor</h3><p>—</p></div>
-            <div class="god-field"><h3>Signs of Anger</h3><p>—</p></div>
-            <div class="god-field"><h3>Relationship with the Dragon King</h3><p>—</p></div>
-            <div class="god-field"><h3>Relationships with the Other Gods</h3><p>—</p></div>
-            <div class="god-field"><h3>Relationship with Mortals</h3><p>—</p></div>
-            <div class="god-field"><h3>Death and the Afterlife</h3><p>—</p></div>
-            <div class="god-field"><h3>Common Prayer or Saying</h3><p>—</p></div>
-            <div class="god-field"><h3>Stories and Legends</h3><p>—</p></div>
-            <div class="god-field"><h3>Secrets</h3><p>—</p></div>
-            <div class="god-field"><h3>How the God Interprets Its Name</h3><p>—</p></div>
-
-        </div>
-
-    </section>
-
-
-    <div class="divider"></div>
-
-
-    <!-- ================================
-         THE TORMENTOR
-         ================================ -->
-
-    <section class="god-entry" id="tormentor">
-
-        <h2>The Tormentor</h2>
-
-        <div class="god-template">
-
-            <div class="god-field">
-                <h3>Watched Kingdom</h3>
-                <p>Loop</p>
-            </div>
-
-            <div class="god-field"><h3>Known As</h3><p>—</p></div>
-            <div class="god-field"><h3>Domain Twilight and Trickery</h3><p>—</p></div>
-            <div class="god-field"><h3>Symbol</h3><p>—</p></div>
-            <div class="god-field"><h3>Appearance</h3><p>—</p></div>
-            <div class="god-field"><h3>Temperament</h3><p>—</p></div>
-            <div class="god-field"><h3>What the God Wants</h3><p>—</p></div>
-            <div class="god-field"><h3>What the God Gives</h3><p>—</p></div>
-            <div class="god-field"><h3>What the God Takes</h3><p>—</p></div>
-            <div class="god-field"><h3>Worship</h3><p>—</p></div>
-            <div class="god-field"><h3>Priests and Followers</h3><p>—</p></div>
-            <div class="god-field"><h3>Sacrifices and Offerings</h3><p>—</p></div>
-            <div class="god-field"><h3>Holy Places</h3><p>—</p></div>
-            <div class="god-field"><h3>Taboos</h3><p>—</p></div>
-            <div class="god-field"><h3>Signs of Favor</h3><p>—</p></div>
-            <div class="god-field"><h3>Signs of Anger</h3><p>—</p></div>
-            <div class="god-field"><h3>Relationship with the Dragon King</h3><p>—</p></div>
-            <div class="god-field"><h3>Relationships with the Other Gods</h3><p>—</p></div>
-            <div class="god-field"><h3>Relationship with Mortals</h3><p>—</p></div>
-            <div class="god-field"><h3>Death and the Afterlife</h3><p>—</p></div>
-            <div class="god-field"><h3>Common Prayer or Saying</h3><p>—</p></div>
-            <div class="god-field"><h3>Stories and Legends</h3><p>—</p></div>
-            <div class="god-field"><h3>Secrets</h3><p>—</p></div>
-            <div class="god-field"><h3>How the God Interprets Its Name</h3><p>—</p></div>
-
-        </div>
-
-    </section>
-
-
-    <div class="divider"></div>
-
-
-    <!-- ================================
-         THE HARVESTER
-         ================================ -->
-
-    <section class="god-entry" id="harvester">
-
-        <h2>The Harvester</h2>
-
-        <div class="god-template">
-
-            <div class="god-field">
-                <h3>Watched Kingdom</h3>
-                <p>Vial</p>
-            </div>
-
-            <div class="god-field"><h3>Known As</h3><p>—</p></div>
-            <div class="god-field"><h3>Domain Nature and Grave</h3><p>—</p></div>
-            <div class="god-field"><h3>Symbol</h3><p>—</p></div>
-            <div class="god-field"><h3>Appearance</h3><p>—</p></div>
-            <div class="god-field"><h3>Temperament</h3><p>—</p></div>
-            <div class="god-field"><h3>What the God Wants</h3><p>—</p></div>
-            <div class="god-field"><h3>What the God Gives</h3><p>—</p></div>
-            <div class="god-field"><h3>What the God Takes</h3><p>—</p></div>
-            <div class="god-field"><h3>Worship</h3><p>—</p></div>
-            <div class="god-field"><h3>Priests and Followers</h3><p>—</p></div>
-            <div class="god-field"><h3>Sacrifices and Offerings</h3><p>—</p></div>
-            <div class="god-field"><h3>Holy Places</h3><p>—</p></div>
-            <div class="god-field"><h3>Taboos</h3><p>—</p></div>
-            <div class="god-field"><h3>Signs of Favor</h3><p>—</p></div>
-            <div class="god-field"><h3>Signs of Anger</h3><p>—</p></div>
-            <div class="god-field"><h3>Relationship with the Dragon King</h3><p>—</p></div>
-            <div class="god-field"><h3>Relationships with the Other Gods</h3><p>—</p></div>
-            <div class="god-field"><h3>Relationship with Mortals</h3><p>—</p></div>
-            <div class="god-field"><h3>Death and the Afterlife</h3><p>—</p></div>
-            <div class="god-field"><h3>Common Prayer or Saying</h3><p>—</p></div>
-            <div class="god-field"><h3>Stories and Legends</h3><p>—</p></div>
-            <div class="god-field"><h3>Secrets</h3><p>—</p></div>
-            <div class="god-field"><h3>How the God Interprets Its Name</h3><p>—</p></div>
-
-        </div>
-
-    </section>
-
-
-    <div class="divider"></div>
-
-
-    <!-- ================================
-         THE INFLICTOR
-         ================================ -->
-
-    <section class="god-entry" id="inflictor">
-
-        <h2>The Inflictor</h2>
-
-        <div class="god-template">
-
-            <div class="god-field">
-                <h3>Watched Kingdom</h3>
-                <p>Torch</p>
-            </div>
-
-            <div class="god-field"><h3>Known As</h3><p>—</p></div>
-            <div class="god-field"><h3>Domain</h3><p>—</p></div>
-            <div class="god-field"><h3>Symbol</h3><p>—</p></div>
-            <div class="god-field"><h3>Appearance</h3><p>—</p></div>
-            <div class="god-field"><h3>Temperament</h3><p>—</p></div>
-            <div class="god-field"><h3>What the God Wants</h3><p>—</p></div>
-            <div class="god-field"><h3>What the God Gives</h3><p>—</p></div>
-            <div class="god-field"><h3>What the God Takes</h3><p>—</p></div>
-            <div class="god-field"><h3>Worship</h3><p>—</p></div>
-            <div class="god-field"><h3>Priests and Followers</h3><p>—</p></div>
-            <div class="god-field"><h3>Sacrifices and Offerings</h3><p>—</p></div>
-            <div class="god-field"><h3>Holy Places</h3><p>—</p></div>
-            <div class="god-field"><h3>Taboos</h3><p>—</p></div>
-            <div class="god-field"><h3>Signs of Favor</h3><p>—</p></div>
-            <div class="god-field"><h3>Signs of Anger</h3><p>—</p></div>
-            <div class="god-field"><h3>Relationship with the Dragon King</h3><p>—</p></div>
-            <div class="god-field"><h3>Relationships with the Other Gods</h3><p>—</p></div>
-            <div class="god-field"><h3>Relationship with Mortals</h3><p>—</p></div>
-            <div class="god-field"><h3>Death and the Afterlife</h3><p>—</p></div>
-            <div class="god-field"><h3>Common Prayer or Saying</h3><p>—</p></div>
-            <div class="god-field"><h3>Stories and Legends</h3><p>—</p></div>
-            <div class="god-field"><h3>Secrets</h3><p>—</p></div>
-            <div class="god-field"><h3>How the God Interprets Its Name</h3><p>—</p></div>
-
-        </div>
-
-    </section>
-
-
-    <div class="divider"></div>
-
-
-    <!-- ================================
-         THE BANISHER
-         ================================ -->
-
-    <section class="god-entry" id="banisher">
-
-        <h2>The Banisher</h2>
-
-        <div class="god-template">
-
-            <div class="god-field">
-                <h3>Watched Kingdom</h3>
-                <p>Crook</p>
-            </div>
-
-            <div class="god-field"><h3>Known As</h3><p>—</p></div>
-            <div class="god-field"><h3>Domain</h3><p>—</p></div>
-            <div class="god-field"><h3>Symbol</h3><p>—</p></div>
-            <div class="god-field"><h3>Appearance</h3><p>—</p></div>
-            <div class="god-field"><h3>Temperament</h3><p>—</p></div>
-            <div class="god-field"><h3>What the God Wants</h3><p>—</p></div>
-            <div class="god-field"><h3>What the God Gives</h3><p>—</p></div>
-            <div class="god-field"><h3>What the God Takes</h3><p>—</p></div>
-            <div class="god-field"><h3>Worship</h3><p>—</p></div>
-            <div class="god-field"><h3>Priests and Followers</h3><p>—</p></div>
-            <div class="god-field"><h3>Sacrifices and Offerings</h3><p>—</p></div>
-            <div class="god-field"><h3>Holy Places</h3><p>—</p></div>
-            <div class="god-field"><h3>Taboos</h3><p>—</p></div>
-            <div class="god-field"><h3>Signs of Favor</h3><p>—</p></div>
-            <div class="god-field"><h3>Signs of Anger</h3><p>—</p></div>
-            <div class="god-field"><h3>Relationship with the Dragon King</h3><p>—</p></div>
-            <div class="god-field"><h3>Relationships with the Other Gods</h3><p>—</p></div>
-            <div class="god-field"><h3>Relationship with Mortals</h3><p>—</p></div>
-            <div class="god-field"><h3>Death and the Afterlife</h3><p>—</p></div>
-            <div class="god-field"><h3>Common Prayer or Saying</h3><p>—</p></div>
-            <div class="god-field"><h3>Stories and Legends</h3><p>—</p></div>
-            <div class="god-field"><h3>Secrets</h3><p>—</p></div>
-            <div class="god-field"><h3>How the God Interprets Its Name</h3><p>—</p></div>
-
-        </div>
+        <h3>Watcher of Plume</h3>
+
+        <p>
+            The Giver is the god traditionally associated with Plume
+            and holds an important place in the oldest histories of
+            Ozyleme.
+        </p>
+
+        <p>
+            The full history, worship, symbols, rites, and influence
+            of the Giver will be recorded here.
+        </p>
 
     </section>
 
@@ -541,51 +271,189 @@
          THE RAVAGER
          ================================ -->
 
-    <section class="god-entry" id="ravager">
+    <section id="ravager">
 
         <h2>The Ravager</h2>
 
-        <div class="god-template">
+        <h3>Watcher of Kettle</h3>
 
-            <div class="god-field">
-                <h3>Watched Kingdom</h3>
-                <p>Kettle</p>
-            </div>
+        <p>
+            The Ravager watches over the forest kingdom of Kettle.
+        </p>
 
-            <div class="god-field"><h3>Known As</h3><p>—</p></div>
-            <div class="god-field"><h3>Domain</h3><p>—</p></div>
-            <div class="god-field"><h3>Symbol</h3><p>—</p></div>
-            <div class="god-field"><h3>Appearance</h3><p>—</p></div>
-            <div class="god-field"><h3>Temperament</h3><p>—</p></div>
-            <div class="god-field"><h3>What the God Wants</h3><p>—</p></div>
-            <div class="god-field"><h3>What the God Gives</h3><p>—</p></div>
-            <div class="god-field"><h3>What the God Takes</h3><p>—</p></div>
-            <div class="god-field"><h3>Worship</h3><p>—</p></div>
-            <div class="god-field"><h3>Priests and Followers</h3><p>—</p></div>
-            <div class="god-field"><h3>Sacrifices and Offerings</h3><p>—</p></div>
-            <div class="god-field"><h3>Holy Places</h3><p>—</p></div>
-            <div class="god-field"><h3>Taboos</h3><p>—</p></div>
-            <div class="god-field"><h3>Signs of Favor</h3><p>—</p></div>
-            <div class="god-field"><h3>Signs of Anger</h3><p>—</p></div>
-            <div class="god-field"><h3>Relationship with the Dragon King</h3><p>—</p></div>
-            <div class="god-field"><h3>Relationships with the Other Gods</h3><p>—</p></div>
-            <div class="god-field"><h3>Relationship with Mortals</h3><p>—</p></div>
-            <div class="god-field"><h3>Death and the Afterlife</h3><p>—</p></div>
-            <div class="god-field"><h3>Common Prayer or Saying</h3><p>—</p></div>
-            <div class="god-field"><h3>Stories and Legends</h3><p>—</p></div>
-            <div class="god-field"><h3>Secrets</h3><p>—</p></div>
-            <div class="god-field"><h3>How the God Interprets Its Name</h3><p>—</p></div>
-
-        </div>
+        <p>
+            The full history, worship, symbols, rites, and influence
+            of the Ravager will be recorded here.
+        </p>
 
     </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- ================================
+         THE TORMENTOR
+         ================================ -->
+
+    <section id="tormentor">
+
+        <h2>The Tormentor</h2>
+
+        <h3>Watcher of Loop</h3>
+
+        <p>
+            The Tormentor watches over Loop, a kingdom of spectacle,
+            strange celebration, illusion, and macabre tradition.
+        </p>
+
+        <p>
+            The full history, worship, symbols, rites, and influence
+            of the Tormentor will be recorded here.
+        </p>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- ================================
+         THE INFLICTOR
+         ================================ -->
+
+    <section id="inflictor">
+
+        <h2>The Inflictor</h2>
+
+        <h3>Watcher of Torch</h3>
+
+        <p>
+            The Inflictor watches over Torch and the lands associated
+            with the High Elves.
+        </p>
+
+        <p>
+            The full history, worship, symbols, rites, and influence
+            of the Inflictor will be recorded here.
+        </p>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- ================================
+         THE HARVESTER
+         ================================ -->
+
+    <section id="harvester">
+
+        <h2>The Harvester</h2>
+
+        <h3>Watcher of Vial</h3>
+
+        <p>
+            The Harvester watches over Vial.
+        </p>
+
+        <p>
+            The full history, worship, symbols, rites, and influence
+            of the Harvester will be recorded here.
+        </p>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- ================================
+         THE SEER
+         ================================ -->
+
+    <section id="seer">
+
+        <h2>The Seer</h2>
+
+        <h3>Watcher of Hook</h3>
+
+        <p>
+            The Seer watches over Hook and is remembered throughout
+            Ozyleme for powers and events that extend far beyond the
+            borders of that kingdom.
+        </p>
+
+        <p>
+            The full history, worship, symbols, rites, and influence
+            of the Seer will be recorded here.
+        </p>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- ================================
+         THE DOMINATOR
+         ================================ -->
+
+    <section id="dominator">
+
+        <h2>The Dominator</h2>
+
+        <h3>Watcher of Bell</h3>
+
+        <p>
+            The Dominator watches over Bell.
+        </p>
+
+        <p>
+            The full history, worship, symbols, rites, and influence
+            of the Dominator will be recorded here.
+        </p>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- ================================
+         THE BANISHER
+         ================================ -->
+
+    <section id="banisher">
+
+        <h2>The Banisher</h2>
+
+        <h3>Watcher of Crook</h3>
+
+        <p>
+            The Banisher watches over Crook.
+        </p>
+
+        <p>
+            The full history, worship, symbols, rites, and influence
+            of the Banisher will be recorded here.
+        </p>
+
+    </section>
+
 
 </main>
 
 
+<!-- ================================
+     FOOTER
+     ================================ -->
+
 <footer>
     <p>The World of Ozyleme</p>
 </footer>
+
 
 </body>
 
