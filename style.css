@@ -1,4 +1,4 @@
-ki/* =========================================================
+/* =========================================================
    OZYLEME
    MAIN WEBSITE STYLESHEET
    ========================================================= */
@@ -91,7 +91,12 @@ header {
 }
 
 
-/* Main OZYLEME title */
+/* =========================================================
+   OPTIONAL HEADER TITLE
+
+   Most pages intentionally leave <h1></h1> empty because
+   OZYLEME is already written into the banner artwork.
+   ========================================================= */
 
 header h1 {
     position: absolute;
@@ -125,8 +130,14 @@ header h1 {
         0 0 24px rgba(120, 40, 30, 0.35);
 }
 
+header h1:empty {
+    display: none;
+}
 
-/* Header tagline */
+
+/* =========================================================
+   HEADER TAGLINE
+   ========================================================= */
 
 header p {
     position: absolute;
@@ -159,7 +170,9 @@ header p {
 }
 
 
-/* Desktop tagline */
+/* =========================================================
+   DESKTOP TAGLINE
+   ========================================================= */
 
 @media (min-width: 768px) {
 
@@ -203,6 +216,7 @@ nav {
         0 5px 15px rgba(0, 0, 0, 0.30);
 }
 
+
 nav a {
     margin: 2px;
 
@@ -215,30 +229,111 @@ nav a {
     font-size: 0.95rem;
     letter-spacing: 0.08em;
 
-    border-bottom: 1px solid transparent;
+    background: transparent;
+
+    border: 0;
+    border-bottom: 2px solid transparent;
+
+    outline: none;
+
+    -webkit-tap-highlight-color: transparent;
 
     transition:
         color 0.2s ease,
-        background-color 0.2s ease,
         border-color 0.2s ease;
 }
 
-nav a:hover,
-nav a:focus {
+
+/* =========================================================
+   CURRENT PAGE
+
+   Keeps a thin red line beneath the page you are currently on.
+   Supports either:
+       class="active"
+   OR
+       aria-current="page"
+   ========================================================= */
+
+nav a.active,
+nav a.active:visited,
+nav a[aria-current="page"],
+nav a[aria-current="page"]:visited {
+
     color: #e0d6b8;
 
-    background-color: rgba(93, 37, 31, 0.16);
+    background: transparent;
 
     border-bottom-color: #74372f;
 }
 
-nav a.active {
+
+/* =========================================================
+   MOBILE / TAP BEHAVIOR
+
+   Prevents a different navigation button from remaining
+   surrounded by a dark/red rectangle after tapping it.
+   ========================================================= */
+
+nav a:not(.active):not([aria-current="page"]):focus,
+nav a:not(.active):not([aria-current="page"]):active {
+
+    color: #aaa48f;
+
+    background: transparent;
+
+    border-bottom-color: transparent;
+
+    outline: none;
+}
+
+
+/* Current page keeps its underline even if focused */
+
+nav a.active:focus,
+nav a.active:active,
+nav a[aria-current="page"]:focus,
+nav a[aria-current="page"]:active {
+
     color: #e0d6b8;
+
+    background: transparent;
 
     border-bottom-color: #74372f;
 
-    background-color:
-        rgba(93, 37, 31, 0.10);
+    outline: none;
+}
+
+
+/* =========================================================
+   DESKTOP HOVER
+
+   Other buttons temporarily receive the same red underline
+   when hovered with a mouse.
+   ========================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+
+    nav a:hover {
+        color: #e0d6b8;
+
+        background: transparent;
+
+        border-bottom-color: #74372f;
+    }
+
+}
+
+
+/* =========================================================
+   KEYBOARD ACCESSIBILITY
+   ========================================================= */
+
+nav a:focus-visible {
+
+    color: #e0d6b8;
+
+    outline: 1px solid #5d5143;
+    outline-offset: 3px;
 }
 
 
@@ -259,6 +354,7 @@ main {
     background: transparent;
 }
 
+
 section {
     margin-bottom: 65px;
 }
@@ -275,12 +371,14 @@ h4 {
     font-weight: normal;
 }
 
+
 main h1,
 main h2 {
     color: #d8cfb2;
 
     letter-spacing: 0.08em;
 }
+
 
 main h1 {
     margin-top: 0;
@@ -291,6 +389,7 @@ main h1 {
         3.4rem
     );
 }
+
 
 main h2 {
     margin-top: 0;
@@ -307,6 +406,7 @@ main h2 {
     border-bottom: 1px solid #413d34;
 }
 
+
 main h3 {
     color: #c9c0a4;
 
@@ -322,13 +422,16 @@ p {
     color: #aaa38f;
 }
 
+
 strong {
     color: #d5ccb0;
 }
 
+
 em {
     color: #b6ad96;
 }
+
 
 blockquote {
     margin: 30px 0;
@@ -356,6 +459,7 @@ main a {
     transition:
         color 0.2s ease;
 }
+
 
 main a:hover {
     color: #d5b4a7;
@@ -391,7 +495,6 @@ main a:hover {
     display: flex;
 
     flex-direction: column;
-
     justify-content: flex-end;
 
     min-height: 190px;
@@ -424,7 +527,9 @@ main a:hover {
 }
 
 
-/* Card background image */
+/* =========================================================
+   CARD BACKGROUND IMAGE
+   ========================================================= */
 
 .card::before {
     content: "";
@@ -452,7 +557,9 @@ main a:hover {
 }
 
 
-/* Dark readability overlay */
+/* =========================================================
+   CARD READABILITY OVERLAY
+   ========================================================= */
 
 .card::after {
     content: "";
@@ -475,7 +582,9 @@ main a:hover {
 }
 
 
-/* Card text */
+/* =========================================================
+   CARD TEXT
+   ========================================================= */
 
 .card h3,
 .card p {
@@ -483,6 +592,7 @@ main a:hover {
 
     z-index: 2;
 }
+
 
 .card h3 {
     margin-top: 0;
@@ -496,6 +606,7 @@ main a:hover {
         0 2px 5px rgba(0, 0, 0, 0.95);
 }
 
+
 .card p {
     margin: 0;
 
@@ -506,22 +617,29 @@ main a:hover {
 }
 
 
-/* Card hover */
+/* =========================================================
+   CARD HOVER
+   ========================================================= */
 
-.card:hover {
-    transform: translateY(-4px);
+@media (hover: hover) and (pointer: fine) {
 
-    border-color: #74372f;
+    .card:hover {
+        transform: translateY(-4px);
 
-    box-shadow:
-        0 12px 30px rgba(0, 0, 0, 0.48),
-        inset 0 0 25px rgba(90, 35, 28, 0.08);
-}
+        border-color: #74372f;
 
-.card:hover::before {
-    transform: scale(1.025);
+        box-shadow:
+            0 12px 30px rgba(0, 0, 0, 0.48),
+            inset 0 0 25px rgba(90, 35, 28, 0.08);
+    }
 
-    filter: brightness(1.07);
+
+    .card:hover::before {
+        transform: scale(1.025);
+
+        filter: brightness(1.07);
+    }
+
 }
 
 
@@ -534,35 +652,42 @@ main a:hover {
         url("images/kingdoms/Plume Navi Button.jpg");
 }
 
+
 .card.kettle {
     --card-image:
         url("images/kingdoms/Kettle Navi Button.jpg");
 }
+
 
 .card.loop {
     --card-image:
         url("images/kingdoms/Loop Navi Button.jpg");
 }
 
+
 .card.torch {
     --card-image:
         url("images/kingdoms/Torch Navi Button.jpg");
 }
+
 
 .card.vial {
     --card-image:
         url("images/kingdoms/Vial Navi Button.jpg");
 }
 
+
 .card.hook {
     --card-image:
         url("images/kingdoms/Hook Navi Button.jpg");
 }
 
+
 .card.bell {
     --card-image:
         url("images/kingdoms/Bell Navi Button.jpg");
 }
+
 
 .card.crook {
     --card-image:
@@ -572,7 +697,6 @@ main a:hover {
 
 /* =========================================================
    GOD CARD IMAGES
-
    SEPARATE FROM KINGDOM CARD IMAGES
    ========================================================= */
 
@@ -581,39 +705,153 @@ main a:hover {
         url("images/gods/Giver Navi Button.jpg");
 }
 
+
 .card.ravager {
     --card-image:
         url("images/gods/Ravager Navi Button.jpg");
 }
+
 
 .card.tormentor {
     --card-image:
         url("images/gods/Tormentor Navi Button.jpg");
 }
 
+
 .card.inflictor {
     --card-image:
         url("images/gods/Inflictor Navi Button.jpg");
 }
+
 
 .card.harvester {
     --card-image:
         url("images/gods/Harvester Navi Button.jpg");
 }
 
+
 .card.seer {
     --card-image:
         url("images/gods/Seer Navi Button.jpg");
 }
+
 
 .card.dominator {
     --card-image:
         url("images/gods/Dominator Navi Button.jpg");
 }
 
+
 .card.banisher {
     --card-image:
         url("images/gods/Banisher Navi Button.jpg");
+}
+
+
+/* =========================================================
+   PLAYER GUIDE — CHARACTER BUILDER CARD
+   ========================================================= */
+
+.character-builder-link {
+    margin-top: 30px;
+}
+
+
+.character-builder-link .builder-button {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+    justify-content: flex-end;
+
+    width: 100%;
+    max-width: 520px;
+
+    min-height: 190px;
+
+    padding: 24px;
+
+    overflow: hidden;
+
+    color: #ddd3b6;
+
+    text-decoration: none;
+
+    font-size: 1.35rem;
+    letter-spacing: 0.04em;
+
+    background:
+        linear-gradient(
+            145deg,
+            #25241f,
+            #11110f
+        );
+
+    border: 1px solid #47443a;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.35),
+        inset 0 0 25px rgba(0, 0, 0, 0.20);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.character-builder-link .builder-button::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 70% 20%,
+            rgba(110, 95, 73, 0.10),
+            transparent 45%
+        );
+
+    pointer-events: none;
+}
+
+
+.character-builder-link .builder-button::after {
+    content:
+        "Create, save, load, and export a character for Ozyleme.";
+
+    position: relative;
+
+    display: block;
+
+    margin-top: 8px;
+
+    color: #aaa38d;
+
+    font-size: 0.95rem;
+    line-height: 1.5;
+
+    letter-spacing: normal;
+}
+
+
+@media (hover: hover) and (pointer: fine) {
+
+    .character-builder-link .builder-button:hover {
+        transform: translateY(-4px);
+
+        color: #ddd3b6;
+
+        border-color: #74372f;
+
+        box-shadow:
+            0 12px 30px rgba(0, 0, 0, 0.48),
+            inset 0 0 25px rgba(90, 35, 28, 0.08);
+    }
+
 }
 
 
@@ -624,6 +862,7 @@ main a:hover {
 .gods-intro {
     margin-bottom: 55px;
 }
+
 
 .gods-directory {
     scroll-margin-top: 90px;
@@ -652,8 +891,6 @@ main a:hover {
 }
 
 
-/* God directory cards */
-
 .gods-grid .card {
     min-width: 0;
 
@@ -665,6 +902,7 @@ main a:hover {
 
     justify-content: flex-end;
 }
+
 
 .gods-grid .card h3 {
     margin: 0;
@@ -683,6 +921,7 @@ main a:hover {
 
     word-break: normal;
 }
+
 
 .gods-grid .card p {
     margin-top: 5px;
@@ -713,7 +952,9 @@ main a:hover {
 }
 
 
-/* God title */
+/* =========================================================
+   GOD TITLE
+   ========================================================= */
 
 .god-heading {
     margin-bottom: 28px;
@@ -723,6 +964,7 @@ main a:hover {
     border-bottom:
         1px solid #3d3d34;
 }
+
 
 .god-heading h2 {
     margin: 0 0 5px;
@@ -741,6 +983,7 @@ main a:hover {
 
     letter-spacing: 0.05em;
 }
+
 
 .god-heading h3 {
     margin: 0;
@@ -766,6 +1009,7 @@ main a:hover {
     margin-bottom: 30px;
 }
 
+
 .god-outline p {
     margin-top: 0;
 
@@ -779,15 +1023,6 @@ main a:hover {
 
 /* =========================================================
    GOD FACT GRID
-
-   Role
-   Element
-   Domains
-   Doctrine
-   Sin
-   Symbol
-   Offering
-   Taboo
    ========================================================= */
 
 .god-facts {
@@ -806,7 +1041,9 @@ main a:hover {
 }
 
 
-/* Individual god fact */
+/* =========================================================
+   INDIVIDUAL GOD FACT
+   ========================================================= */
 
 .god-fact {
     min-width: 0;
@@ -820,16 +1057,13 @@ main a:hover {
             rgba(15, 16, 13, 0.96)
         );
 
-    border:
-        1px solid #404037;
+    border: 1px solid #404037;
 
     box-shadow:
         inset 0 0 20px rgba(0, 0, 0, 0.28),
         0 5px 15px rgba(0, 0, 0, 0.20);
 }
 
-
-/* Fact title */
 
 .god-fact h4 {
     margin: 0 0 7px;
@@ -843,8 +1077,6 @@ main a:hover {
     text-transform: uppercase;
 }
 
-
-/* Fact content */
 
 .god-fact p {
     margin: 0;
@@ -882,6 +1114,7 @@ main a:hover {
     margin-bottom: 30px;
 }
 
+
 .god-section h3 {
     margin-top: 0;
     margin-bottom: 12px;
@@ -894,6 +1127,7 @@ main a:hover {
 
     text-transform: uppercase;
 }
+
 
 .god-section p {
     max-width: 900px;
@@ -921,6 +1155,7 @@ main a:hover {
         1px solid rgba(65, 61, 52, 0.55);
 }
 
+
 .god-back-link a {
     display: inline-block;
 
@@ -936,6 +1171,7 @@ main a:hover {
         color 0.2s ease,
         transform 0.2s ease;
 }
+
 
 .god-back-link a:hover {
     color: #d2cab0;
@@ -958,8 +1194,7 @@ main a:hover {
     background:
         rgba(0, 0, 0, 0.12);
 
-    border:
-        1px solid #39372f;
+    border: 1px solid #39372f;
 
     box-shadow:
         inset 0 0 25px rgba(0, 0, 0, 0.15);
@@ -989,6 +1224,7 @@ hr {
         );
 }
 
+
 .god-profile + .divider {
     margin-top: 50px;
     margin-bottom: 50px;
@@ -1006,6 +1242,7 @@ ol {
     padding-left: 28px;
 }
 
+
 li {
     margin-bottom: 8px;
 }
@@ -1021,6 +1258,37 @@ main img {
     max-width: 100%;
 
     height: auto;
+}
+
+
+/* =========================================================
+   OZYLEME WORLD MAP
+   ========================================================= */
+
+.world-map {
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 45px auto 15px;
+
+    text-align: center;
+}
+
+
+.world-map img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    margin: 0 auto;
+
+    border: 1px solid #47473b;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.55);
+
+    background: #10100e;
 }
 
 
@@ -1045,6 +1313,7 @@ footer {
     letter-spacing: 0.06em;
 }
 
+
 footer p {
     margin: 0;
 
@@ -1064,6 +1333,7 @@ footer p {
     padding: 45px 25px 20px;
 }
 
+
 .people-intro h2 {
     margin-top: 0;
     margin-bottom: 10px;
@@ -1074,6 +1344,7 @@ footer p {
 
     letter-spacing: 0.08em;
 }
+
 
 .people-intro p {
     margin: 0;
@@ -1126,7 +1397,9 @@ footer p {
 }
 
 
-/* Portrait */
+/* =========================================================
+   PERSON PORTRAIT
+   ========================================================= */
 
 .person-portrait {
     width: 95px;
@@ -1136,18 +1409,20 @@ footer p {
 
     object-fit: cover;
 
-    border:
-        1px solid #47473b;
+    border: 1px solid #47473b;
 
     background: #0d0f0c;
 }
 
 
-/* Person text */
+/* =========================================================
+   PERSON TEXT
+   ========================================================= */
 
 .person-info {
     min-width: 0;
 }
+
 
 .person-info h3 {
     margin: 0 0 8px;
@@ -1161,6 +1436,7 @@ footer p {
     letter-spacing: 0.06em;
 }
 
+
 .person-info p {
     margin: 0;
 
@@ -1172,7 +1448,9 @@ footer p {
 }
 
 
-/* Center divider */
+/* =========================================================
+   PEOPLE CENTER DIVIDER
+   ========================================================= */
 
 .person-entry:nth-child(odd) {
     padding-right: 25px;
@@ -1180,6 +1458,7 @@ footer p {
     border-right:
         1px solid rgba(120, 115, 96, 0.28);
 }
+
 
 .person-entry:nth-child(even) {
     padding-left: 25px;
@@ -1196,15 +1475,18 @@ footer p {
         gap: 9px;
     }
 
+
     .gods-grid .card {
         min-height: 130px;
 
         padding: 12px 7px;
     }
 
+
     .gods-grid .card h3 {
         font-size: 0.9rem;
     }
+
 
     .gods-grid .card p {
         font-size: 0.7rem;
@@ -1226,6 +1508,7 @@ footer p {
         aspect-ratio: 2 / 1;
     }
 
+
     header h1 {
         top: 25%;
 
@@ -1237,6 +1520,7 @@ footer p {
 
         letter-spacing: 0.12em;
     }
+
 
     header p {
         bottom: 15%;
@@ -1252,6 +1536,7 @@ footer p {
     nav {
         padding: 8px 5px;
     }
+
 
     nav a {
         padding: 7px 9px;
@@ -1271,6 +1556,7 @@ footer p {
         padding-top: 35px;
     }
 
+
     section {
         margin-bottom: 45px;
     }
@@ -1284,8 +1570,20 @@ footer p {
         gap: 16px;
     }
 
+
     .cards .card {
         min-height: 170px;
+    }
+
+
+    /* CHARACTER BUILDER CARD */
+
+    .character-builder-link .builder-button {
+        max-width: none;
+
+        min-height: 170px;
+
+        padding: 22px;
     }
 
 
@@ -1308,11 +1606,13 @@ footer p {
         margin-top: 20px;
     }
 
+
     .gods-grid .card {
         min-height: 92px;
 
         padding: 8px 3px;
     }
+
 
     .gods-grid .card h3 {
         margin-bottom: 3px;
@@ -1327,6 +1627,7 @@ footer p {
 
         letter-spacing: 0;
     }
+
 
     .gods-grid .card p {
         margin-top: 2px;
@@ -1349,9 +1650,11 @@ footer p {
         padding-bottom: 14px;
     }
 
+
     .god-heading h2 {
         font-size: 2rem;
     }
+
 
     .god-heading h3 {
         font-size: 0.9rem;
@@ -1359,9 +1662,11 @@ footer p {
         line-height: 1.5;
     }
 
+
     .god-outline {
         margin-bottom: 24px;
     }
+
 
     .god-outline p {
         font-size: 0.98rem;
@@ -1379,15 +1684,18 @@ footer p {
         margin-bottom: 28px;
     }
 
+
     .god-fact {
         padding: 13px 14px;
     }
+
 
     .god-fact h4 {
         margin-bottom: 5px;
 
         font-size: 0.7rem;
     }
+
 
     .god-fact p {
         font-size: 0.95rem;
@@ -1400,6 +1708,7 @@ footer p {
         margin-top: 22px;
         margin-bottom: 26px;
     }
+
 
     .god-section h3 {
         font-size: 1rem;
@@ -1446,6 +1755,7 @@ footer p {
         padding: 0 20px;
     }
 
+
     .person-entry:nth-child(odd),
     .person-entry:nth-child(even) {
         padding-left: 0;
@@ -1454,52 +1764,16 @@ footer p {
         border-right: none;
     }
 
+
     .person-entry {
         grid-template-columns:
             80px 1fr;
     }
+
 
     .person-portrait {
         width: 80px;
         height: 80px;
     }
 
-}
-/* =========================================================
-   OZYLEME WORLD MAP
-   ========================================================= */
-
-.world-map {
-    width: 100%;
-    max-width: 1100px;
-
-    margin: 45px auto 15px;
-
-    text-align: center;
-}
-
-.world-map img {
-    display: block;
-
-    width: 100%;
-    height: auto;
-
-    margin: 0 auto;
-
-    border: 1px solid #47473b;
-
-    box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.55);
-
-    background: #10100e;
-}
-/* =========================================================
-   NAVIGATION — KEEP CURRENT PAGE SAME AS OTHER BUTTONS
-   ========================================================= */
-
-nav a.active,
-nav a.active:visited {
-    color: #aaa48f;
-    background-color: transparent;
-    border-bottom-color: transparent;
 }
