@@ -1,4 +1,4 @@
-/* =========================================================
+ki/* =========================================================
    OZYLEME
    MAIN WEBSITE STYLESHEET
    ========================================================= */
@@ -1492,4 +1492,14 @@ footer p {
         0 10px 30px rgba(0, 0, 0, 0.55);
 
     background: #10100e;
+}
+/* =========================================================
+   NAVIGATION — KEEP CURRENT PAGE SAME AS OTHER BUTTONS
+   ========================================================= */
+
+nav a.active,
+nav a.active:visited {
+    color: #aaa48f;
+    background-color: transparent;
+    border-bottom-color: transparent;
 }
