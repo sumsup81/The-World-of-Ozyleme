@@ -923,6 +923,80 @@
 
         }
 
+
+        /* =====================================================
+           SAVE / LOAD CHARACTER
+           ===================================================== */
+
+        .character-builder-page .character-file-controls {
+            display: grid;
+            gap: 12px;
+        }
+
+        .character-builder-page .character-file-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .character-builder-page .character-file-button {
+            min-height: 42px;
+            padding: 9px 16px;
+
+            color: #aaa48f;
+            background: #10110e;
+
+            border: 1px solid #444438;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 0.9rem;
+            letter-spacing: 0.06em;
+
+            cursor: pointer;
+
+            transition:
+                color 0.2s,
+                border-color 0.2s,
+                background 0.2s,
+                transform 0.2s;
+        }
+
+        .character-builder-page .character-file-button:hover {
+            color: #e0d7bb;
+            background: #181913;
+            border-color: #70352f;
+            transform: translateY(-1px);
+        }
+
+        .character-builder-page .character-file-button:focus-visible {
+            outline: 2px solid #7a4840;
+            outline-offset: 2px;
+        }
+
+        .character-builder-page .character-file-status {
+            min-height: 1.4em;
+            margin: 0;
+
+            color: #888471;
+
+            font-size: 0.83rem;
+            text-align: center;
+        }
+
+        .character-builder-page .character-file-status.success {
+            color: #c8c09f;
+        }
+
+        .character-builder-page .character-file-status.error {
+            color: #c4877e;
+        }
+
+
     </style>
 
 </head>
@@ -2958,6 +3032,60 @@
             </div>
 
 
+
+            <!-- =================================================
+                 SAVE / LOAD CHARACTER
+                 ================================================= -->
+
+            <section class="sheet-panel">
+
+                <h3 class="panel-heading">
+                    Save / Load Character
+                </h3>
+
+                <div class="character-file-controls">
+
+                    <div class="character-file-buttons">
+
+                        <button
+                            type="button"
+                            id="saveCharacterButton"
+                            class="character-file-button"
+                        >
+                            Save Character JSON
+                        </button>
+
+
+                        <button
+                            type="button"
+                            id="loadCharacterButton"
+                            class="character-file-button"
+                        >
+                            Load Character JSON
+                        </button>
+
+                    </div>
+
+
+                    <input
+                        type="file"
+                        id="loadCharacterFile"
+                        accept=".json,application/json"
+                        hidden
+                    >
+
+
+                    <p
+                        id="characterFileStatus"
+                        class="character-file-status"
+                        aria-live="polite"
+                    ></p>
+
+                </div>
+
+            </section>
+
+
         </form>
 
     </main>
@@ -3725,6 +3853,696 @@
                 "change",
                 updateCharacterMath
             );
+
+
+
+        /* =====================================================
+           SAVE / LOAD CHARACTER JSON
+           ===================================================== */
+
+        const CHARACTER_FILE_FORMAT =
+            "ozyleme-character";
+
+        const CHARACTER_FILE_VERSION = 1;
+
+
+        function setCharacterFileStatus(
+            message,
+            type
+        ) {
+
+            const status =
+                document.getElementById(
+                    "characterFileStatus"
+                );
+
+            status.textContent = message || "";
+
+            status.classList.remove(
+                "success",
+                "error"
+            );
+
+            if (type) {
+                status.classList.add(type);
+            }
+
+        }
+
+
+        function collectNamedFields() {
+
+            const fields = {};
+
+            document
+                .querySelectorAll(
+                    "#characterForm [name]"
+                )
+                .forEach(function (control) {
+
+                    if (
+                        control.type === "file"
+                    ) {
+                        return;
+                    }
+
+                    if (
+                        control.type === "checkbox"
+                    ) {
+
+                        fields[control.name] =
+                            control.checked;
+
+                    }
+                    else if (
+                        control.type === "radio"
+                    ) {
+
+                        if (control.checked) {
+                            fields[control.name] =
+                                control.value;
+                        }
+
+                    }
+                    else {
+
+                        fields[control.name] =
+                            control.value;
+
+                    }
+
+                });
+
+            return fields;
+
+        }
+
+
+        function collectSavingThrowProficiencies() {
+
+            const saves = {};
+
+            document
+                .querySelectorAll(
+                    ".save-prof"
+                )
+                .forEach(function (checkbox) {
+
+                    saves[
+                        checkbox.dataset.ability
+                    ] = checkbox.checked;
+
+                });
+
+            return saves;
+
+        }
+
+
+        function collectSkills() {
+
+            const skills = {};
+
+            document
+                .querySelectorAll(
+                    ".skill-row"
+                )
+                .forEach(function (row) {
+
+                    const skillName =
+                        row.dataset.skill;
+
+                    skills[skillName] = {
+                        proficient:
+                            row.querySelector(
+                                ".skill-prof"
+                            ).checked,
+
+                        expertise:
+                            row.querySelector(
+                                ".skill-exp"
+                            ).checked
+                    };
+
+                });
+
+            return skills;
+
+        }
+
+
+        function collectDeathSaves() {
+
+            const groups =
+                document.querySelectorAll(
+                    ".death-group"
+                );
+
+            function countChecked(group) {
+
+                if (!group) {
+                    return 0;
+                }
+
+                return group.querySelectorAll(
+                    'input[type="checkbox"]:checked'
+                ).length;
+
+            }
+
+            return {
+                successes:
+                    countChecked(groups[0]),
+
+                failures:
+                    countChecked(groups[1])
+            };
+
+        }
+
+
+        function buildCharacterSaveData() {
+
+            updateCharacterMath();
+
+            return {
+                format:
+                    CHARACTER_FILE_FORMAT,
+
+                version:
+                    CHARACTER_FILE_VERSION,
+
+                savedAt:
+                    new Date().toISOString(),
+
+                fields:
+                    collectNamedFields(),
+
+                savingThrowProficiencies:
+                    collectSavingThrowProficiencies(),
+
+                skills:
+                    collectSkills(),
+
+                deathSaves:
+                    collectDeathSaves()
+            };
+
+        }
+
+
+        function makeSafeFileName(name) {
+
+            const cleaned =
+                String(name || "")
+                    .trim()
+                    .replace(
+                        /[<>:"/\\|?*\u0000-\u001F]/g,
+                        "-"
+                    )
+                    .replace(/\s+/g, " ")
+                    .slice(0, 80);
+
+            return cleaned ||
+                "Ozyleme Character";
+
+        }
+
+
+        function saveCharacterJson() {
+
+            try {
+
+                const characterData =
+                    buildCharacterSaveData();
+
+                const characterName =
+                    document.getElementById(
+                        "characterName"
+                    ).value;
+
+                const fileName =
+                    makeSafeFileName(
+                        characterName
+                    ) + ".json";
+
+                const json =
+                    JSON.stringify(
+                        characterData,
+                        null,
+                        2
+                    );
+
+                const blob =
+                    new Blob(
+                        [json],
+                        {
+                            type:
+                                "application/json"
+                        }
+                    );
+
+                const url =
+                    URL.createObjectURL(blob);
+
+                const link =
+                    document.createElement("a");
+
+                link.href = url;
+                link.download = fileName;
+
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+
+                window.setTimeout(
+                    function () {
+                        URL.revokeObjectURL(url);
+                    },
+                    1000
+                );
+
+                setCharacterFileStatus(
+                    "Character saved as " +
+                    fileName,
+                    "success"
+                );
+
+            }
+            catch (error) {
+
+                console.error(error);
+
+                setCharacterFileStatus(
+                    "The character could not be saved.",
+                    "error"
+                );
+
+            }
+
+        }
+
+
+        function restoreNamedFields(fields) {
+
+            if (
+                !fields ||
+                typeof fields !== "object"
+            ) {
+                return;
+            }
+
+            document
+                .querySelectorAll(
+                    "#characterForm [name]"
+                )
+                .forEach(function (control) {
+
+                    if (
+                        !Object.prototype
+                            .hasOwnProperty.call(
+                                fields,
+                                control.name
+                            )
+                    ) {
+                        return;
+                    }
+
+                    const value =
+                        fields[control.name];
+
+                    if (
+                        control.type === "checkbox"
+                    ) {
+
+                        control.checked =
+                            Boolean(value);
+
+                    }
+                    else if (
+                        control.type === "radio"
+                    ) {
+
+                        control.checked =
+                            String(control.value) ===
+                            String(value);
+
+                    }
+                    else {
+
+                        control.value =
+                            value == null
+                                ? ""
+                                : String(value);
+
+                    }
+
+                });
+
+        }
+
+
+        function restoreSavingThrowProficiencies(
+            saves
+        ) {
+
+            if (
+                !saves ||
+                typeof saves !== "object"
+            ) {
+                return;
+            }
+
+            document
+                .querySelectorAll(
+                    ".save-prof"
+                )
+                .forEach(function (checkbox) {
+
+                    const ability =
+                        checkbox.dataset.ability;
+
+                    checkbox.checked =
+                        Boolean(saves[ability]);
+
+                });
+
+        }
+
+
+        function restoreSkills(skills) {
+
+            if (
+                !skills ||
+                typeof skills !== "object"
+            ) {
+                return;
+            }
+
+            document
+                .querySelectorAll(
+                    ".skill-row"
+                )
+                .forEach(function (row) {
+
+                    const savedSkill =
+                        skills[row.dataset.skill];
+
+                    if (!savedSkill) {
+                        return;
+                    }
+
+                    const prof =
+                        row.querySelector(
+                            ".skill-prof"
+                        );
+
+                    const expertise =
+                        row.querySelector(
+                            ".skill-exp"
+                        );
+
+                    expertise.checked =
+                        Boolean(
+                            savedSkill.expertise
+                        );
+
+                    prof.checked =
+                        Boolean(
+                            savedSkill.proficient ||
+                            savedSkill.expertise
+                        );
+
+                });
+
+        }
+
+
+        function restoreDeathSaves(deathSaves) {
+
+            if (
+                !deathSaves ||
+                typeof deathSaves !== "object"
+            ) {
+                return;
+            }
+
+            const groups =
+                document.querySelectorAll(
+                    ".death-group"
+                );
+
+            function restoreGroup(
+                group,
+                amount
+            ) {
+
+                if (!group) {
+                    return;
+                }
+
+                const count =
+                    Math.max(
+                        0,
+                        Math.min(
+                            3,
+                            parseInt(amount) || 0
+                        )
+                    );
+
+                group
+                    .querySelectorAll(
+                        'input[type="checkbox"]'
+                    )
+                    .forEach(
+                        function (
+                            checkbox,
+                            index
+                        ) {
+
+                            checkbox.checked =
+                                index < count;
+
+                        }
+                    );
+
+            }
+
+            restoreGroup(
+                groups[0],
+                deathSaves.successes
+            );
+
+            restoreGroup(
+                groups[1],
+                deathSaves.failures
+            );
+
+        }
+
+
+        function refreshCustomEntryVisibility() {
+
+            const customGroups = [
+                [
+                    "characterClass",
+                    "customClass"
+                ],
+                [
+                    "species",
+                    "customSpecies"
+                ],
+                [
+                    "background",
+                    "customBackground"
+                ],
+                [
+                    "homeland",
+                    "customHomeland"
+                ]
+            ];
+
+            customGroups.forEach(
+                function (group) {
+
+                    const select =
+                        document.getElementById(
+                            group[0]
+                        );
+
+                    const customField =
+                        document.getElementById(
+                            group[1]
+                        );
+
+                    customField.hidden =
+                        select.value !== "Other";
+
+                }
+            );
+
+        }
+
+
+        function validateCharacterFile(data) {
+
+            if (
+                !data ||
+                typeof data !== "object"
+            ) {
+                throw new Error(
+                    "Invalid JSON data."
+                );
+            }
+
+            if (
+                data.format !==
+                CHARACTER_FILE_FORMAT
+            ) {
+                throw new Error(
+                    "This is not an Ozyleme character file."
+                );
+            }
+
+            if (
+                data.version !==
+                CHARACTER_FILE_VERSION
+            ) {
+                throw new Error(
+                    "This character file uses an unsupported version."
+                );
+            }
+
+            if (
+                !data.fields ||
+                typeof data.fields !== "object"
+            ) {
+                throw new Error(
+                    "The character file is missing its field data."
+                );
+            }
+
+        }
+
+
+        function loadCharacterData(data) {
+
+            validateCharacterFile(data);
+
+            restoreNamedFields(
+                data.fields
+            );
+
+            restoreSavingThrowProficiencies(
+                data.savingThrowProficiencies
+            );
+
+            restoreSkills(
+                data.skills
+            );
+
+            restoreDeathSaves(
+                data.deathSaves
+            );
+
+            refreshCustomEntryVisibility();
+
+            updateCharacterMath();
+
+        }
+
+
+        async function loadCharacterJsonFile(file) {
+
+            try {
+
+                const text =
+                    await file.text();
+
+                const data =
+                    JSON.parse(text);
+
+                loadCharacterData(data);
+
+                const loadedName =
+                    document.getElementById(
+                        "characterName"
+                    ).value.trim();
+
+                setCharacterFileStatus(
+                    loadedName
+                        ? "Character loaded: " +
+                          loadedName
+                        : "Character loaded.",
+                    "success"
+                );
+
+            }
+            catch (error) {
+
+                console.error(error);
+
+                setCharacterFileStatus(
+                    error && error.message
+                        ? error.message
+                        : "The character file could not be loaded.",
+                    "error"
+                );
+
+            }
+
+        }
+
+
+        const saveCharacterButton =
+            document.getElementById(
+                "saveCharacterButton"
+            );
+
+        const loadCharacterButton =
+            document.getElementById(
+                "loadCharacterButton"
+            );
+
+        const loadCharacterFile =
+            document.getElementById(
+                "loadCharacterFile"
+            );
+
+
+        saveCharacterButton.addEventListener(
+            "click",
+            saveCharacterJson
+        );
+
+
+        loadCharacterButton.addEventListener(
+            "click",
+            function () {
+
+                setCharacterFileStatus("");
+
+                loadCharacterFile.click();
+
+            }
+        );
+
+
+        loadCharacterFile.addEventListener(
+            "change",
+            function () {
+
+                const file =
+                    loadCharacterFile.files[0];
+
+                if (file) {
+                    loadCharacterJsonFile(file);
+                }
+
+                loadCharacterFile.value = "";
+
+            }
+        );
 
 
 
