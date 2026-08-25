@@ -1268,7 +1268,7 @@
             <section class="sheet-panel">
 
                 <h3 class="panel-heading">
-                    Save / Load Character
+                    Character Files
                 </h3>
 
                 <div class="character-file-controls">
@@ -1290,6 +1290,15 @@
                             class="character-file-button"
                         >
                             Load Character JSON
+                        </button>
+
+
+                        <button
+                            type="button"
+                            id="exportPdfButton"
+                            class="character-file-button"
+                        >
+                            Export Character PDF
                         </button>
 
                     </div>
@@ -3609,6 +3618,13 @@
 
 
     <!-- =====================================================
+         PDF EXPORT LIBRARY
+         ===================================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+
+
+    <!-- =====================================================
          CHARACTER BUILDER LOGIC
          ===================================================== -->
 
@@ -5280,6 +5296,1756 @@
         }
 
 
+        /* =====================================================
+           EXPORT TO 2024 D&D CHARACTER SHEET PDF
+           ===================================================== */
+
+        const CHARACTER_PDF_TEMPLATE =
+            "Character%20Building/DnD_2024_Character-Sheet.pdf";
+
+
+        function pdfValue(id) {
+
+            const field =
+                document.getElementById(id);
+
+            return field
+                ? String(field.value || "").trim()
+                : "";
+
+        }
+
+
+        function resolvedPdfChoice(
+            selectId,
+            customId
+        ) {
+
+            const selected =
+                pdfValue(selectId);
+
+            if (selected === "Other") {
+                return pdfValue(customId);
+            }
+
+            return selected;
+
+        }
+
+
+        function pdfSafeText(value) {
+
+            return String(value == null ? "" : value)
+                .replace(/[\u2018\u2019]/g, "'")
+                .replace(/[\u201C\u201D]/g, '"')
+                .replace(/[\u2013\u2014]/g, "-")
+                .replace(/\u2026/g, "...")
+                .replace(/\u2022/g, "-")
+                .replace(/\u00A0/g, " ")
+                .replace(/[^\x09\x0A\x0D\x20-\x7E\xA0-\xFF]/g, "?");
+
+        }
+
+
+        function pdfTitleCase(value) {
+
+            const clean =
+                pdfSafeText(value).trim();
+
+            if (!clean) {
+                return "";
+            }
+
+            return clean
+                .split(/\s+/)
+                .map(function (word) {
+                    return word.charAt(0).toUpperCase() +
+                        word.slice(1).toLowerCase();
+                })
+                .join(" ");
+
+        }
+
+
+        function drawPdfTextFit(
+            page,
+            text,
+            x,
+            y,
+            maxWidth,
+            font,
+            requestedSize,
+            minimumSize
+        ) {
+
+            const value =
+                pdfSafeText(text).trim();
+
+            if (!value) {
+                return;
+            }
+
+            let size =
+                requestedSize || 8;
+
+            const minSize =
+                minimumSize || 5;
+
+            while (
+                size > minSize &&
+                font.widthOfTextAtSize(
+                    value,
+                    size
+                ) > maxWidth
+            ) {
+                size -= 0.25;
+            }
+
+            page.drawText(
+                value,
+                {
+                    x: x,
+                    y: y,
+                    size: size,
+                    font: font,
+                    color: PDFLib.rgb(0, 0, 0)
+                }
+            );
+
+        }
+
+
+        function drawPdfCentered(
+            page,
+            text,
+            centerX,
+            y,
+            maxWidth,
+            font,
+            requestedSize,
+            minimumSize
+        ) {
+
+            const value =
+                pdfSafeText(text).trim();
+
+            if (!value) {
+                return;
+            }
+
+            let size =
+                requestedSize || 9;
+
+            const minSize =
+                minimumSize || 5;
+
+            let width =
+                font.widthOfTextAtSize(
+                    value,
+                    size
+                );
+
+            while (
+                size > minSize &&
+                width > maxWidth
+            ) {
+                size -= 0.25;
+                width =
+                    font.widthOfTextAtSize(
+                        value,
+                        size
+                    );
+            }
+
+            page.drawText(
+                value,
+                {
+                    x: centerX - width / 2,
+                    y: y,
+                    size: size,
+                    font: font,
+                    color: PDFLib.rgb(0, 0, 0)
+                }
+            );
+
+        }
+
+
+        function wrapPdfText(
+            font,
+            text,
+            size,
+            maxWidth
+        ) {
+
+            const source =
+                pdfSafeText(text)
+                    .replace(/\r/g, "");
+
+            const paragraphs =
+                source.split("\n");
+
+            const lines = [];
+
+            paragraphs.forEach(
+                function (paragraph) {
+
+                    const trimmed =
+                        paragraph.trim();
+
+                    if (!trimmed) {
+                        lines.push("");
+                        return;
+                    }
+
+                    const words =
+                        trimmed.split(/\s+/);
+
+                    let current = "";
+
+                    words.forEach(
+                        function (word) {
+
+                            const candidate =
+                                current
+                                    ? current + " " + word
+                                    : word;
+
+                            if (
+                                font.widthOfTextAtSize(
+                                    candidate,
+                                    size
+                                ) <= maxWidth
+                            ) {
+                                current = candidate;
+                                return;
+                            }
+
+                            if (current) {
+                                lines.push(current);
+                            }
+
+                            if (
+                                font.widthOfTextAtSize(
+                                    word,
+                                    size
+                                ) <= maxWidth
+                            ) {
+                                current = word;
+                                return;
+                            }
+
+                            let piece = "";
+
+                            Array.from(word).forEach(
+                                function (character) {
+
+                                    const next =
+                                        piece + character;
+
+                                    if (
+                                        font.widthOfTextAtSize(
+                                            next,
+                                            size
+                                        ) > maxWidth &&
+                                        piece
+                                    ) {
+                                        lines.push(piece);
+                                        piece = character;
+                                    }
+                                    else {
+                                        piece = next;
+                                    }
+
+                                }
+                            );
+
+                            current = piece;
+
+                        }
+                    );
+
+                    if (current) {
+                        lines.push(current);
+                    }
+
+                }
+            );
+
+            return lines;
+
+        }
+
+
+        function drawPdfBlock(
+            page,
+            text,
+            options
+        ) {
+
+            const value =
+                pdfSafeText(text).trim();
+
+            if (!value) {
+                return;
+            }
+
+            let size =
+                options.size || 7;
+
+            const minimumSize =
+                options.minimumSize || 5;
+
+            let lineHeight =
+                size * 1.18;
+
+            let lines =
+                wrapPdfText(
+                    options.font,
+                    value,
+                    size,
+                    options.width
+                );
+
+            while (
+                size > minimumSize &&
+                lines.length * lineHeight > options.height
+            ) {
+
+                size -= 0.25;
+                lineHeight = size * 1.18;
+
+                lines =
+                    wrapPdfText(
+                        options.font,
+                        value,
+                        size,
+                        options.width
+                    );
+
+            }
+
+            const maxLines =
+                Math.max(
+                    1,
+                    Math.floor(
+                        options.height /
+                        lineHeight
+                    )
+                );
+
+            const visibleLines =
+                lines.slice(0, maxLines);
+
+            if (
+                lines.length > maxLines &&
+                visibleLines.length > 0
+            ) {
+
+                let last =
+                    visibleLines[
+                        visibleLines.length - 1
+                    ];
+
+                while (
+                    last.length > 1 &&
+                    options.font.widthOfTextAtSize(
+                        last + "...",
+                        size
+                    ) > options.width
+                ) {
+                    last = last.slice(0, -1);
+                }
+
+                visibleLines[
+                    visibleLines.length - 1
+                ] = last + "...";
+
+            }
+
+            visibleLines.forEach(
+                function (line, index) {
+
+                    page.drawText(
+                        line,
+                        {
+                            x: options.x,
+                            y:
+                                options.y -
+                                index * lineHeight,
+                            size: size,
+                            font: options.font,
+                            color:
+                                PDFLib.rgb(
+                                    0,
+                                    0,
+                                    0
+                                )
+                        }
+                    );
+
+                }
+            );
+
+        }
+
+
+        function drawPdfMark(
+            page,
+            x,
+            y,
+            expertise
+        ) {
+
+            page.drawCircle(
+                {
+                    x: x,
+                    y: y,
+                    size: 3.0,
+                    color:
+                        PDFLib.rgb(
+                            0,
+                            0,
+                            0
+                        )
+                }
+            );
+
+            if (expertise) {
+
+                page.drawCircle(
+                    {
+                        x: x,
+                        y: y,
+                        size: 1.25,
+                        color:
+                            PDFLib.rgb(
+                                1,
+                                1,
+                                1
+                            )
+                    }
+                );
+
+            }
+
+        }
+
+
+        function getSkillPdfValue(
+            skillName
+        ) {
+
+            const row =
+                document.querySelector(
+                    '[data-skill="' +
+                    skillName +
+                    '"]'
+                );
+
+            if (!row) {
+                return "";
+            }
+
+            return row
+                .querySelector(
+                    ".skill-total"
+                )
+                .textContent
+                .trim();
+
+        }
+
+
+        function getSavePdfValue(
+            ability
+        ) {
+
+            const value =
+                document.getElementById(
+                    ability + "Save"
+                );
+
+            return value
+                ? value.textContent.trim()
+                : "";
+
+        }
+
+
+        function drawSkillOrSaveLine(
+            page,
+            value,
+            proficient,
+            expertise,
+            markX,
+            valueX,
+            y,
+            font
+        ) {
+
+            drawPdfTextFit(
+                page,
+                value,
+                valueX,
+                y - 2.2,
+                23,
+                font,
+                6.5,
+                5
+            );
+
+            if (proficient) {
+                drawPdfMark(
+                    page,
+                    markX,
+                    y,
+                    expertise
+                );
+            }
+
+        }
+
+
+        function buildBackstoryPersonalityPdfText() {
+
+            const parts = [];
+
+            function addPart(label, id) {
+
+                const value =
+                    pdfValue(id);
+
+                if (value) {
+                    parts.push(
+                        label + ": " + value
+                    );
+                }
+
+            }
+
+            addPart("Backstory", "backstory");
+            addPart("Personality", "personality");
+            addPart("Ideals", "ideals");
+            addPart("Bonds", "bonds");
+            addPart("Flaws", "flaws");
+
+            return parts.join("\n");
+
+        }
+
+
+        function drawSpellSlotsOnPdf(
+            page,
+            font
+        ) {
+
+            const slotMap = {
+                1: {
+                    totalX: 188.5,
+                    y: 682,
+                    diamonds: [203.5, 213.2, 222.9, 232.6]
+                },
+                2: {
+                    totalX: 188.5,
+                    y: 667,
+                    diamonds: [203.5, 213.2, 222.9]
+                },
+                3: {
+                    totalX: 188.5,
+                    y: 652,
+                    diamonds: [203.5, 213.2, 222.9]
+                },
+                4: {
+                    totalX: 275.5,
+                    y: 682,
+                    diamonds: [290.4, 300.1, 309.8]
+                },
+                5: {
+                    totalX: 275.5,
+                    y: 667,
+                    diamonds: [290.4, 300.1, 309.8]
+                },
+                6: {
+                    totalX: 275.5,
+                    y: 652,
+                    diamonds: [290.4, 300.1]
+                },
+                7: {
+                    totalX: 356.5,
+                    y: 682,
+                    diamonds: [369.5, 379.2]
+                },
+                8: {
+                    totalX: 356.5,
+                    y: 667,
+                    diamonds: [369.5]
+                },
+                9: {
+                    totalX: 356.5,
+                    y: 652,
+                    diamonds: [369.5]
+                }
+            };
+
+            Object.keys(slotMap).forEach(
+                function (key) {
+
+                    const level =
+                        Number(key);
+
+                    const info =
+                        slotMap[level];
+
+                    const total =
+                        Math.max(
+                            0,
+                            parseInt(
+                                pdfValue(
+                                    "spellSlots" +
+                                    level +
+                                    "Total"
+                                )
+                            ) || 0
+                        );
+
+                    const expended =
+                        Math.max(
+                            0,
+                            parseInt(
+                                pdfValue(
+                                    "spellSlots" +
+                                    level +
+                                    "Expended"
+                                )
+                            ) || 0
+                        );
+
+                    if (total > 0) {
+
+                        drawPdfCentered(
+                            page,
+                            String(total),
+                            info.totalX,
+                            info.y - 2.2,
+                            15,
+                            font,
+                            7,
+                            5.5
+                        );
+
+                    }
+
+                    const numberToMark =
+                        Math.min(
+                            expended,
+                            info.diamonds.length
+                        );
+
+                    for (
+                        let index = 0;
+                        index < numberToMark;
+                        index += 1
+                    ) {
+
+                        page.drawCircle(
+                            {
+                                x:
+                                    info.diamonds[
+                                        index
+                                    ],
+                                y: info.y,
+                                size: 2.6,
+                                color:
+                                    PDFLib.rgb(
+                                        0,
+                                        0,
+                                        0
+                                    )
+                            }
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        function drawSpellsOnPdf(
+            page,
+            font
+        ) {
+
+            const spells =
+                collectSpells();
+
+            const maximumRows = 28;
+            const startY = 579;
+            const rowHeight = 19.0;
+
+            spells
+                .slice(0, maximumRows)
+                .forEach(
+                    function (spell, index) {
+
+                        const y =
+                            startY -
+                            index * rowHeight;
+
+                        drawPdfCentered(
+                            page,
+                            spell.level === 0
+                                ? "C"
+                                : String(spell.level),
+                            26,
+                            y,
+                            15,
+                            font,
+                            6.2,
+                            5
+                        );
+
+                        drawPdfTextFit(
+                            page,
+                            spell.name,
+                            42,
+                            y,
+                            108,
+                            font,
+                            6.4,
+                            4.8
+                        );
+
+                        drawPdfTextFit(
+                            page,
+                            spell.castingTime,
+                            154,
+                            y,
+                            31,
+                            font,
+                            5.8,
+                            4.5
+                        );
+
+                        drawPdfTextFit(
+                            page,
+                            spell.range,
+                            188,
+                            y,
+                            40,
+                            font,
+                            5.8,
+                            4.5
+                        );
+
+                        const markY =
+                            y + 7;
+
+                        if (spell.concentration) {
+                            drawPdfMark(
+                                page,
+                                243.5,
+                                markY,
+                                false
+                            );
+                        }
+
+                        if (spell.ritual) {
+                            drawPdfMark(
+                                page,
+                                266.0,
+                                markY,
+                                false
+                            );
+                        }
+
+                        if (spell.material) {
+                            drawPdfMark(
+                                page,
+                                287.5,
+                                markY,
+                                false
+                            );
+                        }
+
+                        drawPdfTextFit(
+                            page,
+                            spell.notes,
+                            306,
+                            y,
+                            84,
+                            font,
+                            5.6,
+                            4.2
+                        );
+
+                    }
+                );
+
+        }
+
+
+        async function exportCharacterPdf() {
+
+            const button =
+                document.getElementById(
+                    "exportPdfButton"
+                );
+
+            const originalText =
+                button.textContent;
+
+            try {
+
+                updateCharacterMath();
+
+                if (
+                    !window.PDFLib ||
+                    !window.PDFLib.PDFDocument
+                ) {
+                    throw new Error(
+                        "The PDF library did not load. Refresh the page and try again."
+                    );
+                }
+
+                button.disabled = true;
+                button.textContent =
+                    "Building PDF...";
+
+                setCharacterFileStatus(
+                    "Building character PDF..."
+                );
+
+                const response =
+                    await fetch(
+                        CHARACTER_PDF_TEMPLATE
+                    );
+
+                if (!response.ok) {
+                    throw new Error(
+                        "Could not load the blank character sheet at " +
+                        CHARACTER_PDF_TEMPLATE +
+                        "."
+                    );
+                }
+
+                const templateBytes =
+                    await response.arrayBuffer();
+
+                const pdfDocument =
+                    await PDFLib.PDFDocument.load(
+                        templateBytes
+                    );
+
+                const pages =
+                    pdfDocument.getPages();
+
+                if (pages.length < 2) {
+                    throw new Error(
+                        "The character-sheet template must contain two pages."
+                    );
+                }
+
+                const page1 = pages[0];
+                const page2 = pages[1];
+
+                const regularFont =
+                    await pdfDocument.embedFont(
+                        PDFLib.StandardFonts.Helvetica
+                    );
+
+                const boldFont =
+                    await pdfDocument.embedFont(
+                        PDFLib.StandardFonts.HelveticaBold
+                    );
+
+
+                /* ---------------------------------------------
+                   PAGE 1 - IDENTITY / CORE STATS
+                   --------------------------------------------- */
+
+                const characterName =
+                    pdfValue("characterName");
+
+                const characterClass =
+                    resolvedPdfChoice(
+                        "characterClass",
+                        "customClass"
+                    );
+
+                const species =
+                    resolvedPdfChoice(
+                        "species",
+                        "customSpecies"
+                    );
+
+                const background =
+                    resolvedPdfChoice(
+                        "background",
+                        "customBackground"
+                    );
+
+                drawPdfTextFit(
+                    page1,
+                    characterName,
+                    27,
+                    746,
+                    228,
+                    boldFont,
+                    10,
+                    6
+                );
+
+                drawPdfTextFit(
+                    page1,
+                    background,
+                    27,
+                    725,
+                    115,
+                    regularFont,
+                    8,
+                    5.5
+                );
+
+                drawPdfTextFit(
+                    page1,
+                    characterClass,
+                    151,
+                    725,
+                    96,
+                    regularFont,
+                    8,
+                    5.5
+                );
+
+                drawPdfTextFit(
+                    page1,
+                    species,
+                    27,
+                    703,
+                    115,
+                    regularFont,
+                    8,
+                    5.5
+                );
+
+                drawPdfTextFit(
+                    page1,
+                    pdfValue("subclass"),
+                    151,
+                    703,
+                    96,
+                    regularFont,
+                    8,
+                    5.5
+                );
+
+                drawPdfCentered(
+                    page1,
+                    pdfValue("level"),
+                    272.5,
+                    728,
+                    38,
+                    boldFont,
+                    11,
+                    7
+                );
+
+                drawPdfCentered(
+                    page1,
+                    pdfValue("armorClass"),
+                    340,
+                    724,
+                    42,
+                    boldFont,
+                    17,
+                    9
+                );
+
+                drawPdfCentered(
+                    page1,
+                    pdfValue("tempHP"),
+                    454,
+                    722,
+                    40,
+                    boldFont,
+                    10,
+                    7
+                );
+
+                drawPdfCentered(
+                    page1,
+                    pdfValue("currentHP"),
+                    402,
+                    701,
+                    45,
+                    boldFont,
+                    10,
+                    7
+                );
+
+                drawPdfCentered(
+                    page1,
+                    pdfValue("maxHP"),
+                    454,
+                    701,
+                    45,
+                    boldFont,
+                    10,
+                    7
+                );
+
+                drawPdfCentered(
+                    page1,
+                    pdfValue("hitDice"),
+                    520,
+                    712,
+                    43,
+                    boldFont,
+                    8.5,
+                    5.5
+                );
+
+                drawPdfCentered(
+                    page1,
+                    pdfValue("proficiencyBonus"),
+                    59,
+                    620,
+                    65,
+                    boldFont,
+                    15,
+                    8
+                );
+
+                drawPdfCentered(
+                    page1,
+                    pdfValue("initiative"),
+                    264,
+                    620,
+                    58,
+                    boldFont,
+                    14,
+                    8
+                );
+
+                drawPdfCentered(
+                    page1,
+                    pdfValue("speed"),
+                    355,
+                    620,
+                    58,
+                    boldFont,
+                    14,
+                    8
+                );
+
+                drawPdfCentered(
+                    page1,
+                    pdfValue("passivePerception"),
+                    548,
+                    620,
+                    72,
+                    boldFont,
+                    14,
+                    8
+                );
+
+
+                /* ---------------------------------------------
+                   PAGE 1 - ABILITY SCORES
+                   --------------------------------------------- */
+
+                const abilityPdfPositions = {
+                    strength: {
+                        modifierX: 44,
+                        scoreX: 75,
+                        y: 552
+                    },
+                    dexterity: {
+                        modifierX: 44,
+                        scoreX: 75,
+                        y: 428
+                    },
+                    constitution: {
+                        modifierX: 44,
+                        scoreX: 75,
+                        y: 280
+                    },
+                    intelligence: {
+                        modifierX: 136,
+                        scoreX: 168,
+                        y: 613
+                    },
+                    wisdom: {
+                        modifierX: 136,
+                        scoreX: 168,
+                        y: 428
+                    },
+                    charisma: {
+                        modifierX: 136,
+                        scoreX: 168,
+                        y: 280
+                    }
+                };
+
+                Object.keys(
+                    abilityPdfPositions
+                ).forEach(
+                    function (ability) {
+
+                        const position =
+                            abilityPdfPositions[
+                                ability
+                            ];
+
+                        drawPdfCentered(
+                            page1,
+                            pdfValue(
+                                ability +
+                                "Modifier"
+                            ),
+                            position.modifierX,
+                            position.y,
+                            38,
+                            boldFont,
+                            12,
+                            7
+                        );
+
+                        drawPdfCentered(
+                            page1,
+                            pdfValue(ability),
+                            position.scoreX,
+                            position.y,
+                            34,
+                            boldFont,
+                            11,
+                            7
+                        );
+
+                    }
+                );
+
+
+                /* ---------------------------------------------
+                   PAGE 1 - SAVES / SKILLS
+                   --------------------------------------------- */
+
+                const savePositions = {
+                    strength: {
+                        x: 20.5,
+                        valueX: 28,
+                        y: 509
+                    },
+                    dexterity: {
+                        x: 20.5,
+                        valueX: 28,
+                        y: 392
+                    },
+                    constitution: {
+                        x: 20.5,
+                        valueX: 28,
+                        y: 242
+                    },
+                    intelligence: {
+                        x: 128.5,
+                        valueX: 136,
+                        y: 584
+                    },
+                    wisdom: {
+                        x: 128.5,
+                        valueX: 136,
+                        y: 394
+                    },
+                    charisma: {
+                        x: 128.5,
+                        valueX: 136,
+                        y: 239
+                    }
+                };
+
+                Object.keys(savePositions)
+                    .forEach(
+                        function (ability) {
+
+                            const position =
+                                savePositions[ability];
+
+                            const checkbox =
+                                document.getElementById(
+                                    ability +
+                                    "SaveProf"
+                                );
+
+                            drawSkillOrSaveLine(
+                                page1,
+                                getSavePdfValue(
+                                    ability
+                                ),
+                                Boolean(
+                                    checkbox &&
+                                    checkbox.checked
+                                ),
+                                false,
+                                position.x,
+                                position.valueX,
+                                position.y,
+                                regularFont
+                            );
+
+                        }
+                    );
+
+                const skillPositions = {
+                    athletics: {
+                        x: 20.5,
+                        valueX: 28,
+                        y: 490
+                    },
+                    acrobatics: {
+                        x: 20.5,
+                        valueX: 28,
+                        y: 372
+                    },
+                    sleightOfHand: {
+                        x: 20.5,
+                        valueX: 28,
+                        y: 357
+                    },
+                    stealth: {
+                        x: 20.5,
+                        valueX: 28,
+                        y: 342
+                    },
+                    arcana: {
+                        x: 128.5,
+                        valueX: 136,
+                        y: 564
+                    },
+                    history: {
+                        x: 128.5,
+                        valueX: 136,
+                        y: 550
+                    },
+                    investigation: {
+                        x: 128.5,
+                        valueX: 136,
+                        y: 536
+                    },
+                    nature: {
+                        x: 128.5,
+                        valueX: 136,
+                        y: 522
+                    },
+                    religion: {
+                        x: 128.5,
+                        valueX: 136,
+                        y: 508
+                    },
+                    animalHandling: {
+                        x: 128.5,
+                        valueX: 136,
+                        y: 374
+                    },
+                    insight: {
+                        x: 128.5,
+                        valueX: 136,
+                        y: 360
+                    },
+                    medicine: {
+                        x: 128.5,
+                        valueX: 136,
+                        y: 346
+                    },
+                    perception: {
+                        x: 128.5,
+                        valueX: 136,
+                        y: 332
+                    },
+                    survival: {
+                        x: 128.5,
+                        valueX: 136,
+                        y: 318
+                    },
+                    deception: {
+                        x: 128.5,
+                        valueX: 136,
+                        y: 219
+                    },
+                    intimidation: {
+                        x: 128.5,
+                        valueX: 136,
+                        y: 205
+                    },
+                    performance: {
+                        x: 128.5,
+                        valueX: 136,
+                        y: 191
+                    },
+                    persuasion: {
+                        x: 128.5,
+                        valueX: 136,
+                        y: 177
+                    }
+                };
+
+                Object.keys(skillPositions)
+                    .forEach(
+                        function (skillName) {
+
+                            const position =
+                                skillPositions[
+                                    skillName
+                                ];
+
+                            const row =
+                                document.querySelector(
+                                    '[data-skill="' +
+                                    skillName +
+                                    '"]'
+                                );
+
+                            if (!row) {
+                                return;
+                            }
+
+                            const proficient =
+                                row.querySelector(
+                                    ".skill-prof"
+                                ).checked;
+
+                            const expertise =
+                                row.querySelector(
+                                    ".skill-exp"
+                                ).checked;
+
+                            drawSkillOrSaveLine(
+                                page1,
+                                getSkillPdfValue(
+                                    skillName
+                                ),
+                                proficient,
+                                expertise,
+                                position.x,
+                                position.valueX,
+                                position.y,
+                                regularFont
+                            );
+
+                        }
+                    );
+
+
+                /* ---------------------------------------------
+                   PAGE 1 - INSPIRATION / DEATH SAVES
+                   --------------------------------------------- */
+
+                if (
+                    document.getElementById(
+                        "inspiration"
+                    ).checked
+                ) {
+                    drawPdfMark(
+                        page1,
+                        57,
+                        178,
+                        false
+                    );
+                }
+
+                const deathSaves =
+                    collectDeathSaves();
+
+                const deathSuccessX =
+                    [551, 563, 575];
+
+                const deathFailureX =
+                    [551, 563, 575];
+
+                for (
+                    let index = 0;
+                    index < Math.min(
+                        3,
+                        deathSaves.successes
+                    );
+                    index += 1
+                ) {
+                    drawPdfMark(
+                        page1,
+                        deathSuccessX[index],
+                        728,
+                        false
+                    );
+                }
+
+                for (
+                    let index = 0;
+                    index < Math.min(
+                        3,
+                        deathSaves.failures
+                    );
+                    index += 1
+                ) {
+                    drawPdfMark(
+                        page1,
+                        deathFailureX[index],
+                        705,
+                        false
+                    );
+                }
+
+
+                /* ---------------------------------------------
+                   PAGE 1 - ATTACKS
+                   --------------------------------------------- */
+
+                const attackRows = [
+                    569,
+                    548,
+                    528,
+                    508
+                ];
+
+                attackRows.forEach(
+                    function (y, index) {
+
+                        const number =
+                            index + 1;
+
+                        drawPdfTextFit(
+                            page1,
+                            document.querySelector(
+                                '[name="attack' +
+                                number +
+                                'Name"]'
+                            ).value,
+                            230,
+                            y,
+                            100,
+                            regularFont,
+                            7,
+                            5
+                        );
+
+                        drawPdfTextFit(
+                            page1,
+                            document.querySelector(
+                                '[name="attack' +
+                                number +
+                                'Bonus"]'
+                            ).value,
+                            338,
+                            y,
+                            42,
+                            regularFont,
+                            7,
+                            5
+                        );
+
+                        drawPdfTextFit(
+                            page1,
+                            document.querySelector(
+                                '[name="attack' +
+                                number +
+                                'Damage"]'
+                            ).value,
+                            384,
+                            y,
+                            72,
+                            regularFont,
+                            7,
+                            5
+                        );
+
+                    }
+                );
+
+
+                /* ---------------------------------------------
+                   PAGE 1 - FEATURES / TRAITS / FEATS
+                   --------------------------------------------- */
+
+                drawPdfBlock(
+                    page1,
+                    pdfValue("classFeatures"),
+                    {
+                        x: 228,
+                        y: 414,
+                        width: 356,
+                        height: 203,
+                        font: regularFont,
+                        size: 7.3,
+                        minimumSize: 5.2
+                    }
+                );
+
+                drawPdfBlock(
+                    page1,
+                    pdfValue("speciesTraits"),
+                    {
+                        x: 228,
+                        y: 171,
+                        width: 166,
+                        height: 157,
+                        font: regularFont,
+                        size: 6.8,
+                        minimumSize: 5
+                    }
+                );
+
+                drawPdfBlock(
+                    page1,
+                    pdfValue("feats"),
+                    {
+                        x: 414,
+                        y: 171,
+                        width: 166,
+                        height: 157,
+                        font: regularFont,
+                        size: 6.8,
+                        minimumSize: 5
+                    }
+                );
+
+                drawPdfBlock(
+                    page1,
+                    pdfValue("proficiencies"),
+                    {
+                        x: 18,
+                        y: 113,
+                        width: 190,
+                        height: 92,
+                        font: regularFont,
+                        size: 6.4,
+                        minimumSize: 4.8
+                    }
+                );
+
+
+                /* ---------------------------------------------
+                   PAGE 2 - SPELLCASTING
+                   --------------------------------------------- */
+
+                const spellAbility =
+                    pdfValue("spellAbility");
+
+                drawPdfTextFit(
+                    page2,
+                    spellAbility
+                        ? pdfTitleCase(
+                            spellAbility
+                        )
+                        : "",
+                    25,
+                    748,
+                    107,
+                    boldFont,
+                    8,
+                    5.5
+                );
+
+                if (spellAbility) {
+
+                    drawPdfCentered(
+                        page2,
+                        signedNumber(
+                            getAbilityModifier(
+                                spellAbility
+                            )
+                        ),
+                        31,
+                        708,
+                        28,
+                        boldFont,
+                        10,
+                        7
+                    );
+
+                    drawPdfCentered(
+                        page2,
+                        document.getElementById(
+                            "spellSaveDC"
+                        ).textContent,
+                        31,
+                        681,
+                        28,
+                        boldFont,
+                        10,
+                        7
+                    );
+
+                    drawPdfCentered(
+                        page2,
+                        document.getElementById(
+                            "spellAttack"
+                        ).textContent,
+                        31,
+                        654,
+                        28,
+                        boldFont,
+                        10,
+                        7
+                    );
+
+                }
+
+                drawSpellSlotsOnPdf(
+                    page2,
+                    regularFont
+                );
+
+                drawSpellsOnPdf(
+                    page2,
+                    regularFont
+                );
+
+
+                /* ---------------------------------------------
+                   PAGE 2 - STORY / EQUIPMENT
+                   --------------------------------------------- */
+
+                drawPdfBlock(
+                    page2,
+                    pdfValue("appearance"),
+                    {
+                        x: 416,
+                        y: 726,
+                        width: 166,
+                        height: 69,
+                        font: regularFont,
+                        size: 6.7,
+                        minimumSize: 5
+                    }
+                );
+
+                drawPdfBlock(
+                    page2,
+                    buildBackstoryPersonalityPdfText(),
+                    {
+                        x: 416,
+                        y: 616,
+                        width: 166,
+                        height: 118,
+                        font: regularFont,
+                        size: 6.2,
+                        minimumSize: 4.8
+                    }
+                );
+
+                drawPdfTextFit(
+                    page2,
+                    pdfValue("alignment"),
+                    449,
+                    476,
+                    126,
+                    regularFont,
+                    7,
+                    5
+                );
+
+                drawPdfBlock(
+                    page2,
+                    pdfValue("languages"),
+                    {
+                        x: 416,
+                        y: 418,
+                        width: 166,
+                        height: 31,
+                        font: regularFont,
+                        size: 6.5,
+                        minimumSize: 5
+                    }
+                );
+
+                drawPdfBlock(
+                    page2,
+                    pdfValue("equipment"),
+                    {
+                        x: 416,
+                        y: 354,
+                        width: 166,
+                        height: 235,
+                        font: regularFont,
+                        size: 6.5,
+                        minimumSize: 4.8
+                    }
+                );
+
+
+                /* ---------------------------------------------
+                   DOWNLOAD THE FILLED PDF
+                   --------------------------------------------- */
+
+                const pdfBytes =
+                    await pdfDocument.save();
+
+                const blob =
+                    new Blob(
+                        [pdfBytes],
+                        {
+                            type:
+                                "application/pdf"
+                        }
+                    );
+
+                const url =
+                    URL.createObjectURL(blob);
+
+                const link =
+                    document.createElement("a");
+
+                const fileName =
+                    makeSafeFileName(
+                        characterName
+                    ) +
+                    " - Character Sheet.pdf";
+
+                link.href = url;
+                link.download = fileName;
+
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+
+                window.setTimeout(
+                    function () {
+                        URL.revokeObjectURL(url);
+                    },
+                    1500
+                );
+
+                setCharacterFileStatus(
+                    "Character PDF exported as " +
+                    fileName,
+                    "success"
+                );
+
+            }
+            catch (error) {
+
+                console.error(error);
+
+                setCharacterFileStatus(
+                    error && error.message
+                        ? error.message
+                        : "The character PDF could not be created.",
+                    "error"
+                );
+
+            }
+            finally {
+
+                button.disabled = false;
+                button.textContent =
+                    originalText;
+
+            }
+
+        }
+
+
         const saveCharacterButton =
             document.getElementById(
                 "saveCharacterButton"
@@ -5295,10 +7061,21 @@
                 "loadCharacterFile"
             );
 
+        const exportPdfButton =
+            document.getElementById(
+                "exportPdfButton"
+            );
+
 
         saveCharacterButton.addEventListener(
             "click",
             saveCharacterJson
+        );
+
+
+        exportPdfButton.addEventListener(
+            "click",
+            exportCharacterPdf
         );
 
 
