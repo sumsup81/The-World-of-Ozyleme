@@ -1,7 +1,8 @@
 /* =========================================================
-   OZYLEME KINGDOM DATA
+   OZYLEME — KINGDOM DATA
    =========================================================
-   Edit kingdom lore here rather than editing kingdoms.html.
+   Edit kingdom lore here.
+   kingdoms.html reads from this file.
    ========================================================= */
 
 const kingdomsData = [
@@ -12,20 +13,20 @@ const kingdomsData = [
 
     {
         id: "plume",
-
         name: "Plume",
-
         symbol: "The Feather",
-
         image: "images/kingdoms/Plume Navi Button.jpg",
 
         keeper: "The Giver",
 
-        ruler: "The Lore Keeper has not yet recorded the ruler of Plume.",
+        ruler:
+            "The Lore Keeper has not yet recorded the ruler of Plume.",
 
-        seat: "The Lore Keeper has not yet recorded the ancient seat of Plume.",
+        seat:
+            "The Lore Keeper has not yet recorded the ancient seat of Plume.",
 
-        people: "Humans",
+        people:
+            "Humans",
 
         geography: [
             "Plume once occupied prosperous lands along the coast of Ozyleme.",
@@ -65,20 +66,21 @@ const kingdomsData = [
 
     {
         id: "kettle",
-
         name: "Kettle",
-
         symbol: "The Cauldron",
-
         image: "images/kingdoms/Kettle Navi Button.jpg",
 
-        keeper: "The Ravager",
+        keeper:
+            "The Ravager",
 
-        ruler: "The Lore Keeper has not yet recorded the ruler of Kettle.",
+        ruler:
+            "The Lore Keeper has not yet recorded the ruler of Kettle.",
 
-        seat: "The Lore Keeper has not yet recorded the seat of Kettle.",
+        seat:
+            "The Lore Keeper has not yet recorded the seat of Kettle.",
 
-        people: "Forest Elves",
+        people:
+            "Forest Elves",
 
         geography: [
             "Kettle is a heavily forested kingdom dominated by enormous and ancient woods.",
@@ -115,20 +117,21 @@ const kingdomsData = [
 
     {
         id: "loop",
-
         name: "Loop",
-
         symbol: "The Ring",
-
         image: "images/kingdoms/Loop Navi Button.jpg",
 
-        keeper: "The Tormentor",
+        keeper:
+            "The Tormentor",
 
-        ruler: "Quintsara, the Carnival Queen",
+        ruler:
+            "Quintsara, the Carnival Queen",
 
-        seat: "The Lore Keeper has not yet recorded the seat of the Carnival Queen.",
+        seat:
+            "The Lore Keeper has not yet recorded the seat of the Carnival Queen.",
 
-        people: "Fae and Elves",
+        people:
+            "Fae and Elves",
 
         geography: [
             "Three great calderas dominate the landscape of Loop.",
@@ -169,20 +172,21 @@ const kingdomsData = [
 
     {
         id: "torch",
-
         name: "Torch",
-
         symbol: "The Lantern",
-
         image: "images/kingdoms/Torch Navi Button.jpg",
 
-        keeper: "The Inflictor",
+        keeper:
+            "The Inflictor",
 
-        ruler: "The Lore Keeper has not yet recorded the ruler of Torch.",
+        ruler:
+            "The Lore Keeper has not yet recorded the ruler of Torch.",
 
-        seat: "The Lore Keeper has not yet recorded the seat of Torch.",
+        seat:
+            "The Lore Keeper has not yet recorded the seat of Torch.",
 
-        people: "High Elves",
+        people:
+            "High Elves",
 
         geography: [
             "The Lore Keeper has not yet fully recorded the lands of Torch.",
@@ -222,64 +226,65 @@ const kingdomsData = [
 
     {
         id: "vial",
-
         name: "Vial",
-
         symbol: "The Flagon",
-
         image: "images/kingdoms/Vial Navi Button.jpg",
 
-        keeper: "The Harvester",
+        keeper:
+            "The Harvester",
 
-        ruler: "Gronok, King of Blood and Vine",
+        ruler:
+            "Gronok, King of Blood and Vine",
 
-        seat: "Harvestok",
+        seat:
+            "Harvestok",
 
-        people: "Goliaths and Forest Orcs",
+        people:
+            "Goliaths and Forest Orcs",
 
         geography: [
-            "The lands of Vial are among the most fruitful in Ozyleme.",
-            "Vast fields, vineyards, berry patches, orchards, groves, and dark forests spread across the kingdom.",
-            "Both cultivated fields and deep forest cover the land, binding agriculture and wilderness together."
+            "Vial contains some of the most fruitful lands in Ozyleme.",
+            "Vineyards, berry fields, orchards, farms, groves, and forests cover much of the kingdom.",
+            "The great cultivated fields of the Goliaths frequently meet thick forests inhabited by the Forest Orcs."
         ],
 
         faith: [
             "Vial is kept by the Harvester.",
-            "The Harvester rules over Death, binding the ripening of the crop to the certainty of its eventual reaping.",
-            "Throughout Vial, worn-out farm tools are surrendered to the land as offerings.",
-            "Wicker men and agricultural tributes constructed around dulled, broken, and rusted tools can be found throughout fields and forests."
+            "The Harvester is Master of Death, and the people of Vial see little separation between growth, ripening, reaping, decay, and renewal.",
+            "Wicker men and strange tributes constructed from dulled, worn, rusted, and broken farm tools dot both the fields and forests.",
+            "A tool that can no longer serve the harvest is often surrendered back to the land."
         ],
 
         legacy: [
-            "Vial produces some of the most valued wines and spirits in Ozyleme.",
-            "The Goliaths are famous for crushing grapes and berries beneath their enormous bare feet.",
-            "What might elsewhere be simple labor has become a ritual of the harvest and the making of wine."
+            "The wines of Vial are precious throughout Ozyleme.",
+            "Goliaths traditionally mash grapes and berries beneath their enormous bare feet as part of the ritual of winemaking.",
+            "For the people of Vial, the crushing of the fruit is not merely labor but part of the harvest itself."
         ],
 
         crown: [
-            "Gronok bears the title King of Blood and Vine.",
-            "Vial believes that rulership follows the same law as grapes upon the vine: the fullest, ripest, and most able must rise above the rest.",
-            "A ruler remains upon the throne only while they remain fit to bear the weight of the kingdom.",
-            "As a grape eventually withers upon the vine, so must every ruler eventually surrender their place.",
-            "When that season arrives, another judged ripe enough to rule is raised in their stead."
+            "Vial is presently ruled by Gronok, King of Blood and Vine.",
+            "The crown follows the lesson of grapes upon the vine: the fullest, ripest, and most able is expected to rise above the others.",
+            "The ruler watches over the most fruitful lands of Ozyleme only while they remain capable of bearing the burden.",
+            "As the grape eventually withers upon the vine, so too must a ruler eventually surrender the throne.",
+            "When that season comes, another deemed ripe and able enough to rule takes their place."
         ],
 
         bounty: [
-            "Harvestok is both fortress and repository, protecting one of the greatest concentrations of harvest bounty in Ozyleme.",
-            "Food, wine, seed, preserved fruit, berries, and other riches of the soil are gathered behind its defenses.",
+            "Harvestok is both the seat of Vial's ruler and a heavily protected repository of agricultural bounty.",
+            "Within its defenses are great stores of food, grain, fruit, seed, wine, spirits, and other treasures produced from the land.",
             "Wine from Vial is especially precious to High King Ozyleme.",
-            "Casks are used in dealings with the gnomes who guard his central kingdom and maintain their strange works in his service.",
-            "Vial trades heavily with Torch, whose lands provide little agriculture.",
-            "Merchants from Hook and Bell likewise travel to Vial for wine, spirits, preserved fruit, and other harvest goods."
+            "It is used in his dealings with the Gnomes whose service helps guard the central kingdom.",
+            "Vial trades heavily with Torch because Torch possesses little agricultural land of its own.",
+            "Merchants and inhabitants of Hook and Bell also trade with Vial for its wines and spirits."
         ],
 
         peopleAndCustoms: [
-            "Goliaths dominate the great agricultural lands of Vial and are closely associated with its farms, vineyards, and harvest rituals.",
-            "Forest Orcs inhabit the groves and deep woods, preferring the shelter of branches and shadow to the exposed fields of their Goliath neighbors.",
-            "Many Forest Orcs have deliberately withdrawn into these woods to remain hidden from their kin in Hook.",
-            "Some work alongside the towering Goliaths during planting and harvest.",
-            "Others maintain their own woodland communities and trade what they gather, hunt, or cultivate beneath the canopy.",
-            "In Vial, the Harvester is never far away. Everything ripens. Everything is reaped. Everything eventually returns to the soil."
+            "Goliaths tend much of Vial's open farmland, vineyards, orchards, and berry fields.",
+            "Forest Orcs inhabit the groves and forests, where the heavy canopy allows them to remain hidden from their kin in Hook.",
+            "Some Forest Orcs assist the enormous Goliaths in their fields, particularly during planting and harvest.",
+            "Many prefer to remain beneath the trees and instead trade forest goods with their Goliath neighbors.",
+            "The relationship between field and forest is therefore one of both separation and dependence.",
+            "Across both, wicker effigies and broken farm implements serve as constant reminders that everything which ripens must eventually be reaped."
         ]
     },
 
@@ -290,20 +295,21 @@ const kingdomsData = [
 
     {
         id: "hook",
-
         name: "Hook",
-
         symbol: "The Hook",
-
         image: "images/kingdoms/Hook Navi Button.jpg",
 
-        keeper: "The Seer",
+        keeper:
+            "The Seer",
 
-        ruler: "The Lore Keeper has not yet recorded the ruler of Hook.",
+        ruler:
+            "The Lore Keeper has not yet recorded the ruler of Hook.",
 
-        seat: "The Lore Keeper has not yet recorded the seat of Hook.",
+        seat:
+            "The Lore Keeper has not yet recorded the seat of Hook.",
 
-        people: "Mixed Peoples and Coastal Orcs",
+        people:
+            "Mixed Peoples and Coastal Orcs",
 
         geography: [
             "Hook possesses long coastal regions connected to the old history of the Orcs.",
@@ -340,20 +346,21 @@ const kingdomsData = [
 
     {
         id: "bell",
-
         name: "Bell",
-
         symbol: "The Bell",
-
         image: "images/kingdoms/Bell Navi Button.jpg",
 
-        keeper: "The Dominator",
+        keeper:
+            "The Dominator",
 
-        ruler: "The Lore Keeper has not yet recorded the ruler of Bell.",
+        ruler:
+            "The Lore Keeper has not yet recorded the ruler of Bell.",
 
-        seat: "The Lore Keeper has not yet recorded the seat of Bell.",
+        seat:
+            "The Lore Keeper has not yet recorded the seat of Bell.",
 
-        people: "Dwarves",
+        people:
+            "Dwarves",
 
         geography: [
             "The Lore Keeper has not yet recorded the lands of Bell."
@@ -389,20 +396,21 @@ const kingdomsData = [
 
     {
         id: "crook",
-
         name: "Crook",
-
         symbol: "The Staff",
-
         image: "images/kingdoms/Crook Navi Button.jpg",
 
-        keeper: "The Banisher",
+        keeper:
+            "The Banisher",
 
-        ruler: "The Shepherd King",
+        ruler:
+            "The Shepherd King",
 
-        seat: "The Lore Keeper has not yet recorded the seat of the Shepherd King.",
+        seat:
+            "The Lore Keeper has not yet recorded the seat of the Shepherd King.",
 
-        people: "Humans and Feral Halflings",
+        people:
+            "Humans and Feral Halflings",
 
         geography: [
             "Crook contains broad grasslands and wild open country.",
@@ -439,7 +447,7 @@ const kingdomsData = [
 
 
 /* =========================================================
-   MAKE DATA AVAILABLE TO THE WEBSITE
+   MAKE KINGDOM DATA AVAILABLE TO KINGDOMS.HTML
    ========================================================= */
 
 window.kingdomsData = kingdomsData;
