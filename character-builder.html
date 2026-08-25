@@ -1084,6 +1084,59 @@
         >
 
 
+            <!-- =================================================
+                 SAVE / LOAD CHARACTER
+                 ================================================= -->
+
+            <section class="sheet-panel">
+
+                <h3 class="panel-heading">
+                    Save / Load Character
+                </h3>
+
+                <div class="character-file-controls">
+
+                    <div class="character-file-buttons">
+
+                        <button
+                            type="button"
+                            id="saveCharacterButton"
+                            class="character-file-button"
+                        >
+                            Save Character JSON
+                        </button>
+
+
+                        <button
+                            type="button"
+                            id="loadCharacterButton"
+                            class="character-file-button"
+                        >
+                            Load Character JSON
+                        </button>
+
+                    </div>
+
+
+                    <input
+                        type="file"
+                        id="loadCharacterFile"
+                        accept=".json,application/json"
+                        hidden
+                    >
+
+
+                    <p
+                        id="characterFileStatus"
+                        class="character-file-status"
+                        aria-live="polite"
+                    ></p>
+
+                </div>
+
+            </section>
+
+
 
             <!-- =================================================
                  CHARACTER IDENTITY
@@ -3031,59 +3084,6 @@
 
             </div>
 
-
-
-            <!-- =================================================
-                 SAVE / LOAD CHARACTER
-                 ================================================= -->
-
-            <section class="sheet-panel">
-
-                <h3 class="panel-heading">
-                    Save / Load Character
-                </h3>
-
-                <div class="character-file-controls">
-
-                    <div class="character-file-buttons">
-
-                        <button
-                            type="button"
-                            id="saveCharacterButton"
-                            class="character-file-button"
-                        >
-                            Save Character JSON
-                        </button>
-
-
-                        <button
-                            type="button"
-                            id="loadCharacterButton"
-                            class="character-file-button"
-                        >
-                            Load Character JSON
-                        </button>
-
-                    </div>
-
-
-                    <input
-                        type="file"
-                        id="loadCharacterFile"
-                        accept=".json,application/json"
-                        hidden
-                    >
-
-
-                    <p
-                        id="characterFileStatus"
-                        class="character-file-status"
-                        aria-live="polite"
-                    ></p>
-
-                </div>
-
-            </section>
 
 
         </form>
