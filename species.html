@@ -2,12 +2,21 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Species | Ozyleme</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 
     <style>
 
@@ -37,7 +46,10 @@
         .species-entry {
             margin: 65px auto;
             padding: 30px;
+
             max-width: 1000px;
+
+            scroll-margin-top: 90px;
 
             background:
                 linear-gradient(
@@ -46,11 +58,14 @@
                     rgba(14, 14, 12, 0.85)
                 );
 
-            border: 1px solid #454238;
+            border:
+                1px solid #454238;
 
             box-shadow:
-                0 8px 25px rgba(0, 0, 0, 0.35);
+                0 8px 25px
+                rgba(0, 0, 0, 0.35);
         }
+
 
         .species-entry h2 {
             margin-top: 0;
@@ -59,11 +74,13 @@
             color: #d8cfb3;
         }
 
+
         .species-equivalent {
             margin-top: 0;
             margin-bottom: 25px;
 
             color: #918b79;
+
             font-style: italic;
         }
 
@@ -76,20 +93,27 @@
             display: grid;
 
             grid-template-columns:
-                repeat(auto-fit, minmax(180px, 1fr));
+                repeat(
+                    auto-fit,
+                    minmax(180px, 1fr)
+                );
 
             gap: 12px;
 
             margin: 25px 0 30px;
         }
 
+
         .species-meta-item {
             padding: 12px 15px;
 
-            background: rgba(5, 5, 4, 0.35);
+            background:
+                rgba(5, 5, 4, 0.35);
 
-            border: 1px solid #3d3a31;
+            border:
+                1px solid #3d3a31;
         }
+
 
         .species-meta-label {
             display: block;
@@ -105,27 +129,30 @@
             letter-spacing: 0.08em;
         }
 
+
         .species-meta-value {
             color: #d3cab0;
         }
 
 
         /* =========================================================
-           SPECIES CONTENT
+           CONTENT BLOCKS
            ========================================================= */
 
         .species-content-block {
             margin: 32px 0;
         }
 
+
         .species-content-block h3 {
             margin-bottom: 10px;
 
+            padding-bottom: 6px;
+
             color: #bdb499;
 
-            border-bottom: 1px solid #403d34;
-
-            padding-bottom: 6px;
+            border-bottom:
+                1px solid #403d34;
         }
 
 
@@ -137,9 +164,11 @@
             margin: 20px 0;
         }
 
+
         .trait {
             margin-bottom: 18px;
         }
+
 
         .trait strong {
             color: #c7bea3;
@@ -154,20 +183,27 @@
             display: grid;
 
             grid-template-columns:
-                repeat(auto-fit, minmax(240px, 1fr));
+                repeat(
+                    auto-fit,
+                    minmax(240px, 1fr)
+                );
 
             gap: 18px;
 
             margin-top: 20px;
         }
 
+
         .variation-card {
             padding: 20px;
 
-            background: rgba(8, 8, 7, 0.38);
+            background:
+                rgba(8, 8, 7, 0.38);
 
-            border: 1px solid #464237;
+            border:
+                1px solid #464237;
         }
+
 
         .variation-card h4 {
             margin-top: 0;
@@ -177,6 +213,7 @@
 
             font-size: 1.2rem;
         }
+
 
         .variation-equivalent {
             margin-top: 0;
@@ -195,10 +232,13 @@
         .ozyleme-change-box {
             padding: 20px;
 
-            background: rgba(60, 28, 23, 0.18);
+            background:
+                rgba(60, 28, 23, 0.18);
 
-            border-left: 3px solid #65342c;
+            border-left:
+                3px solid #65342c;
         }
+
 
         .ozyleme-change-box ul {
             margin-bottom: 0;
@@ -211,8 +251,10 @@
 
         .species-return {
             margin-top: 30px;
+
             text-align: center;
         }
+
 
         .species-return a {
             display: inline-block;
@@ -225,13 +267,15 @@
 
             background: #11110f;
 
-            border: 1px solid #47443a;
+            border:
+                1px solid #47443a;
 
             transition:
                 border-color 0.2s,
                 color 0.2s,
                 background 0.2s;
         }
+
 
         .species-return a:hover {
             color: #ded5b8;
@@ -253,16 +297,22 @@
                 margin: 45px auto;
             }
 
+
             .species-meta {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns:
+                    1fr 1fr;
             }
 
+
             .variation-container {
-                grid-template-columns: 1fr;
+                grid-template-columns:
+                    1fr;
             }
+
         }
 
     </style>
+
 </head>
 
 
@@ -271,11 +321,14 @@
 
     <!-- =========================================================
          HEADER
+
+         THE H1 IS INTENTIONALLY EMPTY.
+         THE OZYLEME NAME IS ALREADY IN THE BANNER IMAGE.
          ========================================================= -->
 
     <header>
 
-        <h1>OZYLEME</h1>
+        <h1></h1>
 
         <p>
             Those Ruled By the Dragon King
@@ -290,27 +343,43 @@
 
     <nav>
 
-        <a href="index.html">Home</a>
+        <a href="index.html">
+            Home
+        </a>
 
-        <a href="kingdoms.html">Kingdoms</a>
+        <a href="kingdoms.html">
+            Kingdoms
+        </a>
 
-        <a href="species.html">Species</a>
+        <a href="species.html">
+            Species
+        </a>
 
-        <a href="people.html">People</a>
+        <a href="people.html">
+            People
+        </a>
 
-        <a href="gods.html">Gods</a>
+        <a href="gods.html">
+            Gods
+        </a>
 
-        <a href="bestiary.html">Bestiary</a>
+        <a href="bestiary.html">
+            Bestiary
+        </a>
 
-        <a href="classes.html">Classes</a>
+        <a href="classes.html">
+            Classes
+        </a>
 
-        <a href="player-guide.html">Player Guide</a>
+        <a href="player-guide.html">
+            Player Guide
+        </a>
 
     </nav>
 
 
     <!-- =========================================================
-         MAIN PAGE
+         MAIN
          ========================================================= -->
 
     <main>
@@ -329,27 +398,32 @@
                 Species of Ozyleme
             </h2>
 
+
             <p>
-                Many peoples walk beneath the hollow sun of Ozyleme.
-                Some were born here, some were created, and some became
+                Many peoples walk beneath the hollow sun
+                of Ozyleme. Some were born here,
+                some were created, and some became
                 something other than what they once were.
             </p>
 
+
             <p>
-                Though many resemble peoples known in other worlds,
-                their origins, cultures, and place within Ozyleme can
-                be dramatically different.
+                Though many resemble peoples known in
+                other worlds, their origins, cultures,
+                and place within Ozyleme can be
+                dramatically different.
             </p>
 
         </section>
 
 
+        <div class="divider"></div>
+
+
         <!-- =====================================================
              SPECIES DIRECTORY
 
-             DO NOT MANUALLY ADD SPECIES CARDS HERE.
-
-             THEY ARE CREATED FROM:
+             GENERATED AUTOMATICALLY FROM:
              data/species-data.js
              ===================================================== -->
 
@@ -359,6 +433,7 @@
                 Choose a Species
             </h2>
 
+
             <div
                 class="cards"
                 id="speciesCards"
@@ -367,16 +442,32 @@
         </section>
 
 
+        <div class="divider"></div>
+
+
         <!-- =====================================================
              FULL SPECIES ENTRIES
-
-             DO NOT MANUALLY ADD SPECIES HERE.
-
-             THEY ARE CREATED FROM:
-             data/species-data.js
              ===================================================== -->
 
         <div id="speciesEntries"></div>
+
+
+        <noscript>
+
+            <section>
+
+                <h2>
+                    Species of Ozyleme
+                </h2>
+
+                <p>
+                    JavaScript must be enabled
+                    to display the species.
+                </p>
+
+            </section>
+
+        </noscript>
 
 
     </main>
@@ -398,10 +489,7 @@
     <!-- =========================================================
          SPECIES DATA
 
-         ALL NORMAL SPECIES EDITING HAPPENS IN:
-
-         data/species-data.js
-
+         DO NOT CHANGE THIS PATH.
          ========================================================= -->
 
     <script src="data/species-data.js"></script>
@@ -409,406 +497,485 @@
 
     <!-- =========================================================
          SPECIES PAGE BUILDER
-
-         THIS BUILDS THE PAGE USING species-data.js.
-
-         YOU SHOULD NOT NEED TO EDIT THIS FOR NORMAL
-         SPECIES LORE OR RULE CHANGES.
          ========================================================= -->
 
     <script>
-
 
         /* =========================================================
            PAGE LOCATIONS
            ========================================================= */
 
         const cardsContainer =
-            document.getElementById("speciesCards");
+            document.getElementById(
+                "speciesCards"
+            );
+
 
         const entriesContainer =
-            document.getElementById("speciesEntries");
+            document.getElementById(
+                "speciesEntries"
+            );
 
 
         /* =========================================================
-           CREATE SPECIES DIRECTORY CARDS
+           CREATE SPECIES DIRECTORY
            ========================================================= */
 
-        species.forEach(speciesItem => {
+        species.forEach(
+            speciesItem => {
 
-            const card =
-                document.createElement("a");
 
-            card.className =
-                "card species-card";
+                const card =
+                    document.createElement(
+                        "a"
+                    );
 
-            card.href =
-                "#" + speciesItem.id;
 
-            card.innerHTML = `
+                card.className =
+                    "card species-card";
 
-                <h3>
-                    ${speciesItem.cardTitle}
-                </h3>
 
-                <p>
-                    ${speciesItem.summary}
-                </p>
+                card.href =
+                    "#" + speciesItem.id;
 
-            `;
 
-            cardsContainer.appendChild(card);
+                card.innerHTML = `
 
-        });
+                    <h3>
+                        ${speciesItem.cardTitle}
+                    </h3>
+
+                    <p>
+                        ${speciesItem.summary}
+                    </p>
+
+                `;
+
+
+                cardsContainer
+                    .appendChild(
+                        card
+                    );
+
+
+            }
+        );
 
 
         /* =========================================================
            CREATE FULL SPECIES ENTRIES
            ========================================================= */
 
-        species.forEach(speciesItem => {
+        species.forEach(
+            (
+                speciesItem,
+                speciesIndex
+            ) => {
 
 
-            const section =
-                document.createElement("section");
-
-            section.className =
-                "species-entry";
-
-            section.id =
-                speciesItem.id;
+                const section =
+                    document.createElement(
+                        "section"
+                    );
 
 
-            /* =====================================================
-               TRAITS
-               ===================================================== */
+                section.className =
+                    "species-entry";
 
-            let traitsHTML = "";
 
-            if (
-                speciesItem.traits &&
-                speciesItem.traits.length > 0
-            ) {
+                section.id =
+                    speciesItem.id;
 
-                traitsHTML = `
 
-                    <div class="species-content-block">
+                /* =================================================
+                   TRAITS
+                   ================================================= */
 
-                        <h3>
-                            Species Traits
-                        </h3>
+                let traitsHTML = "";
 
-                        <div class="trait-list">
 
-                            ${speciesItem.traits.map(trait => `
+                if (
+                    Array.isArray(
+                        speciesItem.traits
+                    ) &&
+                    speciesItem.traits.length > 0
+                ) {
 
-                                <div class="trait">
+                    traitsHTML = `
 
-                                    <strong>
-                                        ${trait.name}.
-                                    </strong>
+                        <div class="species-content-block">
 
-                                    ${trait.text}
+                            <h3>
+                                Species Traits
+                            </h3>
 
-                                </div>
+                            <div class="trait-list">
 
-                            `).join("")}
+                                ${speciesItem.traits
+                                    .map(
+                                        trait => `
+
+                                            <div class="trait">
+
+                                                <strong>
+                                                    ${trait.name}.
+                                                </strong>
+
+                                                ${trait.text}
+
+                                            </div>
+
+                                        `
+                                    )
+                                    .join("")
+                                }
+
+                            </div>
 
                         </div>
 
+                    `;
+
+                }
+
+
+                /* =================================================
+                   VARIATIONS
+                   ================================================= */
+
+                let variationsHTML = "";
+
+
+                if (
+                    Array.isArray(
+                        speciesItem.variations
+                    ) &&
+                    speciesItem.variations.length > 0
+                ) {
+
+                    variationsHTML = `
+
+                        <div class="species-content-block">
+
+                            <h3>
+                                Variations
+                            </h3>
+
+                            <p>
+                                The following variations
+                                are recognized within Ozyleme.
+                            </p>
+
+
+                            <div class="variation-container">
+
+                                ${speciesItem.variations
+                                    .map(
+                                        variation => `
+
+                                            <div class="variation-card">
+
+                                                <h4>
+                                                    ${variation.name}
+                                                </h4>
+
+
+                                                <p class="variation-equivalent">
+
+                                                    D&amp;D Equivalent:
+                                                    ${variation.equivalent}
+
+                                                </p>
+
+
+                                                <p>
+                                                    ${variation.description}
+                                                </p>
+
+
+                                                <p>
+
+                                                    <strong>
+                                                        Mechanical Basis:
+                                                    </strong>
+
+                                                    ${variation.mechanics}
+
+                                                </p>
+
+                                            </div>
+
+                                        `
+                                    )
+                                    .join("")
+                                }
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+
+
+                /* =================================================
+                   OZYLEME CHANGES
+                   ================================================= */
+
+                let changesHTML = "";
+
+
+                if (
+                    Array.isArray(
+                        speciesItem.changes
+                    ) &&
+                    speciesItem.changes.length > 0
+                ) {
+
+                    changesHTML = `
+
+                        <div class="species-content-block">
+
+                            <h3>
+                                Ozyleme Changes
+                            </h3>
+
+
+                            <div class="ozyleme-change-box">
+
+                                <ul>
+
+                                    ${speciesItem.changes
+                                        .map(
+                                            change => `
+
+                                                <li>
+                                                    ${change}
+                                                </li>
+
+                                            `
+                                        )
+                                        .join("")
+                                    }
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+
+
+                /* =================================================
+                   COMPLETE SPECIES ENTRY
+                   ================================================= */
+
+                section.innerHTML = `
+
+
+                    <h2>
+                        The ${speciesItem.name}
+                    </h2>
+
+
+                    <p class="species-equivalent">
+                        D&amp;D Equivalent:
+                        ${speciesItem.equivalent}
+                    </p>
+
+
+                    <p>
+                        ${speciesItem.introduction}
+                    </p>
+
+
+                    <!-- =========================================
+                         QUICK INFORMATION
+                         ========================================= -->
+
+                    <div class="species-meta">
+
+
+                        <div class="species-meta-item">
+
+                            <span class="species-meta-label">
+                                Creature Type
+                            </span>
+
+                            <span class="species-meta-value">
+                                ${speciesItem.creatureType}
+                            </span>
+
+                        </div>
+
+
+                        <div class="species-meta-item">
+
+                            <span class="species-meta-label">
+                                Size
+                            </span>
+
+                            <span class="species-meta-value">
+                                ${speciesItem.size}
+                            </span>
+
+                        </div>
+
+
+                        <div class="species-meta-item">
+
+                            <span class="species-meta-label">
+                                Speed
+                            </span>
+
+                            <span class="species-meta-value">
+                                ${speciesItem.speed}
+                            </span>
+
+                        </div>
+
+
+                        <div class="species-meta-item">
+
+                            <span class="species-meta-label">
+                                Common Kingdoms
+                            </span>
+
+                            <span class="species-meta-value">
+                                ${speciesItem.kingdoms}
+                            </span>
+
+                        </div>
+
+
+                        <div class="species-meta-item">
+
+                            <span class="species-meta-label">
+                                Rarity
+                            </span>
+
+                            <span class="species-meta-value">
+                                ${speciesItem.rarity}
+                            </span>
+
+                        </div>
+
+
                     </div>
 
-                `;
-            }
 
-
-            /* =====================================================
-               VARIATIONS
-               ===================================================== */
-
-            let variationsHTML = "";
-
-            if (
-                speciesItem.variations &&
-                speciesItem.variations.length > 0
-            ) {
-
-                variationsHTML = `
+                    <!-- =========================================
+                         ORIGINS
+                         ========================================= -->
 
                     <div class="species-content-block">
 
                         <h3>
-                            Variations
+                            Origins in Ozyleme
                         </h3>
 
                         <p>
-                            The following variations are recognized
-                            within Ozyleme.
+                            ${speciesItem.origins}
                         </p>
-
-                        <div class="variation-container">
-
-                            ${speciesItem.variations.map(variation => `
-
-                                <div class="variation-card">
-
-                                    <h4>
-                                        ${variation.name}
-                                    </h4>
-
-                                    <p class="variation-equivalent">
-
-                                        D&amp;D Equivalent:
-                                        ${variation.equivalent}
-
-                                    </p>
-
-                                    <p>
-                                        ${variation.description}
-                                    </p>
-
-                                    <p>
-
-                                        <strong>
-                                            Mechanical Basis:
-                                        </strong>
-
-                                        ${variation.mechanics}
-
-                                    </p>
-
-                                </div>
-
-                            `).join("")}
-
-                        </div>
 
                     </div>
 
-                `;
-            }
 
-
-            /* =====================================================
-               OZYLEME CHANGES
-               ===================================================== */
-
-            let changesHTML = "";
-
-            if (
-                speciesItem.changes &&
-                speciesItem.changes.length > 0
-            ) {
-
-                changesHTML = `
+                    <!-- =========================================
+                         APPEARANCE
+                         ========================================= -->
 
                     <div class="species-content-block">
 
                         <h3>
-                            Ozyleme Changes
+                            Appearance
                         </h3>
 
-                        <div class="ozyleme-change-box">
+                        <p>
+                            ${speciesItem.appearance}
+                        </p>
 
-                            <ul>
+                    </div>
 
-                                ${speciesItem.changes.map(change => `
 
-                                    <li>
-                                        ${change}
-                                    </li>
+                    <!-- =========================================
+                         LIFE
+                         ========================================= -->
 
-                                `).join("")}
+                    <div class="species-content-block">
 
-                            </ul>
+                        <h3>
+                            Life in Ozyleme
+                        </h3>
 
-                        </div>
+                        <p>
+                            ${speciesItem.life}
+                        </p>
+
+                    </div>
+
+
+                    ${traitsHTML}
+
+                    ${variationsHTML}
+
+                    ${changesHTML}
+
+
+                    <!-- =========================================
+                         RETURN BUTTON
+                         ========================================= -->
+
+                    <div class="species-return">
+
+                        <a href="#species-top">
+                            Return to Species
+                        </a>
 
                     </div>
 
                 `;
+
+
+                entriesContainer
+                    .appendChild(
+                        section
+                    );
+
+
+                /* =================================================
+                   DIVIDER BETWEEN SPECIES
+                   ================================================= */
+
+                if (
+                    speciesIndex <
+                    species.length - 1
+                ) {
+
+                    const divider =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    divider.className =
+                        "divider";
+
+
+                    entriesContainer
+                        .appendChild(
+                            divider
+                        );
+
+                }
+
+
             }
-
-
-            /* =====================================================
-               BUILD COMPLETE SPECIES ENTRY
-               ===================================================== */
-
-            section.innerHTML = `
-
-
-                <h2>
-                    The ${speciesItem.name}
-                </h2>
-
-
-                <p class="species-equivalent">
-
-                    D&amp;D Equivalent:
-                    ${speciesItem.equivalent}
-
-                </p>
-
-
-                <p>
-                    ${speciesItem.introduction}
-                </p>
-
-
-                <!-- =============================================
-                     QUICK INFORMATION
-                     ============================================= -->
-
-                <div class="species-meta">
-
-
-                    <div class="species-meta-item">
-
-                        <span class="species-meta-label">
-                            Creature Type
-                        </span>
-
-                        <span class="species-meta-value">
-                            ${speciesItem.creatureType}
-                        </span>
-
-                    </div>
-
-
-                    <div class="species-meta-item">
-
-                        <span class="species-meta-label">
-                            Size
-                        </span>
-
-                        <span class="species-meta-value">
-                            ${speciesItem.size}
-                        </span>
-
-                    </div>
-
-
-                    <div class="species-meta-item">
-
-                        <span class="species-meta-label">
-                            Speed
-                        </span>
-
-                        <span class="species-meta-value">
-                            ${speciesItem.speed}
-                        </span>
-
-                    </div>
-
-
-                    <div class="species-meta-item">
-
-                        <span class="species-meta-label">
-                            Common Kingdoms
-                        </span>
-
-                        <span class="species-meta-value">
-                            ${speciesItem.kingdoms}
-                        </span>
-
-                    </div>
-
-
-                    <div class="species-meta-item">
-
-                        <span class="species-meta-label">
-                            Rarity
-                        </span>
-
-                        <span class="species-meta-value">
-                            ${speciesItem.rarity}
-                        </span>
-
-                    </div>
-
-
-                </div>
-
-
-                <!-- =============================================
-                     ORIGINS
-                     ============================================= -->
-
-                <div class="species-content-block">
-
-                    <h3>
-                        Origins in Ozyleme
-                    </h3>
-
-                    <p>
-                        ${speciesItem.origins}
-                    </p>
-
-                </div>
-
-
-                <!-- =============================================
-                     APPEARANCE
-                     ============================================= -->
-
-                <div class="species-content-block">
-
-                    <h3>
-                        Appearance
-                    </h3>
-
-                    <p>
-                        ${speciesItem.appearance}
-                    </p>
-
-                </div>
-
-
-                <!-- =============================================
-                     LIFE IN OZYLEME
-                     ============================================= -->
-
-                <div class="species-content-block">
-
-                    <h3>
-                        Life in Ozyleme
-                    </h3>
-
-                    <p>
-                        ${speciesItem.life}
-                    </p>
-
-                </div>
-
-
-                ${traitsHTML}
-
-
-                ${variationsHTML}
-
-
-                ${changesHTML}
-
-
-                <!-- =============================================
-                     RETURN BUTTON
-                     ============================================= -->
-
-                <div class="species-return">
-
-                    <a href="#species-top">
-                        Return to Species
-                    </a>
-
-                </div>
-
-
-            `;
-
-
-            entriesContainer.appendChild(section);
-
-        });
+        );
 
 
     </script>
