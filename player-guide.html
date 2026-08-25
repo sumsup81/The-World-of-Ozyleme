@@ -1,6 +1,913 @@
-<div class="cards">
-    <a class="card" href="character-builder.html">
-        <h3>Open Character Builder</h3>
-        <p>Create, save, load, and export your Ozyleme character.</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Player Guide | Ozyleme</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+
+<!-- ================================
+     HEADER
+     ================================ -->
+
+<header>
+    <h1></h1>
+    <p>A Guide for Those Beneath the Hollow Sun</p>
+</header>
+
+
+<!-- ================================
+     NAVIGATION
+     ================================ -->
+
+<nav class="site-nav">
+
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="kingdoms.html">Kingdoms</a>
+    <a class="nav-link" href="species.html">Species</a>
+    <a class="nav-link" href="people.html">People</a>
+    <a class="nav-link" href="gods.html">Gods</a>
+    <a class="nav-link" href="bestiary.html">Bestiary</a>
+    <a class="nav-link" href="classes.html">Classes</a>
+
+    <a
+        class="nav-link active"
+        href="player-guide.html"
+        aria-current="page"
+    >
+        Player Guide
     </a>
-</div>
+
+</nav>
+
+
+<!-- ================================
+     MAIN CONTENT
+     ================================ -->
+
+<main>
+
+
+    <!-- ================================
+         CHARACTER BUILDER
+         ================================ -->
+
+    <section class="character-builder-link">
+
+        <h2>Character Builder</h2>
+
+        <p>
+            Create a character for Ozyleme, record your character details,
+            and export your finished character for play.
+        </p>
+
+
+        <div class="cards">
+
+            <a
+                class="card"
+                href="character-builder.html"
+            >
+
+                <h3>
+                    Open Character Builder
+                </h3>
+
+                <p>
+                    Create, save, load, and export your Ozyleme character.
+                </p>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- ================================
+         INTRODUCTION
+         ================================ -->
+
+    <section>
+
+        <h2>Player Guide to Ozyleme</h2>
+
+        <p>
+            This guide contains the knowledge, customs, beliefs, and rules
+            needed to create a character who belongs beneath the hollow
+            sun of Ozyleme.
+        </p>
+
+        <p>
+            You do not need to know every kingdom, god, creature, or piece
+            of history before playing. Begin with what your character would
+            reasonably know and allow the darker mysteries of Ozyleme to
+            reveal themselves during play.
+        </p>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- =====================================================
+         CREATE A CHARACTER
+         ===================================================== -->
+
+    <section id="character-creation">
+
+        <h2>Create a Character</h2>
+
+        <p>
+            Use the resources below when building a character for Ozyleme.
+            Standard Dungeons & Dragons character creation applies unless
+            an Ozyleme rule specifically changes it.
+        </p>
+
+
+        <!-- OZYLEME HOUSE RULE -->
+
+        <div class="ozyleme-rule">
+
+            <h3>Ozyleme Character Rule</h3>
+
+            <p>
+                <strong>
+                    All characters in Ozyleme gain +1 to one ability
+                    score of their choice.
+                </strong>
+            </p>
+
+            <p>
+                Choose the ability score after assigning your starting
+                ability scores. The calculator below includes this
+                Ozyleme bonus.
+            </p>
+
+        </div>
+
+
+        <!-- CHARACTER SHEETS -->
+
+        <div class="character-resources">
+
+            <h3>Character Sheets</h3>
+
+            <p>
+                Official Dungeons & Dragons character sheets can be
+                opened or saved as PDFs.
+            </p>
+
+
+            <div class="resource-buttons">
+
+                <a
+                    class="resource-button"
+                    href="https://media.dndbeyond.com/compendium-images/phb/downloads/DnD_2024_Character-Sheet.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    2024 Character Sheet PDF
+                </a>
+
+
+                <a
+                    class="resource-button"
+                    href="https://media.dndbeyond.com/compendium-images/marketing/dnd_5e_charactersheet_formfillable.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    2014 Fillable Character Sheet PDF
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================
+             POINT BUY CALCULATOR
+             ================================ -->
+
+        <div class="point-buy-calculator">
+
+            <div class="calculator-heading">
+
+                <h3>Ability Score Point Buy</h3>
+
+                <p>
+                    Spend up to <strong>27 points</strong>.
+                    Scores may be purchased from 8 to 15 before
+                    applying the Ozyleme +1.
+                </p>
+
+            </div>
+
+
+            <div class="point-summary">
+
+                <div>
+                    <span class="summary-label">Points Used</span>
+                    <strong id="points-used">0</strong>
+                </div>
+
+                <div>
+                    <span class="summary-label">Points Remaining</span>
+                    <strong id="points-remaining">27</strong>
+                </div>
+
+            </div>
+
+
+            <div id="point-status" class="point-status">
+                Your ability scores are within the 27-point limit.
+            </div>
+
+
+            <!-- STRENGTH -->
+
+            <div class="ability-row">
+
+                <label for="strength">Strength</label>
+
+                <select id="strength" class="ability-score">
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                </select>
+
+                <span class="final-score">
+                    Final:
+                    <strong id="strength-final">8</strong>
+                </span>
+
+            </div>
+
+
+            <!-- DEXTERITY -->
+
+            <div class="ability-row">
+
+                <label for="dexterity">Dexterity</label>
+
+                <select id="dexterity" class="ability-score">
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                </select>
+
+                <span class="final-score">
+                    Final:
+                    <strong id="dexterity-final">8</strong>
+                </span>
+
+            </div>
+
+
+            <!-- CONSTITUTION -->
+
+            <div class="ability-row">
+
+                <label for="constitution">Constitution</label>
+
+                <select id="constitution" class="ability-score">
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                </select>
+
+                <span class="final-score">
+                    Final:
+                    <strong id="constitution-final">8</strong>
+                </span>
+
+            </div>
+
+
+            <!-- INTELLIGENCE -->
+
+            <div class="ability-row">
+
+                <label for="intelligence">Intelligence</label>
+
+                <select id="intelligence" class="ability-score">
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                </select>
+
+                <span class="final-score">
+                    Final:
+                    <strong id="intelligence-final">8</strong>
+                </span>
+
+            </div>
+
+
+            <!-- WISDOM -->
+
+            <div class="ability-row">
+
+                <label for="wisdom">Wisdom</label>
+
+                <select id="wisdom" class="ability-score">
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                </select>
+
+                <span class="final-score">
+                    Final:
+                    <strong id="wisdom-final">8</strong>
+                </span>
+
+            </div>
+
+
+            <!-- CHARISMA -->
+
+            <div class="ability-row">
+
+                <label for="charisma">Charisma</label>
+
+                <select id="charisma" class="ability-score">
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                </select>
+
+                <span class="final-score">
+                    Final:
+                    <strong id="charisma-final">8</strong>
+                </span>
+
+            </div>
+
+
+            <!-- OZYLEME +1 -->
+
+            <div class="ozyleme-bonus">
+
+                <label for="bonus-stat">
+                    Ozyleme +1 Ability Score
+                </label>
+
+                <select id="bonus-stat">
+
+                    <option value="" selected>
+                        Choose one...
+                    </option>
+
+                    <option value="strength">
+                        Strength
+                    </option>
+
+                    <option value="dexterity">
+                        Dexterity
+                    </option>
+
+                    <option value="constitution">
+                        Constitution
+                    </option>
+
+                    <option value="intelligence">
+                        Intelligence
+                    </option>
+
+                    <option value="wisdom">
+                        Wisdom
+                    </option>
+
+                    <option value="charisma">
+                        Charisma
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="calculator-actions">
+
+                <button type="button" id="reset-point-buy">
+                    Reset Scores
+                </button>
+
+
+                <a
+                    href="https://chicken-dinner.com/5e/5e-point-buy.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Chicken Dinner Calculator
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- =====================================================
+         THINGS EVERYONE KNOWS
+         ===================================================== -->
+
+    <section id="everyone-knows">
+
+        <h2>Things Everyone Knows About Ozyleme</h2>
+
+        <p>
+            A character raised in Ozyleme should not enter the world
+            knowing nothing about it. Certain ideas are so widespread
+            that even an isolated farmer, wandering laborer, or child
+            would have heard some version of them.
+        </p>
+
+
+        <div class="content-box">
+
+            <h3>The World Beneath the Hollow Sun</h3>
+
+            <p>
+                Notes about the appearance of Ozyleme, its strange sky,
+                the hollow white sun, the mist, and the basic nature of
+                the world will be recorded here.
+            </p>
+
+        </div>
+
+
+        <div class="content-box">
+
+            <h3>The Eight Kingdoms</h3>
+
+            <p>
+                What an ordinary person knows about Plume, Kettle,
+                Loop, Torch, Vial, Hook, Bell, and Crook will be
+                recorded here.
+            </p>
+
+        </div>
+
+
+        <div class="content-box">
+
+            <h3>The Gods</h3>
+
+            <p>
+                Common beliefs concerning the gods, their relationship
+                with mortals, and divine power will be recorded here.
+            </p>
+
+        </div>
+
+
+        <div class="content-box">
+
+            <h3>Magic</h3>
+
+            <p>
+                What the people of Ozyleme believe about magic,
+                those who wield it, and its place within the world
+                will be recorded here.
+            </p>
+
+        </div>
+
+
+        <div class="content-box">
+
+            <h3>Death and What Comes After</h3>
+
+            <p>
+                Common beliefs surrounding death, the dead, spirits,
+                burial, remembrance, and what may remain after life
+                has ended will be recorded here.
+            </p>
+
+        </div>
+
+
+        <div class="content-box">
+
+            <h3>Everyday Life</h3>
+
+            <p>
+                Customs involving travel, food, shelter, work,
+                celebrations, mourning, superstition, and ordinary
+                survival will be recorded here.
+            </p>
+
+        </div>
+
+
+        <div class="content-box">
+
+            <h3>Things People Fear</h3>
+
+            <p>
+                Dangers, warnings, superstitions, and threats known
+                by ordinary inhabitants of Ozyleme will be recorded here.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- =====================================================
+         HOW TO ROLEPLAY
+         ===================================================== -->
+
+    <section id="roleplay">
+
+        <h2>How to Roleplay in Ozyleme</h2>
+
+        <p>
+            Characters in Ozyleme have grown up in a world where
+            strange skies, cruel gods, dangerous wilderness, unusual
+            peoples, and supernatural forces are parts of ordinary life.
+        </p>
+
+
+        <div class="content-box">
+
+            <h3>How Does Your Character See the World?</h3>
+
+            <p>
+                Do they accept Ozyleme as it is, fear it, resent it,
+                celebrate it, or dream that something better exists?
+            </p>
+
+        </div>
+
+
+        <div class="content-box">
+
+            <h3>What Does Your Character Think of the Gods?</h3>
+
+            <p>
+                Does your character worship, fear, respect, bargain
+                with, distrust, or ignore the divine powers?
+            </p>
+
+        </div>
+
+
+        <div class="content-box">
+
+            <h3>Where Is Home?</h3>
+
+            <p>
+                Consider which kingdom, settlement, wilderness, or
+                community shaped your character.
+            </p>
+
+        </div>
+
+
+        <div class="content-box">
+
+            <h3>What Does Your Character Fear?</h3>
+
+            <p>
+                Give your character a superstition, warning, ritual,
+                story, or childhood fear that comes from growing up
+                beneath the hollow sun.
+            </p>
+
+        </div>
+
+
+        <div class="content-box">
+
+            <h3>Remember What Is Normal Here</h3>
+
+            <p>
+                Things that appear grotesque or supernatural to an
+                outsider may be completely ordinary to someone born
+                in Ozyleme.
+            </p>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <h3>Questions for Your Character</h3>
+
+            <ul>
+                <li>Where were you raised?</li>
+                <li>What were you taught about the gods?</li>
+                <li>What story frightened you as a child?</li>
+                <li>What superstition do you still follow?</li>
+                <li>What do you believe happens after death?</li>
+                <li>What have you been told about the Dragon King?</li>
+                <li>Why did you leave home?</li>
+            </ul>
+
+        </div>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- =====================================================
+         THE DRAGON KING
+         ===================================================== -->
+
+    <section id="dragon-king">
+
+        <h2>The Dragon King</h2>
+
+        <p>
+            The Dragon King occupies a place in Ozyleme unlike that
+            of any mortal ruler. His presence reaches beyond kingdoms,
+            borders, generations, and even the gods themselves.
+        </p>
+
+        <p>
+            Not everything said about the Dragon King is necessarily
+            true. Some things are taught as history. Others survive
+            as religion, warning, superstition, rumor, or forbidden story.
+        </p>
+
+
+        <div class="content-box">
+
+            <h3>What Everyone Knows</h3>
+
+            <p>
+                The facts virtually every person in Ozyleme has been
+                taught about the Dragon King will be recorded here.
+            </p>
+
+        </div>
+
+
+        <div class="content-box">
+
+            <h3>The Dragon and the Gods</h3>
+
+            <p>
+                What mortals commonly believe about the Dragon King's
+                relationship with the gods will be recorded here.
+            </p>
+
+        </div>
+
+
+        <div class="content-box">
+
+            <h3>The Dragon's Breath</h3>
+
+            <p>
+                Stories and beliefs concerning the Dragon's breath,
+                the mist, and the things said to emerge from it will
+                be recorded here.
+            </p>
+
+        </div>
+
+
+        <div class="content-box">
+
+            <h3>The Dragon and Magic</h3>
+
+            <p>
+                What people believe about the Dragon King's relationship
+                with magic will be recorded here.
+            </p>
+
+        </div>
+
+
+        <div class="content-box">
+
+            <h3>Stories Told About Him</h3>
+
+            <p>
+                Legends, nursery tales, prayers, warnings, sayings,
+                and contradictory stories concerning the Dragon King
+                can be collected here.
+            </p>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <h3>What Is Not Known</h3>
+
+            <p>
+                Some truths concerning the Dragon King are lost,
+                deliberately hidden, misunderstood, or known only
+                by those who have come dangerously close to him.
+            </p>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<footer>
+    <p>The World of Ozyleme</p>
+</footer>
+
+
+<!-- ================================
+     POINT BUY CALCULATOR SCRIPT
+     ================================ -->
+
+<script>
+
+const pointCosts = {
+    8: 0,
+    9: 1,
+    10: 2,
+    11: 3,
+    12: 4,
+    13: 5,
+    14: 7,
+    15: 9
+};
+
+const abilityIds = [
+    "strength",
+    "dexterity",
+    "constitution",
+    "intelligence",
+    "wisdom",
+    "charisma"
+];
+
+const abilitySelects =
+    document.querySelectorAll(".ability-score");
+
+const bonusStat =
+    document.getElementById("bonus-stat");
+
+const pointsUsed =
+    document.getElementById("points-used");
+
+const pointsRemaining =
+    document.getElementById("points-remaining");
+
+const pointStatus =
+    document.getElementById("point-status");
+
+const resetButton =
+    document.getElementById("reset-point-buy");
+
+
+function updatePointBuy() {
+
+    let totalPoints = 0;
+
+    abilitySelects.forEach(select => {
+
+        const score = Number(select.value);
+
+        totalPoints += pointCosts[score];
+
+    });
+
+
+    pointsUsed.textContent = totalPoints;
+
+    const remaining = 27 - totalPoints;
+
+    pointsRemaining.textContent = remaining;
+
+
+    if (remaining < 0) {
+
+        pointStatus.textContent =
+            "You have spent too many points.";
+
+        pointStatus.classList.add("over-budget");
+
+    } else {
+
+        pointStatus.textContent =
+            "Your ability scores are within the 27-point limit.";
+
+        pointStatus.classList.remove("over-budget");
+
+    }
+
+
+    abilityIds.forEach(id => {
+
+        const baseScore =
+            Number(document.getElementById(id).value);
+
+        let finalScore = baseScore;
+
+        if (bonusStat.value === id) {
+            finalScore += 1;
+        }
+
+        document.getElementById(
+            id + "-final"
+        ).textContent = finalScore;
+
+    });
+
+}
+
+
+abilitySelects.forEach(select => {
+
+    select.addEventListener(
+        "change",
+        updatePointBuy
+    );
+
+});
+
+
+bonusStat.addEventListener(
+    "change",
+    updatePointBuy
+);
+
+
+resetButton.addEventListener(
+    "click",
+    function () {
+
+        abilitySelects.forEach(select => {
+            select.value = "8";
+        });
+
+        bonusStat.value = "";
+
+        updatePointBuy();
+
+    }
+);
+
+
+updatePointBuy();
+
+</script>
+
+
+</body>
+
+</html>
