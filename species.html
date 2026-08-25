@@ -321,9 +321,6 @@
 
     <!-- =========================================================
          HEADER
-
-         THE H1 IS INTENTIONALLY EMPTY.
-         THE OZYLEME NAME IS ALREADY IN THE BANNER IMAGE.
          ========================================================= -->
 
     <header>
@@ -341,37 +338,69 @@
          NAVIGATION
          ========================================================= -->
 
-    <nav>
+    <nav class="site-nav">
 
-        <a href="index.html">
+        <a
+            class="nav-link"
+            href="index.html"
+        >
             Home
         </a>
 
-        <a href="kingdoms.html">
+
+        <a
+            class="nav-link"
+            href="kingdoms.html"
+        >
             Kingdoms
         </a>
 
-        <a href="species.html">
+
+        <a
+            class="nav-link active"
+            href="species.html"
+            aria-current="page"
+        >
             Species
         </a>
 
-        <a href="people.html">
+
+        <a
+            class="nav-link"
+            href="people.html"
+        >
             People
         </a>
 
-        <a href="gods.html">
+
+        <a
+            class="nav-link"
+            href="gods.html"
+        >
             Gods
         </a>
 
-        <a href="bestiary.html">
+
+        <a
+            class="nav-link"
+            href="bestiary.html"
+        >
             Bestiary
         </a>
 
-        <a href="classes.html">
+
+        <a
+            class="nav-link"
+            href="classes.html"
+        >
             Classes
         </a>
 
-        <a href="player-guide.html">
+
+        <a
+            class="nav-link"
+            href="player-guide.html"
+        >
             Player Guide
         </a>
 
@@ -422,9 +451,6 @@
 
         <!-- =====================================================
              SPECIES DIRECTORY
-
-             GENERATED AUTOMATICALLY FROM:
-             data/species-data.js
              ===================================================== -->
 
         <section class="species-directory">
@@ -488,8 +514,6 @@
 
     <!-- =========================================================
          SPECIES DATA
-
-         DO NOT CHANGE THIS PATH.
          ========================================================= -->
 
     <script src="data/species-data.js"></script>
@@ -500,10 +524,6 @@
          ========================================================= -->
 
     <script>
-
-        /* =========================================================
-           PAGE LOCATIONS
-           ========================================================= */
 
         const cardsContainer =
             document.getElementById(
@@ -793,10 +813,6 @@
                     </p>
 
 
-                    <!-- =========================================
-                         QUICK INFORMATION
-                         ========================================= -->
-
                     <div class="species-meta">
 
 
@@ -868,10 +884,6 @@
                     </div>
 
 
-                    <!-- =========================================
-                         ORIGINS
-                         ========================================= -->
-
                     <div class="species-content-block">
 
                         <h3>
@@ -885,10 +897,6 @@
                     </div>
 
 
-                    <!-- =========================================
-                         APPEARANCE
-                         ========================================= -->
-
                     <div class="species-content-block">
 
                         <h3>
@@ -901,10 +909,6 @@
 
                     </div>
 
-
-                    <!-- =========================================
-                         LIFE
-                         ========================================= -->
 
                     <div class="species-content-block">
 
@@ -926,10 +930,6 @@
                     ${changesHTML}
 
 
-                    <!-- =========================================
-                         RETURN BUTTON
-                         ========================================= -->
-
                     <div class="species-return">
 
                         <a href="#species-top">
@@ -946,10 +946,6 @@
                         section
                     );
 
-
-                /* =================================================
-                   DIVIDER BETWEEN SPECIES
-                   ================================================= */
 
                 if (
                     speciesIndex <
