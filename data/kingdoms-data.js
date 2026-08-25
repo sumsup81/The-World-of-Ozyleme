@@ -1,61 +1,59 @@
 /* =========================================================
    OZYLEME — KINGDOM DATA
    =========================================================
-   Edit kingdom lore here.
-   kingdoms.html reads from this file.
+   This is the only file that should normally be edited
+   when kingdom lore changes.
+   kingdoms.html builds the page from this data.
    ========================================================= */
 
-const kingdomsData = [
+const loreKeeper =
+    "It will be recorded here by the Lore Keeper.";
+
+
+const kingdoms = [
 
     /* =====================================================
        PLUME
        ===================================================== */
-
     {
         id: "plume",
         name: "Plume",
         symbol: "The Feather",
         image: "images/kingdoms/Plume Navi Button.jpg",
 
-        keeper: "The Giver",
-
-        ruler:
-            "The Lore Keeper has not yet recorded the ruler of Plume.",
+        tagline:
+            "The kingdom that learned too much.",
 
         seat:
-            "The Lore Keeper has not yet recorded the ancient seat of Plume.",
+            loreKeeper,
 
-        people:
-            "Humans",
+        sovereign:
+            loreKeeper,
 
-        geography: [
-            "Plume once occupied prosperous lands along the coast of Ozyleme.",
-            "Much of the kingdom was destroyed when the Seer obeyed the command of Ozyleme and brought ruin upon it."
-        ],
+        keeper:
+            "The Giver",
 
-        faith: [
-            "Plume was kept by the Giver.",
-            "The Giver is now lost, absent, or believed dead by much of Ozyleme."
-        ],
+        land:
+            "Plume was once a prosperous human kingdom along the coast of Ozyleme. Its cities, libraries, cathedrals, ships, and blue crystal towers were destroyed when Ozyleme commanded the Seer to act. Survivors scattered toward Crook, Kettle, and other lands.",
 
-        legacy: [
-            "Plume was once one of the greatest centers of learning, scholarship, invention, and preserved knowledge in Ozyleme.",
-            "Its scholars eventually learned something that crossed the boundary permitted by the Dragon King.",
-            "Ozyleme commanded the Seer to destroy the kingdom."
-        ],
+        faith:
+            "Plume was kept by the Giver. Most of Ozyleme now believes the Giver is lost, absent, or dead, although secret worship still survives.",
 
-        crown: [
-            "The Lore Keeper has not yet recorded the government of Plume before its destruction."
-        ],
+        achievements:
+            "Plume was one of the greatest centers of learning, scholarship, invention, and preserved knowledge in Ozyleme. Its scholars discovered something that crossed the limit permitted by the Dragon King, and the kingdom paid for that knowledge with its destruction.",
 
-        bounty: [
-            "Plume's greatest treasure was knowledge.",
-            "Libraries, scholars, craftsmen, and learning formed much of the kingdom's value."
-        ],
+        politics:
+            loreKeeper,
 
-        peopleAndCustoms: [
-            "The survivors of Plume scattered after its destruction.",
-            "Many fled toward Crook and Kettle, carrying fragments of the old kingdom with them."
+        economics:
+            "Plume's greatest wealth was knowledge: libraries, scholars, craftsmen, techniques, and discoveries. Much of that wealth was destroyed or scattered during the fall of the kingdom.",
+
+        society:
+            "The people of Plume were primarily human. Its surviving people now live among other kingdoms, carrying fragments of Plume's culture, knowledge, and fear with them.",
+
+        notes: [
+            "Plume was destroyed by the Seer at Ozyleme's command.",
+            "The exact discovery that doomed Plume remains deliberately unrecorded."
         ]
     },
 
@@ -63,105 +61,88 @@ const kingdomsData = [
     /* =====================================================
        KETTLE
        ===================================================== */
-
     {
         id: "kettle",
         name: "Kettle",
         symbol: "The Cauldron",
         image: "images/kingdoms/Kettle Navi Button.jpg",
 
+        tagline:
+            "Where the forest keeps what it takes.",
+
+        seat:
+            loreKeeper,
+
+        sovereign:
+            loreKeeper,
+
         keeper:
             "The Ravager",
 
-        ruler:
-            "The Lore Keeper has not yet recorded the ruler of Kettle.",
+        land:
+            "Kettle is a heavily forested kingdom dominated by enormous and ancient woods. Paths disappear beneath the canopy, borders become uncertain, and travelers are rarely certain whether they are being watched.",
 
-        seat:
-            "The Lore Keeper has not yet recorded the seat of Kettle.",
+        faith:
+            "Kettle is kept by the Ravager, Master of Shadows. In Ozyleme, the Ravager's shadow is a taking force: something is removed, and darkness is what remains.",
 
-        people:
-            "Forest Elves",
+        achievements:
+            loreKeeper,
 
-        geography: [
-            "Kettle is a heavily forested kingdom dominated by enormous and ancient woods.",
-            "Paths disappear beneath the canopy and old borders become difficult to distinguish."
-        ],
+        politics:
+            loreKeeper,
 
-        faith: [
-            "Kettle is kept by the Ravager, Master of Shadows."
-        ],
+        economics:
+            "Kettle's forests provide rare materials and hidden resources, but the full nature of its trade has not yet been recorded.",
 
-        legacy: [
-            "The Lore Keeper has not yet recorded the great works or achievements of Kettle."
-        ],
+        society:
+            "Forest Elves inhabit much of Kettle. Their relationship with outsiders is often hostile, and workers who venture too deeply into their territory have been known to disappear or be taken.",
 
-        crown: [
-            "The Lore Keeper has not yet recorded how Kettle chooses or maintains its ruler."
-        ],
-
-        bounty: [
-            "The forests themselves are among Kettle's greatest resources.",
-            "The Lore Keeper has not yet recorded the full trade of Kettle."
-        ],
-
-        peopleAndCustoms: [
-            "Forest Elves inhabit much of Kettle.",
-            "They have a dangerous relationship with outsiders and have been known to abduct workers who venture too deeply into their forests."
-        ]
+        notes: []
     },
 
 
     /* =====================================================
        LOOP
        ===================================================== */
-
     {
         id: "loop",
         name: "Loop",
         symbol: "The Ring",
         image: "images/kingdoms/Loop Navi Button.jpg",
 
+        tagline:
+            "The revel must continue.",
+
+        seat:
+            loreKeeper,
+
+        sovereign:
+            "Quintsara, the Carnival Queen",
+
         keeper:
             "The Tormentor",
 
-        ruler:
-            "Quintsara, the Carnival Queen",
+        land:
+            "Three great calderas dominate Loop. The kingdom is shaped by spectacle, illusion, ritual, revelry, and ceaseless celebration. Festivals can resemble funerals as readily as carnivals.",
 
-        seat:
-            "The Lore Keeper has not yet recorded the seat of the Carnival Queen.",
+        faith:
+            "Loop is kept by the Tormentor, Master of Flame. The Tormentor demands sensation, excess, performance, and celebration, and his revelers are driven to continue the festivities whether they desire rest or not.",
 
-        people:
-            "Fae and Elves",
+        achievements:
+            "Loop is renowned for carnivals, masks, illusions, performance, grotesque pageantry, macabre humor, mourning rites, and celebrations that transform death itself into spectacle.",
 
-        geography: [
-            "Three great calderas dominate the landscape of Loop.",
-            "The kingdom is a land of spectacle, illusion, ritual, and ceaseless celebration."
-        ],
+        politics:
+            "Loop is ruled by the Carnival Queen, presently Quintsara. A Carnival Queen may reign for one hundred years. At the end of each century, all of Loop must stage the Grand Circus Tormentus for the Tormentor. If the Tormentor judges the spectacle unsatisfactory, he chooses his favorite performer to become the next ruler. The failed ruler is given as tribute to the Banisher and forgotten, preventing an uprising beneath the memory of the old reign.",
 
-        faith: [
-            "Loop is kept by the Tormentor.",
-            "The Tormentor is Master of Flame and embodies excess, sensation, revelry, and torment."
-        ],
+        economics:
+            "Entertainment, spectacle, celebration, performance, and the crafts that support them form an important part of Loop's value to Ozyleme.",
 
-        legacy: [
-            "Loop is famed for carnivals, performances, illusions, funerary celebrations, masks, grotesque pageantry, and macabre humor."
-        ],
+        society:
+            "Fae and Elves are common in Loop. Masks, mourning, grotesque humor, revelry, remembrance, and public performance shape daily life. The boundary between festival and funeral is intentionally thin.",
 
-        crown: [
-            "Loop is ruled by the Carnival Queen, presently Quintsara.",
-            "A Carnival Queen may reign for one hundred years.",
-            "At the end of each century, all of Loop must stage the Grand Circus Tormentus for the Tormentor.",
-            "If the Tormentor is displeased with the performance, he selects his favorite performer to become the new ruler.",
-            "The failed ruler is given as tribute to the Banisher and forgotten so that no uprising may form around the old reign."
-        ],
-
-        bounty: [
-            "Entertainment, spectacle, celebration, and performance are among Loop's great offerings to Ozyleme."
-        ],
-
-        peopleAndCustoms: [
-            "Celebrations in Loop can resemble funerals as easily as festivals.",
-            "Death, mourning, grotesque humor, remembrance, masks, and revelry are all reasons to gather."
+        notes: [
+            "Quintsara is the current Carnival Queen.",
+            "The Grand Circus Tormentus occurs every one hundred years."
         ]
     },
 
@@ -169,122 +150,89 @@ const kingdomsData = [
     /* =====================================================
        TORCH
        ===================================================== */
-
     {
         id: "torch",
         name: "Torch",
         symbol: "The Lantern",
         image: "images/kingdoms/Torch Navi Button.jpg",
 
+        tagline:
+            "Brilliance without mercy.",
+
+        seat:
+            loreKeeper,
+
+        sovereign:
+            loreKeeper,
+
         keeper:
             "The Inflictor",
 
-        ruler:
-            "The Lore Keeper has not yet recorded the ruler of Torch.",
+        land:
+            "Torch is a wealthy High Elven kingdom with little productive agricultural land. Its cities and estates stand in sharp contrast to the lands that must feed them.",
 
-        seat:
-            "The Lore Keeper has not yet recorded the seat of Torch.",
+        faith:
+            "Torch is kept by the Inflictor, Master of Radiance. Radiance is understood less as holy light than as a dangerous, almost radioactive force: brilliant, technological, mutagenic, and harmful through exposure.",
 
-        people:
-            "High Elves",
+        achievements:
+            "The High Elves of Torch are renowned for magic, technology, invention, weapons, disease-making, and other forms of knowledge that allow suffering to be inflicted at a comfortable distance. The Dragon Forged are among the creations associated with the High Elves.",
 
-        geography: [
-            "The Lore Keeper has not yet fully recorded the lands of Torch.",
-            "Agricultural land is scarce enough that Torch depends heavily upon trade."
-        ],
+        politics:
+            loreKeeper,
 
-        faith: [
-            "Torch is kept by the Inflictor, Master of Radiance.",
-            "Radiance is not regarded simply as holy light. It is a dangerous force associated with knowledge, invention, exposure, and destruction."
-        ],
+        economics:
+            "Torch possesses tremendous magical and technological wealth but little agriculture. It therefore trades heavily with Vial for food, wine, fruit, and other products of the harvest.",
 
-        legacy: [
-            "The High Elves of Torch are renowned for magical and technological achievement.",
-            "Knowledge allows them to create weapons, diseases, machines, and other means by which suffering can be inflicted from a comfortable distance."
-        ],
+        society:
+            "Torch's High Elves are wealthy, indolent, and heavily reliant on magic and technology. Their architecture and material culture favor an Art Deco character, while their comfort often depends on systems that prevent them from having to perform difficult labor themselves.",
 
-        crown: [
-            "The Lore Keeper has not yet recorded how Torch is ruled."
-        ],
-
-        bounty: [
-            "Torch possesses wealth, magical technology, invention, and advanced craft.",
-            "Because little agriculture is available within its lands, Torch trades heavily with Vial for food and other harvest goods."
-        ],
-
-        peopleAndCustoms: [
-            "Torch is the kingdom of the High Elves.",
-            "Their culture is wealthy, luxurious, and heavily dependent upon magic and technology.",
-            "Their architecture and material culture favor an Art Deco character."
-        ]
+        notes: []
     },
 
 
     /* =====================================================
        VIAL
        ===================================================== */
-
     {
         id: "vial",
         name: "Vial",
         symbol: "The Flagon",
         image: "images/kingdoms/Vial Navi Button.jpg",
 
-        keeper:
-            "The Harvester",
-
-        ruler:
-            "Gronok, King of Blood and Vine",
+        tagline:
+            "Everything ripens. Everything is reaped.",
 
         seat:
             "Harvestok",
 
-        people:
-            "Goliaths and Forest Orcs",
+        sovereign:
+            "Gronok, King of Blood and Vine",
 
-        geography: [
-            "Vial contains some of the most fruitful lands in Ozyleme.",
-            "Vineyards, berry fields, orchards, farms, groves, and forests cover much of the kingdom.",
-            "The great cultivated fields of the Goliaths frequently meet thick forests inhabited by the Forest Orcs."
-        ],
+        keeper:
+            "The Harvester",
 
-        faith: [
-            "Vial is kept by the Harvester.",
-            "The Harvester is Master of Death, and the people of Vial see little separation between growth, ripening, reaping, decay, and renewal.",
-            "Wicker men and strange tributes constructed from dulled, worn, rusted, and broken farm tools dot both the fields and forests.",
-            "A tool that can no longer serve the harvest is often surrendered back to the land."
-        ],
+        land:
+            "Vial contains some of the most fruitful lands in Ozyleme. Vineyards, berry fields, orchards, farms, groves, and dark forests spread across the kingdom. Great cultivated fields tended by Goliaths frequently meet deep woodland inhabited by Forest Orcs. Wicker men and agricultural tributes made from dulled, worn, rusted, and broken farm tools dot both field and forest.",
 
-        legacy: [
-            "The wines of Vial are precious throughout Ozyleme.",
-            "Goliaths traditionally mash grapes and berries beneath their enormous bare feet as part of the ritual of winemaking.",
-            "For the people of Vial, the crushing of the fruit is not merely labor but part of the harvest itself."
-        ],
+        faith:
+            "Vial is kept by the Harvester, Master of Death. The people of Vial see little separation between growth, ripening, reaping, decay, and renewal. Farm tools that can no longer serve the harvest are often surrendered back to the land and incorporated into wicker offerings and roadside tributes.",
 
-        crown: [
-            "Vial is presently ruled by Gronok, King of Blood and Vine.",
-            "The crown follows the lesson of grapes upon the vine: the fullest, ripest, and most able is expected to rise above the others.",
-            "The ruler watches over the most fruitful lands of Ozyleme only while they remain capable of bearing the burden.",
-            "As the grape eventually withers upon the vine, so too must a ruler eventually surrender the throne.",
-            "When that season comes, another deemed ripe and able enough to rule takes their place."
-        ],
+        achievements:
+            "Vial produces some of the most prized wines and spirits in Ozyleme. Goliaths traditionally crush grapes and berries beneath their enormous bare feet as part of the ritual of winemaking. Harvestok is both a fortress and a vast repository protecting the kingdom's agricultural bounty.",
 
-        bounty: [
-            "Harvestok is both the seat of Vial's ruler and a heavily protected repository of agricultural bounty.",
-            "Within its defenses are great stores of food, grain, fruit, seed, wine, spirits, and other treasures produced from the land.",
-            "Wine from Vial is especially precious to High King Ozyleme.",
-            "It is used in his dealings with the Gnomes whose service helps guard the central kingdom.",
-            "Vial trades heavily with Torch because Torch possesses little agricultural land of its own.",
-            "Merchants and inhabitants of Hook and Bell also trade with Vial for its wines and spirits."
-        ],
+        politics:
+            "Vial is ruled by Gronok, King of Blood and Vine. The crown follows the lesson of grapes upon the vine: the fullest, ripest, and most able is expected to rise above the others and watch over the kingdom. A ruler remains upon the throne only while capable of bearing that burden. As the grape eventually withers and dies, so too must a ruler eventually surrender the throne, allowing another judged ripe and able enough to take their place.",
 
-        peopleAndCustoms: [
-            "Goliaths tend much of Vial's open farmland, vineyards, orchards, and berry fields.",
-            "Forest Orcs inhabit the groves and forests, where the heavy canopy allows them to remain hidden from their kin in Hook.",
-            "Some Forest Orcs assist the enormous Goliaths in their fields, particularly during planting and harvest.",
-            "Many prefer to remain beneath the trees and instead trade forest goods with their Goliath neighbors.",
-            "The relationship between field and forest is therefore one of both separation and dependence.",
-            "Across both, wicker effigies and broken farm implements serve as constant reminders that everything which ripens must eventually be reaped."
+        economics:
+            "Harvestok protects great stores of grain, fruit, seed, wine, spirits, and other valuable agricultural bounty. Vial's wine is especially precious to High King Ozyleme and is used in his dealings with the Gnomes who guard his central kingdom. Vial trades heavily with Torch, where agriculture is scarce, while merchants and inhabitants of Hook and Bell also trade for Vial's wines and spirits.",
+
+        society:
+            "Goliaths tend much of Vial's open farmland, vineyards, orchards, and berry fields. Forest Orcs inhabit the groves and forests, where they can remain hidden from their kin in Hook. Some assist the Goliaths during planting and harvest, but many prefer to remain beneath the trees and trade forest goods with their enormous neighbors. Field and forest remain distinct, but each depends upon the other.",
+
+        notes: [
+            "Gronok bears the title King of Blood and Vine.",
+            "Harvestok is the seat of rule and a fortified repository of agricultural wealth.",
+            "Forest Orcs of Vial often remain hidden from their Hook kin."
         ]
     },
 
@@ -292,162 +240,131 @@ const kingdomsData = [
     /* =====================================================
        HOOK
        ===================================================== */
-
     {
         id: "hook",
         name: "Hook",
         symbol: "The Hook",
         image: "images/kingdoms/Hook Navi Button.jpg",
 
+        tagline:
+            "The sea remembers its exiles.",
+
+        seat:
+            loreKeeper,
+
+        sovereign:
+            loreKeeper,
+
         keeper:
             "The Seer",
 
-        ruler:
-            "The Lore Keeper has not yet recorded the ruler of Hook.",
+        land:
+            "Hook is strongly associated with water, coastlines, sailors, and the old maritime history of the Orcs. Its deeper geography has not yet been fully recorded.",
 
-        seat:
-            "The Lore Keeper has not yet recorded the seat of Hook.",
+        faith:
+            "Hook is kept by the Seer, Master of Depths. The Seer is both watcher and keeper, associated with dangerous knowledge and the things that wait below.",
 
-        people:
-            "Mixed Peoples and Coastal Orcs",
+        achievements:
+            loreKeeper,
 
-        geography: [
-            "Hook possesses long coastal regions connected to the old history of the Orcs.",
-            "The Lore Keeper has not yet fully recorded the geography of Hook."
-        ],
+        politics:
+            loreKeeper,
 
-        faith: [
-            "Hook is kept by the Seer, Master of Depths."
-        ],
+        economics:
+            "Sea travel, coastal trade, fishing, piracy, and exchange with neighboring kingdoms all shape Hook, although its full economy has not yet been recorded.",
 
-        legacy: [
-            "The Lore Keeper has not yet recorded the great works or achievements of Hook."
-        ],
+        society:
+            "Orcs were once widely regarded as a people of the sea. Orc tribes still maintain settlements along the coasts of Hook, preserving a connection to an older Orcish identity that predates many inland communities.",
 
-        crown: [
-            "The Lore Keeper has not yet recorded how Hook is ruled."
-        ],
-
-        bounty: [
-            "The Lore Keeper has not yet recorded the principal wealth and trade of Hook."
-        ],
-
-        peopleAndCustoms: [
-            "Orcs were once widely regarded as a people of the sea.",
-            "Orc tribes still maintain settlements along the coasts of Hook.",
-            "These coastal tribes preserve a connection to an older Orcish identity that predates many inland settlements."
-        ]
+        notes: []
     },
 
 
     /* =====================================================
        BELL
        ===================================================== */
-
     {
         id: "bell",
         name: "Bell",
         symbol: "The Bell",
         image: "images/kingdoms/Bell Navi Button.jpg",
 
+        tagline:
+            "The mountain keeps its old claims.",
+
+        seat:
+            loreKeeper,
+
+        sovereign:
+            loreKeeper,
+
         keeper:
             "The Dominator",
 
-        ruler:
-            "The Lore Keeper has not yet recorded the ruler of Bell.",
+        land:
+            "Bell is a mountain kingdom associated with deep wealth, old stone, and the Dwarves who claim a role in the making of the world.",
 
-        seat:
-            "The Lore Keeper has not yet recorded the seat of Bell.",
+        faith:
+            "Bell is kept by the Dominator, Master of Mountains.",
 
-        people:
-            "Dwarves",
+        achievements:
+            "Dwarves are said to have helped build the world. The full record of Bell's ancient works has not yet been preserved by the Lore Keeper.",
 
-        geography: [
-            "The Lore Keeper has not yet recorded the lands of Bell."
-        ],
+        politics:
+            loreKeeper,
 
-        faith: [
-            "Bell is kept by the Dominator, Master of Mountains."
-        ],
+        economics:
+            "Bell is associated with deep wealth, mountain resources, metalwork, and trade, though its full economy has not yet been recorded.",
 
-        legacy: [
-            "Dwarves played an important role in building the world.",
-            "The deeper works and history of Bell have not yet been recorded by the Lore Keeper."
-        ],
+        society:
+            "Bell is strongly associated with the Dwarves and their old claims upon the mountains. Their deeper customs and social order have not yet been fully recorded.",
 
-        crown: [
-            "The Lore Keeper has not yet recorded how Bell is ruled."
-        ],
-
-        bounty: [
-            "The Lore Keeper has not yet recorded the principal wealth and trade of Bell."
-        ],
-
-        peopleAndCustoms: [
-            "Bell is strongly associated with the Dwarves.",
-            "The Lore Keeper has not yet recorded their customs in sufficient detail."
-        ]
+        notes: []
     },
 
 
     /* =====================================================
        CROOK
        ===================================================== */
-
     {
         id: "crook",
         name: "Crook",
         symbol: "The Staff",
         image: "images/kingdoms/Crook Navi Button.jpg",
 
+        tagline:
+            "Beneath the open sky, the flock survives.",
+
+        seat:
+            loreKeeper,
+
+        sovereign:
+            "The Shepherd King",
+
         keeper:
             "The Banisher",
 
-        ruler:
-            "The Shepherd King",
+        land:
+            "Crook contains broad grasslands, wetlands, and wild open country beneath dangerous skies. Some survivors of Plume fled into these lands after the destruction of their kingdom.",
 
-        seat:
-            "The Lore Keeper has not yet recorded the seat of the Shepherd King.",
+        faith:
+            "Crook is kept by the Banisher, Master of Skies. The Banisher is associated with wrath, force, eradication, and the proper departure of what must be removed.",
 
-        people:
-            "Humans and Feral Halflings",
+        achievements:
+            loreKeeper,
 
-        geography: [
-            "Crook contains broad grasslands and wild open country.",
-            "Its plains became a destination for some of the survivors who fled the destruction of Plume."
-        ],
+        politics:
+            "Crook is ruled by the Shepherd King. The Lore Keeper has not yet recorded how the Shepherd King is chosen or how succession occurs.",
 
-        faith: [
-            "Crook is kept by the Banisher, Master of Skies.",
-            "The Banisher is associated with wrath and the desire to eradicate opposition through force."
-        ],
+        economics:
+            loreKeeper,
 
-        legacy: [
-            "The Lore Keeper has not yet recorded the great works or achievements of Crook."
-        ],
+        society:
+            "Humans form much of Crook's population, while feral Halfling communities inhabit its grasslands and wild places. These Halflings have adapted to a harsher existence than outsiders often expect, with some living in savage bands shaped by hunger, territorial survival, and the dangers of open country.",
 
-        crown: [
-            "Crook is ruled by the Shepherd King.",
-            "The Lore Keeper has not yet recorded how the Shepherd King is chosen or how succession occurs."
-        ],
-
-        bounty: [
-            "The Lore Keeper has not yet recorded the principal wealth and trade of Crook."
-        ],
-
-        peopleAndCustoms: [
-            "Humans form much of Crook's population.",
-            "Its grasslands and wild places are also home to communities of feral Halflings.",
-            "These Halflings have adapted to a harsher existence than outsiders commonly expect.",
-            "Some live in savage bands shaped by hunger, territorial survival, and the dangers of the open country."
+        notes: [
+            "Crook is ruled by the Shepherd King."
         ]
     }
 
 ];
-
-
-/* =========================================================
-   MAKE KINGDOM DATA AVAILABLE TO KINGDOMS.HTML
-   ========================================================= */
-
-window.kingdomsData = kingdomsData;
