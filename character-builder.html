@@ -790,6 +790,183 @@
 
 
         /* =====================================================
+           SPELL SLOTS / SPELL LIST
+           ===================================================== */
+
+        .character-builder-page .spell-subsection {
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid #3d3e34;
+        }
+
+        .character-builder-page .spell-subheading {
+            margin: 0 0 10px;
+            color: #aaa48f;
+            font-size: 0.76rem;
+            font-weight: normal;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .character-builder-page .spell-slot-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+        }
+
+        .character-builder-page .spell-slot-row {
+            display: grid;
+            grid-template-columns: 58px minmax(0, 1fr) minmax(0, 1fr);
+            align-items: end;
+            gap: 6px;
+            padding: 8px;
+            background: #171814;
+            border: 1px solid #3c3d33;
+        }
+
+        .character-builder-page .spell-slot-level {
+            align-self: center;
+            color: #c7bea2;
+            font-size: 0.74rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .character-builder-page .spell-slot-row label {
+            display: block;
+            margin-bottom: 3px;
+            font-size: 0.6rem;
+            text-align: center;
+        }
+
+        .character-builder-page .spell-slot-row input {
+            text-align: center;
+        }
+
+        .character-builder-page .spell-list-note {
+            margin: -2px 0 10px;
+            color: #777466;
+            font-size: 0.76rem;
+        }
+
+        .character-builder-page .spell-list-scroll {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .character-builder-page .spell-list-header,
+        .character-builder-page .spell-entry-row {
+            display: grid;
+            grid-template-columns:
+                74px
+                minmax(170px, 1.5fr)
+                110px
+                95px
+                126px
+                minmax(170px, 1.4fr)
+                42px;
+            gap: 6px;
+            align-items: center;
+            min-width: 900px;
+        }
+
+        .character-builder-page .spell-list-header {
+            padding: 0 4px 6px;
+            color: #68675a;
+            font-size: 0.61rem;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .character-builder-page .spell-list-header span:nth-child(2),
+        .character-builder-page .spell-list-header span:nth-child(6) {
+            text-align: left;
+        }
+
+        .character-builder-page .spell-entry-row {
+            padding: 6px 4px;
+            border-top: 1px solid #313229;
+        }
+
+        .character-builder-page .spell-entry-row select,
+        .character-builder-page .spell-entry-row input[type="text"] {
+            height: 38px;
+            padding: 6px 7px;
+            font-size: 0.82rem;
+        }
+
+        .character-builder-page .spell-components {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3px;
+            min-height: 38px;
+            align-items: center;
+            padding: 0 3px;
+            background: #171814;
+            border: 1px solid #3c3d33;
+        }
+
+        .character-builder-page .spell-component-check {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            margin: 0;
+            color: #aaa48f;
+            font-size: 0.68rem;
+            text-transform: none;
+        }
+
+        .character-builder-page .spell-component-check input {
+            width: 15px;
+            height: 15px;
+            margin: 0;
+            accent-color: #78382f;
+        }
+
+        .character-builder-page .spell-remove-button,
+        .character-builder-page .spell-add-button {
+            min-height: 38px;
+            color: #aaa48f;
+            background: #191a16;
+            border: 1px solid #48483d;
+            font-family: Georgia, "Times New Roman", serif;
+            cursor: pointer;
+        }
+
+        .character-builder-page .spell-remove-button:hover,
+        .character-builder-page .spell-add-button:hover {
+            color: #e0d7bb;
+            background: #24251f;
+            border-color: #70352f;
+        }
+
+        .character-builder-page .spell-remove-button {
+            width: 38px;
+            min-width: 38px;
+            padding: 0;
+            font-size: 1rem;
+        }
+
+        .character-builder-page .spell-list-actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .character-builder-page .spell-add-button {
+            padding: 8px 16px;
+            letter-spacing: 0.06em;
+        }
+
+        @media (max-width: 900px) {
+            .character-builder-page .spell-slot-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        /* =====================================================
            LOWER SHEET
            ===================================================== */
 
@@ -2764,78 +2941,6 @@
                     <section class="sheet-panel">
 
                         <h3 class="panel-heading">
-                            Spellcasting
-                        </h3>
-
-
-                        <div class="spell-grid">
-
-                            <div class="field">
-
-                                <label for="spellAbility">
-                                    Ability
-                                </label>
-
-                                <select
-                                    id="spellAbility"
-                                    name="spellAbility"
-                                >
-
-                                    <option value="">
-                                        None
-                                    </option>
-
-                                    <option value="intelligence">
-                                        Intelligence
-                                    </option>
-
-                                    <option value="wisdom">
-                                        Wisdom
-                                    </option>
-
-                                    <option value="charisma">
-                                        Charisma
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-
-                            <div class="spell-result">
-
-                                <span>
-                                    Spell Save DC
-                                </span>
-
-                                <strong id="spellSaveDC">
-                                    —
-                                </strong>
-
-                            </div>
-
-
-                            <div class="spell-result">
-
-                                <span>
-                                    Spell Attack
-                                </span>
-
-                                <strong id="spellAttack">
-                                    —
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-                    </section>
-
-
-
-                    <section class="sheet-panel">
-
-                        <h3 class="panel-heading">
                             Class Features
                         </h3>
 
@@ -2887,6 +2992,407 @@
 
 
             </div>
+
+
+
+            <!-- =================================================
+                 SPELLCASTING / SPELL LIST
+                 ================================================= -->
+
+            <section class="sheet-panel spellcasting-panel">
+
+                <h3 class="panel-heading">
+                    Spellcasting
+                </h3>
+
+
+                <div class="spell-grid">
+
+                    <div class="field">
+
+                        <label for="spellAbility">
+                            Spellcasting Ability
+                        </label>
+
+                        <select
+                            id="spellAbility"
+                            name="spellAbility"
+                        >
+
+                            <option value="">
+                                None
+                            </option>
+
+                            <option value="intelligence">
+                                Intelligence
+                            </option>
+
+                            <option value="wisdom">
+                                Wisdom
+                            </option>
+
+                            <option value="charisma">
+                                Charisma
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="spell-result">
+
+                        <span>
+                            Spell Save DC
+                        </span>
+
+                        <strong id="spellSaveDC">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="spell-result">
+
+                        <span>
+                            Spell Attack Bonus
+                        </span>
+
+                        <strong id="spellAttack">
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="spell-subsection">
+
+                    <h4 class="spell-subheading">
+                        Spell Slots
+                    </h4>
+
+                    <div class="spell-slot-grid">
+
+                        <div class="spell-slot-row">
+                            <span class="spell-slot-level">Level 1</span>
+
+                            <div>
+                                <label for="spellSlots1Total">Total</label>
+                                <input
+                                    type="number"
+                                    id="spellSlots1Total"
+                                    name="spellSlots1Total"
+                                    value="0"
+                                    min="0"
+                                    max="99"
+                                    data-stepper
+                                >
+                            </div>
+
+                            <div>
+                                <label for="spellSlots1Expended">Expended</label>
+                                <input
+                                    type="number"
+                                    id="spellSlots1Expended"
+                                    name="spellSlots1Expended"
+                                    value="0"
+                                    min="0"
+                                    max="99"
+                                    data-stepper
+                                >
+                            </div>
+                        </div>
+
+                        <div class="spell-slot-row">
+                            <span class="spell-slot-level">Level 2</span>
+
+                            <div>
+                                <label for="spellSlots2Total">Total</label>
+                                <input
+                                    type="number"
+                                    id="spellSlots2Total"
+                                    name="spellSlots2Total"
+                                    value="0"
+                                    min="0"
+                                    max="99"
+                                    data-stepper
+                                >
+                            </div>
+
+                            <div>
+                                <label for="spellSlots2Expended">Expended</label>
+                                <input
+                                    type="number"
+                                    id="spellSlots2Expended"
+                                    name="spellSlots2Expended"
+                                    value="0"
+                                    min="0"
+                                    max="99"
+                                    data-stepper
+                                >
+                            </div>
+                        </div>
+
+                        <div class="spell-slot-row">
+                            <span class="spell-slot-level">Level 3</span>
+
+                            <div>
+                                <label for="spellSlots3Total">Total</label>
+                                <input
+                                    type="number"
+                                    id="spellSlots3Total"
+                                    name="spellSlots3Total"
+                                    value="0"
+                                    min="0"
+                                    max="99"
+                                    data-stepper
+                                >
+                            </div>
+
+                            <div>
+                                <label for="spellSlots3Expended">Expended</label>
+                                <input
+                                    type="number"
+                                    id="spellSlots3Expended"
+                                    name="spellSlots3Expended"
+                                    value="0"
+                                    min="0"
+                                    max="99"
+                                    data-stepper
+                                >
+                            </div>
+                        </div>
+
+                        <div class="spell-slot-row">
+                            <span class="spell-slot-level">Level 4</span>
+
+                            <div>
+                                <label for="spellSlots4Total">Total</label>
+                                <input
+                                    type="number"
+                                    id="spellSlots4Total"
+                                    name="spellSlots4Total"
+                                    value="0"
+                                    min="0"
+                                    max="99"
+                                    data-stepper
+                                >
+                            </div>
+
+                            <div>
+                                <label for="spellSlots4Expended">Expended</label>
+                                <input
+                                    type="number"
+                                    id="spellSlots4Expended"
+                                    name="spellSlots4Expended"
+                                    value="0"
+                                    min="0"
+                                    max="99"
+                                    data-stepper
+                                >
+                            </div>
+                        </div>
+
+                        <div class="spell-slot-row">
+                            <span class="spell-slot-level">Level 5</span>
+
+                            <div>
+                                <label for="spellSlots5Total">Total</label>
+                                <input
+                                    type="number"
+                                    id="spellSlots5Total"
+                                    name="spellSlots5Total"
+                                    value="0"
+                                    min="0"
+                                    max="99"
+                                    data-stepper
+                                >
+                            </div>
+
+                            <div>
+                                <label for="spellSlots5Expended">Expended</label>
+                                <input
+                                    type="number"
+                                    id="spellSlots5Expended"
+                                    name="spellSlots5Expended"
+                                    value="0"
+                                    min="0"
+                                    max="99"
+                                    data-stepper
+                                >
+                            </div>
+                        </div>
+
+                        <div class="spell-slot-row">
+                            <span class="spell-slot-level">Level 6</span>
+
+                            <div>
+                                <label for="spellSlots6Total">Total</label>
+                                <input
+                                    type="number"
+                                    id="spellSlots6Total"
+                                    name="spellSlots6Total"
+                                    value="0"
+                                    min="0"
+                                    max="99"
+                                    data-stepper
+                                >
+                            </div>
+
+                            <div>
+                                <label for="spellSlots6Expended">Expended</label>
+                                <input
+                                    type="number"
+                                    id="spellSlots6Expended"
+                                    name="spellSlots6Expended"
+                                    value="0"
+                                    min="0"
+                                    max="99"
+                                    data-stepper
+                                >
+                            </div>
+                        </div>
+
+                        <div class="spell-slot-row">
+                            <span class="spell-slot-level">Level 7</span>
+
+                            <div>
+                                <label for="spellSlots7Total">Total</label>
+                                <input
+                                    type="number"
+                                    id="spellSlots7Total"
+                                    name="spellSlots7Total"
+                                    value="0"
+                                    min="0"
+                                    max="99"
+                                    data-stepper
+                                >
+                            </div>
+
+                            <div>
+                                <label for="spellSlots7Expended">Expended</label>
+                                <input
+                                    type="number"
+                                    id="spellSlots7Expended"
+                                    name="spellSlots7Expended"
+                                    value="0"
+                                    min="0"
+                                    max="99"
+                                    data-stepper
+                                >
+                            </div>
+                        </div>
+
+                        <div class="spell-slot-row">
+                            <span class="spell-slot-level">Level 8</span>
+
+                            <div>
+                                <label for="spellSlots8Total">Total</label>
+                                <input
+                                    type="number"
+                                    id="spellSlots8Total"
+                                    name="spellSlots8Total"
+                                    value="0"
+                                    min="0"
+                                    max="99"
+                                    data-stepper
+                                >
+                            </div>
+
+                            <div>
+                                <label for="spellSlots8Expended">Expended</label>
+                                <input
+                                    type="number"
+                                    id="spellSlots8Expended"
+                                    name="spellSlots8Expended"
+                                    value="0"
+                                    min="0"
+                                    max="99"
+                                    data-stepper
+                                >
+                            </div>
+                        </div>
+
+                        <div class="spell-slot-row">
+                            <span class="spell-slot-level">Level 9</span>
+
+                            <div>
+                                <label for="spellSlots9Total">Total</label>
+                                <input
+                                    type="number"
+                                    id="spellSlots9Total"
+                                    name="spellSlots9Total"
+                                    value="0"
+                                    min="0"
+                                    max="99"
+                                    data-stepper
+                                >
+                            </div>
+
+                            <div>
+                                <label for="spellSlots9Expended">Expended</label>
+                                <input
+                                    type="number"
+                                    id="spellSlots9Expended"
+                                    name="spellSlots9Expended"
+                                    value="0"
+                                    min="0"
+                                    max="99"
+                                    data-stepper
+                                >
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="spell-subsection">
+
+                    <h4 class="spell-subheading">
+                        Cantrips &amp; Prepared Spells
+                    </h4>
+
+                    <p class="spell-list-note">
+                        Add the cantrips and spells you want listed on the character sheet.
+                        C = Concentration, R = Ritual, M = Required Material.
+                    </p>
+
+                    <div class="spell-list-scroll">
+
+                        <div class="spell-list-header">
+                            <span>Level</span>
+                            <span>Name</span>
+                            <span>Casting Time</span>
+                            <span>Range</span>
+                            <span>C / R / M</span>
+                            <span>Notes</span>
+                            <span></span>
+                        </div>
+
+                        <div id="spellRows"></div>
+
+                    </div>
+
+                    <div class="spell-list-actions">
+                        <button
+                            type="button"
+                            id="addSpellButton"
+                            class="spell-add-button"
+                        >
+                            + Add Spell
+                        </button>
+                    </div>
+
+                </div>
+
+            </section>
+
+
 
 
 
@@ -3857,6 +4363,279 @@
 
 
         /* =====================================================
+           SPELL LIST
+           ===================================================== */
+
+        const spellRows =
+            document.getElementById(
+                "spellRows"
+            );
+
+        const addSpellButton =
+            document.getElementById(
+                "addSpellButton"
+            );
+
+
+        function createSpellRow(spell) {
+
+            const data = spell || {};
+
+            const row =
+                document.createElement("div");
+
+            row.className =
+                "spell-entry-row";
+
+            row.dataset.spellRow = "";
+
+            row.innerHTML = `
+                <select class="spell-level" aria-label="Spell level">
+                    <option value="0">Cantrip</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                </select>
+
+                <input
+                    type="text"
+                    class="spell-name"
+                    aria-label="Spell name"
+                    placeholder="Spell name"
+                >
+
+                <input
+                    type="text"
+                    class="spell-casting-time"
+                    aria-label="Casting time"
+                    placeholder="1 Action"
+                >
+
+                <input
+                    type="text"
+                    class="spell-range"
+                    aria-label="Spell range"
+                    placeholder="60 ft."
+                >
+
+                <div class="spell-components">
+                    <label class="spell-component-check" title="Concentration">
+                        <input type="checkbox" class="spell-concentration">
+                        C
+                    </label>
+                    <label class="spell-component-check" title="Ritual">
+                        <input type="checkbox" class="spell-ritual">
+                        R
+                    </label>
+                    <label class="spell-component-check" title="Required Material">
+                        <input type="checkbox" class="spell-material">
+                        M
+                    </label>
+                </div>
+
+                <input
+                    type="text"
+                    class="spell-notes"
+                    aria-label="Spell notes"
+                    placeholder="Damage, duration, components..."
+                >
+
+                <button
+                    type="button"
+                    class="spell-remove-button"
+                    aria-label="Remove spell"
+                    title="Remove spell"
+                >
+                    ×
+                </button>
+            `;
+
+            row.querySelector(
+                ".spell-level"
+            ).value =
+                String(
+                    data.level == null
+                        ? 0
+                        : data.level
+                );
+
+            row.querySelector(
+                ".spell-name"
+            ).value = data.name || "";
+
+            row.querySelector(
+                ".spell-casting-time"
+            ).value = data.castingTime || "";
+
+            row.querySelector(
+                ".spell-range"
+            ).value = data.range || "";
+
+            row.querySelector(
+                ".spell-concentration"
+            ).checked =
+                Boolean(data.concentration);
+
+            row.querySelector(
+                ".spell-ritual"
+            ).checked =
+                Boolean(data.ritual);
+
+            row.querySelector(
+                ".spell-material"
+            ).checked =
+                Boolean(data.material);
+
+            row.querySelector(
+                ".spell-notes"
+            ).value = data.notes || "";
+
+            row.querySelector(
+                ".spell-remove-button"
+            ).addEventListener(
+                "click",
+                function () {
+                    row.remove();
+                }
+            );
+
+            spellRows.appendChild(row);
+
+            return row;
+
+        }
+
+
+        function ensureStarterSpellRows() {
+
+            if (
+                spellRows.children.length === 0
+            ) {
+
+                for (
+                    let index = 0;
+                    index < 4;
+                    index += 1
+                ) {
+                    createSpellRow();
+                }
+
+            }
+
+        }
+
+
+        function collectSpells() {
+
+            return Array.from(
+                spellRows.querySelectorAll(
+                    "[data-spell-row]"
+                )
+            )
+            .map(function (row) {
+
+                return {
+                    level:
+                        parseInt(
+                            row.querySelector(
+                                ".spell-level"
+                            ).value
+                        ) || 0,
+
+                    name:
+                        row.querySelector(
+                            ".spell-name"
+                        ).value.trim(),
+
+                    castingTime:
+                        row.querySelector(
+                            ".spell-casting-time"
+                        ).value.trim(),
+
+                    range:
+                        row.querySelector(
+                            ".spell-range"
+                        ).value.trim(),
+
+                    concentration:
+                        row.querySelector(
+                            ".spell-concentration"
+                        ).checked,
+
+                    ritual:
+                        row.querySelector(
+                            ".spell-ritual"
+                        ).checked,
+
+                    material:
+                        row.querySelector(
+                            ".spell-material"
+                        ).checked,
+
+                    notes:
+                        row.querySelector(
+                            ".spell-notes"
+                        ).value.trim()
+                };
+
+            })
+            .filter(function (spell) {
+
+                return Boolean(
+                    spell.name ||
+                    spell.castingTime ||
+                    spell.range ||
+                    spell.concentration ||
+                    spell.ritual ||
+                    spell.material ||
+                    spell.notes
+                );
+
+            });
+
+        }
+
+
+        function restoreSpells(spells) {
+
+            spellRows.innerHTML = "";
+
+            if (
+                Array.isArray(spells) &&
+                spells.length > 0
+            ) {
+
+                spells.forEach(
+                    function (spell) {
+                        createSpellRow(spell);
+                    }
+                );
+
+            }
+            else {
+
+                ensureStarterSpellRows();
+
+            }
+
+        }
+
+
+        addSpellButton.addEventListener(
+            "click",
+            function () {
+                createSpellRow();
+            }
+        );
+
+
+        /* =====================================================
            SAVE / LOAD CHARACTER JSON
            ===================================================== */
 
@@ -4045,7 +4824,10 @@
                     collectSkills(),
 
                 deathSaves:
-                    collectDeathSaves()
+                    collectDeathSaves(),
+
+                spells:
+                    collectSpells()
             };
 
         }
@@ -4445,6 +5227,10 @@
                 data.deathSaves
             );
 
+            restoreSpells(
+                data.spells
+            );
+
             refreshCustomEntryVisibility();
 
             updateCharacterMath();
@@ -4550,6 +5336,7 @@
            FIRST PAGE LOAD
            ===================================================== */
 
+        ensureStarterSpellRows();
         updateCharacterMath();
 
 
