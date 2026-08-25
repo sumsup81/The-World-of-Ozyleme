@@ -5985,8 +5985,13 @@
                 collectSpells();
 
             const maximumRows = 28;
-            const startY = 579;
-            const rowHeight = 19.0;
+
+            // The first prepared-spell row is slightly shorter than the
+            // remaining ruled rows on the printed 2024 sheet. Use the
+            // sheet's actual row geometry instead of one approximate step.
+            const firstRowY = 587.3;
+            const secondRowY = 569.1;
+            const regularRowHeight = 19.44;
 
             spells
                 .slice(0, maximumRows)
@@ -5994,8 +5999,11 @@
                     function (spell, index) {
 
                         const y =
-                            startY -
-                            index * rowHeight;
+                            index === 0
+                                ? firstRowY
+                                : secondRowY -
+                                    (index - 1) *
+                                    regularRowHeight;
 
                         drawPdfCentered(
                             page,
@@ -6044,7 +6052,11 @@
                         );
 
                         const markY =
-                            y + 7;
+                            index === 0
+                                ? 588.8
+                                : 569.36 -
+                                    (index - 1) *
+                                    regularRowHeight;
 
                         if (spell.concentration) {
                             drawPdfMark(
@@ -6460,12 +6472,12 @@
                     wisdom: {
                         x: 128.5,
                         valueX: 136,
-                        y: 396
+                        y: 411.5
                     },
                     charisma: {
                         x: 128.5,
                         valueX: 136,
-                        y: 241
+                        y: 237.5
                     }
                 };
 
@@ -6550,47 +6562,47 @@
                     animalHandling: {
                         x: 128.5,
                         valueX: 136,
-                        y: 376
+                        y: 391.5
                     },
                     insight: {
                         x: 128.5,
                         valueX: 136,
-                        y: 362
+                        y: 377.5
                     },
                     medicine: {
                         x: 128.5,
                         valueX: 136,
-                        y: 348
+                        y: 363.5
                     },
                     perception: {
                         x: 128.5,
                         valueX: 136,
-                        y: 334
+                        y: 349.5
                     },
                     survival: {
                         x: 128.5,
                         valueX: 136,
-                        y: 320
+                        y: 335.5
                     },
                     deception: {
                         x: 128.5,
                         valueX: 136,
-                        y: 221
+                        y: 217.5
                     },
                     intimidation: {
                         x: 128.5,
                         valueX: 136,
-                        y: 207
+                        y: 203.5
                     },
                     performance: {
                         x: 128.5,
                         valueX: 136,
-                        y: 193
+                        y: 189.5
                     },
                     persuasion: {
                         x: 128.5,
                         valueX: 136,
-                        y: 179
+                        y: 175.5
                     }
                 };
 
@@ -6775,7 +6787,7 @@
                     pdfValue("classFeatures"),
                     {
                         x: 228,
-                        y: 422,
+                        y: 412,
                         width: 356,
                         height: 203,
                         font: regularFont,
@@ -6817,12 +6829,12 @@
                     pdfValue("proficiencies"),
                     {
                         x: 18,
-                        y: 94,
+                        y: 96,
                         width: 190,
-                        height: 44,
+                        height: 42,
                         font: regularFont,
-                        size: 6.0,
-                        minimumSize: 4.4
+                        size: 5.0,
+                        minimumSize: 5.0
                     }
                 );
 
