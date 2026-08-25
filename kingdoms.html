@@ -2,552 +2,918 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>The Eight Kingdoms | Ozyleme</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="style.css">
+    <title>Kingdoms | Ozyleme</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+
+    <style>
+
+        /* =========================================================
+           KINGDOMS PAGE
+           ========================================================= */
+
+        .kingdom-intro {
+            max-width: 900px;
+            margin: 0 auto 35px;
+        }
+
+
+        /* =========================================================
+           KINGDOM DIRECTORY
+           ========================================================= */
+
+        .kingdom-directory {
+            margin-top: 30px;
+        }
+
+
+        /* =========================================================
+           KINGDOM CARDS
+           ========================================================= */
+
+        .kingdom-card {
+            position: relative;
+            overflow: hidden;
+
+            min-height: 190px;
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+
+            isolation: isolate;
+        }
+
+
+        .kingdom-card::before {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    rgba(7, 7, 6, 0.12),
+                    rgba(7, 7, 6, 0.88)
+                );
+
+            z-index: -1;
+        }
+
+
+        .kingdom-card h3,
+        .kingdom-card p {
+            position: relative;
+            z-index: 1;
+        }
+
+
+        /* =========================================================
+           WORLD MAP
+           ========================================================= */
+
+        .kingdom-map {
+            max-width: 1100px;
+
+            margin: 55px auto 70px;
+
+            text-align: center;
+        }
+
+
+        .kingdom-map h2 {
+            margin-bottom: 20px;
+        }
+
+
+        .kingdom-map img {
+            display: block;
+
+            width: 100%;
+            height: auto;
+
+            margin: 0 auto;
+
+            border: 1px solid #454238;
+
+            box-shadow:
+                0 12px 35px rgba(0, 0, 0, 0.45);
+        }
+
+
+        /* =========================================================
+           FULL KINGDOM ENTRY
+           ========================================================= */
+
+        .kingdom-entry {
+            max-width: 1050px;
+
+            margin: 70px auto;
+
+            padding: 32px;
+
+            scroll-margin-top: 90px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(45, 45, 38, 0.55),
+                    rgba(14, 14, 12, 0.88)
+                );
+
+            border: 1px solid #454238;
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.35);
+        }
+
+
+        .kingdom-entry h2 {
+            margin-top: 0;
+            margin-bottom: 5px;
+
+            color: #d8cfb3;
+        }
+
+
+        .kingdom-symbol {
+            margin-top: 0;
+
+            color: #918b79;
+
+            font-style: italic;
+        }
+
+
+        .kingdom-tagline {
+            margin: 20px 0 28px;
+
+            color: #c8c0a7;
+
+            font-size: 1.08rem;
+            font-style: italic;
+        }
+
+
+        /* =========================================================
+           CROWN INFORMATION
+           ========================================================= */
+
+        .kingdom-meta {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(220px, 1fr));
+
+            gap: 14px;
+
+            margin: 25px 0 38px;
+        }
+
+
+        .kingdom-meta-item {
+            padding: 15px 17px;
+
+            background:
+                rgba(5, 5, 4, 0.38);
+
+            border:
+                1px solid #3d3a31;
+        }
+
+
+        .kingdom-meta-label {
+            display: block;
+
+            margin-bottom: 4px;
+
+            color: #8f8874;
+
+            font-size: 0.78rem;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.09em;
+        }
+
+
+        .kingdom-meta-value {
+            color: #d3cab0;
+        }
+
+
+        /* =========================================================
+           G.R.A.P.E.S. LORE GRID
+           ========================================================= */
+
+        .grapes-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 18px;
+
+            margin-top: 35px;
+        }
+
+
+        .lore-section {
+            padding: 22px;
+
+            background:
+                rgba(7, 7, 6, 0.36);
+
+            border:
+                1px solid #413e34;
+        }
+
+
+        .lore-section h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+
+            padding-bottom: 7px;
+
+            color: #c8bea1;
+
+            border-bottom:
+                1px solid #403d34;
+        }
+
+
+        .lore-section p {
+            margin-bottom: 0;
+
+            white-space: pre-line;
+        }
+
+
+        /* =========================================================
+           LORE KEEPER PLACEHOLDER
+           ========================================================= */
+
+        .lore-keeper {
+            color: #8e8877;
+
+            font-style: italic;
+        }
+
+
+        /* =========================================================
+           LORE KEEPER RECORD
+           ========================================================= */
+
+        .known-lore {
+            margin-top: 35px;
+
+            padding: 22px;
+
+            background:
+                rgba(60, 28, 23, 0.15);
+
+            border-left:
+                3px solid #65342c;
+        }
+
+
+        .known-lore h3 {
+            margin-top: 0;
+
+            color: #c8bea1;
+        }
+
+
+        .known-lore ul {
+            margin-bottom: 0;
+        }
+
+
+        /* =========================================================
+           RETURN TO KINGDOMS
+           ========================================================= */
+
+        .kingdom-return {
+            margin-top: 35px;
+
+            text-align: center;
+        }
+
+
+        .kingdom-return a {
+            display: inline-block;
+
+            padding: 9px 19px;
+
+            color: #aaa48f;
+
+            text-decoration: none;
+
+            background: #11110f;
+
+            border: 1px solid #47443a;
+
+            transition:
+                color 0.2s,
+                border-color 0.2s,
+                background 0.2s;
+        }
+
+
+        .kingdom-return a:hover {
+            color: #ded5b8;
+
+            background: #181713;
+
+            border-color: #74372f;
+        }
+
+
+        /* =========================================================
+           MOBILE
+           ========================================================= */
+
+        @media (max-width: 700px) {
+
+            .kingdom-entry {
+                margin: 50px auto;
+
+                padding: 20px;
+            }
+
+
+            .grapes-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .kingdom-meta {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
 </head>
 
 
 <body>
 
 
-<!-- =========================================================
-     HEADER
-     ========================================================= -->
+    <!-- =========================================================
+         HEADER
+         ========================================================= -->
 
-<header>
-    <h1></h1>
-    <p>The Eight Kingdoms Beneath the Hollow Sun</p>
-</header>
+    <header>
 
-
-<!-- =========================================================
-     NAVIGATION
-     ========================================================= -->
-
-<nav class="site-nav">
-
-    <a class="nav-link" href="index.html">Home</a>
-
-    <a class="nav-link active"
-       href="kingdoms.html"
-       aria-current="page">
-        Kingdoms
-    </a>
-
-    <a class="nav-link" href="species.html">Species</a>
-
-    <a class="nav-link" href="people.html">People</a>
-
-    <a class="nav-link" href="gods.html">Gods</a>
-
-    <a class="nav-link" href="bestiary.html">Bestiary</a>
-
-    <a class="nav-link" href="classes.html">Classes</a>
-
-    <a class="nav-link" href="player-guide.html">Player Guide</a>
-
-</nav>
-
-
-<!-- =========================================================
-     MAIN CONTENT
-     ========================================================= -->
-
-<main>
-
-
-    <!-- =====================================================
-         INTRODUCTION
-         ===================================================== -->
-
-    <section>
-
-        <h2>The Eight Kingdoms</h2>
+        <h1>
+            OZYLEME
+        </h1>
 
         <p>
-            Ozyleme is divided among eight kingdoms, each marked by its own
-            ancient symbol, customs, peoples, and relationship to the powers
-            that watch over the world.
+            The Eight Kingdoms Beneath the Hollow Sun
         </p>
 
-        <p>
-            Their borders divide the land, but they do not divide its history.
-            War, migration, old bargains, divine interference, and the shadow
-            of the Dragon King have shaped every one of them.
-        </p>
-
-    </section>
+    </header>
 
 
-    <div class="divider"></div>
+    <!-- =========================================================
+         NAVIGATION
+         ========================================================= -->
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="kingdoms.html">
+            Kingdoms
+        </a>
+
+        <a href="species.html">
+            Species
+        </a>
+
+        <a href="people.html">
+            People
+        </a>
+
+        <a href="gods.html">
+            Gods
+        </a>
+
+        <a href="bestiary.html">
+            Bestiary
+        </a>
+
+        <a href="classes.html">
+            Classes
+        </a>
+
+        <a href="player-guide.html">
+            Player Guide
+        </a>
+
+    </nav>
 
 
-    <!-- =====================================================
-         KINGDOM DIRECTORY
-         ===================================================== -->
+    <!-- =========================================================
+         MAIN PAGE
+         ========================================================= -->
 
-    <section id="kingdom-directory">
-
-        <h2>Kingdom Directory</h2>
-
-        <div class="cards">
+    <main>
 
 
-            <!-- PLUME -->
+        <!-- =====================================================
+             KINGDOM INTRODUCTION
+             ===================================================== -->
 
-            <a class="card plume"
-               href="#plume"
-               style="--card-image: url('images/kingdoms/Plume Navi Button.jpg');">
+        <section
+            class="kingdom-intro"
+            id="kingdom-top"
+        >
 
-                <h3>Plume</h3>
-                <p>Symbol: The Feather</p>
+            <h2>
+                The Eight Kingdoms
+            </h2>
 
-            </a>
+            <p>
+                Eight kingdoms divide the known lands of Ozyleme.
+                Each exists beneath its own crown, traditions,
+                burdens, history, and relationship with the powers
+                that rule beneath the Dark Dragon.
+            </p>
 
+            <p>
+                Choose a kingdom below to explore its lands,
+                faith, achievements, crown, wealth, and people.
+            </p>
 
-            <!-- KETTLE -->
-
-            <a class="card kettle"
-               href="#kettle"
-               style="--card-image: url('images/kingdoms/Kettle Navi Button.jpg');">
-
-                <h3>Kettle</h3>
-                <p>Symbol: The Cauldron</p>
-
-            </a>
-
-
-            <!-- LOOP -->
-
-            <a class="card loop"
-               href="#loop"
-               style="--card-image: url('images/kingdoms/Loop Navi Button.jpg');">
-
-                <h3>Loop</h3>
-                <p>Symbol: The Ring</p>
-
-            </a>
+        </section>
 
 
-            <!-- TORCH -->
+        <!-- =====================================================
+             KINGDOM DIRECTORY
 
-            <a class="card torch"
-               href="#torch"
-               style="--card-image: url('images/kingdoms/Torch Navi Button.jpg');">
+             DO NOT MANUALLY ADD KINGDOM CARDS HERE.
 
-                <h3>Torch</h3>
-                <p>Symbol: The Lantern</p>
+             THEY ARE GENERATED FROM:
 
-            </a>
+             data/kingdoms-data.js
+             ===================================================== -->
 
+        <section class="kingdom-directory">
 
-            <!-- VIAL -->
+            <div
+                class="cards"
+                id="kingdomCards"
+            ></div>
 
-            <a class="card vial"
-               href="#vial"
-               style="--card-image: url('images/kingdoms/Vial Navi Button.jpg');">
-
-                <h3>Vial</h3>
-                <p>Symbol: The Flagon</p>
-
-            </a>
+        </section>
 
 
-            <!-- HOOK -->
-
-            <a class="card hook"
-               href="#hook"
-               style="--card-image: url('images/kingdoms/Hook Navi Button.jpg');">
-
-                <h3>Hook</h3>
-                <p>Symbol: The Hook</p>
-
-            </a>
-
-
-            <!-- BELL -->
-
-            <a class="card bell"
-               href="#bell"
-               style="--card-image: url('images/kingdoms/Bell Navi Button.jpg');">
-
-                <h3>Bell</h3>
-                <p>Symbol: The Bell</p>
-
-            </a>
-
-
-            <!-- CROOK -->
-
-            <a class="card crook"
-               href="#crook"
-               style="--card-image: url('images/kingdoms/Crook Navi Button.jpg');">
-
-                <h3>Crook</h3>
-                <p>Symbol: The Staff</p>
-
-            </a>
-
-
-        </div>
-
-
-        <!-- =================================================
+        <!-- =====================================================
              WORLD MAP
-             ================================================= -->
 
-        <div class="world-map">
+             CORRECT FILE:
+             images/kingdoms/Ozyleme Map.jpg
+             ===================================================== -->
+
+        <section class="kingdom-map">
+
+            <h2>
+                The Realm of Ozyleme
+            </h2>
 
             <img
                 src="images/kingdoms/Ozyleme Map.jpg"
                 alt="Map of the Eight Kingdoms of Ozyleme"
             >
 
-        </div>
+        </section>
 
 
-    </section>
+        <!-- =====================================================
+             FULL KINGDOM ENTRIES
+
+             GENERATED FROM:
+
+             data/kingdoms-data.js
+             ===================================================== -->
+
+        <div id="kingdomEntries"></div>
 
 
-    <div class="divider"></div>
+    </main>
 
 
-    <!-- =====================================================
-         PLUME
-         ===================================================== -->
+    <!-- =========================================================
+         FOOTER
+         ========================================================= -->
 
-    <section id="plume">
-
-        <h2>Plume</h2>
-
-        <h3>Symbol: The Feather</h3>
-
-        <p>
-            Plume was a great human kingdom and once stood as one of the
-            foremost seats of knowledge in Ozyleme.
-        </p>
-
-        <p>
-            Its history is closely associated with the Giver. Libraries,
-            learning, scholarship, and the preservation of knowledge were
-            central to its identity.
-        </p>
+    <footer>
 
         <p>
-            Plume's greatness did not protect it forever. The kingdom was
-            ultimately destroyed by the Seer, leaving its legacy scattered
-            among ruins, survivors, and whatever knowledge escaped the fall.
+            The World of Ozyleme
         </p>
 
-        <a class="return-button" href="#kingdom-directory">
-            Return to Kingdoms
-        </a>
+    </footer>
 
-    </section>
 
+    <!-- =========================================================
+         KINGDOM DATA
 
-    <div class="divider"></div>
+         NORMAL KINGDOM LORE EDITING HAPPENS IN:
 
+         data/kingdoms-data.js
+         ========================================================= -->
 
-    <!-- =====================================================
-         KETTLE
-         ===================================================== -->
+    <script src="data/kingdoms-data.js"></script>
 
-    <section id="kettle">
 
-        <h2>Kettle</h2>
+    <!-- =========================================================
+         KINGDOM PAGE BUILDER
 
-        <h3>Symbol: The Cauldron</h3>
+         THIS BUILDS THE PAGE AUTOMATICALLY.
 
-        <p>
-            Kettle is a heavily forested realm watched over by the Ravager.
-            Its deep woods are both a resource and a danger.
-        </p>
+         YOU SHOULD NOT NEED TO EDIT THIS SECTION FOR
+         NORMAL KINGDOM LORE CHANGES.
+         ========================================================= -->
 
-        <p>
-            Forest Elves dwell within these lands. Their relationship with
-            neighboring peoples is often hostile, and they have been known
-            to abduct workers who venture too deeply into their territory.
-        </p>
+    <script>
 
-        <p>
-            Settlements exist beneath the shadow of enormous forests where
-            paths disappear, old boundaries become uncertain, and travelers
-            are rarely certain whether they are being watched.
-        </p>
 
-        <a class="return-button" href="#kingdom-directory">
-            Return to Kingdoms
-        </a>
+        /* =========================================================
+           PAGE LOCATIONS
+           ========================================================= */
 
-    </section>
+        const kingdomCardsContainer =
+            document.getElementById("kingdomCards");
 
+        const kingdomEntriesContainer =
+            document.getElementById("kingdomEntries");
 
-    <div class="divider"></div>
 
+        /* =========================================================
+           LORE KEEPER DISPLAY
+           ========================================================= */
 
-    <!-- =====================================================
-         LOOP
-         ===================================================== -->
+        function formatLore(text) {
 
-    <section id="loop">
+            if (text === loreKeeper) {
 
-        <h2>Loop</h2>
+                return `
 
-        <h3>Symbol: The Ring</h3>
+                    <p class="lore-keeper">
+                        ${text}
+                    </p>
 
-        <p>
-            Loop is watched by the Tormentor and is a land shaped by spectacle,
-            illusion, ritual, and strange celebration.
-        </p>
+                `;
 
-        <p>
-            Three great calderas mark the kingdom and form some of its most
-            recognizable features.
-        </p>
+            }
 
-        <p>
-            Carnivals and celebrations are an important part of life in Loop,
-            although outsiders may find them unsettling. Many resemble
-            funerals more than festivals.
-        </p>
 
-        <p>
-            Death, mourning, grotesque pageantry, masks, remembrance, and
-            macabre humor can all become reasons for celebration. What appears
-            dreadful to a visitor may be entirely ordinary revelry to the
-            people of Loop.
-        </p>
+            return `
 
-        <a class="return-button" href="#kingdom-directory">
-            Return to Kingdoms
-        </a>
+                <p>
+                    ${text}
+                </p>
 
-    </section>
+            `;
 
+        }
 
-    <div class="divider"></div>
 
+        /* =========================================================
+           CREATE KINGDOM DIRECTORY CARDS
+           ========================================================= */
 
-    <!-- =====================================================
-         TORCH
-         ===================================================== -->
+        kingdoms.forEach(kingdom => {
 
-    <section id="torch">
 
-        <h2>Torch</h2>
+            const card =
+                document.createElement("a");
 
-        <h3>Symbol: The Lantern</h3>
 
-        <p>
-            Torch is the great seat of the High Elves and is watched over by
-            the Inflictor.
-        </p>
+            card.className =
+                "card kingdom-card";
 
-        <p>
-            The kingdom holds an important place in the history of magic,
-            craftsmanship, and the strange powers that have shaped Ozyleme.
-        </p>
 
-        <p>
-            Among the creations associated with the High Elves are the
-            Dragon Forged, metallic beings made as guardians and servants.
-            Some endure long after the purposes for which they were created
-            have been forgotten.
-        </p>
+            card.href =
+                "#" + kingdom.id;
 
-        <a class="return-button" href="#kingdom-directory">
-            Return to Kingdoms
-        </a>
 
-    </section>
+            card.style.backgroundImage =
+                `url("${kingdom.image}")`;
 
 
-    <div class="divider"></div>
+            card.innerHTML = `
 
+                <h3>
+                    ${kingdom.name}
+                </h3>
 
-    <!-- =====================================================
-         VIAL
-         ===================================================== -->
+                <p>
+                    Symbol: ${kingdom.symbol}
+                </p>
 
-    <section id="vial">
+            `;
 
-        <h2>Vial</h2>
 
-        <h3>Symbol: The Flagon</h3>
+            kingdomCardsContainer.appendChild(card);
 
-        <p>
-            Vial is a land known for its hearty Goliath population.
-            Much of ordinary life revolves around farming, labor, family,
-            and survival upon the land.
-        </p>
 
-        <p>
-            The people of Vial are often associated with physical endurance
-            and the practical demands of rural life rather than the grandeur
-            found in some of Ozyleme's other kingdoms.
-        </p>
+        });
 
-        <p>
-            Orcs have also established settlements within some of Vial's
-            forests, adding another people and another history to the region.
-        </p>
 
-        <a class="return-button" href="#kingdom-directory">
-            Return to Kingdoms
-        </a>
+        /* =========================================================
+           CREATE FULL KINGDOM ENTRIES
+           ========================================================= */
 
-    </section>
+        kingdoms.forEach(kingdom => {
 
 
-    <div class="divider"></div>
+            const section =
+                document.createElement("section");
 
 
-    <!-- =====================================================
-         HOOK
-         ===================================================== -->
+            section.className =
+                "kingdom-entry";
 
-    <section id="hook">
 
-        <h2>Hook</h2>
+            section.id =
+                kingdom.id;
 
-        <h3>Symbol: The Hook</h3>
 
-        <p>
-            Hook is strongly associated with its coastlines and the peoples
-            who have lived along them.
-        </p>
+            /* =====================================================
+               LORE KEEPER RECORD
+               ===================================================== */
 
-        <p>
-            Orcs were once widely regarded as a people of the sea. Though
-            their history has changed, Orc tribes still maintain settlements
-            along the coasts of Hook.
-        </p>
+            let notesHTML = "";
 
-        <p>
-            These coastal tribes preserve a connection to an older Orcish
-            identity that predates many of their inland settlements.
-        </p>
 
-        <a class="return-button" href="#kingdom-directory">
-            Return to Kingdoms
-        </a>
+            if (
+                kingdom.notes &&
+                kingdom.notes.length > 0
+            ) {
 
-    </section>
+                notesHTML = `
 
+                    <div class="known-lore">
 
-    <div class="divider"></div>
+                        <h3>
+                            Lore Keeper's Record
+                        </h3>
 
+                        <ul>
 
-    <!-- =====================================================
-         BELL
-         ===================================================== -->
+                            ${kingdom.notes.map(note => `
 
-    <section id="bell">
+                                <li>
+                                    ${note}
+                                </li>
 
-        <h2>Bell</h2>
+                            `).join("")}
 
-        <h3>Symbol: The Bell</h3>
+                        </ul>
 
-        <p>
-            Bell is one of the eight kingdoms of Ozyleme.
-        </p>
+                    </div>
 
-        <p>
-            Its deeper history, peoples, customs, and relationship with the
-            powers of the world will be recorded here as the Chronicle of
-            Ozyleme grows.
-        </p>
+                `;
 
-        <a class="return-button" href="#kingdom-directory">
-            Return to Kingdoms
-        </a>
+            }
 
-    </section>
 
+            /* =====================================================
+               COMPLETE KINGDOM ENTRY
+               ===================================================== */
 
-    <div class="divider"></div>
+            section.innerHTML = `
 
 
-    <!-- =====================================================
-         CROOK
-         ===================================================== -->
+                <!-- =============================================
+                     KINGDOM NAME
+                     ============================================= -->
 
-    <section id="crook">
+                <h2>
+                    The Kingdom of ${kingdom.name}
+                </h2>
 
-        <h2>Crook</h2>
 
-        <h3>Symbol: The Staff</h3>
+                <p class="kingdom-symbol">
+                    Symbol: ${kingdom.symbol}
+                </p>
 
-        <p>
-            Crook is inhabited primarily by humans, but its grasslands and
-            wild places are also home to communities of feral Halflings.
-        </p>
 
-        <p>
-            These Halflings have adapted to a harsher existence than many
-            outsiders expect from their kind. Some live in savage bands upon
-            the plains and have developed cultures shaped by hunger,
-            territorial survival, and the dangers of the open country.
-        </p>
+                <p class="kingdom-tagline">
+                    ${kingdom.tagline}
+                </p>
 
-        <a class="return-button" href="#kingdom-directory">
-            Return to Kingdoms
-        </a>
 
-    </section>
+                <!-- =============================================
+                     CROWN INFORMATION
+                     ============================================= -->
 
+                <div class="kingdom-meta">
 
-    <div class="divider"></div>
 
+                    <div class="kingdom-meta-item">
 
-    <!-- =====================================================
-         BEYOND THE KINGDOMS
-         ===================================================== -->
+                        <span class="kingdom-meta-label">
+                            Seat of Rule
+                        </span>
 
-    <section>
+                        <span class="kingdom-meta-value">
+                            ${kingdom.seat}
+                        </span>
 
-        <h2>Beyond the Kingdoms</h2>
+                    </div>
 
-        <p>
-            The kingdoms are only one part of Ozyleme. Beyond their settled
-            lands lie ancient wildernesses, strange colonies, ruined places,
-            the Black Sand Desert of Doom, and the distant Spires of Sadness.
-        </p>
 
-        <p>
-            Closest to those central mountains are scattered Gnomish
-            settlements. Some Gnomes serve the Dragon King and construct
-            ruthless traps intended to prevent travelers from approaching
-            the Spires.
-        </p>
+                    <div class="kingdom-meta-item">
 
-        <p>
-            Others have abandoned such service for their own experiments,
-            inventions, obsessions, and curiosities.
-        </p>
+                        <span class="kingdom-meta-label">
+                            Crowned Sovereign
+                        </span>
 
-        <a class="return-button" href="#kingdom-directory">
-            Return to Kingdoms
-        </a>
+                        <span class="kingdom-meta-value">
+                            ${kingdom.sovereign}
+                        </span>
 
-    </section>
+                    </div>
 
 
-</main>
+                    <div class="kingdom-meta-item">
 
+                        <span class="kingdom-meta-label">
+                            Keeper
+                        </span>
 
-<!-- =========================================================
-     FOOTER
-     ========================================================= -->
+                        <span class="kingdom-meta-value">
+                            ${kingdom.keeper}
+                        </span>
 
-<footer>
-    <p>The World of Ozyleme</p>
-</footer>
+                    </div>
+
+
+                </div>
+
+
+                <!-- =============================================
+                     G.R.A.P.E.S.
+
+                     GEOGRAPHY:
+                     LAND & BLIGHT
+                     ============================================= -->
+
+                <div class="grapes-grid">
+
+
+                    <div class="lore-section">
+
+                        <h3>
+                            Land &amp; Blight
+                        </h3>
+
+                        ${formatLore(kingdom.land)}
+
+                    </div>
+
+
+                    <!-- =========================================
+                         RELIGION:
+                         FAITH & FEAR
+                         ========================================= -->
+
+                    <div class="lore-section">
+
+                        <h3>
+                            Faith &amp; Fear
+                        </h3>
+
+                        ${formatLore(kingdom.faith)}
+
+                    </div>
+
+
+                    <!-- =========================================
+                         ACHIEVEMENTS:
+                         RELICS & TRIUMPHS
+                         ========================================= -->
+
+                    <div class="lore-section">
+
+                        <h3>
+                            Relics &amp; Triumphs
+                        </h3>
+
+                        ${formatLore(kingdom.achievements)}
+
+                    </div>
+
+
+                    <!-- =========================================
+                         POLITICS:
+                         CROWN & COMMAND
+                         ========================================= -->
+
+                    <div class="lore-section">
+
+                        <h3>
+                            Crown &amp; Command
+                        </h3>
+
+                        ${formatLore(kingdom.politics)}
+
+                    </div>
+
+
+                    <!-- =========================================
+                         ECONOMICS:
+                         COIN & HUNGER
+                         ========================================= -->
+
+                    <div class="lore-section">
+
+                        <h3>
+                            Coin &amp; Hunger
+                        </h3>
+
+                        ${formatLore(kingdom.economics)}
+
+                    </div>
+
+
+                    <!-- =========================================
+                         SOCIAL STRUCTURE:
+                         BLOOD & STATION
+                         ========================================= -->
+
+                    <div class="lore-section">
+
+                        <h3>
+                            Blood &amp; Station
+                        </h3>
+
+                        ${formatLore(kingdom.society)}
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =============================================
+                     KNOWN LORE
+                     ============================================= -->
+
+                ${notesHTML}
+
+
+                <!-- =============================================
+                     RETURN TO KINGDOMS
+
+                     THIS APPEARS AUTOMATICALLY
+                     UNDER EVERY KINGDOM.
+                     ============================================= -->
+
+                <div class="kingdom-return">
+
+                    <a href="#kingdom-top">
+                        Return to Kingdoms
+                    </a>
+
+                </div>
+
+
+            `;
+
+
+            kingdomEntriesContainer.appendChild(section);
+
+
+        });
+
+
+    </script>
 
 
 </body>
