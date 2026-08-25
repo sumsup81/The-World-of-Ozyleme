@@ -1281,6 +1281,15 @@
 
                         <button
                             type="button"
+                            id="importFoundryButton"
+                            class="character-file-button"
+                        >
+                            Import Foundry VTT JSON
+                        </button>
+
+
+                        <button
+                            type="button"
                             id="exportPdfButton"
                             class="character-file-button"
                         >
@@ -1293,6 +1302,14 @@
                     <input
                         type="file"
                         id="loadCharacterFile"
+                        accept=".json,application/json"
+                        hidden
+                    >
+
+
+                    <input
+                        type="file"
+                        id="foundryCharacterFile"
                         accept=".json,application/json"
                         hidden
                     >
@@ -3623,7 +3640,7 @@
         </p>
 
         <p style="font-size: 0.76rem; opacity: 0.72; letter-spacing: 0.08em; margin-top: 6px;">
-            Version .00005
+            Version .00006
         </p>
 
     </footer>
@@ -5301,6 +5318,2044 @@
                     error && error.message
                         ? error.message
                         : "The character file could not be loaded.",
+                    "error"
+                );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           IMPORT FOUNDRY VTT D&D5E ACTOR JSON
+           ===================================================== */
+
+        const FOUNDRY_ABILITY_MAP = {
+            str: "strength",
+            dex: "dexterity",
+            con: "constitution",
+            int: "intelligence",
+            wis: "wisdom",
+            cha: "charisma"
+        };
+
+        const FOUNDRY_SKILL_MAP = {
+            acr: "acrobatics",
+            ani: "animalHandling",
+            arc: "arcana",
+            ath: "athletics",
+            dec: "deception",
+            his: "history",
+            ins: "insight",
+            itm: "intimidation",
+            inv: "investigation",
+            med: "medicine",
+            nat: "nature",
+            prc: "perception",
+            prf: "performance",
+            per: "persuasion",
+            rel: "religion",
+            slt: "sleightOfHand",
+            ste: "stealth",
+            sur: "survival"
+        };
+
+        const FOUNDRY_SIZE_MAP = {
+            tiny: "Tiny",
+            sm: "Small",
+            small: "Small",
+            med: "Medium",
+            medium: "Medium",
+            lg: "Large",
+            large: "Large",
+            huge: "Huge",
+            grg: "Gargantuan",
+            gargantuan: "Gargantuan"
+        };
+
+
+        function foundryTitleCase(value) {
+
+            return String(value || "")
+                .replace(/[-_]+/g, " ")
+                .replace(/\b\w/g, function (letter) {
+                    return letter.toUpperCase();
+                });
+
+        }
+
+
+        function foundryNumber(value, fallback) {
+
+            const number = Number(value);
+
+            return Number.isFinite(number)
+                ? number
+                : fallback;
+
+        }
+
+
+        function foundrySetField(id, value) {
+
+            const field =
+                document.getElementById(id);
+
+            if (!field || value == null) {
+                return;
+            }
+
+            if (field.type === "checkbox") {
+                field.checked = Boolean(value);
+            }
+            else {
+                field.value = String(value);
+            }
+
+        }
+
+
+        function foundrySetSelectOrOther(
+            selectId,
+            customId,
+            value
+        ) {
+
+            const select =
+                document.getElementById(selectId);
+
+            const custom =
+                document.getElementById(customId);
+
+            if (!select) {
+                return;
+            }
+
+            const target =
+                String(value || "").trim();
+
+            if (!target) {
+                select.value = "";
+
+                if (custom) {
+                    custom.value = "";
+                    custom.hidden = true;
+                }
+
+                return;
+            }
+
+            const matchingOption =
+                Array.from(select.options)
+                    .find(function (option) {
+
+                        return (
+                            String(option.value)
+                                .toLowerCase() ===
+                            target.toLowerCase() ||
+                            String(option.textContent)
+                                .trim()
+                                .toLowerCase() ===
+                            target.toLowerCase()
+                        );
+
+                    });
+
+            if (matchingOption) {
+
+                select.value =
+                    matchingOption.value;
+
+                if (custom) {
+                    custom.value = "";
+                    custom.hidden = true;
+                }
+
+                return;
+            }
+
+            const otherOption =
+                Array.from(select.options)
+                    .find(function (option) {
+                        return option.value === "Other";
+                    });
+
+            if (otherOption && custom) {
+
+                select.value = "Other";
+                custom.value = target;
+                custom.hidden = false;
+
+            }
+
+        }
+
+
+        function foundryStripHtml(html) {
+
+            if (!html) {
+                return "";
+            }
+
+            let source = String(html)
+                .replace(
+                    /@UUID\[[^\]]+\]\{([^}]+)\}/g,
+                    "$1"
+                )
+                .replace(
+                    /@(action|variantrule|status|reference)\[[^\]]+\](?:\{([^}]+)\})?/gi,
+                    function (match, type, label) {
+                        return label || "";
+                    }
+                );
+
+            try {
+
+                const parser =
+                    new DOMParser();
+
+                const documentObject =
+                    parser.parseFromString(
+                        source,
+                        "text/html"
+                    );
+
+                documentObject
+                    .querySelectorAll(
+                        "br, p, div, li, h1, h2, h3, h4, h5, h6, tr"
+                    )
+                    .forEach(function (element) {
+                        element.appendChild(
+                            documentObject.createTextNode("\n")
+                        );
+                    });
+
+                source =
+                    documentObject.body.textContent || "";
+
+            }
+            catch (error) {
+                // If DOM parsing fails, the cleanup below still produces text.
+            }
+
+            return source
+                .replace(/\r/g, "")
+                .replace(/[ \t]+\n/g, "\n")
+                .replace(/\n[ \t]+/g, "\n")
+                .replace(/\n{3,}/g, "\n\n")
+                .replace(/[ \t]{2,}/g, " ")
+                .trim();
+
+        }
+
+
+        function foundryItemsByType(data, type) {
+
+            return Array.isArray(data.items)
+                ? data.items.filter(function (item) {
+                    return item && item.type === type;
+                })
+                : [];
+
+        }
+
+
+        function foundryGetTotalLevel(data) {
+
+            const classes =
+                foundryItemsByType(data, "class");
+
+            const total =
+                classes.reduce(
+                    function (sum, item) {
+                        return sum + Math.max(
+                            0,
+                            parseInt(
+                                item.system &&
+                                item.system.levels
+                            ) || 0
+                        );
+                    },
+                    0
+                );
+
+            return Math.max(1, total || 1);
+
+        }
+
+
+        function foundryAbilityModifier(data, ability) {
+
+            const score =
+                foundryNumber(
+                    data.system &&
+                    data.system.abilities &&
+                    data.system.abilities[ability] &&
+                    data.system.abilities[ability].value,
+                    10
+                );
+
+            return Math.floor(
+                (score - 10) / 2
+            );
+
+        }
+
+
+        function foundryProficiencyBonus(data) {
+
+            const level =
+                foundryGetTotalLevel(data);
+
+            return 2 + Math.floor(
+                (level - 1) / 4
+            );
+
+        }
+
+
+        function foundryDeriveMaxHp(data) {
+
+            const hp =
+                data.system &&
+                data.system.attributes &&
+                data.system.attributes.hp
+                    ? data.system.attributes.hp
+                    : {};
+
+            const explicitMax =
+                foundryNumber(hp.max, NaN);
+
+            if (
+                Number.isFinite(explicitMax) &&
+                explicitMax > 0
+            ) {
+                return explicitMax;
+            }
+
+            const classes =
+                foundryItemsByType(data, "class");
+
+            const conModifier =
+                foundryAbilityModifier(
+                    data,
+                    "con"
+                );
+
+            let total = 0;
+            let characterLevel = 0;
+
+            classes.forEach(
+                function (classItem) {
+
+                    const system =
+                        classItem.system || {};
+
+                    const levels =
+                        Math.max(
+                            0,
+                            parseInt(system.levels) || 0
+                        );
+
+                    const dieText =
+                        system.hd &&
+                        system.hd.denomination
+                            ? String(
+                                system.hd.denomination
+                            )
+                            : "d8";
+
+                    const die =
+                        parseInt(
+                            dieText.replace(/\D/g, "")
+                        ) || 8;
+
+                    let hitPointChoices = {};
+
+                    if (
+                        system.advancement &&
+                        typeof system.advancement === "object"
+                    ) {
+
+                        Object.values(
+                            system.advancement
+                        ).forEach(
+                            function (advancement) {
+
+                                if (
+                                    advancement &&
+                                    advancement.type === "HitPoints" &&
+                                    advancement.value &&
+                                    typeof advancement.value === "object"
+                                ) {
+                                    hitPointChoices =
+                                        advancement.value;
+                                }
+
+                            }
+                        );
+
+                    }
+
+                    for (
+                        let level = 1;
+                        level <= levels;
+                        level += 1
+                    ) {
+
+                        characterLevel += 1;
+
+                        const choice =
+                            hitPointChoices[String(level)];
+
+                        let baseHitPoints;
+
+                        if (choice === "max") {
+                            baseHitPoints = die;
+                        }
+                        else if (choice === "avg") {
+                            baseHitPoints =
+                                Math.floor(die / 2) + 1;
+                        }
+                        else if (
+                            Number.isFinite(
+                                Number(choice)
+                            )
+                        ) {
+                            baseHitPoints =
+                                Number(choice);
+                        }
+                        else if (characterLevel === 1) {
+                            baseHitPoints = die;
+                        }
+                        else {
+                            baseHitPoints =
+                                Math.floor(die / 2) + 1;
+                        }
+
+                        total += Math.max(
+                            1,
+                            baseHitPoints +
+                            conModifier
+                        );
+
+                    }
+
+                }
+            );
+
+            if (total > 0) {
+                return total;
+            }
+
+            return Math.max(
+                0,
+                foundryNumber(hp.value, 0)
+            );
+
+        }
+
+
+        function foundryActivationText(system) {
+
+            const activation =
+                system && system.activation
+                    ? system.activation
+                    : {};
+
+            const type =
+                String(
+                    activation.type || ""
+                ).toLowerCase();
+
+            const labels = {
+                action: "Action",
+                bonus: "Bonus Action",
+                reaction: "Reaction",
+                minute: "Minute",
+                hour: "Hour",
+                day: "Day",
+                special: "Special"
+            };
+
+            if (!type) {
+                return "";
+            }
+
+            const label =
+                labels[type] ||
+                foundryTitleCase(type);
+
+            const value =
+                foundryNumber(
+                    activation.value,
+                    NaN
+                );
+
+            if (
+                Number.isFinite(value) &&
+                value > 0
+            ) {
+                return value + " " + label;
+            }
+
+            return label;
+
+        }
+
+
+        function foundryRangeText(system) {
+
+            const range =
+                system && system.range
+                    ? system.range
+                    : {};
+
+            const units =
+                String(range.units || "")
+                    .toLowerCase();
+
+            const unitLabels = {
+                self: "Self",
+                touch: "Touch",
+                sight: "Sight",
+                any: "Any",
+                spec: "Special",
+                special: "Special",
+                unlimited: "Unlimited",
+                mi: "mi.",
+                ft: "ft."
+            };
+
+            if (
+                units === "self" ||
+                units === "touch" ||
+                units === "sight" ||
+                units === "any" ||
+                units === "spec" ||
+                units === "special" ||
+                units === "unlimited"
+            ) {
+                return unitLabels[units];
+            }
+
+            const value =
+                range.value == null
+                    ? ""
+                    : String(range.value).trim();
+
+            if (!value) {
+                return range.special || "";
+            }
+
+            return value +
+                (unitLabels[units]
+                    ? " " + unitLabels[units]
+                    : units
+                        ? " " + units
+                        : "");
+
+        }
+
+
+        function foundryDurationText(system) {
+
+            const duration =
+                system && system.duration
+                    ? system.duration
+                    : {};
+
+            const units =
+                String(duration.units || "")
+                    .toLowerCase();
+
+            if (units === "inst") {
+                return "Instantaneous";
+            }
+
+            const value =
+                duration.value == null
+                    ? ""
+                    : String(duration.value).trim();
+
+            if (!value || value === "0") {
+                return "";
+            }
+
+            const unit =
+                units === "minute"
+                    ? "minute"
+                    : units === "hour"
+                        ? "hour"
+                        : units === "round"
+                            ? "round"
+                            : units === "day"
+                                ? "day"
+                                : units;
+
+            if (!unit) {
+                return value;
+            }
+
+            return value + " " + unit +
+                (value === "1" ? "" : "s");
+
+        }
+
+
+        function foundrySpellData(item) {
+
+            const system =
+                item.system || {};
+
+            const properties =
+                Array.isArray(system.properties)
+                    ? system.properties
+                    : [];
+
+            const notes = [];
+
+            const duration =
+                foundryDurationText(system);
+
+            if (duration) {
+                notes.push(duration);
+            }
+
+            if (system.method === "atwill") {
+                notes.push("At will");
+            }
+
+            if (
+                system.materials &&
+                system.materials.value
+            ) {
+                notes.push(
+                    "M: " +
+                    foundryStripHtml(
+                        system.materials.value
+                    )
+                );
+            }
+
+            return {
+                level:
+                    Math.max(
+                        0,
+                        Math.min(
+                            9,
+                            parseInt(system.level) || 0
+                        )
+                    ),
+
+                name:
+                    item.name || "",
+
+                castingTime:
+                    foundryActivationText(system),
+
+                range:
+                    foundryRangeText(system),
+
+                concentration:
+                    properties.includes(
+                        "concentration"
+                    ),
+
+                ritual:
+                    properties.includes("ritual"),
+
+                material:
+                    properties.includes("material") ||
+                    Boolean(
+                        system.materials &&
+                        system.materials.value
+                    ),
+
+                notes:
+                    notes.join("; ")
+            };
+
+        }
+
+
+        function foundryWeaponAbility(data, item) {
+
+            const system =
+                item.system || {};
+
+            let attack = {};
+
+            if (
+                system.activities &&
+                typeof system.activities === "object"
+            ) {
+
+                const attackActivity =
+                    Object.values(
+                        system.activities
+                    ).find(
+                        function (activity) {
+                            return activity &&
+                                activity.type === "attack";
+                        }
+                    );
+
+                if (attackActivity) {
+                    attack =
+                        attackActivity.attack || {};
+                }
+
+            }
+
+            if (
+                attack.ability &&
+                FOUNDRY_ABILITY_MAP[
+                    attack.ability
+                ]
+            ) {
+                return attack.ability;
+            }
+
+            if (
+                system.ability &&
+                FOUNDRY_ABILITY_MAP[
+                    system.ability
+                ]
+            ) {
+                return system.ability;
+            }
+
+            const weaponType =
+                String(
+                    system.type &&
+                    system.type.value || ""
+                ).toLowerCase();
+
+            const properties =
+                Array.isArray(system.properties)
+                    ? system.properties
+                    : [];
+
+            if (
+                weaponType.endsWith("r")
+            ) {
+                return "dex";
+            }
+
+            if (
+                properties.includes("fin") ||
+                properties.includes("finesse")
+            ) {
+
+                return foundryAbilityModifier(
+                    data,
+                    "dex"
+                ) > foundryAbilityModifier(
+                    data,
+                    "str"
+                )
+                    ? "dex"
+                    : "str";
+
+            }
+
+            return "str";
+
+        }
+
+
+        function foundryWeaponIsProficient(
+            data,
+            item
+        ) {
+
+            const system =
+                item.system || {};
+
+            if (
+                typeof system.proficient === "boolean"
+            ) {
+                return system.proficient;
+            }
+
+            const weaponType =
+                String(
+                    system.type &&
+                    system.type.value || ""
+                ).toLowerCase();
+
+            if (
+                weaponType === "natural" ||
+                weaponType.includes("unarmed") ||
+                String(item.name || "")
+                    .toLowerCase()
+                    .includes("unarmed")
+            ) {
+                return true;
+            }
+
+            const actorProficiencies =
+                data.system &&
+                data.system.traits &&
+                data.system.traits.weaponProf &&
+                Array.isArray(
+                    data.system.traits.weaponProf.value
+                )
+                    ? data.system.traits.weaponProf.value
+                    : [];
+
+            if (weaponType.startsWith("simple")) {
+                return actorProficiencies.includes("sim");
+            }
+
+            if (weaponType.startsWith("martial")) {
+                return actorProficiencies.includes("mar");
+            }
+
+            return false;
+
+        }
+
+
+        function foundryWeaponAttackBonus(
+            data,
+            item
+        ) {
+
+            const ability =
+                foundryWeaponAbility(
+                    data,
+                    item
+                );
+
+            let total =
+                foundryAbilityModifier(
+                    data,
+                    ability
+                );
+
+            if (
+                foundryWeaponIsProficient(
+                    data,
+                    item
+                )
+            ) {
+                total +=
+                    foundryProficiencyBonus(data);
+            }
+
+            let extraBonus = 0;
+
+            const system =
+                item.system || {};
+
+            if (
+                system.activities &&
+                typeof system.activities === "object"
+            ) {
+
+                const attackActivity =
+                    Object.values(
+                        system.activities
+                    ).find(
+                        function (activity) {
+                            return activity &&
+                                activity.type === "attack";
+                        }
+                    );
+
+                if (
+                    attackActivity &&
+                    attackActivity.attack &&
+                    attackActivity.attack.bonus !== ""
+                ) {
+                    extraBonus =
+                        foundryNumber(
+                            attackActivity.attack.bonus,
+                            0
+                        );
+                }
+
+            }
+
+            total += extraBonus;
+
+            return signedNumber(total);
+
+        }
+
+
+        function foundryWeaponDamageText(
+            data,
+            item
+        ) {
+
+            const system =
+                item.system || {};
+
+            const damage =
+                system.damage &&
+                system.damage.base
+                    ? system.damage.base
+                    : {};
+
+            const types =
+                Array.isArray(damage.types)
+                    ? damage.types
+                    : [];
+
+            let formula = "";
+
+            if (
+                damage.custom &&
+                damage.custom.enabled &&
+                damage.custom.formula
+            ) {
+                formula =
+                    String(
+                        damage.custom.formula
+                    );
+            }
+            else if (
+                damage.number != null &&
+                damage.denomination
+            ) {
+                formula =
+                    String(damage.number) +
+                    "d" +
+                    String(damage.denomination);
+            }
+            else if (
+                damage.custom &&
+                damage.custom.enabled &&
+                damage.custom.formula === ""
+            ) {
+                formula = "1";
+            }
+
+            const ability =
+                foundryWeaponAbility(
+                    data,
+                    item
+                );
+
+            const modifier =
+                foundryAbilityModifier(
+                    data,
+                    ability
+                );
+
+            let bonusText =
+                damage.bonus == null
+                    ? ""
+                    : String(damage.bonus).trim();
+
+            if (bonusText.includes("@mod")) {
+                bonusText =
+                    bonusText.replace(
+                        /@mod/g,
+                        String(modifier)
+                    );
+            }
+
+            if (!bonusText && formula) {
+                bonusText = String(modifier);
+            }
+
+            if (
+                formula &&
+                bonusText &&
+                bonusText !== "0"
+            ) {
+
+                const numericBonus =
+                    Number(bonusText);
+
+                if (Number.isFinite(numericBonus)) {
+                    formula +=
+                        numericBonus >= 0
+                            ? "+" + numericBonus
+                            : String(numericBonus);
+                }
+                else {
+                    formula += "+" + bonusText;
+                }
+
+            }
+
+            if (!formula && bonusText) {
+                formula = bonusText;
+            }
+
+            return [
+                formula,
+                types.length > 0
+                    ? types.join("/")
+                    : ""
+            ]
+                .filter(Boolean)
+                .join(" ");
+
+        }
+
+
+        function foundryBuildAppearance(details) {
+
+            const parts = [];
+
+            if (details.appearance) {
+                parts.push(
+                    foundryStripHtml(
+                        details.appearance
+                    )
+                );
+            }
+
+            [
+                ["Age", "age"],
+                ["Height", "height"],
+                ["Weight", "weight"],
+                ["Eyes", "eyes"],
+                ["Hair", "hair"],
+                ["Skin", "skin"],
+                ["Gender", "gender"]
+            ].forEach(
+                function (entry) {
+
+                    if (details[entry[1]]) {
+                        parts.push(
+                            entry[0] + ": " +
+                            details[entry[1]]
+                        );
+                    }
+
+                }
+            );
+
+            return parts.join("\n");
+
+        }
+
+
+        function foundryBuildProficiencies(data) {
+
+            const traits =
+                data.system &&
+                data.system.traits
+                    ? data.system.traits
+                    : {};
+
+            const armorMap = {
+                lgt: "Light armor",
+                med: "Medium armor",
+                hvy: "Heavy armor",
+                shl: "Shields"
+            };
+
+            const weaponMap = {
+                sim: "Simple weapons",
+                mar: "Martial weapons"
+            };
+
+            const armor =
+                traits.armorProf &&
+                Array.isArray(
+                    traits.armorProf.value
+                )
+                    ? traits.armorProf.value.map(
+                        function (code) {
+                            return armorMap[code] ||
+                                foundryTitleCase(code);
+                        }
+                    )
+                    : [];
+
+            if (
+                traits.armorProf &&
+                traits.armorProf.custom
+            ) {
+                armor.push(
+                    traits.armorProf.custom
+                );
+            }
+
+            const weapons =
+                traits.weaponProf &&
+                Array.isArray(
+                    traits.weaponProf.value
+                )
+                    ? traits.weaponProf.value.map(
+                        function (code) {
+                            return weaponMap[code] ||
+                                foundryTitleCase(code);
+                        }
+                    )
+                    : [];
+
+            if (
+                traits.weaponProf &&
+                traits.weaponProf.custom
+            ) {
+                weapons.push(
+                    traits.weaponProf.custom
+                );
+            }
+
+            const toolNameMap = {
+                herb: "Herbalism Kit",
+                calligrapher:
+                    "Calligrapher's Supplies"
+            };
+
+            const tools = [];
+
+            if (
+                data.system &&
+                data.system.tools &&
+                typeof data.system.tools === "object"
+            ) {
+
+                Object.entries(
+                    data.system.tools
+                ).forEach(
+                    function (entry) {
+
+                        const value =
+                            entry[1] &&
+                            entry[1].value;
+
+                        if (
+                            foundryNumber(value, 0) > 0
+                        ) {
+                            tools.push(
+                                toolNameMap[entry[0]] ||
+                                foundryTitleCase(
+                                    entry[0]
+                                )
+                            );
+                        }
+
+                    }
+                );
+
+            }
+
+            foundryItemsByType(data, "tool")
+                .forEach(
+                    function (item) {
+                        if (
+                            item.name &&
+                            !tools.includes(item.name)
+                        ) {
+                            tools.push(item.name);
+                        }
+                    }
+                );
+
+            return [
+                armor.length
+                    ? "Armor: " +
+                      armor.join(", ")
+                    : "",
+                weapons.length
+                    ? "Weapons: " +
+                      weapons.join(", ")
+                    : "",
+                tools.length
+                    ? "Tools: " +
+                      tools.join(", ")
+                    : ""
+            ]
+                .filter(Boolean)
+                .join("\n");
+
+        }
+
+
+        function foundryBuildEquipment(data) {
+
+            const equipmentTypes =
+                new Set([
+                    "weapon",
+                    "equipment",
+                    "loot",
+                    "consumable",
+                    "container",
+                    "tool"
+                ]);
+
+            const lines = [];
+
+            if (Array.isArray(data.items)) {
+
+                data.items.forEach(
+                    function (item) {
+
+                        if (
+                            !item ||
+                            !equipmentTypes.has(
+                                item.type
+                            ) ||
+                            !item.name
+                        ) {
+                            return;
+                        }
+
+                        const quantity =
+                            foundryNumber(
+                                item.system &&
+                                item.system.quantity,
+                                1
+                            );
+
+                        lines.push(
+                            item.name +
+                            (quantity > 1
+                                ? " ×" + quantity
+                                : "")
+                        );
+
+                    }
+                );
+
+            }
+
+            const currency =
+                data.system &&
+                data.system.currency
+                    ? data.system.currency
+                    : {};
+
+            const currencyParts = [];
+
+            ["pp", "gp", "ep", "sp", "cp"]
+                .forEach(
+                    function (coin) {
+
+                        const amount =
+                            foundryNumber(
+                                currency[coin],
+                                0
+                            );
+
+                        if (amount) {
+                            currencyParts.push(
+                                amount + " " +
+                                coin.toUpperCase()
+                            );
+                        }
+
+                    }
+                );
+
+            if (currencyParts.length) {
+                lines.push(
+                    "Currency: " +
+                    currencyParts.join(", ")
+                );
+            }
+
+            return lines.join("\n");
+
+        }
+
+
+        function validateFoundryCharacter(data) {
+
+            if (
+                !data ||
+                typeof data !== "object"
+            ) {
+                throw new Error(
+                    "Invalid Foundry JSON data."
+                );
+            }
+
+            if (data.type !== "character") {
+                throw new Error(
+                    "This Foundry Actor is not a character."
+                );
+            }
+
+            if (
+                !data.system ||
+                !data.system.abilities
+            ) {
+                throw new Error(
+                    "This file does not contain D&D 5e character data."
+                );
+            }
+
+            const systemId =
+                data._stats &&
+                data._stats.systemId
+                    ? data._stats.systemId
+                    : data._stats &&
+                      data._stats.exportSource &&
+                      data._stats.exportSource.systemId
+                        ? data._stats.exportSource.systemId
+                        : "";
+
+            if (
+                systemId &&
+                systemId !== "dnd5e"
+            ) {
+                throw new Error(
+                    "This Foundry character is not from the D&D 5e system."
+                );
+            }
+
+        }
+
+
+        function importFoundryCharacterData(data) {
+
+            validateFoundryCharacter(data);
+
+            const form =
+                document.getElementById(
+                    "characterForm"
+                );
+
+            form.reset();
+
+            document
+                .querySelectorAll(
+                    ".save-prof, .skill-prof, .skill-exp"
+                )
+                .forEach(function (checkbox) {
+                    checkbox.checked = false;
+                });
+
+            restoreDeathSaves({
+                successes: 0,
+                failures: 0
+            });
+
+            restoreSpells([]);
+
+            const system =
+                data.system || {};
+
+            const details =
+                system.details || {};
+
+            const traits =
+                system.traits || {};
+
+            const attributes =
+                system.attributes || {};
+
+            const classes =
+                foundryItemsByType(
+                    data,
+                    "class"
+                );
+
+            const races =
+                foundryItemsByType(
+                    data,
+                    "race"
+                );
+
+            const backgrounds =
+                foundryItemsByType(
+                    data,
+                    "background"
+                );
+
+            const subclasses =
+                foundryItemsByType(
+                    data,
+                    "subclass"
+                );
+
+            foundrySetField(
+                "characterName",
+                data.name || ""
+            );
+
+            const totalLevel =
+                foundryGetTotalLevel(data);
+
+            foundrySetField(
+                "level",
+                Math.max(
+                    1,
+                    Math.min(20, totalLevel)
+                )
+            );
+
+            if (classes.length === 1) {
+                foundrySetSelectOrOther(
+                    "characterClass",
+                    "customClass",
+                    classes[0].name
+                );
+            }
+            else if (classes.length > 1) {
+                foundrySetSelectOrOther(
+                    "characterClass",
+                    "customClass",
+                    classes.map(
+                        function (item) {
+                            const levels =
+                                parseInt(
+                                    item.system &&
+                                    item.system.levels
+                                ) || 0;
+
+                            return item.name +
+                                (levels
+                                    ? " " + levels
+                                    : "");
+                        }
+                    ).join(" / ")
+                );
+            }
+
+            if (subclasses.length) {
+                foundrySetField(
+                    "subclass",
+                    subclasses.map(
+                        function (item) {
+                            return item.name;
+                        }
+                    ).join(" / ")
+                );
+            }
+
+            if (races.length) {
+                foundrySetSelectOrOther(
+                    "species",
+                    "customSpecies",
+                    races[0].name
+                );
+            }
+
+            if (backgrounds.length) {
+                foundrySetSelectOrOther(
+                    "background",
+                    "customBackground",
+                    backgrounds[0].name
+                );
+            }
+
+            foundrySetField(
+                "alignment",
+                details.alignment || ""
+            );
+
+            Object.entries(
+                FOUNDRY_ABILITY_MAP
+            ).forEach(
+                function (entry) {
+
+                    const foundryAbility =
+                        entry[0];
+
+                    const builderAbility =
+                        entry[1];
+
+                    const abilityData =
+                        system.abilities &&
+                        system.abilities[
+                            foundryAbility
+                        ]
+                            ? system.abilities[
+                                foundryAbility
+                            ]
+                            : {};
+
+                    foundrySetField(
+                        builderAbility,
+                        foundryNumber(
+                            abilityData.value,
+                            10
+                        )
+                    );
+
+                    const saveCheckbox =
+                        document.getElementById(
+                            builderAbility +
+                            "SaveProf"
+                        );
+
+                    if (saveCheckbox) {
+                        saveCheckbox.checked =
+                            foundryNumber(
+                                abilityData.proficient,
+                                0
+                            ) >= 1;
+                    }
+
+                }
+            );
+
+            Object.entries(
+                FOUNDRY_SKILL_MAP
+            ).forEach(
+                function (entry) {
+
+                    const foundrySkill =
+                        entry[0];
+
+                    const builderSkill =
+                        entry[1];
+
+                    const skillData =
+                        system.skills &&
+                        system.skills[foundrySkill]
+                            ? system.skills[
+                                foundrySkill
+                            ]
+                            : {};
+
+                    const row =
+                        document.querySelector(
+                            '[data-skill="' +
+                            builderSkill +
+                            '"]'
+                        );
+
+                    if (!row) {
+                        return;
+                    }
+
+                    const value =
+                        foundryNumber(
+                            skillData.value,
+                            0
+                        );
+
+                    row.querySelector(
+                        ".skill-prof"
+                    ).checked = value >= 1;
+
+                    row.querySelector(
+                        ".skill-exp"
+                    ).checked = value >= 2;
+
+                }
+            );
+
+            const hp =
+                attributes.hp || {};
+
+            foundrySetField(
+                "currentHP",
+                Math.max(
+                    0,
+                    foundryNumber(
+                        hp.value,
+                        0
+                    )
+                )
+            );
+
+            foundrySetField(
+                "maxHP",
+                foundryDeriveMaxHp(data)
+            );
+
+            foundrySetField(
+                "tempHP",
+                Math.max(
+                    0,
+                    foundryNumber(
+                        hp.temp,
+                        0
+                    )
+                )
+            );
+
+            const explicitAc =
+                attributes.ac &&
+                foundryNumber(
+                    attributes.ac.value,
+                    NaN
+                );
+
+            const flatAc =
+                attributes.ac &&
+                foundryNumber(
+                    attributes.ac.flat,
+                    NaN
+                );
+
+            if (
+                Number.isFinite(explicitAc)
+            ) {
+                foundrySetField(
+                    "armorClass",
+                    explicitAc
+                );
+            }
+            else if (
+                Number.isFinite(flatAc)
+            ) {
+                foundrySetField(
+                    "armorClass",
+                    flatAc
+                );
+            }
+            else {
+                foundrySetField(
+                    "armorClass",
+                    10 +
+                    foundryAbilityModifier(
+                        data,
+                        "dex"
+                    )
+                );
+            }
+
+            let speed =
+                attributes.movement &&
+                foundryNumber(
+                    attributes.movement.walk,
+                    NaN
+                );
+
+            if (
+                !Number.isFinite(speed) &&
+                races.length &&
+                races[0].system &&
+                races[0].system.movement
+            ) {
+                speed =
+                    foundryNumber(
+                        races[0].system.movement.walk,
+                        NaN
+                    );
+            }
+
+            if (Number.isFinite(speed)) {
+                foundrySetField(
+                    "speed",
+                    speed
+                );
+            }
+
+            const sizeCode =
+                String(
+                    traits.size || ""
+                ).toLowerCase();
+
+            if (
+                FOUNDRY_SIZE_MAP[sizeCode]
+            ) {
+                foundrySetField(
+                    "size",
+                    FOUNDRY_SIZE_MAP[sizeCode]
+                );
+            }
+
+            foundrySetField(
+                "inspiration",
+                Boolean(
+                    attributes.inspiration
+                )
+            );
+
+            const death =
+                attributes.death || {};
+
+            restoreDeathSaves({
+                successes:
+                    foundryNumber(
+                        death.success,
+                        0
+                    ),
+                failures:
+                    foundryNumber(
+                        death.failure,
+                        0
+                    )
+            });
+
+            const hitDiceText =
+                classes.map(
+                    function (item) {
+
+                        const systemData =
+                            item.system || {};
+
+                        const levels =
+                            Math.max(
+                                0,
+                                parseInt(
+                                    systemData.levels
+                                ) || 0
+                            );
+
+                        const denomination =
+                            systemData.hd &&
+                            systemData.hd.denomination
+                                ? String(
+                                    systemData.hd.denomination
+                                ).replace(/^d/i, "")
+                                : "";
+
+                        return levels && denomination
+                            ? levels + "d" +
+                              denomination
+                            : "";
+
+                    }
+                )
+                .filter(Boolean)
+                .join(" + ");
+
+            if (hitDiceText) {
+                foundrySetField(
+                    "hitDice",
+                    hitDiceText
+                );
+            }
+
+            const spellcastingAbility =
+                attributes.spellcasting ||
+                (classes[0] &&
+                 classes[0].system &&
+                 classes[0].system.spellcasting &&
+                 classes[0].system.spellcasting.ability) ||
+                "";
+
+            if (
+                FOUNDRY_ABILITY_MAP[
+                    spellcastingAbility
+                ]
+            ) {
+                foundrySetField(
+                    "spellAbility",
+                    FOUNDRY_ABILITY_MAP[
+                        spellcastingAbility
+                    ]
+                );
+            }
+
+            for (
+                let level = 1;
+                level <= 9;
+                level += 1
+            ) {
+
+                const slotData =
+                    system.spells &&
+                    system.spells[
+                        "spell" + level
+                    ]
+                        ? system.spells[
+                            "spell" + level
+                        ]
+                        : {};
+
+                const max =
+                    foundryNumber(
+                        slotData.max,
+                        NaN
+                    );
+
+                const value =
+                    foundryNumber(
+                        slotData.value,
+                        0
+                    );
+
+                const spent =
+                    foundryNumber(
+                        slotData.spent,
+                        NaN
+                    );
+
+                const total =
+                    Number.isFinite(max)
+                        ? max
+                        : value;
+
+                const expended =
+                    Number.isFinite(spent)
+                        ? spent
+                        : Number.isFinite(max)
+                            ? Math.max(
+                                0,
+                                max - value
+                            )
+                            : 0;
+
+                foundrySetField(
+                    "spellSlots" +
+                    level +
+                    "Total",
+                    Math.max(0, total)
+                );
+
+                foundrySetField(
+                    "spellSlots" +
+                    level +
+                    "Expended",
+                    Math.max(0, expended)
+                );
+
+            }
+
+            const foundrySpells =
+                foundryItemsByType(
+                    data,
+                    "spell"
+                )
+                .map(foundrySpellData)
+                .sort(
+                    function (a, b) {
+                        return a.level - b.level ||
+                            a.name.localeCompare(
+                                b.name
+                            );
+                    }
+                );
+
+            restoreSpells(foundrySpells);
+
+            const weapons =
+                foundryItemsByType(
+                    data,
+                    "weapon"
+                ).slice(0, 4);
+
+            for (
+                let index = 1;
+                index <= 4;
+                index += 1
+            ) {
+
+                const item =
+                    weapons[index - 1];
+
+                const nameField =
+                    document.querySelector(
+                        '[name="attack' +
+                        index +
+                        'Name"]'
+                    );
+
+                const bonusField =
+                    document.querySelector(
+                        '[name="attack' +
+                        index +
+                        'Bonus"]'
+                    );
+
+                const damageField =
+                    document.querySelector(
+                        '[name="attack' +
+                        index +
+                        'Damage"]'
+                    );
+
+                if (!item) {
+                    nameField.value = "";
+                    bonusField.value = "";
+                    damageField.value = "";
+                    continue;
+                }
+
+                nameField.value =
+                    item.name || "";
+
+                bonusField.value =
+                    foundryWeaponAttackBonus(
+                        data,
+                        item
+                    );
+
+                damageField.value =
+                    foundryWeaponDamageText(
+                        data,
+                        item
+                    );
+
+            }
+
+            const featItems =
+                foundryItemsByType(
+                    data,
+                    "feat"
+                );
+
+            const classFeatureNames = [];
+            const speciesTraitNames = [];
+            const featNames = [];
+
+            featItems.forEach(
+                function (item) {
+
+                    const featureType =
+                        item.system &&
+                        item.system.type &&
+                        item.system.type.value
+                            ? item.system.type.value
+                            : "feat";
+
+                    if (featureType === "class") {
+                        classFeatureNames.push(
+                            item.name
+                        );
+                    }
+                    else if (
+                        featureType === "race"
+                    ) {
+                        speciesTraitNames.push(
+                            item.name
+                        );
+                    }
+                    else {
+                        featNames.push(item.name);
+                    }
+
+                }
+            );
+
+            foundrySetField(
+                "classFeatures",
+                classFeatureNames.join("\n")
+            );
+
+            foundrySetField(
+                "speciesTraits",
+                speciesTraitNames.join("\n")
+            );
+
+            foundrySetField(
+                "feats",
+                featNames.join("\n")
+            );
+
+            foundrySetField(
+                "proficiencies",
+                foundryBuildProficiencies(
+                    data
+                )
+            );
+
+            foundrySetField(
+                "equipment",
+                foundryBuildEquipment(data)
+            );
+
+            const languages =
+                traits.languages &&
+                Array.isArray(
+                    traits.languages.value
+                )
+                    ? traits.languages.value.map(
+                        foundryTitleCase
+                    )
+                    : [];
+
+            if (
+                traits.languages &&
+                traits.languages.custom
+            ) {
+                languages.push(
+                    traits.languages.custom
+                );
+            }
+
+            foundrySetField(
+                "languages",
+                languages.join(", ")
+            );
+
+            foundrySetField(
+                "appearance",
+                foundryBuildAppearance(
+                    details
+                )
+            );
+
+            foundrySetField(
+                "personality",
+                foundryStripHtml(
+                    details.trait || ""
+                )
+            );
+
+            foundrySetField(
+                "ideals",
+                foundryStripHtml(
+                    details.ideal || ""
+                )
+            );
+
+            foundrySetField(
+                "bonds",
+                foundryStripHtml(
+                    details.bond || ""
+                )
+            );
+
+            foundrySetField(
+                "flaws",
+                foundryStripHtml(
+                    details.flaw || ""
+                )
+            );
+
+            foundrySetField(
+                "backstory",
+                foundryStripHtml(
+                    details.biography &&
+                    details.biography.value
+                        ? details.biography.value
+                        : ""
+                )
+            );
+
+            refreshCustomEntryVisibility();
+            updateCharacterMath();
+
+        }
+
+
+        async function loadFoundryCharacterJsonFile(
+            file
+        ) {
+
+            try {
+
+                const text =
+                    await file.text();
+
+                const data =
+                    JSON.parse(text);
+
+                importFoundryCharacterData(data);
+
+                const loadedName =
+                    document.getElementById(
+                        "characterName"
+                    ).value.trim();
+
+                setCharacterFileStatus(
+                    loadedName
+                        ? "Foundry character imported: " +
+                          loadedName +
+                          ". Review any Foundry-only details that do not have a matching builder field."
+                        : "Foundry character imported. Review any Foundry-only details that do not have a matching builder field.",
+                    "success"
+                );
+
+            }
+            catch (error) {
+
+                console.error(error);
+
+                setCharacterFileStatus(
+                    error && error.message
+                        ? error.message
+                        : "The Foundry character could not be imported.",
                     "error"
                 );
 
@@ -7100,6 +9155,16 @@
                 "loadCharacterFile"
             );
 
+        const importFoundryButton =
+            document.getElementById(
+                "importFoundryButton"
+            );
+
+        const foundryCharacterFile =
+            document.getElementById(
+                "foundryCharacterFile"
+            );
+
         const exportPdfButton =
             document.getElementById(
                 "exportPdfButton"
@@ -7142,6 +9207,37 @@
                 }
 
                 loadCharacterFile.value = "";
+
+            }
+        );
+
+
+        importFoundryButton.addEventListener(
+            "click",
+            function () {
+
+                setCharacterFileStatus("");
+
+                foundryCharacterFile.click();
+
+            }
+        );
+
+
+        foundryCharacterFile.addEventListener(
+            "change",
+            function () {
+
+                const file =
+                    foundryCharacterFile.files[0];
+
+                if (file) {
+                    loadFoundryCharacterJsonFile(
+                        file
+                    );
+                }
+
+                foundryCharacterFile.value = "";
 
             }
         );
