@@ -282,7 +282,7 @@
 
             grid-template-columns:
                 0.65fr
-                repeat(5, 1fr)
+                repeat(6, 1fr)
                 1.4fr;
 
             gap: 8px;
@@ -1724,6 +1724,29 @@
                         step="5"
                         data-stepper
                     >
+
+                </div>
+
+
+
+                <div class="stat-box">
+
+                    <label for="size">
+                        Size
+                    </label>
+
+                    <select
+                        id="size"
+                        name="size"
+                    >
+                        <option value="">Choose Size</option>
+                        <option>Tiny</option>
+                        <option>Small</option>
+                        <option>Medium</option>
+                        <option>Large</option>
+                        <option>Huge</option>
+                        <option>Gargantuan</option>
+                    </select>
 
                 </div>
 
@@ -3614,7 +3637,7 @@
         </p>
 
         <p style="font-size: 0.76rem; opacity: 0.72; letter-spacing: 0.08em; margin-top: 6px;">
-            Version .00002
+            Version .00003
         </p>
 
     </footer>
@@ -5805,8 +5828,8 @@
             if (proficient) {
                 drawPdfMark(
                     page,
-                    markX,
-                    y,
+                    markX - 0.7,
+                    y + 0.8,
                     expertise
                 );
             }
@@ -6341,8 +6364,8 @@
                 drawPdfCentered(
                     page1,
                     pdfValue("initiative"),
-                    264,
-                    618,
+                    265.9,
+                    627,
                     58,
                     boldFont,
                     14,
@@ -6352,8 +6375,8 @@
                 drawPdfCentered(
                     page1,
                     pdfValue("speed"),
-                    355,
-                    620,
+                    362.3,
+                    629,
                     58,
                     boldFont,
                     14,
@@ -6362,9 +6385,20 @@
 
                 drawPdfCentered(
                     page1,
+                    pdfValue("size"),
+                    457.3,
+                    628,
+                    64,
+                    boldFont,
+                    13,
+                    7
+                );
+
+                drawPdfCentered(
+                    page1,
                     pdfValue("passivePerception"),
-                    548,
-                    618,
+                    552.8,
+                    627,
                     72,
                     boldFont,
                     14,
@@ -6378,33 +6412,33 @@
 
                 const abilityPdfPositions = {
                     strength: {
-                        modifierX: 43.6,
-                        scoreX: 73.8,
+                        modifierX: 44.1,
+                        scoreX: 79.0,
                         y: 546.5
                     },
                     dexterity: {
-                        modifierX: 43.6,
-                        scoreX: 73.8,
+                        modifierX: 44.1,
+                        scoreX: 79.0,
                         y: 428
                     },
                     constitution: {
-                        modifierX: 43.6,
-                        scoreX: 73.8,
+                        modifierX: 44.1,
+                        scoreX: 79.0,
                         y: 282
                     },
                     intelligence: {
-                        modifierX: 149.7,
-                        scoreX: 180,
+                        modifierX: 151.2,
+                        scoreX: 186.0,
                         y: 623
                     },
                     wisdom: {
-                        modifierX: 149.7,
-                        scoreX: 180,
+                        modifierX: 151.2,
+                        scoreX: 186.0,
                         y: 449.5
                     },
                     charisma: {
-                        modifierX: 149.7,
-                        scoreX: 180,
+                        modifierX: 151.2,
+                        scoreX: 186.0,
                         y: 275.5
                     }
                 };
