@@ -1,4 +1,4 @@
-/* =========================================================
+7px/* =========================================================
    OZYLEME
    MAIN WEBSITE STYLESHEET
    ========================================================= */
@@ -1776,4 +1776,22 @@ footer p {
         height: 80px;
     }
 
+}
+/* =========================================================
+   FORCE ACTIVE NAV — KINGDOMS & SPECIES
+   ========================================================= */
+
+/* Kingdoms page */
+body:has(.kingdom-intro) nav a[href="kingdoms.html"] {
+    color: #e0d6b8 !important;
+    border-bottom-color: #74372f !important;
+    background-color: rgba(93, 37, 31, 0.10) !important;
+}
+
+
+/* Species page */
+body:has(.species-intro) nav a[href="species.html"] {
+    color: #e0d6b8 !important;
+    border-bottom-color: #74372f !important;
+    background-color: rgba(93, 37, 31, 0.10) !important;
 }
