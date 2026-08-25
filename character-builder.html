@@ -5300,6 +5300,9 @@
            EXPORT TO 2024 D&D CHARACTER SHEET PDF
            ===================================================== */
 
+        // PDF template is 603 x 774 points. Coordinates below are calibrated
+        // directly against that page size rather than US Letter 612 x 792.
+
         const CHARACTER_PDF_TEMPLATE =
             "Character%20Building/DnD_2024_Character-Sheet.pdf";
 
@@ -6191,7 +6194,7 @@
                     page1,
                     characterName,
                     27,
-                    742,
+                    751,
                     228,
                     boldFont,
                     10,
@@ -6202,7 +6205,7 @@
                     page1,
                     background,
                     27,
-                    721,
+                    729,
                     115,
                     regularFont,
                     8,
@@ -6213,7 +6216,7 @@
                     page1,
                     characterClass,
                     151,
-                    721,
+                    729,
                     96,
                     regularFont,
                     8,
@@ -6224,7 +6227,7 @@
                     page1,
                     species,
                     27,
-                    699,
+                    708,
                     115,
                     regularFont,
                     8,
@@ -6235,7 +6238,7 @@
                     page1,
                     pdfValue("subclass"),
                     151,
-                    699,
+                    708,
                     96,
                     regularFont,
                     8,
@@ -6246,7 +6249,7 @@
                     page1,
                     pdfValue("level"),
                     272.5,
-                    725,
+                    734,
                     38,
                     boldFont,
                     11,
@@ -6268,7 +6271,7 @@
                     page1,
                     pdfValue("tempHP"),
                     454,
-                    720,
+                    730,
                     40,
                     boldFont,
                     10,
@@ -6279,7 +6282,7 @@
                     page1,
                     pdfValue("currentHP"),
                     402,
-                    699,
+                    708,
                     45,
                     boldFont,
                     10,
@@ -6290,7 +6293,7 @@
                     page1,
                     pdfValue("maxHP"),
                     454,
-                    701,
+                    708,
                     45,
                     boldFont,
                     10,
@@ -6376,12 +6379,12 @@
                     intelligence: {
                         modifierX: 136,
                         scoreX: 168,
-                        y: 613
+                        y: 623
                     },
                     wisdom: {
                         modifierX: 136,
                         scoreX: 168,
-                        y: 428
+                        y: 445
                     },
                     charisma: {
                         modifierX: 136,
@@ -6452,17 +6455,17 @@
                     intelligence: {
                         x: 128.5,
                         valueX: 136,
-                        y: 584
+                        y: 586
                     },
                     wisdom: {
                         x: 128.5,
                         valueX: 136,
-                        y: 394
+                        y: 396
                     },
                     charisma: {
                         x: 128.5,
                         valueX: 136,
-                        y: 239
+                        y: 241
                     }
                 };
 
@@ -6522,72 +6525,72 @@
                     arcana: {
                         x: 128.5,
                         valueX: 136,
-                        y: 564
+                        y: 566
                     },
                     history: {
                         x: 128.5,
                         valueX: 136,
-                        y: 550
+                        y: 552
                     },
                     investigation: {
                         x: 128.5,
                         valueX: 136,
-                        y: 536
+                        y: 538
                     },
                     nature: {
                         x: 128.5,
                         valueX: 136,
-                        y: 522
+                        y: 524
                     },
                     religion: {
                         x: 128.5,
                         valueX: 136,
-                        y: 508
+                        y: 510
                     },
                     animalHandling: {
                         x: 128.5,
                         valueX: 136,
-                        y: 374
+                        y: 376
                     },
                     insight: {
                         x: 128.5,
                         valueX: 136,
-                        y: 360
+                        y: 362
                     },
                     medicine: {
                         x: 128.5,
                         valueX: 136,
-                        y: 346
+                        y: 348
                     },
                     perception: {
                         x: 128.5,
                         valueX: 136,
-                        y: 332
+                        y: 334
                     },
                     survival: {
                         x: 128.5,
                         valueX: 136,
-                        y: 318
+                        y: 320
                     },
                     deception: {
                         x: 128.5,
                         valueX: 136,
-                        y: 219
+                        y: 221
                     },
                     intimidation: {
                         x: 128.5,
                         valueX: 136,
-                        y: 205
+                        y: 207
                     },
                     performance: {
                         x: 128.5,
                         valueX: 136,
-                        y: 191
+                        y: 193
                     },
                     persuasion: {
                         x: 128.5,
                         valueX: 136,
-                        y: 177
+                        y: 179
                     }
                 };
 
@@ -6772,7 +6775,7 @@
                     pdfValue("classFeatures"),
                     {
                         x: 228,
-                        y: 414,
+                        y: 422,
                         width: 356,
                         height: 203,
                         font: regularFont,
@@ -6814,12 +6817,12 @@
                     pdfValue("proficiencies"),
                     {
                         x: 18,
-                        y: 100,
+                        y: 94,
                         width: 190,
-                        height: 105,
+                        height: 44,
                         font: regularFont,
-                        size: 6.4,
-                        minimumSize: 4.8
+                        size: 6.0,
+                        minimumSize: 4.4
                     }
                 );
 
@@ -6839,7 +6842,7 @@
                         )
                         : "",
                     25,
-                    744,
+                    750,
                     107,
                     boldFont,
                     8,
@@ -6911,7 +6914,7 @@
                     pdfValue("appearance"),
                     {
                         x: 416,
-                        y: 722,
+                        y: 730,
                         width: 166,
                         height: 69,
                         font: regularFont,
@@ -6925,7 +6928,7 @@
                     buildBackstoryPersonalityPdfText(),
                     {
                         x: 416,
-                        y: 612,
+                        y: 626,
                         width: 166,
                         height: 118,
                         font: regularFont,
@@ -6964,7 +6967,7 @@
                     pdfValue("equipment"),
                     {
                         x: 416,
-                        y: 350,
+                        y: 358,
                         width: 166,
                         height: 235,
                         font: regularFont,
