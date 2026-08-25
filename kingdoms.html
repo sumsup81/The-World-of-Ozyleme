@@ -118,7 +118,7 @@
 
 
         /* =========================================================
-           FULL KINGDOM ENTRY
+           KINGDOM ENTRY
            ========================================================= */
 
         .kingdom-entry {
@@ -161,15 +161,25 @@
         }
 
 
+        .kingdom-tagline {
+            margin: 20px 0 28px;
+
+            color: #c8c0a7;
+
+            font-size: 1.08rem;
+            font-style: italic;
+        }
+
+
         /* =========================================================
-           KINGDOM INFORMATION
+           CROWN INFORMATION
            ========================================================= */
 
         .kingdom-meta {
             display: grid;
 
             grid-template-columns:
-                repeat(auto-fit, minmax(200px, 1fr));
+                repeat(auto-fit, minmax(220px, 1fr));
 
             gap: 14px;
 
@@ -209,7 +219,7 @@
 
 
         /* =========================================================
-           G.R.A.P.E.S. GRID
+           GRAPES GRID
            ========================================================= */
 
         .grapes-grid {
@@ -265,8 +275,36 @@
 
         .lore-keeper {
             color: #8e8877;
-
             font-style: italic;
+        }
+
+
+        /* =========================================================
+           LORE KEEPER RECORD
+           ========================================================= */
+
+        .known-lore {
+            margin-top: 35px;
+
+            padding: 22px;
+
+            background:
+                rgba(60, 28, 23, 0.15);
+
+            border-left:
+                3px solid #65342c;
+        }
+
+
+        .known-lore h3 {
+            margin-top: 0;
+
+            color: #c8bea1;
+        }
+
+
+        .known-lore ul {
+            margin-bottom: 0;
         }
 
 
@@ -326,8 +364,7 @@
             background:
                 rgba(60, 28, 23, 0.18);
 
-            border:
-                1px solid #65342c;
+            border: 1px solid #65342c;
         }
 
 
@@ -339,7 +376,6 @@
 
             .kingdom-entry {
                 margin: 50px auto;
-
                 padding: 20px;
             }
 
@@ -366,10 +402,8 @@
     <!-- =========================================================
          HEADER
 
-         IMPORTANT:
-         THE H1 IS INTENTIONALLY EMPTY.
-
-         THE BANNER IMAGE ALREADY CONTAINS THE OZYLEME TITLE.
+         EMPTY H1 IS INTENTIONAL.
+         THE OZYLEME NAME IS ALREADY PART OF THE BANNER IMAGE.
          ========================================================= -->
 
     <header>
@@ -387,69 +421,37 @@
          NAVIGATION
          ========================================================= -->
 
-    <nav class="site-nav">
+    <nav>
 
-        <a
-            class="nav-link"
-            href="index.html"
-        >
+        <a href="index.html">
             Home
         </a>
 
-
-        <a
-            class="nav-link active"
-            href="kingdoms.html"
-            aria-current="page"
-        >
+        <a href="kingdoms.html">
             Kingdoms
         </a>
 
-
-        <a
-            class="nav-link"
-            href="species.html"
-        >
+        <a href="species.html">
             Species
         </a>
 
-
-        <a
-            class="nav-link"
-            href="people.html"
-        >
+        <a href="people.html">
             People
         </a>
 
-
-        <a
-            class="nav-link"
-            href="gods.html"
-        >
+        <a href="gods.html">
             Gods
         </a>
 
-
-        <a
-            class="nav-link"
-            href="bestiary.html"
-        >
+        <a href="bestiary.html">
             Bestiary
         </a>
 
-
-        <a
-            class="nav-link"
-            href="classes.html"
-        >
+        <a href="classes.html">
             Classes
         </a>
 
-
-        <a
-            class="nav-link"
-            href="player-guide.html"
-        >
+        <a href="player-guide.html">
             Player Guide
         </a>
 
@@ -476,14 +478,12 @@
                 The Eight Kingdoms
             </h2>
 
-
             <p>
                 Eight kingdoms divide the known lands of Ozyleme.
                 Each exists beneath its own crown, traditions,
                 burdens, history, and relationship with the powers
                 that rule beneath the Dark Dragon.
             </p>
-
 
             <p>
                 Choose a kingdom below to explore its lands,
@@ -498,9 +498,6 @@
 
         <!-- =====================================================
              KINGDOM DIRECTORY
-
-             AUTOMATICALLY GENERATED FROM:
-             data/kingdoms-data.js
              ===================================================== -->
 
         <section
@@ -529,7 +526,6 @@
                 The Realm of Ozyleme
             </h2>
 
-
             <img
                 src="images/kingdoms/Ozyleme Map.jpg"
                 alt="Map of the Eight Kingdoms of Ozyleme"
@@ -542,18 +538,11 @@
 
 
         <!-- =====================================================
-             KINGDOM PROFILES
-
-             AUTOMATICALLY GENERATED FROM:
-             data/kingdoms-data.js
+             KINGDOM ENTRIES
              ===================================================== -->
 
         <div id="kingdomEntries"></div>
 
-
-        <!-- =====================================================
-             NO JAVASCRIPT FALLBACK
-             ===================================================== -->
 
         <noscript>
 
@@ -565,7 +554,7 @@
 
                 <p>
                     JavaScript must be enabled to display
-                    the kingdoms of Ozyleme.
+                    the kingdoms.
                 </p>
 
             </section>
@@ -590,16 +579,18 @@
 
 
     <!-- =========================================================
-         LOAD KINGDOM DATA
+         KINGDOM DATA
 
-         DO NOT CHANGE THIS PATH.
+         THIS FILE CURRENTLY DEFINES:
+         const loreKeeper
+         const kingdoms
          ========================================================= -->
 
     <script src="data/kingdoms-data.js"></script>
 
 
     <!-- =========================================================
-         BUILD KINGDOM PAGE
+         KINGDOM PAGE BUILDER
          ========================================================= -->
 
     <script>
@@ -620,16 +611,12 @@
             );
 
 
-        /* =========================================================
-           DEFAULT LORE KEEPER MESSAGE
-           ========================================================= */
-
-        const loreKeeperMessage =
+        const defaultLoreKeeperMessage =
             "It will be recorded here by the Lore Keeper.";
 
 
         /* =========================================================
-           CHECK FOR LORE KEEPER TEXT
+           LORE KEEPER CHECK
            ========================================================= */
 
         function isLoreKeeperText(text) {
@@ -637,9 +624,7 @@
             if (
                 typeof text !== "string"
             ) {
-
                 return false;
-
             }
 
 
@@ -653,48 +638,7 @@
 
 
         /* =========================================================
-           CREATE A SINGLE LORE PARAGRAPH
-           ========================================================= */
-
-        function createLoreParagraph(text) {
-
-            const finalText =
-                String(
-                    text ||
-                    loreKeeperMessage
-                );
-
-
-            const className =
-                isLoreKeeperText(finalText)
-                    ? ' class="lore-keeper"'
-                    : "";
-
-
-            return `
-
-                <p${className}>
-                    ${finalText}
-                </p>
-
-            `;
-
-        }
-
-
-        /* =========================================================
-           FORMAT KINGDOM LORE
-
-           kingdoms-data.js stores lore in ARRAYS.
-
-           Example:
-
-           geography: [
-               "First paragraph.",
-               "Second paragraph."
-           ]
-
-           This function turns every item into a paragraph.
+           FORMAT LORE
            ========================================================= */
 
         function formatLore(value) {
@@ -707,20 +651,32 @@
                     value.length === 0
                 ) {
 
-                    return createLoreParagraph(
-                        loreKeeperMessage
-                    );
+                    return `
+                        <p class="lore-keeper">
+                            ${defaultLoreKeeperMessage}
+                        </p>
+                    `;
 
                 }
 
 
                 return value
                     .map(
-                        item => {
+                        paragraph => {
 
-                            return createLoreParagraph(
-                                item
-                            );
+                            const loreClass =
+                                isLoreKeeperText(
+                                    paragraph
+                                )
+                                    ? ' class="lore-keeper"'
+                                    : "";
+
+
+                            return `
+                                <p${loreClass}>
+                                    ${paragraph}
+                                </p>
+                            `;
 
                         }
                     )
@@ -729,32 +685,39 @@
             }
 
 
-            if (
-                typeof value === "string" &&
-                value.trim() !== ""
-            ) {
-
-                return createLoreParagraph(
-                    value
-                );
-
-            }
+            const text =
+                value ||
+                defaultLoreKeeperMessage;
 
 
-            return createLoreParagraph(
-                loreKeeperMessage
-            );
+            const loreClass =
+                isLoreKeeperText(text)
+                    ? ' class="lore-keeper"'
+                    : "";
+
+
+            return `
+                <p${loreClass}>
+                    ${text}
+                </p>
+            `;
 
         }
 
 
         /* =========================================================
-           CHECK KINGDOM DATA FILE
+           CHECK THAT THE DATA FILE LOADED
+
+           IMPORTANT:
+           kingdoms-data.js defines:
+           const kingdoms = [...]
+
+           IT DOES NOT USE window.kingdomsData.
            ========================================================= */
 
         if (
-            !window.kingdomsData ||
-            !Array.isArray(window.kingdomsData)
+            typeof kingdoms === "undefined" ||
+            !Array.isArray(kingdoms)
         ) {
 
             kingdomCardsContainer.innerHTML = `
@@ -766,9 +729,8 @@
                     </strong>
 
                     <p>
-                        Check that the file
-                        data/kingdoms-data.js
-                        exists and has been uploaded.
+                        The page could not read
+                        data/kingdoms-data.js.
                     </p>
 
                 </div>
@@ -782,20 +744,11 @@
 
 
             /* =====================================================
-               USE THE DATA EXPORTED BY kingdoms-data.js
-               ===================================================== */
-
-            const kingdoms =
-                window.kingdomsData;
-
-
-            /* =====================================================
                CREATE KINGDOM DIRECTORY CARDS
                ===================================================== */
 
             kingdoms.forEach(
                 kingdom => {
-
 
                     const card =
                         document.createElement(
@@ -838,7 +791,7 @@
 
 
             /* =====================================================
-               CREATE FULL KINGDOM PROFILES
+               CREATE KINGDOM ENTRIES
                ===================================================== */
 
             kingdoms.forEach(
@@ -863,15 +816,77 @@
 
 
                     /* =============================================
-                       KINGDOM PROFILE
+                       TAGLINE
+                       ============================================= */
+
+                    let taglineHTML = "";
+
+
+                    if (
+                        kingdom.tagline
+                    ) {
+
+                        taglineHTML = `
+
+                            <p class="kingdom-tagline">
+                                ${kingdom.tagline}
+                            </p>
+
+                        `;
+
+                    }
+
+
+                    /* =============================================
+                       LORE KEEPER NOTES
+                       ============================================= */
+
+                    let notesHTML = "";
+
+
+                    if (
+                        Array.isArray(
+                            kingdom.notes
+                        ) &&
+                        kingdom.notes.length > 0
+                    ) {
+
+                        notesHTML = `
+
+                            <div class="known-lore">
+
+                                <h3>
+                                    Lore Keeper's Record
+                                </h3>
+
+                                <ul>
+
+                                    ${kingdom.notes
+                                        .map(
+                                            note => `
+                                                <li>
+                                                    ${note}
+                                                </li>
+                                            `
+                                        )
+                                        .join("")
+                                    }
+
+                                </ul>
+
+                            </div>
+
+                        `;
+
+                    }
+
+
+                    /* =============================================
+                       COMPLETE KINGDOM PROFILE
                        ============================================= */
 
                     section.innerHTML = `
 
-
-                        <!-- =====================================
-                             KINGDOM NAME
-                             ===================================== -->
 
                         <h2>
                             The Kingdom of ${kingdom.name}
@@ -883,14 +898,15 @@
                         </p>
 
 
+                        ${taglineHTML}
+
+
                         <!-- =====================================
                              CROWN INFORMATION
                              ===================================== -->
 
                         <div class="kingdom-meta">
 
-
-                            <!-- SEAT -->
 
                             <div class="kingdom-meta-item">
 
@@ -900,13 +916,11 @@
 
                                 <span class="kingdom-meta-value">
                                     ${kingdom.seat ||
-                                      loreKeeperMessage}
+                                      defaultLoreKeeperMessage}
                                 </span>
 
                             </div>
 
-
-                            <!-- RULER -->
 
                             <div class="kingdom-meta-item">
 
@@ -915,14 +929,12 @@
                                 </span>
 
                                 <span class="kingdom-meta-value">
-                                    ${kingdom.ruler ||
-                                      loreKeeperMessage}
+                                    ${kingdom.sovereign ||
+                                      defaultLoreKeeperMessage}
                                 </span>
 
                             </div>
 
-
-                            <!-- KEEPER -->
 
                             <div class="kingdom-meta-item">
 
@@ -932,23 +944,7 @@
 
                                 <span class="kingdom-meta-value">
                                     ${kingdom.keeper ||
-                                      loreKeeperMessage}
-                                </span>
-
-                            </div>
-
-
-                            <!-- PEOPLE -->
-
-                            <div class="kingdom-meta-item">
-
-                                <span class="kingdom-meta-label">
-                                    Peoples
-                                </span>
-
-                                <span class="kingdom-meta-value">
-                                    ${kingdom.people ||
-                                      loreKeeperMessage}
+                                      defaultLoreKeeperMessage}
                                 </span>
 
                             </div>
@@ -964,9 +960,7 @@
                         <div class="grapes-grid">
 
 
-                            <!-- ================================
-                                 GEOGRAPHY
-                                 ================================ -->
+                            <!-- GEOGRAPHY -->
 
                             <div class="lore-section">
 
@@ -975,15 +969,13 @@
                                 </h3>
 
                                 ${formatLore(
-                                    kingdom.geography
+                                    kingdom.land
                                 )}
 
                             </div>
 
 
-                            <!-- ================================
-                                 RELIGION
-                                 ================================ -->
+                            <!-- RELIGION -->
 
                             <div class="lore-section">
 
@@ -998,9 +990,7 @@
                             </div>
 
 
-                            <!-- ================================
-                                 ACHIEVEMENTS
-                                 ================================ -->
+                            <!-- ACHIEVEMENTS -->
 
                             <div class="lore-section">
 
@@ -1009,15 +999,13 @@
                                 </h3>
 
                                 ${formatLore(
-                                    kingdom.legacy
+                                    kingdom.achievements
                                 )}
 
                             </div>
 
 
-                            <!-- ================================
-                                 POLITICS
-                                 ================================ -->
+                            <!-- POLITICS -->
 
                             <div class="lore-section">
 
@@ -1026,15 +1014,13 @@
                                 </h3>
 
                                 ${formatLore(
-                                    kingdom.crown
+                                    kingdom.politics
                                 )}
 
                             </div>
 
 
-                            <!-- ================================
-                                 ECONOMICS
-                                 ================================ -->
+                            <!-- ECONOMICS -->
 
                             <div class="lore-section">
 
@@ -1043,15 +1029,13 @@
                                 </h3>
 
                                 ${formatLore(
-                                    kingdom.bounty
+                                    kingdom.economics
                                 )}
 
                             </div>
 
 
-                            <!-- ================================
-                                 SOCIETY
-                                 ================================ -->
+                            <!-- SOCIETY -->
 
                             <div class="lore-section">
 
@@ -1060,7 +1044,7 @@
                                 </h3>
 
                                 ${formatLore(
-                                    kingdom.peopleAndCustoms
+                                    kingdom.society
                                 )}
 
                             </div>
@@ -1069,17 +1053,21 @@
                         </div>
 
 
+                        ${notesHTML}
+
+
                         <!-- =====================================
-                             RETURN TO KINGDOMS
+                             RETURN BUTTON
                              ===================================== -->
 
                         <div class="kingdom-return">
 
                             <a href="#kingdom-directory">
-                                ↑ Return to Kingdoms
+                                Return to Kingdoms
                             </a>
 
                         </div>
+
 
                     `;
 
@@ -1122,7 +1110,6 @@
 
 
         }
-
 
     </script>
 
