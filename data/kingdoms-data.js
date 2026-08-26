@@ -160,33 +160,43 @@ const kingdoms = [
             "Brilliance without mercy.",
 
         seat:
-            loreKeeper,
+            "Radiant Reach",
 
         sovereign:
-            loreKeeper,
+            "The Shard of Truth",
 
         keeper:
             "The Inflictor",
 
         land:
-            "Torch is a wealthy High Elven kingdom with little productive agricultural land. Its cities and estates stand in sharp contrast to the lands that must feed them.",
+            "Torch is a vast, exhausted desert crowned by the high stone towers of the High Elves. The land was once rich enough to feed their earliest works, but generations of quarrying, clearing, building, and magical exploitation stripped it nearly bare. The Ravager is said to have encouraged the taking until the country was reduced to dusty bones. Above those wastes now rises Radiant Reach, a city of severe geometric towers and monumental stonework. Precious-metal hues of gold, silver, copper, and other rare metals are favored throughout High Elven design, standing in deliberate contrast to the barren sands below.",
 
         faith:
-            "Torch is kept by the Inflictor, Master of Radiance. Radiance is understood less as holy light than as a dangerous, almost radioactive force: brilliant, technological, mutagenic, and harmful through exposure.",
+            "Torch is kept by the Inflictor, Master of Radiance. Radiance is understood less as holy light than as a dangerous force of revelation, invention, exposure, and power. The Inflictor favored the High Elves because they discovered ever more elaborate ways to bring about action without performing it themselves. A weapon can kill for its maker, a disease can spread beyond its creator, a construct can labor without its master, and magic can make the world move while the High Elf remains still. To the culture of Torch, causing something else to act in one's place is not laziness but refinement.",
 
         achievements:
-            "The High Elves of Torch are renowned for magic, technology, invention, weapons, disease-making, and other forms of knowledge that allow suffering to be inflicted at a comfortable distance. The Dragon Forged are among the creations associated with the High Elves.",
+            "The High Elves are counted among the first peoples of Ozyleme and are said to have come from beyond the realm itself, perhaps brought there by Ozyleme. Tiny mystical Fey accompanied them in servitude, along with strange tools capable of shaping the young world. Over their long history the High Elves made magic commonplace, raised immense towers, created devices and servants to perform labor in their place, and eventually gave life to creations of their own. The Dragon Forged are among the beings associated with this tradition. Some believe the extraordinary lifespan of a High Elf allows one to gather far more Essence of Experience than shorter-lived mortal species.",
 
         politics:
-            loreKeeper,
+            "Torch is ruled from Radiant Reach by the Shard of Truth, a glowing stone that the High Elves have anointed as their king. The Shard does not walk, speak, write laws, or perform any labor of its own. Instead, the light it sheds is interpreted by the High Scholars, some of the eldest High Elves in Torch. Their readings become the commands and policies of the kingdom. To the High Elves, the Shard embodies the highest form of rulership: something that does nothing for itself, yet causes an entire kingdom to act on its behalf.",
 
         economics:
-            "Torch possesses tremendous magical and technological wealth but little agriculture. It therefore trades heavily with Vial for food, wine, fruit, and other products of the harvest.",
+            "Torch possesses tremendous accumulated wealth, magical knowledge, and technological power, but its own land has been stripped of most useful resources and provides little productive agriculture. The kingdom therefore relies heavily on trade, especially with Vial for food, wine, fruit, and other products of the harvest. High Elven greed and their mastery of magic, invention, delegated labor, and rare luxuries have nevertheless made Torch one of the wealthiest kingdoms in Ozyleme.",
 
         society:
-            "Torch's High Elves are wealthy, indolent, and heavily reliant on magic and technology. Their architecture and material culture favor an Art Deco character, while their comfort often depends on systems that prevent them from having to perform difficult labor themselves.",
+            "High Elven society values long life, wealth, control, and the ability to delegate labor. Their aesthetic is simple, geometric, and monumental, with precious-metal colors displayed as signs of rarity and status. Those who insist upon doing things for themselves are often regarded as crude, eccentric, or even opposed to the Inflictor's ideal. Some such Elves were cast out and now live in darkness beneath the sands or among neighboring lands. Other distant Elven branches are said to have left Torch long ago. Some passed through Loop and now dwell largely underground, surfacing at times for its night carnivals; a few become performers, though the truth of their wider culture is rarely discussed in Torch. The Forest Elves of Kettle are likewise said to descend from High Elves drawn away by the jealous Ravager, who wished to see another land taken and transformed. Most High Elves remain content within Torch, but those with greater ambition sometimes leave the sands to pursue outside interests, often of an illicit kind.",
 
-        notes: []
+        notes: [
+            "Radiant Reach is the seat of High Elven power in Torch.",
+            "The Shard of Truth, a glowing stone, is the anointed king of Torch.",
+            "The Shard's light is interpreted by the High Scholars, some of the eldest High Elves.",
+            "High Elven culture considers delegation and inaction signs of refinement and achievement.",
+            "Torch's present desert was created through generations of exploitation and resource stripping.",
+            "The Ravager is said to have encouraged the wasting of the land before the Inflictor claimed its people.",
+            "The High Elves are said to be among the first peoples of Ozyleme and may have come from beyond the realm.",
+            "Fey are said to have accompanied the earliest High Elves in servitude.",
+            "Some High Elves believe their long lives allow them to accumulate unusual amounts of Essence of Experience."
+        ]
     },
 
 
@@ -380,4 +390,3 @@ const kingdoms = [
     }
 
 ];
-``` [❶](code://python)
