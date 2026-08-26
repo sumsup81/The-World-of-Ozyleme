@@ -6,11 +6,9 @@
    kingdoms.html builds the page from this data.
    ========================================================= */
 
-const loreKeeper =
-    "It will be recorded here by the Lore Keeper.";
+var loreKeeper = "It will be recorded here by the Lore Keeper.";
 
-
-const kingdoms = [
+var kingdoms = [
 
     /* =====================================================
        PLUME
@@ -169,22 +167,22 @@ const kingdoms = [
             "The Inflictor",
 
         land:
-            `Torch is a vast, exhausted desert crowned by the high stone towers of the High Elves. The land was once rich enough to feed their earliest works, but generations of quarrying, clearing, building, and magical exploitation stripped it nearly bare. The Ravager is said to have encouraged the taking until the country was reduced to dusty bones. Above those wastes rises Radiant Reach, a city of severe geometric towers and monumental stonework. Precious-metal hues of gold, silver, copper, and other rare metals are favored throughout High Elven design, standing in deliberate contrast to the barren sands below.`,
+            "Torch is a vast, exhausted desert crowned by the high stone towers of the High Elves. The land was once rich enough to feed their earliest works, but generations of quarrying, clearing, building, and magical exploitation stripped it nearly bare. The Ravager is said to have encouraged the taking until the country was reduced to dusty bones. Above those wastes rises Radiant Reach, a city of severe geometric towers and monumental stonework. Precious-metal hues of gold, silver, copper, and other rare metals are favored throughout High Elven design, standing in deliberate contrast to the barren sands below.",
 
         faith:
-            `Torch is kept by the Inflictor, Master of Radiance. Radiance is understood less as holy light than as a dangerous force of revelation, invention, exposure, and power. The Inflictor favored the High Elves because they discovered increasingly elaborate ways to bring about action without performing it themselves. A weapon can kill for its maker, a disease can spread beyond its creator, a construct can labor without its master, and magic can make the world move while the High Elf remains still. To the culture of Torch, causing something else to act in one's place is not laziness but refinement.`,
+            "Torch is kept by the Inflictor, Master of Radiance. Radiance is understood less as holy light than as a dangerous force of revelation, invention, exposure, and power. The Inflictor favored the High Elves because they discovered increasingly elaborate ways to bring about action without performing it themselves. A weapon can kill for its maker, a disease can spread beyond its creator, a construct can labor without its master, and magic can make the world move while the High Elf remains still. To the culture of Torch, causing something else to act in one's place is not laziness but refinement.",
 
         achievements:
-            `The High Elves are counted among the first peoples of Ozyleme and are said to have come from beyond the realm itself, perhaps brought there by Ozyleme. Tiny mystical Fey accompanied them in servitude, along with strange tools capable of shaping the young world. Over their long history the High Elves made magic commonplace, raised immense towers, created devices and servants to perform labor in their place, and eventually gave life to creations of their own. The Dragon Forged are among the beings associated with this tradition. Some believe the extraordinary lifespan of a High Elf allows one to gather far more Essence of Experience than shorter-lived mortal species.`,
+            "The High Elves are counted among the first peoples of Ozyleme and are said to have come from beyond the realm itself, perhaps brought there by Ozyleme. Tiny mystical Fey accompanied them in servitude, along with strange tools capable of shaping the young world. Over their long history the High Elves made magic commonplace, raised immense towers, created devices and servants to perform labor in their place, and eventually gave life to creations of their own. The Dragon Forged are among the beings associated with this tradition. Some believe the extraordinary lifespan of a High Elf allows one to gather far more Essence of Experience than shorter-lived mortal species.",
 
         politics:
-            `Torch is ruled from Radiant Reach by the Shard of Truth, a glowing stone that the High Elves have anointed as their king. The Shard does not walk, speak, write laws, or perform any labor of its own. Instead, the light it sheds is interpreted by the High Scholars, some of the eldest High Elves in Torch. Their readings become the commands and policies of the kingdom. To the High Elves, the Shard embodies the highest form of rulership: something that does nothing for itself, yet causes an entire kingdom to act on its behalf.`,
+            "Torch is ruled from Radiant Reach by the Shard of Truth, a glowing stone that the High Elves have anointed as their king. The Shard does not walk, speak, write laws, or perform any labor of its own. Instead, the light it sheds is interpreted by the High Scholars, some of the eldest High Elves in Torch. Their readings become the commands and policies of the kingdom. To the High Elves, the Shard embodies the highest form of rulership: something that does nothing for itself, yet causes an entire kingdom to act on its behalf.",
 
         economics:
-            `Torch possesses tremendous accumulated wealth, magical knowledge, and technological power, but its own land has been stripped of most useful resources and provides little productive agriculture. The kingdom therefore relies heavily on trade, especially with Vial for food, wine, fruit, and other products of the harvest. High Elven greed and their mastery of magic, invention, delegated labor, and rare luxuries have nevertheless made Torch one of the wealthiest kingdoms in Ozyleme.`,
+            "Torch possesses tremendous accumulated wealth, magical knowledge, and technological power, but its own land has been stripped of most useful resources and provides little productive agriculture. The kingdom therefore relies heavily on trade, especially with Vial for food, wine, fruit, and other products of the harvest. High Elven greed and their mastery of magic, invention, delegated labor, and rare luxuries have nevertheless made Torch one of the wealthiest kingdoms in Ozyleme.",
 
         society:
-            `High Elven society values long life, wealth, control, and the ability to delegate labor. Their aesthetic is simple, geometric, and monumental, with precious-metal colors displayed as signs of rarity and status. Those who insist upon doing things for themselves are often regarded as crude, eccentric, or even opposed to the Inflictor's ideal. Some such Elves were cast out and now live in darkness beneath the sands or among neighboring lands. Other distant Elven branches are said to have left Torch long ago. Some descendants now dwell largely underground and are occasionally seen at the night carnivals of Loop, where a few become performers, though this is only one path among many. The Forest Elves of Kettle are likewise said to descend from High Elves drawn away by the jealous Ravager, who wished to see another land taken and transformed. Most High Elves remain content within Torch, but those with greater ambition sometimes leave the sands to pursue outside interests, often of an illicit kind.`,
+            "High Elven society values long life, wealth, control, and the ability to delegate labor. Their aesthetic is simple, geometric, and monumental, with precious-metal colors displayed as signs of rarity and status. Those who insist upon doing things for themselves are often regarded as crude, eccentric, or even opposed to the Inflictor's ideal. Some such Elves were cast out and now live in darkness beneath the sands or among neighboring lands. Other distant Elven branches are said to have left Torch long ago. Some descendants now dwell largely underground and are occasionally seen at the night carnivals of Loop, where a few become performers, though this is only one path among many. The Forest Elves of Kettle are likewise said to descend from High Elves drawn away by the jealous Ravager, who wished to see another land taken and transformed. Most High Elves remain content within Torch, but those with greater ambition sometimes leave the sands to pursue outside interests, often of an illicit kind.",
 
         notes: [
             "Radiant Reach is the seat of High Elven power in Torch.",
@@ -355,22 +353,22 @@ const kingdoms = [
             "The Banisher",
 
         land:
-            `Crook is a kingdom of broad grasslands, rough fields, treacherous wetlands, deep mines, and wild open country beneath dangerous skies. Palisade-protected villages dot the countryside, many of them built near or directly above mines of Dark Dragon Coal. The fires used to burn this black fuel can often be seen glowing upon the distant horizon, and travelers use the smoke and furnace-light as landmarks when navigating the open country. The land is also scattered with enormous ruins believed to be the remains of a lost tribe of Giants. Sheepfold, the seat of the Gray Shepherd, is a great fortress surrounded by treacherous and devouring marshlands. Some survivors of Plume fled into Crook following the destruction of their kingdom.`,
+            "Crook is a kingdom of broad grasslands, rough fields, treacherous wetlands, deep mines, and wild open country beneath dangerous skies. Palisade-protected villages dot the countryside, many of them built near or directly above mines of Dark Dragon Coal. The fires used to burn this black fuel can often be seen glowing upon the distant horizon, and travelers use the smoke and furnace-light as landmarks when navigating the open country. The land is also scattered with enormous ruins believed to be the remains of a lost tribe of Giants. Sheepfold, the seat of the Gray Shepherd, is a great fortress surrounded by treacherous and devouring marshlands. Some survivors of Plume fled into Crook following the destruction of their kingdom.",
 
         faith:
-            `Crook is kept by the Banisher, Master of Skies. The Banisher is associated with wrath, force, eradication, and the proper departure of what must be removed. Wanderers who show little fear of the beasts and dangers of Crook often become terrified when speaking of the land itself and especially of the Banisher.`,
+            "Crook is kept by the Banisher, Master of Skies. The Banisher is associated with wrath, force, eradication, and the proper departure of what must be removed. Wanderers who show little fear of the beasts and dangers of Crook often become terrified when speaking of the land itself and especially of the Banisher.",
 
         achievements:
-            `The people of Crook have learned to survive in a land where little can afford to be wasted. Livestock are used for far more than food and labor. Hide, bone, horn, sinew, teeth, hooves, and other remains of beasts of burden are worked into homes, tools, furniture, containers, fittings, weapons, and everyday goods. Crook is also well known for practical medicines used to treat the parasites common among livestock, travelers, miners, and those living near the kingdom's marshes.`,
+            "The people of Crook have learned to survive in a land where little can afford to be wasted. Livestock are used for far more than food and labor. Hide, bone, horn, sinew, teeth, hooves, and other remains of beasts of burden are worked into homes, tools, furniture, containers, fittings, weapons, and everyday goods. Crook is also well known for practical medicines used to treat the parasites common among livestock, travelers, miners, and those living near the kingdom's marshes.",
 
         politics:
-            `Crook is ruled from Sheepfold by the Gray Shepherd, King Olean Peele. He is said to have been personally chosen by Ozyleme himself to tend the kingdom and has ruled Crook for more than ten yearturns. The title of Shepherd King remains associated with the ruler of Crook, while Olean Peele is commonly called the Gray Shepherd.`,
+            "Crook is ruled from Sheepfold by the Gray Shepherd, King Olean Peele. He is said to have been personally chosen by Ozyleme himself to tend the kingdom and has ruled Crook for more than ten yearturns. The title of Shepherd King remains associated with the ruler of Crook, while Olean Peele is commonly called the Gray Shepherd.",
 
         economics:
-            `Livestock and hardy root vegetables form the foundation of Crook's trade. Herd animals are raised throughout the safer grasslands, while root crops are cultivated in soil capable of surviving the kingdom's difficult conditions. Medicines for worms, parasites, and other infestations are another valued export. Dark Dragon Coal is mined beneath many settlements and burned throughout the kingdom. Crook's culture of using nearly every part of its animals also supports a trade in bone, horn, hide, sinew, and goods crafted from them.`,
+            "Livestock and hardy root vegetables form the foundation of Crook's trade. Herd animals are raised throughout the safer grasslands, while root crops are cultivated in soil capable of surviving the kingdom's difficult conditions. Medicines for worms, parasites, and other infestations are another valued export. Dark Dragon Coal is mined beneath many settlements and burned throughout the kingdom. Crook's culture of using nearly every part of its animals also supports a trade in bone, horn, hide, sinew, and goods crafted from them.",
 
         society:
-            `Humans form much of Crook's settled population and commonly live within fortified villages surrounded by heavy wooden palisades. Feral Halfling communities inhabit the grasslands and wild places beyond them. According to old Crook legend, the Halflings descend from a lost tribe of Giants who committed some forgotten misdeed and were struck into quarters for their crimes, leaving their scattered descendants diminished and feral. Whether the story is history, religious warning, or merely an old insult has been lost. Wanderers are also occasionally seen crossing Crook's fields alone or in ragged groups. They appear to exist in a perpetual state of madness, speaking in fragments, warnings, and half-remembered stories. Strangely, the creatures of Crook tend to leave them alone. Wanderers may know secrets concerning forgotten roads, hidden places, buried entrances, and ruins no longer marked upon any map.`,
+            "Humans form much of Crook's settled population and commonly live within fortified villages surrounded by heavy wooden palisades. Feral Halfling communities inhabit the grasslands and wild places beyond them. According to old Crook legend, the Halflings descend from a lost tribe of Giants who committed some forgotten misdeed and were struck into quarters for their crimes, leaving their scattered descendants diminished and feral. Whether the story is history, religious warning, or merely an old insult has been lost. Wanderers are also occasionally seen crossing Crook's fields alone or in ragged groups. They appear to exist in a perpetual state of madness, speaking in fragments, warnings, and half-remembered stories. Strangely, the creatures of Crook tend to leave them alone. Wanderers may know secrets concerning forgotten roads, hidden places, buried entrances, and ruins no longer marked upon any map.",
 
         notes: [
             "Sheepfold is the fortified seat of power in Crook.",
@@ -391,3 +389,13 @@ const kingdoms = [
     }
 
 ];
+
+
+/* =========================================================
+   EXPOSE KINGDOM DATA TO kingdoms.html
+   ========================================================= */
+
+if (typeof window !== "undefined") {
+    window.kingdoms = kingdoms;
+    window.loreKeeper = loreKeeper;
+}
