@@ -345,7 +345,7 @@ const kingdoms = [
             "The Banisher",
 
         land:
-            "Crook is a kingdom of broad grasslands, rough fields, treacherous wetlands, deep mines, and wild open country beneath dangerous skies. Palisade-protected villages dot the countryside, many of them built near or directly above mines of Dark Dragon Coal. The fires used to burn this black fuel can often be seen glowing upon the distant horizon, and travelers use the smoke and furnace-light as landmarks when navigating the open country. The land is also scattered with enormous ruins believed to be the remains of a lost tribe of Giants. Sheepfold, the seat of the Gray Shepherd, is a great fortress surrounded by treacherous and devouring marshlands. Some survivors of Plume fled into Crook following the destruction of their kingdom.",
+            "Crook is a kingdom of broad grasslands, rough fields, treacherous wetlands, deep mines, and wild open country beneath dangerous skies. Palisade-protected villages dot the countryside, many built near or above mines of Dark Dragon Coal. The fires used to burn this black fuel can often be seen glowing upon the distant horizon, and travelers use the smoke and furnace-light as landmarks when navigating the open country. The land is also scattered with enormous ruins believed to be the remains of a lost tribe of Giants. Sheepfold, the seat of the Gray Shepherd, is a great fortress surrounded by treacherous and devouring marshlands. Some survivors of Plume fled into Crook following the destruction of their kingdom.",
 
         faith:
             "Crook is kept by the Banisher, Master of Skies. The Banisher is associated with wrath, force, eradication, and the proper departure of what must be removed. Wanderers who show little fear of the beasts and dangers of Crook often become terrified when speaking of the land itself and especially of the Banisher.",
@@ -357,7 +357,7 @@ const kingdoms = [
             "Crook is ruled from Sheepfold by the Gray Shepherd, King Olean Peele. He is said to have been personally chosen by Ozyleme himself to tend the kingdom and has ruled Crook for more than ten yearturns. The title of Shepherd King remains associated with the ruler of Crook, while Olean Peele is commonly called the Gray Shepherd.",
 
         economics:
-            "Livestock and hardy root vegetables form the foundation of Crook's trade. Herd animals are raised throughout the safer grasslands, while root crops are cultivated in soil capable of surviving the kingdom's difficult conditions. Medicines for worms, parasites, and other infestations are another valued export. Dark Dragon Coal is mined beneath many settlements and burned throughout the kingdom. Crook's culture of using nearly every part of its animals also supports a trade in bone, horn, hide, sinew, and goods crafted from them.",
+            "Livestock and hardy root vegetables form the foundation of Crook's trade. Herd animals are raised throughout the safer grasslands, while root crops are cultivated wherever the soil can support them. Medicines for worms, parasites, and other infestations are another valued export. Dark Dragon Coal is mined beneath many settlements and burned throughout the kingdom. Crook's culture of using nearly every part of its animals also supports a trade in bone, horn, hide, sinew, and goods crafted from them.",
 
         society:
             "Humans form much of Crook's settled population and commonly live within fortified villages surrounded by heavy wooden palisades. Feral Halfling communities inhabit the grasslands and wild places beyond them. According to old Crook legend, the Halflings descend from a lost tribe of Giants who committed some forgotten misdeed and were struck into quarters for their crimes, leaving their scattered descendants diminished and feral. Whether the story is history, religious warning, or merely an old insult has been lost. Wanderers are also occasionally seen crossing Crook's fields alone or in ragged groups. They appear to exist in a perpetual state of madness, speaking in fragments, warnings, and half-remembered stories. Strangely, the creatures of Crook tend to leave them alone. Wanderers may know secrets concerning forgotten roads, hidden places, buried entrances, and ruins no longer marked upon any map.",
@@ -367,7 +367,6 @@ const kingdoms = [
             "The Gray Shepherd is King Olean Peele.",
             "King Olean Peele is said to have been chosen by Ozyleme himself.",
             "Olean Peele has ruled for more than ten yearturns.",
-            "The ruler of Crook is traditionally associated with the title Shepherd King.",
             "Wanderers are commonly regarded as mad, yet may possess knowledge of hidden places.",
             "The creatures of Crook strangely tend to leave Wanderers alone.",
             "Wanderers show a particular fear of the Banisher.",
@@ -381,3 +380,4 @@ const kingdoms = [
     }
 
 ];
+``` [❶](code://python)
