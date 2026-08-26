@@ -1,4 +1,5 @@
-/* =========================================================
+
+ =========================================================
    OZYLEME — KINGDOM DATA
    =========================================================
    This is the only file that should normally be edited
@@ -336,34 +337,47 @@ const kingdoms = [
             "Beneath the open sky, the flock survives.",
 
         seat:
-            loreKeeper,
+            "Sheepfold",
 
         sovereign:
-            "The Shepherd King",
+            "The Gray Shepherd, King Olean Peele",
 
         keeper:
             "The Banisher",
 
         land:
-            "Crook contains broad grasslands, wetlands, and wild open country beneath dangerous skies. Some survivors of Plume fled into these lands after the destruction of their kingdom.",
+            "Crook is a kingdom of broad grasslands, rough fields, treacherous wetlands, deep mines, and wild open country beneath dangerous skies. Palisade-protected villages dot the countryside, many of them built near or directly above mines of Dark Dragon Coal. The fires used to burn this black fuel can often be seen glowing upon the distant horizon, and travelers use the smoke and furnace-light as landmarks when navigating the open country. The land is also scattered with enormous ruins believed to be the remains of a lost tribe of Giants. Sheepfold, the seat of the Gray Shepherd, is a great fortress surrounded by treacherous and devouring marshlands. Some survivors of Plume fled into Crook following the destruction of their kingdom.",
 
         faith:
-            "Crook is kept by the Banisher, Master of Skies. The Banisher is associated with wrath, force, eradication, and the proper departure of what must be removed.",
+            "Crook is kept by the Banisher, Master of Skies. The Banisher is associated with wrath, force, eradication, and the proper departure of what must be removed. Wanderers who show little fear of the beasts and dangers of Crook often become terrified when speaking of the land itself and especially of the Banisher.",
 
         achievements:
-            loreKeeper,
+            "The people of Crook have learned to survive in a land where little can afford to be wasted. Livestock are used for far more than food and labor. Hide, bone, horn, sinew, teeth, hooves, and other remains of beasts of burden are worked into homes, tools, furniture, containers, fittings, weapons, and everyday goods. Crook is also well known for practical medicines used to treat the parasites common among livestock, travelers, miners, and those living near the kingdom's marshes.",
 
         politics:
-            "Crook is ruled by the Shepherd King. The Lore Keeper has not yet recorded how the Shepherd King is chosen or how succession occurs.",
+            "Crook is ruled from Sheepfold by the Gray Shepherd, King Olean Peele. He is said to have been personally chosen by Ozyleme himself to tend the kingdom and has ruled Crook for more than ten yearturns. The title of Shepherd King remains associated with the ruler of Crook, while Olean Peele is commonly called the Gray Shepherd.",
 
         economics:
-            loreKeeper,
+            "Livestock and hardy root vegetables form the foundation of Crook's trade. Herd animals are raised throughout the safer grasslands, while root crops are cultivated in soil capable of surviving the kingdom's difficult conditions. Medicines for worms, parasites, and other infestations are another valued export. Dark Dragon Coal is mined beneath many settlements and burned throughout the kingdom. Crook's culture of using nearly every part of its animals also supports a trade in bone, horn, hide, sinew, and goods crafted from them.",
 
         society:
-            "Humans form much of Crook's population, while feral Halfling communities inhabit its grasslands and wild places. These Halflings have adapted to a harsher existence than outsiders often expect, with some living in savage bands shaped by hunger, territorial survival, and the dangers of open country.",
+            "Humans form much of Crook's settled population and commonly live within fortified villages surrounded by heavy wooden palisades. Feral Halfling communities inhabit the grasslands and wild places beyond them. According to old Crook legend, the Halflings descend from a lost tribe of Giants who committed some forgotten misdeed and were struck into quarters for their crimes, leaving their scattered descendants diminished and feral. Whether the story is history, religious warning, or merely an old insult has been lost. Wanderers are also occasionally seen crossing Crook's fields alone or in ragged groups. They appear to exist in a perpetual state of madness, speaking in fragments, warnings, and half-remembered stories. Strangely, the creatures of Crook tend to leave them alone. Wanderers may know secrets concerning forgotten roads, hidden places, buried entrances, and ruins no longer marked upon any map.",
 
         notes: [
-            "Crook is ruled by the Shepherd King."
+            "Sheepfold is the fortified seat of power in Crook.",
+            "The Gray Shepherd is King Olean Peele.",
+            "King Olean Peele is said to have been chosen by Ozyleme himself.",
+            "Olean Peele has ruled for more than ten yearturns.",
+            "The ruler of Crook is traditionally associated with the title Shepherd King.",
+            "Wanderers are commonly regarded as mad, yet may possess knowledge of hidden places.",
+            "The creatures of Crook strangely tend to leave Wanderers alone.",
+            "Wanderers show a particular fear of the Banisher.",
+            "Crook's countryside contains ruins attributed to a lost Giant tribe.",
+            "Old legend claims the feral Halflings descend from Giants who were struck into quarters.",
+            "Many palisade villages are connected to mines of Dark Dragon Coal.",
+            "The glow of burning Dark Dragon Coal is used as a landmark by travelers.",
+            "Livestock and root vegetables are among Crook's primary exports.",
+            "Crook is known for medicines used against parasites."
         ]
     }
 
