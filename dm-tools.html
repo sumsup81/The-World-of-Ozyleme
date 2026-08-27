@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>DM Utilities | Ozyleme</title>
+
+    <link rel="stylesheet" href="style.css">
+
+
+    <!-- =========================================
+         DM TOOLS PAGE STYLES
+         These affect only this page.
+         ========================================= -->
+
+    <style>
+
+        .dm-tools-main {
+            width: min(1100px, 92%);
+            margin: 0 auto;
+            padding: 2rem 0 4rem;
+        }
+
+
+        .dm-tools-intro,
+        .dm-tool-panel {
+
+            background: rgba(26, 25, 22, .92);
+
+            border: 1px solid #5b3a32;
+
+            padding: 1.4rem;
+
+            margin-bottom: 1.5rem;
+        }
+
+
+        .dm-tools-intro {
+            text-align: center;
+        }
+
+
+        .dm-tools-intro h2,
+        .dm-tool-panel h2,
+        .dm-tool-panel h3 {
+
+            color: #d8d0bc;
+        }
+
+
+        .dm-tools-kicker {
+
+            letter-spacing: .18em;
+
+            text-transform: uppercase;
+
+            font-size: .75rem;
+
+            opacity: .7;
+        }
+
+
+        /* =========================================
+           TOOL LAYOUT
+           ========================================= */
+
+        .tool-columns {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1.2fr;
+
+            gap: 1rem;
+        }
+
+
+        .tool-box {
+
+            border: 1px solid #47342e;
+
+            padding: 1rem;
+
+            background: rgba(0, 0, 0, .12);
+        }
+
+
+        /* =========================================
+           PARTY / ENEMY ROWS
+           ========================================= */
+
+        .party-row,
+        .enemy-row {
+
+            display: grid;
+
+            gap: .65rem;
+
+            align-items: end;
+
+            margin-bottom: .75rem;
+
+            padding: .75rem;
+
+            border-bottom: 1px solid rgba(216, 208, 188, .14);
+        }
+
+
+        .party-row {
+
+            grid-template-columns:
+                1fr
+                1fr
+                auto;
+        }
+
+
+        .enemy-row {
+
+            grid-template-columns:
+                1.5fr
+                1fr
+                .8fr
+                auto;
+        }
+
+
+        /* =========================================
+           INPUTS
+           ========================================= */
+
+        .dm-tools-page label {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: .3rem;
+
+            font-size: .84rem;
+        }
+
+
+        .dm-tools-page input,
+        .dm-tools-page select {
+
+            width: 100%;
+
+            box-sizing: border-box;
+
+            background: #11110f;
+
+            color: #e2dac7;
+
+            border: 1px solid #65483e;
+
+            padding: .7rem;
+
+            font: inherit;
+        }
+
+
+        /* =========================================
+           BUTTONS
+           ========================================= */
+
+        .dm-tools-page button {
+
+            background: #2a211d;
+
+            color: #e2dac7;
+
+            border: 1px solid #755044;
+
+            padding: .7rem 1rem;
+
+            font: inherit;
+
+            cursor: pointer;
+        }
+
+
+        .dm-tools-page button:hover {
+
+            background: #382a25;
+        }
+
+
+        .row-remove {
+
+            padding: .66rem .8rem;
+        }
+
+
+        .tool-actions {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: .7rem;
+
+            margin-top: 1rem;
+        }
+
+
+        .primary-action {
+
+            font-weight: 700;
+        }
+
+
+        /* =========================================
+           RESULTS
+           ========================================= */
+
+        .results {
+
+            margin-top: 1.4rem;
+
+            border-top: 1px solid #5b3a32;
+
+            padding-top: 1.2rem;
+        }
+
+
+        .result-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: .75rem;
+        }
+
+
+        .result-card {
+
+            border: 1px solid #47342e;
+
+            padding: .9rem;
+
+            text-align: center;
+
+            background: rgba(0, 0, 0, .12);
+        }
+
+
+        .result-label {
+
+            display: block;
+
+            font-size: .75rem;
+
+            letter-spacing: .08em;
+
+            text-transform: uppercase;
+
+            opacity: .7;
+
+            margin-bottom: .3rem;
+        }
+
+
+        .result-value {
+
+            font-size: 1.35rem;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================================
+           DIFFICULTY RESULT
+           ========================================= */
+
+        .difficulty-banner {
+
+            margin-top: .9rem;
+
+            padding: 1rem;
+
+            border: 1px solid #755044;
+
+            text-align: center;
+        }
+
+
+        .difficulty-banner strong {
+
+            font-size: 1.35rem;
+        }
+
+
+        /* =========================================
+           WARNINGS
+           ========================================= */
+
+        .warnings {
+
+            margin-top: 1rem;
+
+            padding: .9rem 1rem;
+
+            border-left: 3px solid #755044;
+
+            background: rgba(0, 0, 0, .12);
+        }
+
+
+        .warnings ul {
+
+            margin: .5rem 0 0 1.25rem;
+
+            padding: 0;
+        }
+
+
+        .empty-note {
+
+            opacity: .65;
+
+            font-style: italic;
+        }
+
+
+        /* =========================================
+           VERSION
+           ========================================= */
+
+        .version-mark {
+
+            text-align: center;
+
+            opacity: .45;
+
+            font-size: .75rem;
+
+            margin-top: 2rem;
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 800px) {
+
+            .tool-columns {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .enemy-row {
+
+                grid-template-columns:
+                    1fr
+                    1fr;
+            }
+
+
+            .enemy-row .enemy-name-field {
+
+                grid-column: 1 / -1;
+            }
+
+
+            .party-row {
+
+                grid-template-columns:
+                    1fr
+                    1fr;
+            }
+
+
+            .result-grid {
+
+                grid-template-columns:
+                    1fr
+                    1fr;
+            }
+
+        }
+
+
+        @media (max-width: 520px) {
+
+            .enemy-row,
+            .party-row,
+            .result-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .enemy-row .enemy-name-field {
+
+                grid-column: auto;
+            }
+
+
+            .row-remove {
+
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body class="dm-tools-page">
+
+
+<!-- =========================================
+     HEADER
+     ========================================= -->
+
+<header>
+
+    <h1></h1>
+
+    <p>
+        Tools Kept Beyond the Player's Eye
+    </p>
+
+</header>
+
+
+<!-- =========================================
+     NORMAL OZYLEME NAVIGATION
+
+     DM Tools is intentionally NOT listed here.
+     ========================================= -->
+
+<nav class="site-nav">
+
+    <a class="nav-link"
+       href="index.html">
+        Home
+    </a>
+
+    <a class="nav-link"
+       href="kingdoms.html">
+        Kingdoms
+    </a>
+
+    <a class="nav-link"
+       href="species.html">
+        Species
+    </a>
+
+    <a class="nav-link"
+       href="people.html">
+        People
+    </a>
+
+    <a class="nav-link"
+       href="gods.html">
+        Gods
+    </a>
+
+    <a class="nav-link"
+       href="bestiary.html">
+        Bestiary
+    </a>
+
+    <a class="nav-link"
+       href="classes.html">
+        Classes
+    </a>
+
+    <a class="nav-link"
+       href="player-guide.html">
+        Player Guide
+    </a>
+
+</nav>
+
+
+<!-- =========================================
+     MAIN
+     ========================================= -->
+
+<main class="dm-tools-main">
+
+
+    <!-- =====================================
+         INTRODUCTION
+         ===================================== -->
+
+    <section class="dm-tools-intro">
+
+        <div class="dm-tools-kicker">
+            Dungeon Master's Utility Page
+        </div>
+
+        <h2>
+            The Lore Keeper's Cabinet
+        </h2>
+
+        <p>
+            Calculators, generators, and other instruments
+            for things the players are better off not seeing.
+        </p>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- =====================================
+         COMBAT CALCULATOR
+         ===================================== -->
+
+    <section class="dm-tool-panel"
+             id="combat-calculator">
+
+
+        <h2>
+            Combat Calculator
+        </h2>
+
+
+        <p>
+            Build a party and opposition below.
+            The calculator uses the 2024 / 5.5e
+            Low, Moderate, and High XP encounter budgets.
+        </p>
+
+
+        <div class="tool-columns">
+
+
+            <!-- =============================
+                 PARTY
+                 ============================= -->
+
+            <div class="tool-box">
+
+                <h3>
+                    Adventurers
+                </h3>
+
+                <p class="empty-note">
+                    Use multiple rows if the party contains
+                    characters of different levels.
+                </p>
+
+
+                <div id="partyRows"></div>
+
+
+                <button type="button"
+                        id="addPartyGroup">
+
+                    + Add Level Group
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =============================
+                 ENEMIES
+                 ============================= -->
+
+            <div class="tool-box">
+
+                <h3>
+                    Opposition
+                </h3>
+
+                <p class="empty-note">
+                    Creature names are optional.
+                    CR automatically supplies the creature's XP value.
+                </p>
+
+
+                <div id="enemyRows"></div>
+
+
+                <button type="button"
+                        id="addEnemy">
+
+                    + Add Creature
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =============================
+             ACTION BUTTONS
+             ============================= -->
+
+        <div class="tool-actions">
+
+            <button type="button"
+                    class="primary-action"
+                    id="calculateEncounter">
+
+                Calculate Encounter
+
+            </button>
+
+
+            <button type="button"
+                    id="resetEncounter">
+
+                Reset
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =============================
+             RESULTS
+             ============================= -->
+
+        <div class="results"
+             id="combatResults"
+             aria-live="polite">
+
+
+            <div class="result-grid">
+
+
+                <div class="result-card">
+
+                    <span class="result-label">
+                        Party Size
+                    </span>
+
+                    <span class="result-value"
+                          id="partySizeResult">
+
+                        —
+
+                    </span>
+
+                </div>
+
+
+
+                <div class="result-card">
+
+                    <span class="result-label">
+                        Enemy XP
+                    </span>
+
+                    <span class="result-value"
+                          id="enemyXpResult">
+
+                        —
+
+                    </span>
+
+                </div>
+
+
+
+                <div class="result-card">
+
+                    <span class="result-label">
+                        Low Budget
+                    </span>
+
+                    <span class="result-value"
+                          id="lowBudgetResult">
+
+                        —
+
+                    </span>
+
+                </div>
+
+
+
+                <div class="result-card">
+
+                    <span class="result-label">
+                        Moderate Budget
+                    </span>
+
+                    <span class="result-value"
+                          id="moderateBudgetResult">
+
+                        —
+
+                    </span>
+
+                </div>
+
+
+
+                <div class="result-card">
+
+                    <span class="result-label">
+                        High Budget
+                    </span>
+
+                    <span class="result-value"
+                          id="highBudgetResult">
+
+                        —
+
+                    </span>
+
+                </div>
+
+
+
+                <div class="result-card">
+
+                    <span class="result-label">
+                        Enemy Count
+                    </span>
+
+                    <span class="result-value"
+                          id="enemyCountResult">
+
+                        —
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =============================
+                 DIFFICULTY
+                 ============================= -->
+
+            <div class="difficulty-banner"
+                 id="difficultyBanner">
+
+
+                <span class="result-label">
+                    Encounter Difficulty
+                </span>
+
+
+                <strong id="difficultyResult">
+
+                    Not Calculated
+
+                </strong>
+
+
+                <div id="difficultyDetail"></div>
+
+
+            </div>
+
+
+
+            <!-- =============================
+                 WARNINGS
+                 ============================= -->
+
+            <div class="warnings"
+                 id="combatWarnings"
+                 hidden>
+
+
+                <strong>
+                    DM Warnings
+                </strong>
+
+
+                <ul id="warningList"></ul>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =====================================
+         VERSION
+         ===================================== -->
+
+    <p class="version-mark">
+        Version .00001
+    </p>
+
+
+</main>
+
+
+
+<!-- =========================================
+     COMBAT CALCULATOR JAVASCRIPT
+     ========================================= -->
+
+<script>
+
+
+/* ===========================================
+   2024 / 5.5e XP BUDGETS PER CHARACTER
+   =========================================== */
+
+const XP_BUDGETS = {
+
+    1:  { low: 50,   moderate: 75,    high: 100 },
+    2:  { low: 100,  moderate: 150,   high: 200 },
+    3:  { low: 150,  moderate: 225,   high: 400 },
+    4:  { low: 250,  moderate: 375,   high: 500 },
+    5:  { low: 500,  moderate: 750,   high: 1100 },
+    6:  { low: 600,  moderate: 1000,  high: 1400 },
+    7:  { low: 750,  moderate: 1300,  high: 1700 },
+    8:  { low: 1000, moderate: 1700,  high: 2100 },
+    9:  { low: 1300, moderate: 2000,  high: 2600 },
+    10: { low: 1600, moderate: 2300,  high: 3100 },
+    11: { low: 1900, moderate: 2900,  high: 4100 },
+    12: { low: 2200, moderate: 3700,  high: 4700 },
+    13: { low: 2600, moderate: 4200,  high: 5400 },
+    14: { low: 2900, moderate: 4900,  high: 6200 },
+    15: { low: 3300, moderate: 5400,  high: 7800 },
+    16: { low: 3800, moderate: 6100,  high: 9800 },
+    17: { low: 4500, moderate: 7200,  high: 11700 },
+    18: { low: 5000, moderate: 8700,  high: 14200 },
+    19: { low: 5500, moderate: 10700, high: 17200 },
+    20: { low: 6400, moderate: 13200, high: 22000 }
+
+};
+
+
+
+/* ===========================================
+   CHALLENGE RATING XP VALUES
+   =========================================== */
+
+const CR_OPTIONS = [
+
+    {
+        key: "0-0",
+        label: "0 — 0 XP",
+        cr: 0,
+        xp: 0
+    },
+
+    {
+        key: "0-10",
+        label: "0 — 10 XP",
+        cr: 0,
+        xp: 10
+    },
+
+    {
+        key: "1/8",
+        label: "1/8 — 25 XP",
+        cr: .125,
+        xp: 25
+    },
+
+    {
+        key: "1/4",
+        label: "1/4 — 50 XP",
+        cr: .25,
+        xp: 50
+    },
+
+    {
+        key: "1/2",
+        label: "1/2 — 100 XP",
+        cr: .5,
+        xp: 100
+    },
+
+    { key: "1",  label: "1 — 200 XP",      cr: 1,  xp: 200 },
+    { key: "2",  label: "2 — 450 XP",      cr: 2,  xp: 450 },
+    { key: "3",  label: "3 — 700 XP",      cr: 3,  xp: 700 },
+    { key: "4",  label: "4 — 1,100 XP",    cr: 4,  xp: 1100 },
+    { key: "5",  label: "5 — 1,800 XP",    cr: 5,  xp: 1800 },
+    { key: "6",  label: "6 — 2,300 XP",    cr: 6,  xp: 2300 },
+    { key: "7",  label: "7 — 2,900 XP",    cr: 7,  xp: 2900 },
+    { key: "8",  label: "8 — 3,900 XP",    cr: 8,  xp: 3900 },
+    { key: "9",  label: "9 — 5,000 XP",    cr: 9,  xp: 5000 },
+    { key: "10", label: "10 — 5,900 XP",   cr: 10, xp: 5900 },
+    { key: "11", label: "11 — 7,200 XP",   cr: 11, xp: 7200 },
+    { key: "12", label: "12 — 8,400 XP",   cr: 12, xp: 8400 },
+    { key: "13", label: "13 — 10,000 XP",  cr: 13, xp: 10000 },
+    { key: "14", label: "14 — 11,500 XP",  cr: 14, xp: 11500 },
+    { key: "15", label: "15 — 13,000 XP",  cr: 15, xp: 13000 },
+    { key: "16", label: "16 — 15,000 XP",  cr: 16, xp: 15000 },
+    { key: "17", label: "17 — 18,000 XP",  cr: 17, xp: 18000 },
+    { key: "18", label: "18 — 20,000 XP",  cr: 18, xp: 20000 },
+    { key: "19", label: "19 — 22,000 XP",  cr: 19, xp: 22000 },
+    { key: "20", label: "20 — 25,000 XP",  cr: 20, xp: 25000 },
+    { key: "21", label: "21 — 33,000 XP",  cr: 21, xp: 33000 },
+    { key: "22", label: "22 — 41,000 XP",  cr: 22, xp: 41000 },
+    { key: "23", label: "23 — 50,000 XP",  cr: 23, xp: 50000 },
+    { key: "24", label: "24 — 62,000 XP",  cr: 24, xp: 62000 },
+    { key: "25", label: "25 — 75,000 XP",  cr: 25, xp: 75000 },
+    { key: "26", label: "26 — 90,000 XP",  cr: 26, xp: 90000 },
+    { key: "27", label: "27 — 105,000 XP", cr: 27, xp: 105000 },
+    { key: "28", label: "28 — 120,000 XP", cr: 28, xp: 120000 },
+    { key: "29", label: "29 — 135,000 XP", cr: 29, xp: 135000 },
+    { key: "30", label: "30 — 155,000 XP", cr: 30, xp: 155000 }
+
+];
+
+
+
+/* ===========================================
+   PAGE ELEMENTS
+   =========================================== */
+
+const partyRows =
+    document.getElementById("partyRows");
+
+const enemyRows =
+    document.getElementById("enemyRows");
+
+
+
+/* ===========================================
+   BUILD LEVEL DROPDOWN
+   =========================================== */
+
+function levelOptions(selected = 5) {
+
+    return Array
+        .from(
+            { length: 20 },
+            (_, i) => i + 1
+        )
+        .map(level =>
+
+            `
+            <option
+                value="${level}"
+                ${level === selected ? "selected" : ""}>
+
+                Level ${level}
+
+            </option>
+            `
+
+        )
+        .join("");
+
+}
+
+
+
+/* ===========================================
+   BUILD CR DROPDOWN
+   =========================================== */
+
+function crOptions(selected = "5") {
+
+    return CR_OPTIONS
+        .map(item =>
+
+            `
+            <option
+                value="${item.key}"
+                ${item.key === selected ? "selected" : ""}>
+
+                ${item.label}
+
+            </option>
+            `
+
+        )
+        .join("");
+
+}
+
+
+
+/* ===========================================
+   ADD PARTY GROUP
+   =========================================== */
+
+function addPartyRow(
+    level = 5,
+    count = 4
+) {
+
+    const row =
+        document.createElement("div");
+
+
+    row.className =
+        "party-row";
+
+
+    row.innerHTML = `
+
+        <label>
+
+            Level
+
+            <select class="party-level">
+
+                ${levelOptions(level)}
+
+            </select>
+
+        </label>
+
+
+        <label>
+
+            Characters
+
+            <input
+                class="party-count"
+                type="number"
+                min="1"
+                max="20"
+                value="${count}">
+
+        </label>
+
+
+        <button
+            type="button"
+            class="row-remove"
+            aria-label="Remove party group">
+
+            Remove
+
+        </button>
+
+    `;
+
+
+    row
+        .querySelector(".row-remove")
+        .addEventListener(
+            "click",
+            () => {
+
+                row.remove();
+
+                calculateEncounter();
+
+            }
+        );
+
+
+    partyRows.appendChild(row);
+
+}
+
+
+
+/* ===========================================
+   ADD ENEMY
+   =========================================== */
+
+function addEnemyRow(
+    name = "",
+    cr = "5",
+    count = 1
+) {
+
+    const row =
+        document.createElement("div");
+
+
+    row.className =
+        "enemy-row";
+
+
+    row.innerHTML = `
+
+        <label class="enemy-name-field">
+
+            Creature
+
+            <input
+                class="enemy-name"
+                type="text"
+                placeholder="Optional name"
+                value="${name}">
+
+        </label>
+
+
+        <label>
+
+            Challenge Rating
+
+            <select class="enemy-cr">
+
+                ${crOptions(cr)}
+
+            </select>
+
+        </label>
+
+
+        <label>
+
+            Count
+
+            <input
+                class="enemy-count"
+                type="number"
+                min="1"
+                max="100"
+                value="${count}">
+
+        </label>
+
+
+        <button
+            type="button"
+            class="row-remove"
+            aria-label="Remove creature">
+
+            Remove
+
+        </button>
+
+    `;
+
+
+    row
+        .querySelector(".row-remove")
+        .addEventListener(
+            "click",
+            () => {
+
+                row.remove();
+
+                calculateEncounter();
+
+            }
+        );
+
+
+    enemyRows.appendChild(row);
+
+}
+
+
+
+/* ===========================================
+   NUMBER FORMATTING
+   =========================================== */
+
+function formatNumber(value) {
+
+    return Number(value)
+        .toLocaleString("en-US");
+
+}
+
+
+
+/* ===========================================
+   CALCULATE ENCOUNTER
+   =========================================== */
+
+function calculateEncounter() {
+
+
+    /* ---------------------------------------
+       PARTY TOTALS
+       --------------------------------------- */
+
+    let partyCount = 0;
+
+    let low = 0;
+
+    let moderate = 0;
+
+    let high = 0;
+
+    let lowestLevel = 20;
+
+    let highestLevel = 0;
+
+
+
+    document
+        .querySelectorAll(".party-row")
+        .forEach(row => {
+
+
+            const level =
+                Number(
+                    row
+                        .querySelector(".party-level")
+                        .value
+                );
+
+
+            const count =
+                Math.max(
+                    0,
+                    Number(
+                        row
+                            .querySelector(".party-count")
+                            .value
+                    ) || 0
+                );
+
+
+            if (count > 0) {
+
+
+                partyCount += count;
+
+
+                low +=
+                    XP_BUDGETS[level].low *
+                    count;
+
+
+                moderate +=
+                    XP_BUDGETS[level].moderate *
+                    count;
+
+
+                high +=
+                    XP_BUDGETS[level].high *
+                    count;
+
+
+                lowestLevel =
+                    Math.min(
+                        lowestLevel,
+                        level
+                    );
+
+
+                highestLevel =
+                    Math.max(
+                        highestLevel,
+                        level
+                    );
+
+            }
+
+        });
+
+
+
+    /* ---------------------------------------
+       ENEMY TOTALS
+       --------------------------------------- */
+
+    let enemyXp = 0;
+
+    let enemyCount = 0;
+
+    let highestCR = 0;
+
+
+
+    document
+        .querySelectorAll(".enemy-row")
+        .forEach(row => {
+
+
+            const key =
+                row
+                    .querySelector(".enemy-cr")
+                    .value;
+
+
+            const count =
+                Math.max(
+                    0,
+                    Number(
+                        row
+                            .querySelector(".enemy-count")
+                            .value
+                    ) || 0
+                );
+
+
+            const creature =
+                CR_OPTIONS.find(
+                    item =>
+                        item.key === key
+                );
+
+
+            if (
+                creature &&
+                count > 0
+            ) {
+
+
+                enemyXp +=
+                    creature.xp *
+                    count;
+
+
+                enemyCount +=
+                    count;
+
+
+                highestCR =
+                    Math.max(
+                        highestCR,
+                        creature.cr
+                    );
+
+            }
+
+        });
+
+
+
+    /* ---------------------------------------
+       DISPLAY NUMBERS
+       --------------------------------------- */
+
+    document
+        .getElementById("partySizeResult")
+        .textContent =
+            formatNumber(partyCount);
+
+
+    document
+        .getElementById("enemyXpResult")
+        .textContent =
+            formatNumber(enemyXp);
+
+
+    document
+        .getElementById("lowBudgetResult")
+        .textContent =
+            formatNumber(low);
+
+
+    document
+        .getElementById("moderateBudgetResult")
+        .textContent =
+            formatNumber(moderate);
+
+
+    document
+        .getElementById("highBudgetResult")
+        .textContent =
+            formatNumber(high);
+
+
+    document
+        .getElementById("enemyCountResult")
+        .textContent =
+            formatNumber(enemyCount);
+
+
+
+    /* ---------------------------------------
+       DETERMINE DIFFICULTY
+       --------------------------------------- */
+
+    let difficulty =
+        "Not Calculated";
+
+
+    let detail =
+        "Add at least one adventurer to calculate encounter difficulty.";
+
+
+
+    if (partyCount > 0) {
+
+
+        if (enemyXp <= 0) {
+
+
+            difficulty =
+                "No XP Threat";
+
+
+            detail =
+                "The listed opposition contributes no encounter XP.";
+
+
+        }
+
+
+        else if (enemyXp <= low) {
+
+
+            difficulty =
+                "Low";
+
+
+            detail =
+                `${formatNumber(
+                    low - enemyXp
+                )} XP remains before exceeding the Low budget.`;
+
+
+        }
+
+
+        else if (enemyXp <= moderate) {
+
+
+            difficulty =
+                "Moderate";
+
+
+            detail =
+                `${formatNumber(
+                    moderate - enemyXp
+                )} XP remains before exceeding the Moderate budget.`;
+
+
+        }
+
+
+        else if (enemyXp <= high) {
+
+
+            difficulty =
+                "High";
+
+
+            detail =
+                `${formatNumber(
+                    high - enemyXp
+                )} XP remains before exceeding the High budget.`;
+
+
+        }
+
+
+        else {
+
+
+            difficulty =
+                "Above High";
+
+
+            detail =
+                `${formatNumber(
+                    enemyXp - high
+                )} XP above the party's High-difficulty budget.`;
+
+
+        }
+
+    }
+
+
+
+    document
+        .getElementById("difficultyResult")
+        .textContent =
+            difficulty;
+
+
+    document
+        .getElementById("difficultyDetail")
+        .textContent =
+            detail;
+
+
+
+    /* ---------------------------------------
+       DM WARNINGS
+       --------------------------------------- */
+
+    const warnings = [];
+
+
+
+    if (
+        partyCount > 0 &&
+        enemyCount > partyCount * 2
+    ) {
+
+        warnings.push(
+
+            "There are more than two creatures per character. " +
+
+            "Large enemy groups can be more dangerous than the XP budget suggests."
+
+        );
+
+    }
+
+
+
+    if (
+        partyCount > 0 &&
+        highestCR > lowestLevel
+    ) {
+
+        warnings.push(
+
+            `At least one creature (up to CR ${highestCR}) ` +
+
+            "is above the level of part of the party. " +
+
+            "A powerful creature may be able to drop a lower-level character very quickly."
+
+        );
+
+    }
+
+
+
+    const warningsBox =
+        document.getElementById(
+            "combatWarnings"
+        );
+
+
+    const warningList =
+        document.getElementById(
+            "warningList"
+        );
+
+
+    warningList.innerHTML = "";
+
+
+
+    warnings.forEach(text => {
+
+
+        const li =
+            document.createElement("li");
+
+
+        li.textContent =
+            text;
+
+
+        warningList.appendChild(li);
+
+    });
+
+
+
+    warningsBox.hidden =
+        warnings.length === 0;
+
+}
+
+
+
+/* ===========================================
+   RESET
+   =========================================== */
+
+function resetEncounter() {
+
+
+    partyRows.innerHTML = "";
+
+    enemyRows.innerHTML = "";
+
+
+    addPartyRow(
+        5,
+        4
+    );
+
+
+    addEnemyRow(
+        "",
+        "5",
+        1
+    );
+
+
+    calculateEncounter();
+
+}
+
+
+
+/* ===========================================
+   BUTTON EVENTS
+   =========================================== */
+
+document
+    .getElementById("addPartyGroup")
+    .addEventListener(
+        "click",
+        () => {
+
+            addPartyRow(
+                5,
+                1
+            );
+
+        }
+    );
+
+
+
+document
+    .getElementById("addEnemy")
+    .addEventListener(
+        "click",
+        () => {
+
+            addEnemyRow(
+                "",
+                "1",
+                1
+            );
+
+        }
+    );
+
+
+
+document
+    .getElementById("calculateEncounter")
+    .addEventListener(
+        "click",
+        calculateEncounter
+    );
+
+
+
+document
+    .getElementById("resetEncounter")
+    .addEventListener(
+        "click",
+        resetEncounter
+    );
+
+
+
+/* ===========================================
+   AUTOMATIC RECALCULATION
+   =========================================== */
+
+partyRows.addEventListener(
+    "input",
+    calculateEncounter
+);
+
+
+partyRows.addEventListener(
+    "change",
+    calculateEncounter
+);
+
+
+enemyRows.addEventListener(
+    "input",
+    calculateEncounter
+);
+
+
+enemyRows.addEventListener(
+    "change",
+    calculateEncounter
+);
+
+
+
+/* ===========================================
+   INITIALIZE PAGE
+   =========================================== */
+
+resetEncounter();
+
+
+</script>
+
+
+</body>
+
+</html>
