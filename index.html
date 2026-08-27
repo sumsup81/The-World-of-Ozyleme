@@ -20,7 +20,7 @@
             display: flex;
             justify-content: center;
             margin-top: 3rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
         }
 
         .dm-secret-button {
@@ -28,36 +28,45 @@
             border: none;
             padding: 0;
             margin: 0;
+
             cursor: pointer;
-            opacity: 0.38;
+
+            opacity: 0.90;
 
             transition:
                 opacity 0.2s ease,
-                transform 0.2s ease;
+                transform 0.2s ease,
+                filter 0.2s ease;
         }
 
         .dm-secret-button:hover {
-            opacity: 0.8;
+            opacity: 1;
             transform: scale(1.08);
+
+            filter:
+                drop-shadow(0 0 4px rgba(220, 220, 220, 0.25));
         }
 
         .dm-secret-button:focus-visible {
             outline: 1px solid #777;
-            outline-offset: 4px;
+            outline-offset: 5px;
         }
 
         .dm-secret-button img {
             display: block;
-            width: 58px;
-            height: 58px;
+
+            width: 64px;
+            height: 64px;
+
             object-fit: contain;
         }
+
 
         @media (max-width: 600px) {
 
             .dm-secret-button img {
-                width: 50px;
-                height: 50px;
+                width: 60px;
+                height: 60px;
             }
 
         }
@@ -75,8 +84,13 @@
      ================================ -->
 
 <header>
+
     <h1></h1>
-    <p>Realm of the Dark Dragon</p>
+
+    <p>
+        Realm of the Dark Dragon
+    </p>
+
 </header>
 
 
@@ -89,22 +103,66 @@
     <a class="nav-link active"
        href="index.html"
        aria-current="page">
+
         Home
+
     </a>
 
-    <a class="nav-link" href="kingdoms.html">Kingdoms</a>
 
-    <a class="nav-link" href="species.html">Species</a>
+    <a class="nav-link"
+       href="kingdoms.html">
 
-    <a class="nav-link" href="people.html">People</a>
+        Kingdoms
 
-    <a class="nav-link" href="gods.html">Gods</a>
+    </a>
 
-    <a class="nav-link" href="bestiary.html">Bestiary</a>
 
-    <a class="nav-link" href="classes.html">Classes</a>
+    <a class="nav-link"
+       href="species.html">
 
-    <a class="nav-link" href="player-guide.html">Player Guide</a>
+        Species
+
+    </a>
+
+
+    <a class="nav-link"
+       href="people.html">
+
+        People
+
+    </a>
+
+
+    <a class="nav-link"
+       href="gods.html">
+
+        Gods
+
+    </a>
+
+
+    <a class="nav-link"
+       href="bestiary.html">
+
+        Bestiary
+
+    </a>
+
+
+    <a class="nav-link"
+       href="classes.html">
+
+        Classes
+
+    </a>
+
+
+    <a class="nav-link"
+       href="player-guide.html">
+
+        Player Guide
+
+    </a>
 
 </nav>
 
@@ -122,17 +180,25 @@
 
     <section>
 
-        <h2>Welcome to Ozyleme</h2>
+        <h2>
+            Welcome to Ozyleme
+        </h2>
+
 
         <p>
+
             Beneath a sickly sky and the light of a hollow white sun lies Ozyleme,
             a world divided among eight kingdoms and watched by ancient gods.
+
         </p>
 
+
         <p>
+
             Beyond their borders lie black deserts, mist-shrouded wilderness,
             strange peoples, forgotten ruins, and the distant shadow of the
             Dragon King.
+
         </p>
 
     </section>
@@ -147,19 +213,27 @@
 
     <section>
 
-        <h2>Explore the World</h2>
+        <h2>
+            Explore the World
+        </h2>
+
 
         <div class="cards">
 
 
             <!-- KINGDOMS -->
 
-            <a class="card" href="kingdoms.html">
+            <a class="card"
+               href="kingdoms.html">
 
-                <h3>The Eight Kingdoms</h3>
+                <h3>
+                    The Eight Kingdoms
+                </h3>
 
                 <p>
+
                     Plume, Kettle, Loop, Torch, Vial, Hook, Bell, and Crook.
+
                 </p>
 
             </a>
@@ -167,13 +241,18 @@
 
             <!-- SPECIES -->
 
-            <a class="card" href="species.html">
+            <a class="card"
+               href="species.html">
 
-                <h3>Species</h3>
+                <h3>
+                    Species
+                </h3>
 
                 <p>
+
                     The mortal, created, transformed, and Umbral inhabitants
                     of Ozyleme.
+
                 </p>
 
             </a>
@@ -181,13 +260,18 @@
 
             <!-- PEOPLE -->
 
-            <a class="card" href="people.html">
+            <a class="card"
+               href="people.html">
 
-                <h3>People of Ozyleme</h3>
+                <h3>
+                    People of Ozyleme
+                </h3>
 
                 <p>
+
                     Important figures, rulers, wanderers, villains, and other
                     inhabitants of the world.
+
                 </p>
 
             </a>
@@ -195,13 +279,18 @@
 
             <!-- GODS -->
 
-            <a class="card" href="gods.html">
+            <a class="card"
+               href="gods.html">
 
-                <h3>The Gods</h3>
+                <h3>
+                    The Gods
+                </h3>
 
                 <p>
+
                     The powers that watch over the kingdoms and shape mortal
                     existence.
+
                 </p>
 
             </a>
@@ -209,13 +298,18 @@
 
             <!-- BESTIARY -->
 
-            <a class="card" href="bestiary.html">
+            <a class="card"
+               href="bestiary.html">
 
-                <h3>Bestiary</h3>
+                <h3>
+                    Bestiary
+                </h3>
 
                 <p>
+
                     Creatures, horrors, beasts, and nightmares found throughout
                     Ozyleme.
+
                 </p>
 
             </a>
@@ -223,13 +317,18 @@
 
             <!-- CLASSES -->
 
-            <a class="card" href="classes.html">
+            <a class="card"
+               href="classes.html">
 
-                <h3>Classes</h3>
+                <h3>
+                    Classes
+                </h3>
 
                 <p>
+
                     How the familiar paths of adventurers are altered by the
                     gods, magic, and strange laws of Ozyleme.
+
                 </p>
 
             </a>
@@ -237,13 +336,18 @@
 
             <!-- PLAYER GUIDE -->
 
-            <a class="card" href="player-guide.html">
+            <a class="card"
+               href="player-guide.html">
 
-                <h3>Player Guide</h3>
+                <h3>
+                    Player Guide
+                </h3>
 
                 <p>
+
                     Everything needed to create a character who belongs in
                     Ozyleme, including its calendar, customs, and rules of play.
+
                 </p>
 
             </a>
@@ -252,6 +356,7 @@
         </div>
 
     </section>
+
 
 
     <!-- ================================
@@ -306,27 +411,36 @@
             "click",
             function () {
 
+
                 const enteredPassword =
-                    prompt("Speak the hidden word.");
+                    prompt(
+                        "Speak the hidden word."
+                    );
 
 
                 if (enteredPassword === null) {
+
                     return;
+
                 }
 
 
                 if (enteredPassword === DM_PASSWORD) {
 
+
                     window.location.href =
                         "dm-tools.html";
+
 
                 }
 
                 else {
 
+
                     alert(
                         "The way remains closed."
                     );
+
 
                 }
 
