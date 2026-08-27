@@ -1,20 +1,13 @@
 /* =========================================================
    OZYLEME MONSTER DATABASE
-   =========================================================
+   Version 2
 
-   Base Creature Data:
-   Dungeons & Dragons SRD 5.2.1
-
-   SRD 5.2.1 is licensed under:
-   Creative Commons Attribution 4.0 International
-
-   https://creativecommons.org/licenses/by/4.0/
-
-   This file loads the SRD monster database and converts it
-   into the lightweight format used by Ozyleme DM Tools.
+   Sources:
+   - Open5e API V2
+   - Openly licensed 5e-compatible material
+   - Local Ozyleme creatures
 
    ========================================================= */
-
 
 (function () {
 
@@ -22,30 +15,93 @@
 
 
     /* =====================================================
-       DATABASE SOURCE
+       EASY CONFIG
        ===================================================== */
 
-    const MONSTER_DATABASE_URL =
-        "https://raw.githubusercontent.com/rschaeff/srd/refs/heads/master/monsters.json";
+    const OPEN5E_API =
+        "https://api.open5e.com/v2/creatures/";
+
+    const OPEN5E_PAGE_SIZE =
+        500;
+
+    const CACHE_KEY =
+        "ozyleme_open5e_monsters_v2";
+
+    const CACHE_TIME_KEY =
+        "ozyleme_open5e_monsters_v2_time";
+
+    const CACHE_MAX_AGE =
+        24 * 60 * 60 * 1000;
 
 
     /* =====================================================
-       LOCAL CACHE
+       LOCAL OZYLEME CREATURES
 
-       This prevents the browser from downloading all of the
-       monster data every time the DM Tools page opens.
+       Later we can permanently add your custom Ozyleme
+       monsters here.
        ===================================================== */
 
-    const CACHE_KEY =
-        "ozyleme_srd521_monsters_v1";
+    const OZYLEME_LOCAL_MONSTERS = [
+
+        /* Example:
+
+        {
+            name: "Feral Halfling",
+            cr: "1/4",
+            type: "Humanoid",
+            size: "Small",
+            source: "Ozyleme",
+            ruleset: "5.5e / 2024"
+        }
+
+        */
+
+    ];
 
 
-    const CACHE_TIME_KEY =
-        "ozyleme_srd521_monsters_v1_time";
+    /* =====================================================
+       XP BY CHALLENGE RATING
+       ===================================================== */
 
+    const XP_BY_CR = {
 
-    const CACHE_MAX_AGE =
-        7 * 24 * 60 * 60 * 1000;
+        "0": 10,
+        "1/8": 25,
+        "1/4": 50,
+        "1/2": 100,
+
+        "1": 200,
+        "2": 450,
+        "3": 700,
+        "4": 1100,
+        "5": 1800,
+        "6": 2300,
+        "7": 2900,
+        "8": 3900,
+        "9": 5000,
+        "10": 5900,
+        "11": 7200,
+        "12": 8400,
+        "13": 10000,
+        "14": 11500,
+        "15": 13000,
+        "16": 15000,
+        "17": 18000,
+        "18": 20000,
+        "19": 22000,
+        "20": 25000,
+        "21": 33000,
+        "22": 41000,
+        "23": 50000,
+        "24": 62000,
+        "25": 75000,
+        "26": 90000,
+        "27": 105000,
+        "28": 120000,
+        "29": 135000,
+        "30": 155000
+
+    };
 
 
     /* =====================================================
@@ -55,99 +111,316 @@
     window.OZYLEME_MONSTER_DATABASE_INFO = {
 
         name:
-            "Ozyleme Monster Database",
+            "Ozyleme Monster Archive",
 
-        rules:
-            "D&D 5.5e / 2024",
+        api:
+            "Open5e API V2",
 
-        source:
-            "SRD 5.2.1",
+        includes: [
 
-        license:
-            "CC BY 4.0",
+            "SRD 5.2 / 2024",
 
-        expectedCreatureCount:
-            330
+            "SRD 5.1 / 2014",
+
+            "Openly licensed third-party 5e-compatible creatures",
+
+            "Ozyleme creatures"
+
+        ],
+
+        databaseVersion:
+            2
 
     };
 
-
-    /* =====================================================
-       ACTIVE MONSTER ARRAY
-
-       dm-tools.html will eventually read from this.
-       ===================================================== */
 
     window.OZYLEME_MONSTERS = [];
 
 
     /* =====================================================
-       NORMALIZE MONSTER
-
-       The original SRD data contains complete stat blocks.
-
-       The encounter calculator does NOT need all of that.
-
-       We keep only:
-
-       name
-       type
-       size
-       CR
-       XP
-       source
+       CLEAN TEXT
        ===================================================== */
 
-    function normalizeMonster(monster) {
+    function cleanText(
+        value,
+        fallback = "Unknown"
+    ) {
+
+        if (
+            value === null ||
+            value === undefined ||
+            value === ""
+        ) {
+
+            return fallback;
+
+        }
 
 
-        const crDisplay =
+        if (
+            Array.isArray(value)
+        ) {
 
-            monster.cr_string !== undefined
+            return value.join(", ");
 
-                ? String(monster.cr_string)
-
-                : String(monster.cr ?? "0");
-
-
-
-        const crNumber =
-
-            Number(monster.cr) || 0;
+        }
 
 
+        if (
+            typeof value === "object"
+        ) {
 
-        const xp =
+            return String(
 
-            Number(monster.xp) || 0;
+                value.name ??
+                value.label ??
+                value.value ??
+                fallback
 
+            );
+
+        }
+
+
+        return String(value);
+
+    }
+
+
+    /* =====================================================
+       CHALLENGE RATING
+       ===================================================== */
+
+    function normalizeCR(
+        monster
+    ) {
+
+        const raw =
+
+            monster.challenge_rating ??
+
+            monster.cr ??
+
+            monster.cr_string ??
+
+            0;
+
+
+        if (
+            typeof raw === "object" &&
+            raw !== null
+        ) {
+
+            const display =
+
+                raw.rating ??
+
+                raw.name ??
+
+                raw.label ??
+
+                raw.value ??
+
+                raw.challenge_rating ??
+
+                "0";
+
+
+            const decimal =
+
+                raw.decimal ??
+
+                raw.decimal_value ??
+
+                raw.value_decimal ??
+
+                monster.challenge_rating_decimal;
+
+
+            return {
+
+                display:
+                    String(display),
+
+                number:
+                    crToNumber(
+                        display,
+                        decimal
+                    )
+
+            };
+
+        }
 
 
         return {
 
+            display:
+                String(raw),
+
+            number:
+                crToNumber(
+                    raw,
+                    monster.challenge_rating_decimal
+                )
+
+        };
+
+    }
+
+
+    function crToNumber(
+        display,
+        decimalFallback
+    ) {
+
+        const fallback =
+            Number(decimalFallback);
+
+
+        if (
+            Number.isFinite(fallback)
+        ) {
+
+            return fallback;
+
+        }
+
+
+        const text =
+            String(display).trim();
+
+
+        if (
+            text.includes("/")
+        ) {
+
+            const parts =
+                text.split("/");
+
+
+            const numerator =
+                Number(parts[0]);
+
+
+            const denominator =
+                Number(parts[1]);
+
+
+            if (
+                Number.isFinite(numerator) &&
+                Number.isFinite(denominator) &&
+                denominator !== 0
+            ) {
+
+                return (
+                    numerator /
+                    denominator
+                );
+
+            }
+
+        }
+
+
+        const number =
+            Number(text);
+
+
+        return Number.isFinite(number)
+
+            ? number
+
+            : 0;
+
+    }
+
+
+    /* =====================================================
+       XP
+       ===================================================== */
+
+    function getXPForCR(
+        crDisplay,
+        monster = {}
+    ) {
+
+        const possibleApiXP =
+
+            monster.experience_points ??
+
+            monster.xp ??
+
+            monster.challenge_rating?.xp;
+
+
+        const apiXP =
+            Number(possibleApiXP);
+
+
+        if (
+            Number.isFinite(apiXP) &&
+            apiXP >= 0
+        ) {
+
+            return apiXP;
+
+        }
+
+
+        return (
+            XP_BY_CR[String(crDisplay)] ??
+            0
+        );
+
+    }
+
+
+    /* =====================================================
+       SOURCE INFORMATION
+       ===================================================== */
+
+    function getDocumentInfo(
+        monster
+    ) {
+
+        const document =
+            monster.document || {};
+
+
+        const sourceKey =
+            cleanText(
+
+                document.key ??
+
+                monster.document__key,
+
+                "unknown-source"
+
+            );
+
+
+        const sourceName =
+            cleanText(
+
+                document.name ??
+
+                document.title ??
+
+                sourceKey,
+
+                sourceKey
+
+            );
+
+
+        return {
+
+            key:
+                sourceKey,
+
             name:
-                monster.name || "Unknown Creature",
-
-            type:
-                monster.type || "Unknown",
-
-            size:
-                monster.size || "Unknown",
-
-            cr:
-                crDisplay,
-
-            crNumber:
-                crNumber,
-
-            xp:
-                xp,
-
-            source:
-                "SRD 5.2.1",
-
-            sourceType:
-                "srd"
+                sourceName
 
         };
 
@@ -155,68 +428,490 @@
 
 
     /* =====================================================
-       SORT MONSTERS
+       IDENTIFY RULESET
        ===================================================== */
 
-    function sortMonsters(monsters) {
+    function inferRuleset(
+        sourceKey,
+        sourceName
+    ) {
 
-        return monsters.sort(
+        const key =
+            String(sourceKey)
+                .toLowerCase();
 
-            (a, b) =>
 
-                a.name.localeCompare(
-                    b.name,
-                    "en",
-                    {
-                        sensitivity: "base"
-                    }
-                )
+        const name =
+            String(sourceName)
+                .toLowerCase();
 
+
+        /* 2024 / 5.5E */
+
+        if (
+
+            key === "srd-2024"
+
+            ||
+
+            name.includes(
+                "system reference document 5.2"
+            )
+
+            ||
+
+            name.includes(
+                "srd 5.2"
+            )
+
+        ) {
+
+            return "5.5e / 2024";
+
+        }
+
+
+        /* 2014 / 5E */
+
+        if (
+
+            key === "srd-2014"
+
+            ||
+
+            name.includes(
+                "system reference document 5.1"
+            )
+
+            ||
+
+            name.includes(
+                "srd 5.1"
+            )
+
+        ) {
+
+            return "5e / 2014";
+
+        }
+
+
+        /* THIRD PARTY */
+
+        return (
+            "5e-Compatible / Third Party"
         );
 
     }
 
 
     /* =====================================================
-       READ CACHE
+       NORMALIZE OPEN5E CREATURE
+       ===================================================== */
+
+    function normalizeOpen5eMonster(
+        monster
+    ) {
+
+        const cr =
+            normalizeCR(monster);
+
+
+        const document =
+            getDocumentInfo(monster);
+
+
+        return {
+
+            id:
+
+                `open5e:${document.key}:`
+
+                +
+
+                cleanText(
+                    monster.key,
+                    monster.name
+                ),
+
+
+            key:
+
+                cleanText(
+                    monster.key,
+                    monster.name
+                ),
+
+
+            /* DATABASE NAME */
+
+            name:
+
+                cleanText(
+                    monster.name,
+                    "Unknown Creature"
+                ),
+
+
+            /* ORIGINAL STAT BLOCK NAME */
+
+            baseName:
+
+                cleanText(
+                    monster.name,
+                    "Unknown Creature"
+                ),
+
+
+            type:
+
+                cleanText(
+                    monster.type
+                ),
+
+
+            size:
+
+                cleanText(
+                    monster.size
+                ),
+
+
+            cr:
+
+                cr.display,
+
+
+            crNumber:
+
+                cr.number,
+
+
+            xp:
+
+                getXPForCR(
+                    cr.display,
+                    monster
+                ),
+
+
+            source:
+
+                document.name,
+
+
+            sourceKey:
+
+                document.key,
+
+
+            sourceType:
+
+                "open5e",
+
+
+            ruleset:
+
+                inferRuleset(
+
+                    document.key,
+
+                    document.name
+
+                ),
+
+
+            /* =================================
+               ENCOUNTER CUSTOMIZATION
+
+               These are intentionally included
+               now for our later encounter tools.
+               ================================= */
+
+            customName:
+
+                "",
+
+
+            note:
+
+                ""
+
+        };
+
+    }
+
+
+    /* =====================================================
+       NORMALIZE OZYLEME CREATURE
+       ===================================================== */
+
+    function normalizeLocalMonster(
+        monster,
+        index
+    ) {
+
+        const crDisplay =
+            String(
+                monster.cr ??
+                "0"
+            );
+
+
+        return {
+
+            id:
+
+                monster.id ||
+
+                `ozyleme:${index}:${monster.name}`,
+
+
+            key:
+
+                monster.key ||
+
+                `ozyleme-${index}`,
+
+
+            name:
+
+                cleanText(
+                    monster.name,
+                    "Ozyleme Creature"
+                ),
+
+
+            baseName:
+
+                cleanText(
+
+                    monster.baseName ??
+
+                    monster.name,
+
+                    "Ozyleme Creature"
+
+                ),
+
+
+            type:
+
+                cleanText(
+                    monster.type
+                ),
+
+
+            size:
+
+                cleanText(
+                    monster.size
+                ),
+
+
+            cr:
+
+                crDisplay,
+
+
+            crNumber:
+
+                crToNumber(
+                    crDisplay
+                ),
+
+
+            xp:
+
+                Number(
+                    monster.xp
+                )
+
+                ||
+
+                XP_BY_CR[
+                    crDisplay
+                ]
+
+                ||
+
+                0,
+
+
+            source:
+
+                cleanText(
+                    monster.source,
+                    "Ozyleme"
+                ),
+
+
+            sourceKey:
+
+                "ozyleme",
+
+
+            sourceType:
+
+                "ozyleme",
+
+
+            ruleset:
+
+                cleanText(
+
+                    monster.ruleset,
+
+                    "5.5e / 2024"
+
+                ),
+
+
+            customName:
+
+                monster.customName || "",
+
+
+            note:
+
+                monster.note || ""
+
+        };
+
+    }
+
+
+    /* =====================================================
+       SORTING
+
+       2024 creatures appear first.
+       ===================================================== */
+
+    function sourcePriority(
+        monster
+    ) {
+
+        if (
+            monster.ruleset ===
+            "5.5e / 2024"
+        ) {
+
+            return 0;
+
+        }
+
+
+        if (
+            monster.sourceType ===
+            "ozyleme"
+        ) {
+
+            return 1;
+
+        }
+
+
+        if (
+            monster.ruleset ===
+            "5e / 2014"
+        ) {
+
+            return 2;
+
+        }
+
+
+        return 3;
+
+    }
+
+
+    function sortMonsters(
+        monsters
+    ) {
+
+        return monsters.sort(
+            (a, b) => {
+
+
+                const priorityDifference =
+
+                    sourcePriority(a)
+
+                    -
+
+                    sourcePriority(b);
+
+
+                if (
+                    priorityDifference !== 0
+                ) {
+
+                    return (
+                        priorityDifference
+                    );
+
+                }
+
+
+                return a.name.localeCompare(
+
+                    b.name,
+
+                    "en",
+
+                    {
+                        sensitivity:
+                            "base"
+                    }
+
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       CACHE
        ===================================================== */
 
     function readCache() {
 
-
         try {
 
-
             const savedData =
+
                 localStorage.getItem(
                     CACHE_KEY
                 );
 
 
             const savedTime =
+
                 Number(
+
                     localStorage.getItem(
                         CACHE_TIME_KEY
                     )
+
                 );
 
 
             if (
-                !savedData ||
+
+                !savedData
+
+                ||
+
                 !savedTime
-            ) {
 
-                return null;
+                ||
 
-            }
+                Date.now() - savedTime >
+                CACHE_MAX_AGE
 
-
-            const age =
-                Date.now() - savedTime;
-
-
-            if (
-                age > CACHE_MAX_AGE
             ) {
 
                 return null;
@@ -230,26 +925,25 @@
                 );
 
 
-            if (
-                !Array.isArray(parsed)
-            ) {
+            return Array.isArray(parsed)
 
-                return null;
+                ? parsed
 
-            }
-
-
-            return parsed;
-
+                : null;
 
         }
 
-        catch (error) {
 
+        catch (
+            error
+        ) {
 
             console.warn(
+
                 "Ozyleme monster cache could not be read.",
+
                 error
+
             );
 
 
@@ -260,15 +954,11 @@
     }
 
 
-    /* =====================================================
-       SAVE CACHE
-       ===================================================== */
-
-    function saveCache(monsters) {
-
+    function saveCache(
+        monsters
+    ) {
 
         try {
-
 
             localStorage.setItem(
 
@@ -291,15 +981,19 @@
 
             );
 
-
         }
 
-        catch (error) {
 
+        catch (
+            error
+        ) {
 
             console.warn(
+
                 "Ozyleme monster database could not be cached.",
+
                 error
+
             );
 
         }
@@ -308,113 +1002,229 @@
 
 
     /* =====================================================
-       LOAD DATABASE
+       DOWNLOAD OPEN5E CREATURES
+
+       Open5e paginates results, so this follows each
+       page until the entire available archive is loaded.
+       ===================================================== */
+
+    async function fetchOpen5eCreatures() {
+
+        const creatures =
+            [];
+
+
+        let nextUrl =
+
+            `${OPEN5E_API}`
+
+            +
+
+            `?limit=${OPEN5E_PAGE_SIZE}`
+
+            +
+
+            `&fields=name,key,size,type,challenge_rating,document`
+
+            +
+
+            `&document__fields=name,key`
+
+            +
+
+            `&ordering=name`;
+
+
+        let safetyCounter =
+            0;
+
+
+        while (
+            nextUrl &&
+            safetyCounter < 100
+        ) {
+
+            safetyCounter +=
+                1;
+
+
+            const response =
+                await fetch(
+                    nextUrl
+                );
+
+
+            if (
+                !response.ok
+            ) {
+
+                throw new Error(
+
+                    "Open5e request failed with HTTP "
+
+                    +
+
+                    response.status
+
+                    +
+
+                    "."
+
+                );
+
+            }
+
+
+            const payload =
+                await response.json();
+
+
+            const pageResults =
+
+                Array.isArray(payload)
+
+                    ? payload
+
+                    : payload.results;
+
+
+            if (
+                !Array.isArray(
+                    pageResults
+                )
+            ) {
+
+                throw new Error(
+
+                    "Open5e returned an unexpected creature response."
+
+                );
+
+            }
+
+
+            creatures.push(
+                ...pageResults
+            );
+
+
+            if (
+                Array.isArray(payload)
+            ) {
+
+                nextUrl =
+                    null;
+
+            }
+
+            else {
+
+                nextUrl =
+                    payload.next ||
+                    null;
+
+            }
+
+        }
+
+
+        return creatures;
+
+    }
+
+
+    /* =====================================================
+       LOAD COMPLETE DATABASE
        ===================================================== */
 
     async function loadMonsterDatabase() {
 
 
         /* -----------------------------------------
-           TRY CACHE FIRST
+           CHECK CACHE
            ----------------------------------------- */
 
-        const cachedMonsters =
+        const cached =
             readCache();
 
 
         if (
-            cachedMonsters &&
-            cachedMonsters.length > 0
+            cached &&
+            cached.length > 0
         ) {
 
-
             window.OZYLEME_MONSTERS =
-                cachedMonsters;
+                cached;
 
 
             console.log(
 
-                `Ozyleme Monster Database loaded ` +
-                `${cachedMonsters.length} creatures from cache.`
+                `Ozyleme Monster Archive loaded `
+
+                +
+
+                `${cached.length} creatures from cache.`
 
             );
 
 
-            return cachedMonsters;
+            return cached;
 
         }
 
 
-
         /* -----------------------------------------
-           DOWNLOAD SRD DATABASE
+           LOAD OPEN5E
            ----------------------------------------- */
 
-        const response =
-            await fetch(
-                MONSTER_DATABASE_URL
-            );
+        const rawOpen5e =
+            await fetchOpen5eCreatures();
 
 
-        if (
-            !response.ok
-        ) {
+        const open5eMonsters =
 
+            rawOpen5e
 
-            throw new Error(
+                .filter(
 
-                "Monster database request failed: " +
-                response.status
+                    monster =>
 
-            );
+                        monster &&
 
-        }
+                        monster.name
 
+                )
 
-
-        const rawMonsters =
-            await response.json();
-
-
-
-        if (
-            !Array.isArray(rawMonsters)
-        ) {
-
-
-            throw new Error(
-                "Monster database did not contain a valid creature list."
-            );
-
-        }
-
+                .map(
+                    normalizeOpen5eMonster
+                );
 
 
         /* -----------------------------------------
-           CONVERT TO OZYLEME FORMAT
+           LOAD OZYLEME
+           ----------------------------------------- */
+
+        const localMonsters =
+
+            OZYLEME_LOCAL_MONSTERS.map(
+                normalizeLocalMonster
+            );
+
+
+        /* -----------------------------------------
+           MERGE
            ----------------------------------------- */
 
         const monsters =
 
-            sortMonsters(
+            sortMonsters([
 
-                rawMonsters
-                    .filter(
-                        monster =>
-                            monster &&
-                            monster.name
-                    )
-                    .map(
-                        normalizeMonster
-                    )
+                ...open5eMonsters,
 
-            );
+                ...localMonsters
 
+            ]);
 
-
-        /* -----------------------------------------
-           STORE DATABASE
-           ----------------------------------------- */
 
         window.OZYLEME_MONSTERS =
             monsters;
@@ -425,10 +1235,12 @@
         );
 
 
-
         console.log(
 
-            `Ozyleme Monster Database loaded ` +
+            `Ozyleme Monster Archive loaded `
+
+            +
+
             `${monsters.length} creatures.`
 
         );
@@ -440,100 +1252,113 @@
 
 
     /* =====================================================
-       DATABASE READY PROMISE
-
-       dm-tools.html can wait for this before showing the
-       monster picker.
-
-       Example:
-
-       await window.OZYLEME_MONSTERS_READY;
+       DATABASE READY
        ===================================================== */
 
     window.OZYLEME_MONSTERS_READY =
 
         loadMonsterDatabase()
 
-            .then(monsters => {
+            .then(
+                monsters => {
 
 
-                /* ---------------------------------
-                   TELL OTHER TOOLS DATABASE IS READY
-                   --------------------------------- */
+                    window.dispatchEvent(
 
-                window.dispatchEvent(
+                        new CustomEvent(
 
-                    new CustomEvent(
-                        "ozyleme-monsters-ready",
-                        {
-                            detail: {
-                                monsters:
-                                    monsters
+                            "ozyleme-monsters-ready",
+
+                            {
+
+                                detail: {
+
+                                    monsters:
+                                        monsters
+
+                                }
+
                             }
-                        }
-                    )
 
-                );
+                        )
 
-
-                return monsters;
-
-            })
-
-            .catch(error => {
+                    );
 
 
-                console.error(
-                    "Ozyleme Monster Database failed to load.",
-                    error
-                );
+                    return monsters;
+
+                }
+            )
+
+            .catch(
+                error => {
 
 
-                window.OZYLEME_MONSTERS =
-                    [];
+                    console.error(
+
+                        "Ozyleme Monster Archive failed to load.",
+
+                        error
+
+                    );
 
 
-                window.dispatchEvent(
+                    window.OZYLEME_MONSTERS =
+                        [];
 
-                    new CustomEvent(
-                        "ozyleme-monsters-error",
-                        {
-                            detail: {
-                                error:
-                                    error
+
+                    window.dispatchEvent(
+
+                        new CustomEvent(
+
+                            "ozyleme-monsters-error",
+
+                            {
+
+                                detail: {
+
+                                    error:
+                                        error
+
+                                }
+
                             }
-                        }
-                    )
 
-                );
+                        )
+
+                    );
 
 
-                return [];
+                    return [];
 
-            });
-
+                }
+            );
 
 
     /* =====================================================
-       HELPER: GET ALL MONSTERS
+       GET ALL MONSTERS
        ===================================================== */
 
-    window.getOzylemeMonsters = function () {
+    window.getOzylemeMonsters =
+        function () {
 
-        return [
-            ...window.OZYLEME_MONSTERS
-        ];
+            return [
 
-    };
+                ...window.OZYLEME_MONSTERS
+
+            ];
+
+        };
 
 
     /* =====================================================
-       HELPER: SEARCH MONSTERS
+       SEARCH
        ===================================================== */
 
     window.searchOzylemeMonsters =
-        function (searchText) {
-
+        function (
+            searchText
+        ) {
 
             const search =
 
@@ -544,7 +1369,6 @@
                     .trim()
 
                     .toLowerCase();
-
 
 
             if (
@@ -558,44 +1382,68 @@
             }
 
 
-
             return window
                 .OZYLEME_MONSTERS
-                .filter(monster => {
+                .filter(
+                    monster => {
 
 
-                    return (
+                        return (
 
-                        monster.name
-                            .toLowerCase()
-                            .includes(search)
+                            monster.name
+                                .toLowerCase()
+                                .includes(
+                                    search
+                                )
 
-                        ||
+                            ||
 
-                        monster.type
-                            .toLowerCase()
-                            .includes(search)
+                            monster.type
+                                .toLowerCase()
+                                .includes(
+                                    search
+                                )
 
-                        ||
+                            ||
 
-                        monster.cr
-                            .toLowerCase()
-                            .includes(search)
+                            monster.source
+                                .toLowerCase()
+                                .includes(
+                                    search
+                                )
 
-                    );
+                            ||
 
-                });
+                            monster.ruleset
+                                .toLowerCase()
+                                .includes(
+                                    search
+                                )
+
+                            ||
+
+                            monster.cr
+                                .toLowerCase()
+                                .includes(
+                                    search
+                                )
+
+                        );
+
+                    }
+                );
 
         };
 
 
     /* =====================================================
-       HELPER: FILTER BY CR
+       FILTER BY CR
        ===================================================== */
 
     window.getOzylemeMonstersByCR =
-        function (cr) {
-
+        function (
+            cr
+        ) {
 
             const requestedCR =
                 String(cr);
@@ -606,6 +1454,7 @@
                 .filter(
 
                     monster =>
+
                         monster.cr ===
                         requestedCR
 
@@ -615,21 +1464,21 @@
 
 
     /* =====================================================
-       HELPER: FILTER BY TYPE
+       FILTER BY SOURCE
        ===================================================== */
 
-    window.getOzylemeMonstersByType =
-        function (type) {
+    window.getOzylemeMonstersBySource =
+        function (
+            sourceKey
+        ) {
 
-
-            const requestedType =
+            const requestedSource =
 
                 String(
-                    type || ""
+                    sourceKey || ""
                 )
 
                     .toLowerCase();
-
 
 
             return window
@@ -638,11 +1487,74 @@
 
                     monster =>
 
-                        monster.type
-                            .toLowerCase() ===
-                        requestedType
+                        monster.sourceKey
+                            .toLowerCase()
+
+                        ===
+
+                        requestedSource
 
                 );
+
+        };
+
+
+    /* =====================================================
+       FILTER BY RULESET
+       ===================================================== */
+
+    window.getOzylemeMonstersByRuleset =
+        function (
+            ruleset
+        ) {
+
+            const requestedRuleset =
+
+                String(
+                    ruleset || ""
+                )
+
+                    .toLowerCase();
+
+
+            return window
+                .OZYLEME_MONSTERS
+                .filter(
+
+                    monster =>
+
+                        monster.ruleset
+                            .toLowerCase()
+
+                        ===
+
+                        requestedRuleset
+
+                );
+
+        };
+
+
+    /* =====================================================
+       CLEAR CACHE
+
+       Later we can attach this to a Refresh Archive button.
+       ===================================================== */
+
+    window.clearOzylemeMonsterCache =
+        function () {
+
+            localStorage.removeItem(
+                CACHE_KEY
+            );
+
+
+            localStorage.removeItem(
+                CACHE_TIME_KEY
+            );
+
+
+            return true;
 
         };
 
