@@ -2,8 +2,26 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!-- =====================================================
+         OZYLEME PAGE CONFIG
+         EASY-TO-CHANGE SETTINGS
+         ===================================================== -->
+
+    <script>
+
+        const DM_PASSWORD = "CHANGE-ME";
+
+        const DM_TOOLS_PAGE = "dm-tools.html";
+
+        const DM_BUTTON_IMAGE = "images/index/ddark20.png";
+
+    </script>
+
 
     <title>Ozyleme</title>
 
@@ -17,16 +35,24 @@
     <style>
 
         .dm-secret-entry {
+
             display: flex;
             justify-content: center;
+
             margin-top: 3rem;
             margin-bottom: 1.25rem;
+
         }
 
+
         .dm-secret-button {
+
             background: none;
+
             border: none;
+
             padding: 0;
+
             margin: 0;
 
             cursor: pointer;
@@ -37,36 +63,53 @@
                 opacity 0.2s ease,
                 transform 0.2s ease,
                 filter 0.2s ease;
+
         }
 
+
         .dm-secret-button:hover {
+
             opacity: 1;
+
             transform: scale(1.08);
 
             filter:
-                drop-shadow(0 0 4px rgba(220, 220, 220, 0.25));
+                drop-shadow(
+                    0 0 4px
+                    rgba(220, 220, 220, 0.25)
+                );
+
         }
+
 
         .dm-secret-button:focus-visible {
+
             outline: 1px solid #777;
+
             outline-offset: 5px;
+
         }
 
+
         .dm-secret-button img {
+
             display: block;
 
             width: 64px;
             height: 64px;
 
             object-fit: contain;
+
         }
 
 
         @media (max-width: 600px) {
 
             .dm-secret-button img {
+
                 width: 60px;
                 height: 60px;
+
             }
 
         }
@@ -372,7 +415,8 @@
             aria-label="Twenty-sided die">
 
             <img
-                src="images/index/ddark20.png"
+                id="dmSecretImage"
+                src=""
                 alt="">
 
         </button>
@@ -397,13 +441,25 @@
 
 
 <!-- ================================
-     SECRET DM PASSWORD
+     SECRET DM ENTRY SCRIPT
      ================================ -->
 
 <script>
 
-    const DM_PASSWORD = "CHANGE-ME";
 
+    /* =========================================
+       APPLY CONFIGURED IMAGE
+       ========================================= */
+
+    document
+        .getElementById("dmSecretImage")
+        .src = DM_BUTTON_IMAGE;
+
+
+
+    /* =========================================
+       PASSWORD BUTTON
+       ========================================= */
 
     document
         .getElementById("dmSecretButton")
@@ -429,7 +485,7 @@
 
 
                     window.location.href =
-                        "dm-tools.html";
+                        DM_TOOLS_PAGE;
 
 
                 }
@@ -446,6 +502,7 @@
 
             }
         );
+
 
 </script>
 
