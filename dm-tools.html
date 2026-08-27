@@ -10,7 +10,7 @@
          ===================================================== -->
     <script>
         const DM_TOOLS_CONFIG = {
-            pageVersion: ".00003",
+            pageVersion: ".00004",
             fiveEToolsBestiary: "https://5e.tools/bestiary.html",
             maxSearchResults: 80
         };
@@ -133,7 +133,7 @@
 
         .monster-search-controls {
             display: grid;
-            grid-template-columns: 1.5fr .9fr .9fr .7fr;
+            grid-template-columns: 1.5fr .9fr .9fr .9fr .7fr;
             gap: .65rem;
             margin-bottom: .7rem;
         }
@@ -383,13 +383,29 @@
             max-height: 520px;
             overflow: auto;
             white-space: pre-wrap;
-            background: #11110f;
-            color: #e2dac7;
-            border: 1px solid #47342e;
-            padding: 1rem;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            font-size: .82rem;
-            line-height: 1.5;
+
+            background:
+                linear-gradient(
+                    rgba(111, 73, 40, 0.06),
+                    rgba(111, 73, 40, 0.03)
+                ),
+                #d8c39a;
+
+            color: #541c22;
+
+            border: 1px solid #7d5a43;
+
+            padding: 1.2rem;
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: .9rem;
+            line-height: 1.6;
+
+            box-shadow:
+                inset 0 0 18px rgba(77, 46, 25, 0.16);
+
+            text-shadow:
+                0 1px rgba(255, 255, 255, 0.18);
         }
 
         .srd-attribution {
@@ -538,6 +554,13 @@
                                 type="search"
                                 placeholder="Try goblin, dragon, wolf..."
                                 autocomplete="off">
+                        </label>
+
+                        <label>
+                            Creature Type
+                            <select id="monsterTypeFilter">
+                                <option value="">All Types</option>
+                            </select>
                         </label>
 
                         <label>
@@ -801,6 +824,7 @@ const CR_OPTIONS = [
 const partyRows = document.getElementById("partyRows");
 const encounterTitle = document.getElementById("encounterTitle");
 const monsterSearch = document.getElementById("monsterSearch");
+const monsterTypeFilter = document.getElementById("monsterTypeFilter");
 const monsterRulesetFilter = document.getElementById("monsterRulesetFilter");
 const monsterSourceFilter = document.getElementById("monsterSourceFilter");
 const monsterCRFilter = document.getElementById("monsterCRFilter");
@@ -918,6 +942,23 @@ function addPartyRow(level = 5, count = 4) {
    ===================================================== */
 
 function populateMonsterFilters() {
+    const types = [
+        ...new Set(
+            monsterDatabase
+                .map(monster => monster.type)
+                .filter(Boolean)
+        )
+    ].sort((a, b) => a.localeCompare(b));
+
+    monsterTypeFilter.innerHTML = '<option value="">All Types</option>';
+
+    types.forEach(type => {
+        const option = document.createElement("option");
+        option.value = type;
+        option.textContent = type;
+        monsterTypeFilter.appendChild(option);
+    });
+
     const rulesets = [
         ...new Set(monsterDatabase.map(monster => monster.ruleset).filter(Boolean))
     ];
@@ -996,6 +1037,7 @@ function refreshSourceFilter() {
 
 function getFilteredMonsters() {
     const search = monsterSearch.value.trim().toLowerCase();
+    const type = monsterTypeFilter.value;
     const ruleset = monsterRulesetFilter.value;
     const source = monsterSourceFilter.value;
     const cr = monsterCRFilter.value;
@@ -1014,11 +1056,18 @@ function getFilteredMonsters() {
             .toLowerCase();
 
         const matchesSearch = !search || searchableText.includes(search);
+        const matchesType = !type || monster.type === type;
         const matchesRuleset = !ruleset || monster.ruleset === ruleset;
         const matchesSource = !source || (monster.sourceKey || monster.source) === source;
         const matchesCR = !cr || String(monster.cr) === cr;
 
-        return matchesSearch && matchesRuleset && matchesSource && matchesCR;
+        return (
+            matchesSearch &&
+            matchesType &&
+            matchesRuleset &&
+            matchesSource &&
+            matchesCR
+        );
     });
 }
 
@@ -1538,7 +1587,6 @@ function buildEncounterReference() {
             lines.push(`   Ruleset: ${monster.ruleset}`);
 
             const note = String(monster.note || "").trim();
-
             if (note) {
                 lines.push(`   Note: ${note}`);
             }
@@ -1548,10 +1596,7 @@ function buildEncounterReference() {
     if (calc.warnings.length > 0) {
         lines.push("");
         lines.push("DM WARNINGS");
-
-        calc.warnings.forEach(warning => {
-            lines.push(`- ${warning}`);
-        });
+        calc.warnings.forEach(warning => lines.push(`- ${warning}`));
     }
 
     lines.push("");
@@ -1571,19 +1616,14 @@ async function copyTextToClipboard(text) {
     }
 
     const textarea = document.createElement("textarea");
-
     textarea.value = text;
     textarea.setAttribute("readonly", "");
     textarea.style.position = "fixed";
     textarea.style.opacity = "0";
-
     document.body.appendChild(textarea);
-
     textarea.select();
 
-    const copied =
-        document.execCommand("copy");
-
+    const copied = document.execCommand("copy");
     textarea.remove();
 
     if (!copied) {
@@ -1592,22 +1632,13 @@ async function copyTextToClipboard(text) {
 }
 
 async function copyEncounterReference() {
-    const text =
-        buildEncounterReference();
+    const text = buildEncounterReference();
 
     try {
         await copyTextToClipboard(text);
-
-        copyStatus.textContent =
-            "Encounter copied to clipboard.";
-    }
-
-    catch (error) {
-        console.error(
-            "Encounter copy failed.",
-            error
-        );
-
+        copyStatus.textContent = "Encounter copied to clipboard.";
+    } catch (error) {
+        console.error("Encounter copy failed.", error);
         copyStatus.textContent =
             "Copy was blocked by the browser. Select the reference text below and copy it manually.";
     }
@@ -1624,14 +1655,12 @@ function resetEncounter() {
     encounterTitle.value = "";
 
     addPartyRow(5, 4);
-
     renderEncounterMonsters();
 
     monsterSearch.value = "";
+    monsterTypeFilter.value = "";
     monsterRulesetFilter.value = "";
-
     refreshSourceFilter();
-
     monsterSourceFilter.value = "";
     monsterCRFilter.value = "";
 
@@ -1640,15 +1669,11 @@ function resetEncounter() {
     }
 
     copyStatus.textContent = "";
-
     calculateEncounter();
 }
 
 function refreshMonsterArchive() {
-    if (
-        typeof window.clearOzylemeMonsterCache ===
-        "function"
-    ) {
+    if (typeof window.clearOzylemeMonsterCache === "function") {
         window.clearOzylemeMonsterCache();
     }
 
@@ -1660,131 +1685,36 @@ function refreshMonsterArchive() {
    INITIALIZE CONTROLS
    ===================================================== */
 
-document
-    .getElementById("customMonsterCR")
-    .innerHTML =
-        customCROptions("1");
+document.getElementById("customMonsterCR").innerHTML = customCROptions("1");
 
+document.getElementById("addPartyGroup").addEventListener("click", () => {
+    addPartyRow(5, 1);
+    calculateEncounter();
+});
 
-document
-    .getElementById("addPartyGroup")
-    .addEventListener(
-        "click",
-        () => {
+document.getElementById("addCustomMonster").addEventListener("click", addCustomMonster);
+document.getElementById("calculateEncounter").addEventListener("click", calculateEncounter);
+document.getElementById("copyEncounter").addEventListener("click", copyEncounterReference);
+document.getElementById("copyEncounterReference").addEventListener("click", copyEncounterReference);
+document.getElementById("resetEncounter").addEventListener("click", resetEncounter);
+document.getElementById("refreshMonsterArchive").addEventListener("click", refreshMonsterArchive);
 
-            addPartyRow(
-                5,
-                1
-            );
+partyRows.addEventListener("input", calculateEncounter);
+partyRows.addEventListener("change", calculateEncounter);
+encounterTitle.addEventListener("input", updateEncounterReference);
 
-            calculateEncounter();
+monsterSearch.addEventListener("input", renderMonsterSearchResults);
+monsterTypeFilter.addEventListener("change", renderMonsterSearchResults);
 
-        }
-    );
+monsterRulesetFilter.addEventListener("change", () => {
+    refreshSourceFilter();
+    renderMonsterSearchResults();
+});
 
-
-document
-    .getElementById("addCustomMonster")
-    .addEventListener(
-        "click",
-        addCustomMonster
-    );
-
-
-document
-    .getElementById("calculateEncounter")
-    .addEventListener(
-        "click",
-        calculateEncounter
-    );
-
-
-document
-    .getElementById("copyEncounter")
-    .addEventListener(
-        "click",
-        copyEncounterReference
-    );
-
-
-document
-    .getElementById("copyEncounterReference")
-    .addEventListener(
-        "click",
-        copyEncounterReference
-    );
-
-
-document
-    .getElementById("resetEncounter")
-    .addEventListener(
-        "click",
-        resetEncounter
-    );
-
-
-document
-    .getElementById("refreshMonsterArchive")
-    .addEventListener(
-        "click",
-        refreshMonsterArchive
-    );
-
-
-partyRows.addEventListener(
-    "input",
-    calculateEncounter
-);
-
-
-partyRows.addEventListener(
-    "change",
-    calculateEncounter
-);
-
-
-encounterTitle.addEventListener(
-    "input",
-    updateEncounterReference
-);
-
-
-monsterSearch.addEventListener(
-    "input",
-    renderMonsterSearchResults
-);
-
-
-monsterRulesetFilter.addEventListener(
-    "change",
-    () => {
-
-        refreshSourceFilter();
-
-        renderMonsterSearchResults();
-
-    }
-);
-
-
-monsterSourceFilter.addEventListener(
-    "change",
-    renderMonsterSearchResults
-);
-
-
-monsterCRFilter.addEventListener(
-    "change",
-    renderMonsterSearchResults
-);
-
-
-/* =====================================================
-   START
-   ===================================================== */
+monsterSourceFilter.addEventListener("change", renderMonsterSearchResults);
+monsterCRFilter.addEventListener("change", renderMonsterSearchResults);
 
 resetEncounter();
-
 initializeMonsterDatabase();
 
 </script>
