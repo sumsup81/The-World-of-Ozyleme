@@ -1,4071 +1,1793 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <!-- =====================================================
+         OZYLEME DM TOOLS CONFIG
+         EASY-TO-CHANGE SETTINGS
+         ===================================================== -->
+    <script>
+        const DM_TOOLS_CONFIG = {
+            pageVersion: ".00003",
+            fiveEToolsBestiary: "https://5e.tools/bestiary.html",
+            maxSearchResults: 80
+        };
+    </script>
 
     <title>DM Utilities | Ozyleme</title>
-
     <link rel="stylesheet" href="style.css">
 
-
     <style>
-
         .dm-tools-main {
-            width: min(1180px, 92%);
+            width: min(1220px, 92%);
             margin: 0 auto;
             padding: 2rem 0 4rem;
         }
 
-
         .dm-tools-intro,
         .dm-tool-panel {
-
             background: rgba(26, 25, 22, .92);
-
             border: 1px solid #5b3a32;
-
             padding: 1.4rem;
-
             margin-bottom: 1.5rem;
         }
 
-
-        .dm-tools-intro {
-            text-align: center;
-        }
-
+        .dm-tools-intro { text-align: center; }
 
         .dm-tools-intro h2,
         .dm-tool-panel h2,
         .dm-tool-panel h3,
-        .dm-tool-panel h4 {
-
-            color: #d8d0bc;
-        }
-
+        .dm-tool-panel h4 { color: #d8d0bc; }
 
         .dm-tools-kicker {
-
             letter-spacing: .18em;
-
             text-transform: uppercase;
-
             font-size: .75rem;
-
             opacity: .7;
         }
 
-
-        /* =========================================
-           MAIN TOOL LAYOUT
-           ========================================= */
-
         .tool-columns {
-
             display: grid;
-
-            grid-template-columns:
-                .8fr
-                1.4fr;
-
+            grid-template-columns: .78fr 1.5fr;
             gap: 1rem;
-
             align-items: start;
         }
 
-
         .tool-box {
-
             border: 1px solid #47342e;
-
             padding: 1rem;
-
             background: rgba(0, 0, 0, .12);
         }
 
-
-        /* =========================================
-           PARTY
-           ========================================= */
+        .encounter-title-box { margin-bottom: 1rem; }
 
         .party-row {
-
             display: grid;
-
-            grid-template-columns:
-                1fr
-                1fr
-                auto;
-
+            grid-template-columns: 1fr 1fr auto;
             gap: .65rem;
-
             align-items: end;
-
             margin-bottom: .75rem;
-
             padding: .75rem;
-
-            border-bottom:
-                1px solid rgba(216, 208, 188, .14);
+            border-bottom: 1px solid rgba(216, 208, 188, .14);
         }
 
-
-        /* =========================================
-           FORM ELEMENTS
-           ========================================= */
-
         .dm-tools-page label {
-
             display: flex;
-
             flex-direction: column;
-
             gap: .3rem;
-
             font-size: .84rem;
         }
 
-
         .dm-tools-page input,
-        .dm-tools-page select {
-
+        .dm-tools-page select,
+        .dm-tools-page textarea {
             width: 100%;
-
             box-sizing: border-box;
-
             background: #11110f;
-
             color: #e2dac7;
-
             border: 1px solid #65483e;
-
             padding: .7rem;
-
             font: inherit;
         }
 
+        .dm-tools-page textarea {
+            min-height: 70px;
+            resize: vertical;
+        }
 
-        /* =========================================
-           BUTTONS
-           ========================================= */
-
-        .dm-tools-page button {
-
+        .dm-tools-page button,
+        .utility-link-button {
+            display: inline-block;
+            box-sizing: border-box;
             background: #2a211d;
-
             color: #e2dac7;
-
             border: 1px solid #755044;
-
             padding: .7rem 1rem;
-
             font: inherit;
-
+            text-decoration: none;
             cursor: pointer;
         }
 
-
-        .dm-tools-page button:hover {
-
-            background: #382a25;
-        }
-
+        .dm-tools-page button:hover,
+        .utility-link-button:hover { background: #382a25; }
 
         .dm-tools-page button:disabled {
-
             opacity: .45;
-
             cursor: not-allowed;
         }
 
-
-        .row-remove {
-
-            padding: .66rem .8rem;
-        }
-
+        .row-remove { padding: .66rem .8rem; }
 
         .tool-actions {
-
             display: flex;
-
             flex-wrap: wrap;
-
             gap: .7rem;
-
             margin-top: 1rem;
         }
 
+        .primary-action { font-weight: 700; }
 
-        .primary-action {
-
-            font-weight: 700;
-        }
-
-
-        /* =========================================
-           MONSTER LIBRARY
-           ========================================= */
-
-        .monster-library {
-
-            margin-top: .7rem;
-        }
-
+        .monster-library { margin-top: .7rem; }
 
         .monster-search-controls {
-
             display: grid;
-
-            grid-template-columns:
-                1.5fr
-                .8fr
-                .7fr;
-
+            grid-template-columns: 1.5fr .9fr .9fr .7fr;
             gap: .65rem;
-
             margin-bottom: .7rem;
         }
 
-
-        .database-status {
-
-            font-size: .82rem;
-
-            opacity: .75;
-
-            margin: .45rem 0 .7rem;
+        .database-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .55rem;
+            align-items: center;
+            justify-content: space-between;
+            margin: .45rem 0 .75rem;
         }
 
+        .database-status {
+            font-size: .82rem;
+            opacity: .75;
+        }
 
-        /* =========================================
-           SEARCH RESULTS
-           ========================================= */
+        .database-toolbar-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .45rem;
+        }
+
+        .database-toolbar-actions button,
+        .database-toolbar-actions .utility-link-button {
+            padding: .5rem .7rem;
+            font-size: .78rem;
+        }
 
         .monster-results {
-
             border: 1px solid #47342e;
-
-            max-height: 360px;
-
+            max-height: 390px;
             overflow-y: auto;
-
             background: rgba(0, 0, 0, .14);
         }
 
-
         .monster-result {
-
             display: grid;
-
-            grid-template-columns:
-                1fr
-                auto;
-
+            grid-template-columns: 1fr auto;
             gap: .8rem;
-
             align-items: center;
-
             padding: .72rem .8rem;
-
-            border-bottom:
-                1px solid rgba(216, 208, 188, .1);
+            border-bottom: 1px solid rgba(216, 208, 188, .1);
         }
 
-
-        .monster-result:last-child {
-
-            border-bottom: 0;
-        }
-
+        .monster-result:last-child { border-bottom: 0; }
 
         .monster-result-name,
         .encounter-monster-name {
-
             font-weight: 700;
-
             color: #e2dac7;
         }
 
-
         .monster-meta {
-
             margin-top: .2rem;
-
             font-size: .78rem;
-
             opacity: .72;
+            line-height: 1.45;
         }
 
-
-        .monster-result button {
-
-            padding: .48rem .75rem;
+        .monster-source-line {
+            margin-top: .15rem;
+            font-size: .72rem;
+            opacity: .55;
         }
 
+        .monster-result button { padding: .48rem .75rem; }
 
         .result-limit-note,
         .empty-note {
-
             opacity: .65;
-
             font-style: italic;
         }
 
-
         .result-limit-note {
-
             padding: .65rem .8rem;
-
             margin: 0;
-
-            border-top:
-                1px solid rgba(216, 208, 188, .1);
+            border-top: 1px solid rgba(216, 208, 188, .1);
         }
 
-
-        /* =========================================
-           ENCOUNTER MONSTER LIST
-           ========================================= */
-
         .encounter-builder {
-
             margin-top: 1.2rem;
-
             border-top: 1px solid #5b3a32;
-
             padding-top: 1rem;
         }
 
-
         .encounter-monsters {
-
             border: 1px solid #47342e;
-
             background: rgba(0, 0, 0, .12);
         }
 
-
         .encounter-empty {
-
             padding: .9rem;
-
             opacity: .65;
-
             font-style: italic;
         }
 
-
         .encounter-monster-row {
+            padding: .85rem;
+            border-bottom: 1px solid rgba(216, 208, 188, .1);
+        }
 
+        .encounter-monster-row:last-child { border-bottom: 0; }
+
+        .encounter-monster-top {
             display: grid;
-
-            grid-template-columns:
-                1fr
-                auto
-                auto
-                auto
-                auto;
-
+            grid-template-columns: 1fr auto auto auto auto;
             gap: .45rem;
-
             align-items: center;
-
-            padding: .75rem;
-
-            border-bottom:
-                1px solid rgba(216, 208, 188, .1);
         }
 
+        .encounter-monster-info { min-width: 0; }
 
-        .encounter-monster-row:last-child {
-
-            border-bottom: 0;
+        .base-creature-label {
+            margin-top: .2rem;
+            font-size: .78rem;
+            opacity: .72;
         }
 
-
-        .encounter-monster-row .quantity-button {
-
+        .encounter-monster-top .quantity-button {
             width: 2.4rem;
-
             height: 2.4rem;
-
             padding: 0;
         }
 
-
-        .encounter-monster-row .monster-quantity {
-
+        .encounter-monster-top .monster-quantity {
             width: 4.2rem;
-
             text-align: center;
-
             padding: .55rem .25rem;
         }
 
+        .encounter-monster-top .remove-monster { padding: .55rem .7rem; }
 
-        .encounter-monster-row .remove-monster {
-
-            padding: .55rem .7rem;
+        .encounter-custom-fields {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr auto;
+            gap: .6rem;
+            align-items: end;
+            margin-top: .75rem;
         }
 
+        .encounter-custom-fields textarea { min-height: 58px; }
 
-        /* =========================================
-           CUSTOM MONSTERS
-           ========================================= */
+        .lookup-button { padding: .58rem .7rem !important; }
 
         .custom-monster-box {
-
             margin-top: .9rem;
-
             border: 1px solid #47342e;
-
             padding: .8rem;
-
             background: rgba(0, 0, 0, .1);
         }
 
-
         .custom-monster-box summary {
-
             cursor: pointer;
-
             font-weight: 700;
-
             color: #d8d0bc;
         }
 
-
         .custom-monster-fields {
-
             display: grid;
-
-            grid-template-columns:
-                1.4fr
-                .8fr
-                .6fr
-                auto;
-
+            grid-template-columns: 1.4fr .8fr .6fr auto;
             gap: .6rem;
-
             align-items: end;
-
             margin-top: .8rem;
         }
 
-
-        /* =========================================
-           RESULTS
-           ========================================= */
-
         .results {
-
             margin-top: 1.4rem;
-
             border-top: 1px solid #5b3a32;
-
             padding-top: 1.2rem;
         }
 
-
         .result-grid {
-
             display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
+            grid-template-columns: repeat(3, 1fr);
             gap: .75rem;
         }
 
-
         .result-card {
-
             border: 1px solid #47342e;
-
             padding: .9rem;
-
             text-align: center;
-
             background: rgba(0, 0, 0, .12);
         }
 
-
         .result-label {
-
             display: block;
-
             font-size: .75rem;
-
             letter-spacing: .08em;
-
             text-transform: uppercase;
-
             opacity: .7;
-
             margin-bottom: .3rem;
         }
 
-
         .result-value {
-
             font-size: 1.35rem;
-
             font-weight: 700;
         }
 
-
-        /* =========================================
-           DIFFICULTY
-           ========================================= */
-
         .difficulty-banner {
-
             margin-top: .9rem;
-
             padding: 1rem;
-
             border: 1px solid #755044;
-
             text-align: center;
         }
 
-
-        .difficulty-banner strong {
-
-            font-size: 1.35rem;
-        }
-
-
-        /* =========================================
-           WARNINGS
-           ========================================= */
+        .difficulty-banner strong { font-size: 1.35rem; }
 
         .warnings {
-
             margin-top: 1rem;
-
             padding: .9rem 1rem;
-
             border-left: 3px solid #755044;
-
             background: rgba(0, 0, 0, .12);
         }
 
-
         .warnings ul {
-
             margin: .5rem 0 0 1.25rem;
-
             padding: 0;
         }
 
+        .reference-panel {
+            margin-top: 1.3rem;
+            border-top: 1px solid #5b3a32;
+            padding-top: 1.1rem;
+        }
 
-        /* =========================================
-           SRD ATTRIBUTION
-           ========================================= */
+        .reference-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .7rem;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: .7rem;
+        }
 
-        .srd-attribution {
+        .copy-status {
+            min-height: 1.2em;
+            font-size: .8rem;
+            opacity: .72;
+        }
 
-            margin-top: 1.2rem;
-
-            padding-top: .8rem;
-
-            border-top:
-                1px solid rgba(216, 208, 188, .12);
-
-            font-size: .72rem;
-
-            opacity: .55;
-
+        .encounter-output {
+            box-sizing: border-box;
+            width: 100%;
+            min-height: 280px;
+            max-height: 520px;
+            overflow: auto;
+            white-space: pre-wrap;
+            background: #11110f;
+            color: #e2dac7;
+            border: 1px solid #47342e;
+            padding: 1rem;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: .82rem;
             line-height: 1.5;
         }
 
-
-        .srd-attribution a {
-
-            color: inherit;
+        .srd-attribution {
+            margin-top: 1.2rem;
+            padding-top: .8rem;
+            border-top: 1px solid rgba(216, 208, 188, .12);
+            font-size: .72rem;
+            opacity: .55;
+            line-height: 1.5;
         }
 
-
-        /* =========================================
-           VERSION
-           ========================================= */
+        .srd-attribution a { color: inherit; }
 
         .version-mark {
-
             text-align: center;
-
             opacity: .45;
-
             font-size: .75rem;
-
             margin-top: 2rem;
         }
 
-
-        /* =========================================
-           TABLET
-           ========================================= */
-
-        @media (max-width: 900px) {
-
-            .tool-columns {
-
-                grid-template-columns: 1fr;
-            }
-
-
-            .monster-search-controls {
-
-                grid-template-columns:
-                    1fr
-                    1fr;
-            }
-
-
-            .monster-search-controls
-            .monster-search-field {
-
-                grid-column: 1 / -1;
-            }
-
+        @media (max-width: 1000px) {
+            .tool-columns { grid-template-columns: 1fr; }
+            .monster-search-controls { grid-template-columns: 1fr 1fr; }
+            .monster-search-controls .monster-search-field { grid-column: 1 / -1; }
         }
 
-
-        /* =========================================
-           SMALL TABLET
-           ========================================= */
-
-        @media (max-width: 700px) {
-
+        @media (max-width: 760px) {
             .party-row,
-            .custom-monster-fields {
+            .custom-monster-fields,
+            .encounter-custom-fields { grid-template-columns: 1fr 1fr; }
 
-                grid-template-columns:
-                    1fr
-                    1fr;
-            }
+            .custom-monster-fields .custom-name-field,
+            .encounter-custom-fields .monster-note-field { grid-column: 1 / -1; }
 
-
-            .custom-monster-fields
-            .custom-name-field {
-
-                grid-column: 1 / -1;
-            }
-
-
-            .encounter-monster-row {
-
-                grid-template-columns:
-                    1fr
-                    auto
-                    auto
-                    auto;
-            }
-
-
-            .encounter-monster-row
-            .encounter-monster-info {
-
-                grid-column: 1 / -1;
-            }
-
-
-            .result-grid {
-
-                grid-template-columns:
-                    1fr
-                    1fr;
-            }
-
+            .encounter-monster-top { grid-template-columns: 1fr auto auto auto; }
+            .encounter-monster-top .encounter-monster-info { grid-column: 1 / -1; }
+            .result-grid { grid-template-columns: 1fr 1fr; }
         }
-
-
-        /* =========================================
-           MOBILE
-           ========================================= */
 
         @media (max-width: 520px) {
-
             .party-row,
             .monster-search-controls,
             .custom-monster-fields,
-            .result-grid {
+            .encounter-custom-fields,
+            .result-grid { grid-template-columns: 1fr; }
 
-                grid-template-columns: 1fr;
-            }
-
-
-            .monster-search-controls
-            .monster-search-field,
-            .custom-monster-fields
-            .custom-name-field {
-
-                grid-column: auto;
-            }
-
+            .monster-search-controls .monster-search-field,
+            .custom-monster-fields .custom-name-field,
+            .encounter-custom-fields .monster-note-field { grid-column: auto; }
 
             .row-remove,
-            .custom-monster-fields button {
+            .custom-monster-fields button,
+            .lookup-button { width: 100%; }
 
-                width: 100%;
-            }
+            .monster-result { grid-template-columns: 1fr; }
+            .monster-result button { width: 100%; }
 
+            .encounter-monster-top { grid-template-columns: auto 1fr auto; }
+            .encounter-monster-top .encounter-monster-info { grid-column: 1 / -1; }
+            .encounter-monster-top .monster-quantity { width: 100%; }
+            .encounter-monster-top .remove-monster { grid-column: 1 / -1; width: 100%; }
 
-            .monster-result {
-
-                grid-template-columns: 1fr;
-            }
-
-
-            .monster-result button {
-
-                width: 100%;
-            }
-
-
-            .encounter-monster-row {
-
-                grid-template-columns:
-                    auto
-                    1fr
-                    auto;
-            }
-
-
-            .encounter-monster-row
-            .encounter-monster-info {
-
-                grid-column: 1 / -1;
-            }
-
-
-            .encounter-monster-row
-            .monster-quantity {
-
-                width: 100%;
-            }
-
-
-            .encounter-monster-row
-            .remove-monster {
-
-                grid-column: 1 / -1;
-
-                width: 100%;
-            }
-
+            .database-toolbar,
+            .reference-toolbar { align-items: stretch; }
         }
-
     </style>
-
 </head>
-
 
 <body class="dm-tools-page">
 
-
-<!-- =========================================
-     HEADER
-     ========================================= -->
-
 <header>
-
     <h1></h1>
-
-    <p>
-        Tools Kept Beyond the Player's Eye
-    </p>
-
+    <p>Tools Kept Beyond the Player's Eye</p>
 </header>
 
-
-<!-- =========================================
-     NAVIGATION
-
-     DM Tools remains intentionally hidden.
-     ========================================= -->
-
 <nav class="site-nav">
-
-    <a class="nav-link"
-       href="index.html">
-        Home
-    </a>
-
-    <a class="nav-link"
-       href="kingdoms.html">
-        Kingdoms
-    </a>
-
-    <a class="nav-link"
-       href="species.html">
-        Species
-    </a>
-
-    <a class="nav-link"
-       href="people.html">
-        People
-    </a>
-
-    <a class="nav-link"
-       href="gods.html">
-        Gods
-    </a>
-
-    <a class="nav-link"
-       href="bestiary.html">
-        Bestiary
-    </a>
-
-    <a class="nav-link"
-       href="classes.html">
-        Classes
-    </a>
-
-    <a class="nav-link"
-       href="player-guide.html">
-        Player Guide
-    </a>
-
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="kingdoms.html">Kingdoms</a>
+    <a class="nav-link" href="species.html">Species</a>
+    <a class="nav-link" href="people.html">People</a>
+    <a class="nav-link" href="gods.html">Gods</a>
+    <a class="nav-link" href="bestiary.html">Bestiary</a>
+    <a class="nav-link" href="classes.html">Classes</a>
+    <a class="nav-link" href="player-guide.html">Player Guide</a>
 </nav>
-
-
-<!-- =========================================
-     MAIN
-     ========================================= -->
 
 <main class="dm-tools-main">
 
-
-    <!-- =====================================
-         INTRODUCTION
-         ===================================== -->
-
     <section class="dm-tools-intro">
-
-        <div class="dm-tools-kicker">
-            Dungeon Master's Utility Page
-        </div>
-
-        <h2>
-            The Lore Keeper's Cabinet
-        </h2>
-
+        <div class="dm-tools-kicker">Dungeon Master's Utility Page</div>
+        <h2>The Lore Keeper's Cabinet</h2>
         <p>
             Calculators, generators, and other instruments
             for things the players are better off not seeing.
         </p>
-
     </section>
-
 
     <div class="divider"></div>
 
+    <section class="dm-tool-panel" id="combat-calculator">
 
-    <!-- =====================================
-         COMBAT CALCULATOR
-         ===================================== -->
-
-    <section class="dm-tool-panel"
-             id="combat-calculator">
-
-
-        <h2>
-            Combat Calculator
-        </h2>
-
+        <h2>Combat Calculator</h2>
 
         <p>
-            Build the party, search the monster archive,
-            and add creatures to the encounter.
-            Difficulty uses the 2024 / 5.5e
-            Low, Moderate, and High XP budgets.
+            Build the party, search the monster archive, rename or reskin creatures,
+            add encounter notes, and produce a clean DM reference list.
+            Difficulty uses the 2024 / 5.5e Low, Moderate, and High XP budgets.
         </p>
 
+        <div class="encounter-title-box">
+            <label>
+                Encounter Name
+                <input
+                    id="encounterTitle"
+                    type="text"
+                    placeholder="The Reed Road Ambush"
+                    autocomplete="off">
+            </label>
+        </div>
 
         <div class="tool-columns">
 
-
-            <!-- =============================
-                 PARTY
-                 ============================= -->
-
             <div class="tool-box">
-
-                <h3>
-                    Adventurers
-                </h3>
-
-
+                <h3>Adventurers</h3>
                 <p class="empty-note">
-
-                    Use multiple rows if the party
-                    contains characters of different levels.
-
+                    Use multiple rows if the party contains characters of different levels.
                 </p>
-
-
                 <div id="partyRows"></div>
-
-
-                <button type="button"
-                        id="addPartyGroup">
-
-                    + Add Level Group
-
-                </button>
-
+                <button type="button" id="addPartyGroup">+ Add Level Group</button>
             </div>
 
-
-
-            <!-- =============================
-                 MONSTER LIBRARY
-                 ============================= -->
-
             <div class="tool-box">
-
-                <h3>
-                    Opposition
-                </h3>
-
-
+                <h3>Opposition</h3>
                 <p class="empty-note">
-
-                    Search the SRD monster archive
-                    and add creatures directly to the encounter.
-
+                    Search the open monster archive. Use the ruleset and source filters
+                    to distinguish 2024, 2014, third-party, and Ozyleme material.
                 </p>
-
 
                 <div class="monster-library">
 
-
-                    <!-- SEARCH / FILTERS -->
-
                     <div class="monster-search-controls">
-
-
                         <label class="monster-search-field">
-
                             Search Monsters
-
                             <input
                                 id="monsterSearch"
                                 type="search"
                                 placeholder="Try goblin, dragon, wolf..."
                                 autocomplete="off">
-
                         </label>
 
-
-
                         <label>
-
-                            Creature Type
-
-                            <select id="monsterTypeFilter">
-
-                                <option value="">
-                                    All Types
-                                </option>
-
+                            Ruleset
+                            <select id="monsterRulesetFilter">
+                                <option value="">All Rulesets</option>
                             </select>
-
                         </label>
 
-
+                        <label>
+                            Source
+                            <select id="monsterSourceFilter">
+                                <option value="">All Sources</option>
+                            </select>
+                        </label>
 
                         <label>
-
                             CR
-
                             <select id="monsterCRFilter">
-
-                                <option value="">
-                                    All CRs
-                                </option>
-
+                                <option value="">All CRs</option>
                             </select>
-
                         </label>
-
-
                     </div>
 
-
-                    <!-- DATABASE STATUS -->
-
-                    <div class="database-status"
-                         id="monsterDatabaseStatus">
-
-                        Loading monster archive...
-
-                    </div>
-
-
-                    <!-- MONSTER SEARCH RESULTS -->
-
-                    <div class="monster-results"
-                         id="monsterSearchResults">
-
-                        <div class="encounter-empty">
-
-                            Loading creatures...
-
+                    <div class="database-toolbar">
+                        <div class="database-status" id="monsterDatabaseStatus">
+                            Loading monster archive...
                         </div>
 
+                        <div class="database-toolbar-actions">
+                            <button type="button" id="refreshMonsterArchive">
+                                Refresh Archive
+                            </button>
+
+                            <a
+                                id="fiveEToolsTopLink"
+                                class="utility-link-button"
+                                href="#"
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                Open 5etools Bestiary
+                            </a>
+                        </div>
                     </div>
 
-
+                    <div class="monster-results" id="monsterSearchResults">
+                        <div class="encounter-empty">Loading creatures...</div>
+                    </div>
                 </div>
 
-
-
-                <!-- =========================
-                     ENCOUNTER LIST
-                     ========================= -->
-
                 <div class="encounter-builder">
+                    <h4>Encounter Monsters</h4>
 
-
-                    <h4>
-                        Encounter Monsters
-                    </h4>
-
-
-                    <div class="encounter-monsters"
-                         id="encounterMonsterRows">
-
-                        <div class="encounter-empty">
-
-                            No monsters have been added yet.
-
-                        </div>
-
+                    <div class="encounter-monsters" id="encounterMonsterRows">
+                        <div class="encounter-empty">No monsters have been added yet.</div>
                     </div>
 
-
-
-                    <!-- =====================
-                         CUSTOM MONSTER
-                         ===================== -->
-
                     <details class="custom-monster-box">
-
-
-                        <summary>
-
-                            + Add a Custom / Ozyleme Creature
-
-                        </summary>
-
+                        <summary>+ Add a Custom / Ozyleme Creature</summary>
 
                         <div class="custom-monster-fields">
-
-
                             <label class="custom-name-field">
-
-                                Creature Name
-
+                                Base Creature Name
                                 <input
                                     id="customMonsterName"
                                     type="text"
                                     placeholder="Feral Halfling">
-
                             </label>
 
-
-
                             <label>
-
                                 CR
-
                                 <select id="customMonsterCR"></select>
-
                             </label>
 
-
-
                             <label>
-
                                 Count
-
                                 <input
                                     id="customMonsterCount"
                                     type="number"
                                     min="1"
                                     max="100"
                                     value="1">
-
                             </label>
 
-
-
-                            <button type="button"
-                                    id="addCustomMonster">
-
-                                Add
-
-                            </button>
-
-
+                            <button type="button" id="addCustomMonster">Add</button>
                         </div>
-
-
                     </details>
-
-
                 </div>
-
-
             </div>
-
-
         </div>
-
-
-
-        <!-- =============================
-             ACTION BUTTONS
-             ============================= -->
 
         <div class="tool-actions">
-
-
-            <button type="button"
-                    class="primary-action"
-                    id="calculateEncounter">
-
+            <button type="button" class="primary-action" id="calculateEncounter">
                 Calculate Encounter
-
             </button>
 
+            <button type="button" id="copyEncounter">
+                Copy Encounter
+            </button>
 
-            <button type="button"
-                    id="resetEncounter">
-
+            <button type="button" id="resetEncounter">
                 Reset Encounter
-
             </button>
-
-
         </div>
 
-
-
-        <!-- =============================
-             RESULTS
-             ============================= -->
-
-        <div class="results"
-             id="combatResults"
-             aria-live="polite">
-
-
+        <div class="results" id="combatResults" aria-live="polite">
             <div class="result-grid">
-
-
                 <div class="result-card">
-
-                    <span class="result-label">
-                        Party Size
-                    </span>
-
-                    <span class="result-value"
-                          id="partySizeResult">
-                        —
-                    </span>
-
+                    <span class="result-label">Party Size</span>
+                    <span class="result-value" id="partySizeResult">—</span>
                 </div>
 
-
-
                 <div class="result-card">
-
-                    <span class="result-label">
-                        Enemy XP
-                    </span>
-
-                    <span class="result-value"
-                          id="enemyXpResult">
-                        —
-                    </span>
-
+                    <span class="result-label">Enemy XP</span>
+                    <span class="result-value" id="enemyXpResult">—</span>
                 </div>
 
-
-
                 <div class="result-card">
-
-                    <span class="result-label">
-                        Low Budget
-                    </span>
-
-                    <span class="result-value"
-                          id="lowBudgetResult">
-                        —
-                    </span>
-
+                    <span class="result-label">Low Budget</span>
+                    <span class="result-value" id="lowBudgetResult">—</span>
                 </div>
 
-
-
                 <div class="result-card">
-
-                    <span class="result-label">
-                        Moderate Budget
-                    </span>
-
-                    <span class="result-value"
-                          id="moderateBudgetResult">
-                        —
-                    </span>
-
+                    <span class="result-label">Moderate Budget</span>
+                    <span class="result-value" id="moderateBudgetResult">—</span>
                 </div>
 
-
-
                 <div class="result-card">
-
-                    <span class="result-label">
-                        High Budget
-                    </span>
-
-                    <span class="result-value"
-                          id="highBudgetResult">
-                        —
-                    </span>
-
+                    <span class="result-label">High Budget</span>
+                    <span class="result-value" id="highBudgetResult">—</span>
                 </div>
 
-
-
                 <div class="result-card">
-
-                    <span class="result-label">
-                        Enemy Count
-                    </span>
-
-                    <span class="result-value"
-                          id="enemyCountResult">
-                        —
-                    </span>
-
+                    <span class="result-label">Enemy Count</span>
+                    <span class="result-value" id="enemyCountResult">—</span>
                 </div>
-
-
             </div>
 
-
-
-            <!-- =========================
-                 DIFFICULTY
-                 ========================= -->
-
-            <div class="difficulty-banner"
-                 id="difficultyBanner">
-
-
-                <span class="result-label">
-
-                    Encounter Difficulty
-
-                </span>
-
-
-                <strong id="difficultyResult">
-
-                    Not Calculated
-
-                </strong>
-
-
+            <div class="difficulty-banner" id="difficultyBanner">
+                <span class="result-label">Encounter Difficulty</span>
+                <strong id="difficultyResult">Not Calculated</strong>
                 <div id="difficultyDetail"></div>
-
-
             </div>
 
-
-
-            <!-- =========================
-                 WARNINGS
-                 ========================= -->
-
-            <div class="warnings"
-                 id="combatWarnings"
-                 hidden>
-
-
-                <strong>
-
-                    DM Warnings
-
-                </strong>
-
-
+            <div class="warnings" id="combatWarnings" hidden>
+                <strong>DM Warnings</strong>
                 <ul id="warningList"></ul>
-
-
             </div>
-
-
         </div>
 
+        <div class="reference-panel">
+            <div class="reference-toolbar">
+                <div>
+                    <h3>Encounter Reference</h3>
+                    <div class="copy-status" id="copyStatus"></div>
+                </div>
 
+                <button type="button" id="copyEncounterReference">
+                    Copy Reference
+                </button>
+            </div>
 
-        <!-- =============================
-             SRD ATTRIBUTION
-             ============================= -->
+            <pre class="encounter-output" id="encounterOutputPreview">No encounter built yet.</pre>
+        </div>
 
         <div class="srd-attribution">
-
-            This tool includes material from the
-            Dungeons &amp; Dragons System Reference
-            Document 5.2.1 by Wizards of the Coast LLC,
-            available under the Creative Commons
-            Attribution 4.0 International License.
-
-            <a href="https://www.dndbeyond.com/srd"
-               target="_blank"
-               rel="noopener noreferrer">
-
-                SRD 5.2.1
-
-            </a>
-
-            ·
-
-            <a href="https://creativecommons.org/licenses/by/4.0/"
-               target="_blank"
-               rel="noopener noreferrer">
-
-                CC BY 4.0
-
-            </a>
-
+            This tool uses openly licensed creature data supplied through Open5e.
+            SRD 5.2.1 material from Wizards of the Coast LLC is available under
+            the Creative Commons Attribution 4.0 International License.
+            The 5etools button opens an external reference site; paid-book content
+            is not copied into the Ozyleme database.
         </div>
-
 
     </section>
 
-
-
-    <!-- =====================================
-         VERSION
-         ===================================== -->
-
     <p class="version-mark">
-
-        Version .00002
-
+        Version <span id="pageVersion"></span>
     </p>
-
 
 </main>
 
-
-
-<!-- =====================================================
-     MONSTER DATABASE
-
-     Must load before calculator JavaScript.
-     ===================================================== -->
-
 <script src="data/monsters.js"></script>
 
-
-
-<!-- =====================================================
-     COMBAT CALCULATOR JAVASCRIPT
-     ===================================================== -->
-
 <script>
-
 
 /* =====================================================
    2024 / 5.5e XP BUDGETS
    ===================================================== */
 
 const XP_BUDGETS = {
-
-    1: {
-        low: 50,
-        moderate: 75,
-        high: 100
-    },
-
-    2: {
-        low: 100,
-        moderate: 150,
-        high: 200
-    },
-
-    3: {
-        low: 150,
-        moderate: 225,
-        high: 400
-    },
-
-    4: {
-        low: 250,
-        moderate: 375,
-        high: 500
-    },
-
-    5: {
-        low: 500,
-        moderate: 750,
-        high: 1100
-    },
-
-    6: {
-        low: 600,
-        moderate: 1000,
-        high: 1400
-    },
-
-    7: {
-        low: 750,
-        moderate: 1300,
-        high: 1700
-    },
-
-    8: {
-        low: 1000,
-        moderate: 1700,
-        high: 2100
-    },
-
-    9: {
-        low: 1300,
-        moderate: 2000,
-        high: 2600
-    },
-
-    10: {
-        low: 1600,
-        moderate: 2300,
-        high: 3100
-    },
-
-    11: {
-        low: 1900,
-        moderate: 2900,
-        high: 4100
-    },
-
-    12: {
-        low: 2200,
-        moderate: 3700,
-        high: 4700
-    },
-
-    13: {
-        low: 2600,
-        moderate: 4200,
-        high: 5400
-    },
-
-    14: {
-        low: 2900,
-        moderate: 4900,
-        high: 6200
-    },
-
-    15: {
-        low: 3300,
-        moderate: 5400,
-        high: 7800
-    },
-
-    16: {
-        low: 3800,
-        moderate: 6100,
-        high: 9800
-    },
-
-    17: {
-        low: 4500,
-        moderate: 7200,
-        high: 11700
-    },
-
-    18: {
-        low: 5000,
-        moderate: 8700,
-        high: 14200
-    },
-
-    19: {
-        low: 5500,
-        moderate: 10700,
-        high: 17200
-    },
-
-    20: {
-        low: 6400,
-        moderate: 13200,
-        high: 22000
-    }
-
+    1:  { low: 50,   moderate: 75,    high: 100 },
+    2:  { low: 100,  moderate: 150,   high: 200 },
+    3:  { low: 150,  moderate: 225,   high: 400 },
+    4:  { low: 250,  moderate: 375,   high: 500 },
+    5:  { low: 500,  moderate: 750,   high: 1100 },
+    6:  { low: 600,  moderate: 1000,  high: 1400 },
+    7:  { low: 750,  moderate: 1300,  high: 1700 },
+    8:  { low: 1000, moderate: 1700,  high: 2100 },
+    9:  { low: 1300, moderate: 2000,  high: 2600 },
+    10: { low: 1600, moderate: 2300,  high: 3100 },
+    11: { low: 1900, moderate: 2900,  high: 4100 },
+    12: { low: 2200, moderate: 3700,  high: 4700 },
+    13: { low: 2600, moderate: 4200,  high: 5400 },
+    14: { low: 2900, moderate: 4900,  high: 6200 },
+    15: { low: 3300, moderate: 5400,  high: 7800 },
+    16: { low: 3800, moderate: 6100,  high: 9800 },
+    17: { low: 4500, moderate: 7200,  high: 11700 },
+    18: { low: 5000, moderate: 8700,  high: 14200 },
+    19: { low: 5500, moderate: 10700, high: 17200 },
+    20: { low: 6400, moderate: 13200, high: 22000 }
 };
 
 
-
 /* =====================================================
-   CR / XP TABLE
-
-   Used for custom Ozyleme monsters.
+   CR / XP TABLE FOR CUSTOM CREATURES
    ===================================================== */
 
 const CR_OPTIONS = [
-
-    {
-        key: "0-0",
-        label: "0 — 0 XP",
-        cr: 0,
-        xp: 0
-    },
-
-    {
-        key: "0-10",
-        label: "0 — 10 XP",
-        cr: 0,
-        xp: 10
-    },
-
-    {
-        key: "1/8",
-        label: "1/8 — 25 XP",
-        cr: .125,
-        xp: 25
-    },
-
-    {
-        key: "1/4",
-        label: "1/4 — 50 XP",
-        cr: .25,
-        xp: 50
-    },
-
-    {
-        key: "1/2",
-        label: "1/2 — 100 XP",
-        cr: .5,
-        xp: 100
-    },
-
-    {
-        key: "1",
-        label: "1 — 200 XP",
-        cr: 1,
-        xp: 200
-    },
-
-    {
-        key: "2",
-        label: "2 — 450 XP",
-        cr: 2,
-        xp: 450
-    },
-
-    {
-        key: "3",
-        label: "3 — 700 XP",
-        cr: 3,
-        xp: 700
-    },
-
-    {
-        key: "4",
-        label: "4 — 1,100 XP",
-        cr: 4,
-        xp: 1100
-    },
-
-    {
-        key: "5",
-        label: "5 — 1,800 XP",
-        cr: 5,
-        xp: 1800
-    },
-
-    {
-        key: "6",
-        label: "6 — 2,300 XP",
-        cr: 6,
-        xp: 2300
-    },
-
-    {
-        key: "7",
-        label: "7 — 2,900 XP",
-        cr: 7,
-        xp: 2900
-    },
-
-    {
-        key: "8",
-        label: "8 — 3,900 XP",
-        cr: 8,
-        xp: 3900
-    },
-
-    {
-        key: "9",
-        label: "9 — 5,000 XP",
-        cr: 9,
-        xp: 5000
-    },
-
-    {
-        key: "10",
-        label: "10 — 5,900 XP",
-        cr: 10,
-        xp: 5900
-    },
-
-    {
-        key: "11",
-        label: "11 — 7,200 XP",
-        cr: 11,
-        xp: 7200
-    },
-
-    {
-        key: "12",
-        label: "12 — 8,400 XP",
-        cr: 12,
-        xp: 8400
-    },
-
-    {
-        key: "13",
-        label: "13 — 10,000 XP",
-        cr: 13,
-        xp: 10000
-    },
-
-    {
-        key: "14",
-        label: "14 — 11,500 XP",
-        cr: 14,
-        xp: 11500
-    },
-
-    {
-        key: "15",
-        label: "15 — 13,000 XP",
-        cr: 15,
-        xp: 13000
-    },
-
-    {
-        key: "16",
-        label: "16 — 15,000 XP",
-        cr: 16,
-        xp: 15000
-    },
-
-    {
-        key: "17",
-        label: "17 — 18,000 XP",
-        cr: 17,
-        xp: 18000
-    },
-
-    {
-        key: "18",
-        label: "18 — 20,000 XP",
-        cr: 18,
-        xp: 20000
-    },
-
-    {
-        key: "19",
-        label: "19 — 22,000 XP",
-        cr: 19,
-        xp: 22000
-    },
-
-    {
-        key: "20",
-        label: "20 — 25,000 XP",
-        cr: 20,
-        xp: 25000
-    },
-
-    {
-        key: "21",
-        label: "21 — 33,000 XP",
-        cr: 21,
-        xp: 33000
-    },
-
-    {
-        key: "22",
-        label: "22 — 41,000 XP",
-        cr: 22,
-        xp: 41000
-    },
-
-    {
-        key: "23",
-        label: "23 — 50,000 XP",
-        cr: 23,
-        xp: 50000
-    },
-
-    {
-        key: "24",
-        label: "24 — 62,000 XP",
-        cr: 24,
-        xp: 62000
-    },
-
-    {
-        key: "25",
-        label: "25 — 75,000 XP",
-        cr: 25,
-        xp: 75000
-    },
-
-    {
-        key: "26",
-        label: "26 — 90,000 XP",
-        cr: 26,
-        xp: 90000
-    },
-
-    {
-        key: "27",
-        label: "27 — 105,000 XP",
-        cr: 27,
-        xp: 105000
-    },
-
-    {
-        key: "28",
-        label: "28 — 120,000 XP",
-        cr: 28,
-        xp: 120000
-    },
-
-    {
-        key: "29",
-        label: "29 — 135,000 XP",
-        cr: 29,
-        xp: 135000
-    },
-
-    {
-        key: "30",
-        label: "30 — 155,000 XP",
-        cr: 30,
-        xp: 155000
-    }
-
+    { key: "0-0",  label: "0 — 0 XP",       cr: 0,    xp: 0 },
+    { key: "0-10", label: "0 — 10 XP",      cr: 0,    xp: 10 },
+    { key: "1/8",  label: "1/8 — 25 XP",    cr: .125, xp: 25 },
+    { key: "1/4",  label: "1/4 — 50 XP",    cr: .25,  xp: 50 },
+    { key: "1/2",  label: "1/2 — 100 XP",   cr: .5,   xp: 100 },
+    { key: "1",  label: "1 — 200 XP",       cr: 1,  xp: 200 },
+    { key: "2",  label: "2 — 450 XP",       cr: 2,  xp: 450 },
+    { key: "3",  label: "3 — 700 XP",       cr: 3,  xp: 700 },
+    { key: "4",  label: "4 — 1,100 XP",     cr: 4,  xp: 1100 },
+    { key: "5",  label: "5 — 1,800 XP",     cr: 5,  xp: 1800 },
+    { key: "6",  label: "6 — 2,300 XP",     cr: 6,  xp: 2300 },
+    { key: "7",  label: "7 — 2,900 XP",     cr: 7,  xp: 2900 },
+    { key: "8",  label: "8 — 3,900 XP",     cr: 8,  xp: 3900 },
+    { key: "9",  label: "9 — 5,000 XP",     cr: 9,  xp: 5000 },
+    { key: "10", label: "10 — 5,900 XP",    cr: 10, xp: 5900 },
+    { key: "11", label: "11 — 7,200 XP",    cr: 11, xp: 7200 },
+    { key: "12", label: "12 — 8,400 XP",    cr: 12, xp: 8400 },
+    { key: "13", label: "13 — 10,000 XP",   cr: 13, xp: 10000 },
+    { key: "14", label: "14 — 11,500 XP",   cr: 14, xp: 11500 },
+    { key: "15", label: "15 — 13,000 XP",   cr: 15, xp: 13000 },
+    { key: "16", label: "16 — 15,000 XP",   cr: 16, xp: 15000 },
+    { key: "17", label: "17 — 18,000 XP",   cr: 17, xp: 18000 },
+    { key: "18", label: "18 — 20,000 XP",   cr: 18, xp: 20000 },
+    { key: "19", label: "19 — 22,000 XP",   cr: 19, xp: 22000 },
+    { key: "20", label: "20 — 25,000 XP",   cr: 20, xp: 25000 },
+    { key: "21", label: "21 — 33,000 XP",   cr: 21, xp: 33000 },
+    { key: "22", label: "22 — 41,000 XP",   cr: 22, xp: 41000 },
+    { key: "23", label: "23 — 50,000 XP",   cr: 23, xp: 50000 },
+    { key: "24", label: "24 — 62,000 XP",   cr: 24, xp: 62000 },
+    { key: "25", label: "25 — 75,000 XP",   cr: 25, xp: 75000 },
+    { key: "26", label: "26 — 90,000 XP",   cr: 26, xp: 90000 },
+    { key: "27", label: "27 — 105,000 XP",  cr: 27, xp: 105000 },
+    { key: "28", label: "28 — 120,000 XP",  cr: 28, xp: 120000 },
+    { key: "29", label: "29 — 135,000 XP",  cr: 29, xp: 135000 },
+    { key: "30", label: "30 — 155,000 XP",  cr: 30, xp: 155000 }
 ];
 
 
-
 /* =====================================================
-   PAGE ELEMENTS
+   PAGE ELEMENTS / STATE
    ===================================================== */
 
-const partyRows =
-    document.getElementById(
-        "partyRows"
-    );
-
-
-const monsterSearch =
-    document.getElementById(
-        "monsterSearch"
-    );
-
-
-const monsterTypeFilter =
-    document.getElementById(
-        "monsterTypeFilter"
-    );
-
-
-const monsterCRFilter =
-    document.getElementById(
-        "monsterCRFilter"
-    );
-
-
-const monsterSearchResults =
-    document.getElementById(
-        "monsterSearchResults"
-    );
-
-
-const monsterDatabaseStatus =
-    document.getElementById(
-        "monsterDatabaseStatus"
-    );
-
-
-const encounterMonsterRows =
-    document.getElementById(
-        "encounterMonsterRows"
-    );
-
-
-
-/* =====================================================
-   ACTIVE DATA
-   ===================================================== */
+const partyRows = document.getElementById("partyRows");
+const encounterTitle = document.getElementById("encounterTitle");
+const monsterSearch = document.getElementById("monsterSearch");
+const monsterRulesetFilter = document.getElementById("monsterRulesetFilter");
+const monsterSourceFilter = document.getElementById("monsterSourceFilter");
+const monsterCRFilter = document.getElementById("monsterCRFilter");
+const monsterSearchResults = document.getElementById("monsterSearchResults");
+const monsterDatabaseStatus = document.getElementById("monsterDatabaseStatus");
+const encounterMonsterRows = document.getElementById("encounterMonsterRows");
+const encounterOutputPreview = document.getElementById("encounterOutputPreview");
+const copyStatus = document.getElementById("copyStatus");
 
 let monsterDatabase = [];
-
 let encounterMonsters = [];
-
+let currentEncounterCalculation = null;
 
 
 /* =====================================================
-   LEVEL OPTIONS
+   CONFIG APPLICATION
    ===================================================== */
 
-function levelOptions(
-    selected = 5
-) {
+document.getElementById("pageVersion").textContent = DM_TOOLS_CONFIG.pageVersion;
+document.getElementById("fiveEToolsTopLink").href = DM_TOOLS_CONFIG.fiveEToolsBestiary;
 
+
+/* =====================================================
+   HELPERS
+   ===================================================== */
+
+function formatNumber(value) {
+    return Number(value).toLocaleString("en-US");
+}
+
+function levelOptions(selected = 5) {
     return Array
-        .from(
-            {
-                length: 20
-            },
-            (_, i) => i + 1
-        )
-
-        .map(
-            level => `
-
-                <option
-                    value="${level}"
-                    ${level === selected
-                        ? "selected"
-                        : ""}>
-
-                    Level ${level}
-
-                </option>
-
-            `
-        )
-
+        .from({ length: 20 }, (_, i) => i + 1)
+        .map(level => `
+            <option value="${level}" ${level === selected ? "selected" : ""}>
+                Level ${level}
+            </option>
+        `)
         .join("");
-
 }
 
-
-
-/* =====================================================
-   CUSTOM CR OPTIONS
-   ===================================================== */
-
-function customCROptions(
-    selected = "1"
-) {
-
+function customCROptions(selected = "1") {
     return CR_OPTIONS
-
-        .map(
-            item => `
-
-                <option
-                    value="${item.key}"
-                    ${item.key === selected
-                        ? "selected"
-                        : ""}>
-
-                    ${item.label}
-
-                </option>
-
-            `
-        )
-
+        .map(item => `
+            <option value="${item.key}" ${item.key === selected ? "selected" : ""}>
+                ${item.label}
+            </option>
+        `)
         .join("");
+}
 
+function crSortValue(cr) {
+    const text = String(cr);
+
+    if (text.includes("/")) {
+        const [a, b] = text.split("/").map(Number);
+        return b ? a / b : 0;
+    }
+
+    const number = Number(text);
+    return Number.isFinite(number) ? number : 0;
+}
+
+function displayMonsterName(monster) {
+    const renamed = String(monster.customName || "").trim();
+    return renamed || monster.baseName || monster.name;
 }
 
 
-
 /* =====================================================
-   ADD PARTY GROUP
+   PARTY
    ===================================================== */
 
-function addPartyRow(
-    level = 5,
-    count = 4
-) {
-
-    const row =
-        document.createElement(
-            "div"
-        );
-
-
-    row.className =
-        "party-row";
-
+function addPartyRow(level = 5, count = 4) {
+    const row = document.createElement("div");
+    row.className = "party-row";
 
     row.innerHTML = `
-
         <label>
-
             Level
-
             <select class="party-level">
-
                 ${levelOptions(level)}
-
             </select>
-
         </label>
 
-
         <label>
-
             Characters
-
             <input
                 class="party-count"
                 type="number"
                 min="1"
                 max="20"
                 value="${count}">
-
         </label>
-
 
         <button
             type="button"
             class="row-remove"
             aria-label="Remove party group">
-
             Remove
-
         </button>
-
     `;
 
+    row.querySelector(".row-remove").addEventListener("click", () => {
+        row.remove();
+        calculateEncounter();
+    });
 
-    row
-        .querySelector(
-            ".row-remove"
-        )
-        .addEventListener(
-            "click",
-            () => {
-
-                row.remove();
-
-                calculateEncounter();
-
-            }
-        );
-
-
-    partyRows.appendChild(
-        row
-    );
-
+    partyRows.appendChild(row);
 }
 
 
-
 /* =====================================================
-   FORMAT NUMBERS
-   ===================================================== */
-
-function formatNumber(
-    value
-) {
-
-    return Number(
-        value
-    )
-        .toLocaleString(
-            "en-US"
-        );
-
-}
-
-
-
-/* =====================================================
-   HTML SAFETY
-   ===================================================== */
-
-function escapeHtml(
-    value
-) {
-
-    return String(value)
-
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
-
-}
-
-
-
-/* =====================================================
-   POPULATE MONSTER FILTERS
+   FILTER BUILDING
    ===================================================== */
 
 function populateMonsterFilters() {
+    const rulesets = [
+        ...new Set(monsterDatabase.map(monster => monster.ruleset).filter(Boolean))
+    ];
 
+    const rulesetPriority = {
+        "5.5e / 2024": 0,
+        "5e / 2014": 1,
+        "5e-Compatible / Third Party": 2
+    };
 
-    /* -----------------------------------------
-       CREATURE TYPES
-       ----------------------------------------- */
+    rulesets.sort((a, b) => {
+        const ap = rulesetPriority[a] ?? 50;
+        const bp = rulesetPriority[b] ?? 50;
+        return ap - bp || a.localeCompare(b);
+    });
 
-    const types = [
+    monsterRulesetFilter.innerHTML = '<option value="">All Rulesets</option>';
 
-        ...new Set(
+    rulesets.forEach(ruleset => {
+        const option = document.createElement("option");
+        option.value = ruleset;
+        option.textContent = ruleset;
+        monsterRulesetFilter.appendChild(option);
+    });
 
+    refreshSourceFilter();
+
+    const crs = [
+        ...new Set(monsterDatabase.map(monster => String(monster.cr)).filter(Boolean))
+    ].sort((a, b) => crSortValue(a) - crSortValue(b));
+
+    monsterCRFilter.innerHTML = '<option value="">All CRs</option>';
+
+    crs.forEach(cr => {
+        const option = document.createElement("option");
+        option.value = cr;
+        option.textContent = `CR ${cr}`;
+        monsterCRFilter.appendChild(option);
+    });
+}
+
+function refreshSourceFilter() {
+    const selectedRuleset = monsterRulesetFilter.value;
+    const previousSource = monsterSourceFilter.value;
+
+    const sources = [
+        ...new Map(
             monsterDatabase
+                .filter(monster => !selectedRuleset || monster.ruleset === selectedRuleset)
+                .filter(monster => monster.source)
+                .map(monster => [monster.sourceKey || monster.source, {
+                    key: monster.sourceKey || monster.source,
+                    name: monster.source
+                }])
+        ).values()
+    ].sort((a, b) => a.name.localeCompare(b.name));
 
-                .map(
-                    monster =>
-                        monster.type
-                )
+    monsterSourceFilter.innerHTML = '<option value="">All Sources</option>';
 
-                .filter(
-                    Boolean
-                )
+    sources.forEach(source => {
+        const option = document.createElement("option");
+        option.value = source.key;
+        option.textContent = source.name;
+        monsterSourceFilter.appendChild(option);
+    });
 
-        )
-
-    ];
-
-
-    types.sort(
-        (a, b) =>
-            a.localeCompare(b)
-    );
-
-
-    monsterTypeFilter.innerHTML =
-        '<option value="">All Types</option>';
-
-
-
-    types.forEach(
-        type => {
-
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-
-            option.value =
-                type;
-
-
-            option.textContent =
-                type;
-
-
-            monsterTypeFilter.appendChild(
-                option
-            );
-
-
-        }
-    );
-
-
-
-    /* -----------------------------------------
-       CHALLENGE RATINGS
-       ----------------------------------------- */
-
-    const databaseCRs = [
-
-        ...new Set(
-
-            monsterDatabase.map(
-                monster =>
-                    monster.cr
-            )
-
-        )
-
-    ];
-
-
-    const orderedCRs = [
-
-        "0",
-
-        "1/8",
-
-        "1/4",
-
-        "1/2",
-
-        ...Array.from(
-            {
-                length: 30
-            },
-            (_, i) =>
-                String(i + 1)
-        )
-
-    ]
-
-        .filter(
-            cr =>
-                databaseCRs.includes(cr)
-        );
-
-
-    monsterCRFilter.innerHTML =
-        '<option value="">All CRs</option>';
-
-
-
-    orderedCRs.forEach(
-        cr => {
-
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-
-            option.value =
-                cr;
-
-
-            option.textContent =
-                `CR ${cr}`;
-
-
-            monsterCRFilter.appendChild(
-                option
-            );
-
-
-        }
-    );
-
+    if (sources.some(source => source.key === previousSource)) {
+        monsterSourceFilter.value = previousSource;
+    }
 }
 
 
-
 /* =====================================================
-   FILTER MONSTER DATABASE
+   DATABASE SEARCH
    ===================================================== */
 
 function getFilteredMonsters() {
+    const search = monsterSearch.value.trim().toLowerCase();
+    const ruleset = monsterRulesetFilter.value;
+    const source = monsterSourceFilter.value;
+    const cr = monsterCRFilter.value;
 
-
-    const search =
-        monsterSearch
-            .value
-            .trim()
+    return monsterDatabase.filter(monster => {
+        const searchableText = [
+            monster.name,
+            monster.baseName,
+            monster.type,
+            monster.source,
+            monster.ruleset,
+            monster.cr
+        ]
+            .filter(Boolean)
+            .join(" ")
             .toLowerCase();
 
+        const matchesSearch = !search || searchableText.includes(search);
+        const matchesRuleset = !ruleset || monster.ruleset === ruleset;
+        const matchesSource = !source || (monster.sourceKey || monster.source) === source;
+        const matchesCR = !cr || String(monster.cr) === cr;
 
-    const type =
-        monsterTypeFilter.value;
-
-
-    const cr =
-        monsterCRFilter.value;
-
-
-
-    return monsterDatabase
-
-        .filter(
-            monster => {
-
-
-                const matchesSearch =
-
-                    !search
-
-                    ||
-
-                    monster.name
-                        .toLowerCase()
-                        .includes(search)
-
-                    ||
-
-                    monster.type
-                        .toLowerCase()
-                        .includes(search);
-
-
-
-                const matchesType =
-
-                    !type
-
-                    ||
-
-                    monster.type === type;
-
-
-
-                const matchesCR =
-
-                    !cr
-
-                    ||
-
-                    monster.cr === cr;
-
-
-
-                return (
-
-                    matchesSearch
-
-                    &&
-
-                    matchesType
-
-                    &&
-
-                    matchesCR
-
-                );
-
-
-            }
-        );
-
+        return matchesSearch && matchesRuleset && matchesSource && matchesCR;
+    });
 }
-
-
-
-/* =====================================================
-   SHOW MONSTER SEARCH RESULTS
-   ===================================================== */
 
 function renderMonsterSearchResults() {
-
-
-    if (
-        monsterDatabase.length === 0
-    ) {
-
+    if (monsterDatabase.length === 0) {
         monsterSearchResults.innerHTML = `
-
             <div class="encounter-empty">
-
                 The monster archive is not available yet.
-
             </div>
-
         `;
-
-
         return;
-
     }
 
+    const matches = getFilteredMonsters();
+    const visibleMatches = matches.slice(0, DM_TOOLS_CONFIG.maxSearchResults);
 
+    monsterSearchResults.innerHTML = "";
 
-    const matches =
-        getFilteredMonsters();
-
-
-    const visibleMatches =
-        matches.slice(
-            0,
-            60
-        );
-
-
-    monsterSearchResults.innerHTML =
-        "";
-
-
-
-    if (
-        visibleMatches.length === 0
-    ) {
-
+    if (visibleMatches.length === 0) {
         monsterSearchResults.innerHTML = `
-
             <div class="encounter-empty">
-
                 No creatures match those filters.
-
             </div>
-
         `;
-
-
         return;
-
     }
 
-
-
-    visibleMatches.forEach(
-        monster => {
-
-
-            const row =
-                document.createElement(
-                    "div"
-                );
-
-
-            row.className =
-                "monster-result";
-
-
-
-            /* MONSTER INFO */
-
-            const info =
-                document.createElement(
-                    "div"
-                );
-
-
-            const name =
-                document.createElement(
-                    "div"
-                );
-
-
-            name.className =
-                "monster-result-name";
-
-
-            name.textContent =
-                monster.name;
-
-
-
-            const meta =
-                document.createElement(
-                    "div"
-                );
-
-
-            meta.className =
-                "monster-meta";
-
-
-            meta.textContent =
-
-                `${monster.size} ${monster.type}`
-
-                +
-
-                ` · CR ${monster.cr}`
-
-                +
-
-                ` · ${formatNumber(monster.xp)} XP`;
-
-
-
-            info.appendChild(
-                name
-            );
-
-
-            info.appendChild(
-                meta
-            );
-
-
-
-            /* ADD BUTTON */
-
-            const addButton =
-                document.createElement(
-                    "button"
-                );
-
-
-            addButton.type =
-                "button";
-
-
-            addButton.textContent =
-                "+ Add";
-
-
-            addButton.addEventListener(
-                "click",
-                () => {
-
-                    addMonsterToEncounter(
-                        monster
-                    );
-
-                }
-            );
-
-
-
-            row.appendChild(
-                info
-            );
-
-
-            row.appendChild(
-                addButton
-            );
-
-
-            monsterSearchResults.appendChild(
-                row
-            );
-
-
-        }
-    );
-
-
-
-    /* -----------------------------------------
-       TOO MANY SEARCH RESULTS
-       ----------------------------------------- */
-
-    if (
-        matches.length >
-        visibleMatches.length
-    ) {
-
-
-        const note =
-            document.createElement(
-                "p"
-            );
-
-
-        note.className =
-            "result-limit-note";
-
-
+    visibleMatches.forEach(monster => {
+        const row = document.createElement("div");
+        row.className = "monster-result";
+
+        const info = document.createElement("div");
+
+        const name = document.createElement("div");
+        name.className = "monster-result-name";
+        name.textContent = monster.name;
+
+        const meta = document.createElement("div");
+        meta.className = "monster-meta";
+        meta.textContent =
+            `${monster.size} ${monster.type} · CR ${monster.cr} · ${formatNumber(monster.xp)} XP`;
+
+        const source = document.createElement("div");
+        source.className = "monster-source-line";
+        source.textContent = `${monster.ruleset} · ${monster.source}`;
+
+        info.appendChild(name);
+        info.appendChild(meta);
+        info.appendChild(source);
+
+        const addButton = document.createElement("button");
+        addButton.type = "button";
+        addButton.textContent = "+ Add";
+        addButton.addEventListener("click", () => addMonsterToEncounter(monster));
+
+        row.appendChild(info);
+        row.appendChild(addButton);
+        monsterSearchResults.appendChild(row);
+    });
+
+    if (matches.length > visibleMatches.length) {
+        const note = document.createElement("p");
+        note.className = "result-limit-note";
         note.textContent =
-
-            `${formatNumber(matches.length)} matches found. `
-
-            +
-
-            "Showing the first 60; narrow the search to see more.";
-
-
-        monsterSearchResults.appendChild(
-            note
-        );
-
-
+            `${formatNumber(matches.length)} matches found. ` +
+            `Showing the first ${DM_TOOLS_CONFIG.maxSearchResults}; narrow the search to see more.`;
+        monsterSearchResults.appendChild(note);
     }
-
 }
 
 
-
 /* =====================================================
-   ADD DATABASE MONSTER TO ENCOUNTER
+   ENCOUNTER MONSTERS
    ===================================================== */
 
-function addMonsterToEncounter(
-    monster
-) {
+function addMonsterToEncounter(monster) {
+    const existing = encounterMonsters.find(item => item.databaseId === monster.id);
 
-
-    const existing =
-        encounterMonsters.find(
-            item =>
-
-                item.sourceType ===
-                    monster.sourceType
-
-                &&
-
-                item.name ===
-                    monster.name
-
-                &&
-
-                item.cr ===
-                    monster.cr
-
-                &&
-
-                item.xp ===
-                    monster.xp
-
-        );
-
-
-
-    /* -----------------------------------------
-       ALREADY IN ENCOUNTER
-       ----------------------------------------- */
-
-    if (
-        existing
-    ) {
-
+    if (existing) {
         existing.count += 1;
-
-    }
-
-
-    /* -----------------------------------------
-       NEW MONSTER
-       ----------------------------------------- */
-
-    else {
-
-
+    } else {
         encounterMonsters.push({
-
-            id:
-                `srd-${monster.name}-${monster.cr}`,
-
-            name:
-                monster.name,
-
-            type:
-                monster.type,
-
-            size:
-                monster.size,
-
-            cr:
-                monster.cr,
-
-            crNumber:
-                Number(
-                    monster.crNumber
-                ) || 0,
-
-            xp:
-                Number(
-                    monster.xp
-                ) || 0,
-
-            source:
-                monster.source ||
-                "SRD 5.2.1",
-
-            sourceType:
-                monster.sourceType ||
-                "srd",
-
-            count:
-                1
-
+            encounterId: `encounter-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+            databaseId: monster.id,
+            baseName: monster.baseName || monster.name,
+            customName: "",
+            note: "",
+            type: monster.type,
+            size: monster.size,
+            cr: String(monster.cr),
+            crNumber: Number(monster.crNumber) || crSortValue(monster.cr),
+            xp: Number(monster.xp) || 0,
+            source: monster.source || "Unknown Source",
+            sourceKey: monster.sourceKey || "",
+            sourceType: monster.sourceType || "open5e",
+            ruleset: monster.ruleset || "5e-Compatible",
+            count: 1
         });
-
-
     }
-
-
 
     renderEncounterMonsters();
-
     calculateEncounter();
-
 }
-
-
-
-/* =====================================================
-   RENDER ENCOUNTER MONSTERS
-   ===================================================== */
 
 function renderEncounterMonsters() {
+    encounterMonsterRows.innerHTML = "";
 
-
-    encounterMonsterRows.innerHTML =
-        "";
-
-
-
-    /* -----------------------------------------
-       EMPTY ENCOUNTER
-       ----------------------------------------- */
-
-    if (
-        encounterMonsters.length === 0
-    ) {
-
+    if (encounterMonsters.length === 0) {
         encounterMonsterRows.innerHTML = `
-
             <div class="encounter-empty">
-
                 No monsters have been added yet.
-
             </div>
-
         `;
-
-
         return;
-
     }
 
-
-
-    /* -----------------------------------------
-       MONSTER ROWS
-       ----------------------------------------- */
-
-    encounterMonsters.forEach(
-        monster => {
-
-
-            const row =
-                document.createElement(
-                    "div"
-                );
-
-
-            row.className =
-                "encounter-monster-row";
-
-
-
-            /* INFO */
-
-            const info =
-                document.createElement(
-                    "div"
-                );
-
-
-            info.className =
-                "encounter-monster-info";
-
-
-            info.innerHTML = `
-
-                <div class="encounter-monster-name">
-
-                    ${escapeHtml(monster.name)}
-
-                </div>
-
-
-                <div class="monster-meta">
-
-                    CR ${escapeHtml(monster.cr)}
-
-                    ·
-
-                    ${formatNumber(monster.xp)} XP each
-
-                    ·
-
-                    ${formatNumber(
-                        monster.xp *
-                        monster.count
-                    )} XP total
-
-                </div>
-
-            `;
-
-
-
-            /* MINUS BUTTON */
-
-            const minusButton =
-                document.createElement(
-                    "button"
-                );
-
-
-            minusButton.type =
-                "button";
-
-
-            minusButton.className =
-                "quantity-button";
-
-
-            minusButton.textContent =
-                "−";
-
-
-            minusButton.setAttribute(
-
-                "aria-label",
-
-                `Decrease ${monster.name} quantity`
-
-            );
-
-
-            minusButton.addEventListener(
-                "click",
-                () => {
-
-
-                    monster.count =
-                        Math.max(
-                            1,
-                            monster.count - 1
-                        );
-
-
-                    renderEncounterMonsters();
-
-                    calculateEncounter();
-
-
-                }
-            );
-
-
-
-            /* QUANTITY INPUT */
-
-            const quantityInput =
-                document.createElement(
-                    "input"
-                );
-
-
-            quantityInput.className =
-                "monster-quantity";
-
-
-            quantityInput.type =
-                "number";
-
-
-            quantityInput.min =
-                "1";
-
-
-            quantityInput.max =
-                "100";
-
-
-            quantityInput.value =
-                monster.count;
-
-
-            quantityInput.setAttribute(
-
-                "aria-label",
-
-                `${monster.name} quantity`
-
-            );
-
-
-            quantityInput.addEventListener(
-                "change",
-                () => {
-
-
-                    monster.count =
-                        Math.max(
-                            1,
-                            Math.min(
-                                100,
-                                Number(
-                                    quantityInput.value
-                                ) || 1
-                            )
-                        );
-
-
-                    renderEncounterMonsters();
-
-                    calculateEncounter();
-
-
-                }
-            );
-
-
-
-            /* PLUS BUTTON */
-
-            const plusButton =
-                document.createElement(
-                    "button"
-                );
-
-
-            plusButton.type =
-                "button";
-
-
-            plusButton.className =
-                "quantity-button";
-
-
-            plusButton.textContent =
-                "+";
-
-
-            plusButton.setAttribute(
-
-                "aria-label",
-
-                `Increase ${monster.name} quantity`
-
-            );
-
-
-            plusButton.addEventListener(
-                "click",
-                () => {
-
-
-                    monster.count =
-                        Math.min(
-                            100,
-                            monster.count + 1
-                        );
-
-
-                    renderEncounterMonsters();
-
-                    calculateEncounter();
-
-
-                }
-            );
-
-
-
-            /* REMOVE BUTTON */
-
-            const removeButton =
-                document.createElement(
-                    "button"
-                );
-
-
-            removeButton.type =
-                "button";
-
-
-            removeButton.className =
-                "remove-monster";
-
-
-            removeButton.textContent =
-                "Remove";
-
-
-            removeButton.addEventListener(
-                "click",
-                () => {
-
-
-                    encounterMonsters =
-                        encounterMonsters.filter(
-                            item =>
-                                item !== monster
-                        );
-
-
-                    renderEncounterMonsters();
-
-                    calculateEncounter();
-
-
-                }
-            );
-
-
-
-            row.appendChild(
-                info
-            );
-
-
-            row.appendChild(
-                minusButton
-            );
-
-
-            row.appendChild(
-                quantityInput
-            );
-
-
-            row.appendChild(
-                plusButton
-            );
-
-
-            row.appendChild(
-                removeButton
-            );
-
-
-            encounterMonsterRows.appendChild(
-                row
-            );
-
-
-        }
-    );
-
+    encounterMonsters.forEach(monster => {
+        const row = document.createElement("div");
+        row.className = "encounter-monster-row";
+
+        const top = document.createElement("div");
+        top.className = "encounter-monster-top";
+
+        const info = document.createElement("div");
+        info.className = "encounter-monster-info";
+
+        const displayName = document.createElement("div");
+        displayName.className = "encounter-monster-name";
+        displayName.textContent = displayMonsterName(monster);
+
+        const baseLabel = document.createElement("div");
+        baseLabel.className = "base-creature-label";
+        baseLabel.textContent = `Base: ${monster.baseName}`;
+
+        const meta = document.createElement("div");
+        meta.className = "monster-meta";
+        meta.textContent =
+            `CR ${monster.cr} · ${formatNumber(monster.xp)} XP each · ` +
+            `${formatNumber(monster.xp * monster.count)} XP total`;
+
+        const source = document.createElement("div");
+        source.className = "monster-source-line";
+        source.textContent = `${monster.ruleset} · ${monster.source}`;
+
+        info.appendChild(displayName);
+        info.appendChild(baseLabel);
+        info.appendChild(meta);
+        info.appendChild(source);
+
+        const minusButton = document.createElement("button");
+        minusButton.type = "button";
+        minusButton.className = "quantity-button";
+        minusButton.textContent = "−";
+        minusButton.setAttribute("aria-label", `Decrease ${monster.baseName} quantity`);
+        minusButton.addEventListener("click", () => {
+            monster.count = Math.max(1, monster.count - 1);
+            renderEncounterMonsters();
+            calculateEncounter();
+        });
+
+        const quantityInput = document.createElement("input");
+        quantityInput.className = "monster-quantity";
+        quantityInput.type = "number";
+        quantityInput.min = "1";
+        quantityInput.max = "100";
+        quantityInput.value = monster.count;
+        quantityInput.setAttribute("aria-label", `${monster.baseName} quantity`);
+        quantityInput.addEventListener("change", () => {
+            monster.count = Math.max(1, Math.min(100, Number(quantityInput.value) || 1));
+            renderEncounterMonsters();
+            calculateEncounter();
+        });
+
+        const plusButton = document.createElement("button");
+        plusButton.type = "button";
+        plusButton.className = "quantity-button";
+        plusButton.textContent = "+";
+        plusButton.setAttribute("aria-label", `Increase ${monster.baseName} quantity`);
+        plusButton.addEventListener("click", () => {
+            monster.count = Math.min(100, monster.count + 1);
+            renderEncounterMonsters();
+            calculateEncounter();
+        });
+
+        const removeButton = document.createElement("button");
+        removeButton.type = "button";
+        removeButton.className = "remove-monster";
+        removeButton.textContent = "Remove";
+        removeButton.addEventListener("click", () => {
+            encounterMonsters = encounterMonsters.filter(item => item !== monster);
+            renderEncounterMonsters();
+            calculateEncounter();
+        });
+
+        top.appendChild(info);
+        top.appendChild(minusButton);
+        top.appendChild(quantityInput);
+        top.appendChild(plusButton);
+        top.appendChild(removeButton);
+
+        const customFields = document.createElement("div");
+        customFields.className = "encounter-custom-fields";
+
+        const customNameLabel = document.createElement("label");
+        customNameLabel.textContent = "Custom Name";
+
+        const customNameInput = document.createElement("input");
+        customNameInput.type = "text";
+        customNameInput.placeholder = monster.baseName;
+        customNameInput.value = monster.customName || "";
+        customNameInput.addEventListener("input", () => {
+            monster.customName = customNameInput.value;
+            displayName.textContent = displayMonsterName(monster);
+            updateEncounterReference();
+        });
+
+        customNameLabel.appendChild(customNameInput);
+
+        const noteLabel = document.createElement("label");
+        noteLabel.className = "monster-note-field";
+        noteLabel.textContent = "DM Note";
+
+        const noteInput = document.createElement("textarea");
+        noteInput.placeholder = "Appearance, tactics, treasure, morale, reminders...";
+        noteInput.value = monster.note || "";
+        noteInput.addEventListener("input", () => {
+            monster.note = noteInput.value;
+            updateEncounterReference();
+        });
+
+        noteLabel.appendChild(noteInput);
+
+        const lookupLink = document.createElement("a");
+        lookupLink.className = "utility-link-button lookup-button";
+        lookupLink.href = DM_TOOLS_CONFIG.fiveEToolsBestiary;
+        lookupLink.target = "_blank";
+        lookupLink.rel = "noopener noreferrer";
+        lookupLink.textContent = "5etools";
+        lookupLink.title = `Open 5etools Bestiary and search for ${monster.baseName}`;
+
+        customFields.appendChild(customNameLabel);
+        customFields.appendChild(noteLabel);
+        customFields.appendChild(lookupLink);
+
+        row.appendChild(top);
+        row.appendChild(customFields);
+        encounterMonsterRows.appendChild(row);
+    });
 }
 
 
-
 /* =====================================================
-   ADD CUSTOM / OZYLEME MONSTER
+   CUSTOM / OZYLEME CREATURE
    ===================================================== */
 
 function addCustomMonster() {
-
-
-    const nameInput =
-        document.getElementById(
-            "customMonsterName"
-        );
-
-
-    const crSelect =
-        document.getElementById(
-            "customMonsterCR"
-        );
-
-
-    const countInput =
-        document.getElementById(
-            "customMonsterCount"
-        );
-
-
-
-    const name =
-
-        nameInput
-            .value
-            .trim()
-
-        ||
-
-        "Custom Creature";
-
-
-
-    const selectedCR =
-        CR_OPTIONS.find(
-            item =>
-                item.key ===
-                crSelect.value
-        );
-
-
-
-    const count =
-        Math.max(
-            1,
-            Math.min(
-                100,
-                Number(
-                    countInput.value
-                ) || 1
-            )
-        );
-
-
-
-    if (
-        !selectedCR
-    ) {
-
-        return;
-
-    }
-
-
-
-    /* -----------------------------------------
-       DISPLAY CR 0 CORRECTLY
-       ----------------------------------------- */
-
-    const displayCR =
-
-        selectedCR.key.startsWith(
-            "0-"
-        )
-
-            ? "0"
-
-            : selectedCR.key;
-
-
-
-    /* -----------------------------------------
-       CHECK FOR EXISTING CUSTOM MONSTER
-       ----------------------------------------- */
-
-    const existing =
-        encounterMonsters.find(
-            item =>
-
-                item.sourceType ===
-                    "custom"
-
-                &&
-
-                item.name
-                    .toLowerCase() ===
-                    name.toLowerCase()
-
-                &&
-
-                item.cr ===
-                    displayCR
-
-                &&
-
-                item.xp ===
-                    selectedCR.xp
-
-        );
-
-
-
-    if (
-        existing
-    ) {
-
-
-        existing.count =
-            Math.min(
-                100,
-                existing.count +
-                count
-            );
-
-
-    }
-
-
-    else {
-
-
-        encounterMonsters.push({
-
-            id:
-
-                `custom-${Date.now()}-`
-
-                +
-
-                Math.random()
-                    .toString(16)
-                    .slice(2),
-
-            name:
-                name,
-
-            type:
-                "Custom",
-
-            size:
-                "Custom",
-
-            cr:
-                displayCR,
-
-            crNumber:
-                selectedCR.cr,
-
-            xp:
-                selectedCR.xp,
-
-            source:
-                "Ozyleme / Custom",
-
-            sourceType:
-                "custom",
-
-            count:
-                count
-
-        });
-
-
-    }
-
-
-
-    /* -----------------------------------------
-       RESET CUSTOM FORM
-       ----------------------------------------- */
-
-    nameInput.value =
-        "";
-
-
-    countInput.value =
-        "1";
-
-
+    const nameInput = document.getElementById("customMonsterName");
+    const crSelect = document.getElementById("customMonsterCR");
+    const countInput = document.getElementById("customMonsterCount");
+
+    const baseName = nameInput.value.trim() || "Custom Creature";
+    const selectedCR = CR_OPTIONS.find(item => item.key === crSelect.value);
+    const count = Math.max(1, Math.min(100, Number(countInput.value) || 1));
+
+    if (!selectedCR) return;
+
+    const displayCR = selectedCR.key.startsWith("0-") ? "0" : selectedCR.key;
+
+    encounterMonsters.push({
+        encounterId: `custom-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+        databaseId: null,
+        baseName,
+        customName: "",
+        note: "",
+        type: "Custom",
+        size: "Custom",
+        cr: displayCR,
+        crNumber: selectedCR.cr,
+        xp: selectedCR.xp,
+        source: "Ozyleme / Custom",
+        sourceKey: "ozyleme",
+        sourceType: "custom",
+        ruleset: "5.5e / 2024",
+        count
+    });
+
+    nameInput.value = "";
+    countInput.value = "1";
 
     renderEncounterMonsters();
-
     calculateEncounter();
-
 }
 
 
-
 /* =====================================================
-   INITIALIZE DATABASE
+   DATABASE INITIALIZATION
    ===================================================== */
 
 async function initializeMonsterDatabase() {
-
-
     try {
-
-
-        /* -----------------------------------------
-           CHECK MONSTERS.JS
-           ----------------------------------------- */
-
-        if (
-            !window.OZYLEME_MONSTERS_READY
-        ) {
-
-            throw new Error(
-                "monsters.js did not load."
-            );
-
+        if (!window.OZYLEME_MONSTERS_READY) {
+            throw new Error("monsters.js did not load.");
         }
 
+        const monsters = await window.OZYLEME_MONSTERS_READY;
 
-
-        /* -----------------------------------------
-           WAIT FOR DATABASE
-           ----------------------------------------- */
-
-        const monsters =
-            await window.OZYLEME_MONSTERS_READY;
-
-
-
-        if (
-            !Array.isArray(monsters)
-
-            ||
-
-            monsters.length === 0
-        ) {
-
-            throw new Error(
-                "The monster archive returned no creatures."
-            );
-
+        if (!Array.isArray(monsters) || monsters.length === 0) {
+            throw new Error("The monster archive returned no creatures.");
         }
 
-
-
-        /* -----------------------------------------
-           STORE DATABASE
-           ----------------------------------------- */
-
-        monsterDatabase =
-            monsters;
-
-
-
-        /* -----------------------------------------
-           BUILD FILTERS
-           ----------------------------------------- */
-
+        monsterDatabase = monsters;
         populateMonsterFilters();
-
-
-
-        /* -----------------------------------------
-           SHOW CREATURES
-           ----------------------------------------- */
-
         renderMonsterSearchResults();
 
-
-
-        /* -----------------------------------------
-           STATUS MESSAGE
-           ----------------------------------------- */
+        const sourceCount = new Set(
+            monsterDatabase.map(monster => monster.sourceKey || monster.source)
+        ).size;
 
         monsterDatabaseStatus.textContent =
-
-            `${formatNumber(
-                monsterDatabase.length
-            )} SRD 5.2.1 creatures loaded.`;
-
-
-
-    }
-
-
-    catch (
-        error
-    ) {
-
-
-        console.error(
-
-            "Monster archive could not be initialized.",
-
-            error
-
-        );
-
-
+            `${formatNumber(monsterDatabase.length)} creatures loaded from ` +
+            `${formatNumber(sourceCount)} sources.`;
+    } catch (error) {
+        console.error("Monster archive could not be initialized.", error);
 
         monsterDatabaseStatus.textContent =
-
-            "Monster archive could not be loaded. " +
-
-            "Custom creatures still work.";
-
-
+            "Monster archive could not be loaded. Custom creatures still work.";
 
         monsterSearchResults.innerHTML = `
-
             <div class="encounter-empty">
-
-                The SRD creature archive is unavailable.
-
+                The open creature archive is unavailable.
                 You can still add a custom creature below.
-
             </div>
-
         `;
-
-
     }
-
 }
 
 
-
 /* =====================================================
-   CALCULATE ENCOUNTER
+   ENCOUNTER CALCULATION
    ===================================================== */
 
 function calculateEncounter() {
-
-
-    /* -----------------------------------------
-       PARTY VALUES
-       ----------------------------------------- */
-
-    let partyCount =
-        0;
-
-
-    let low =
-        0;
-
-
-    let moderate =
-        0;
-
-
-    let high =
-        0;
-
-
-    let lowestLevel =
-        20;
-
-
-
-    document
-        .querySelectorAll(
-            ".party-row"
-        )
-        .forEach(
-            row => {
-
-
-                const level =
-                    Number(
-
-                        row
-                            .querySelector(
-                                ".party-level"
-                            )
-                            .value
-
-                    );
-
-
-                const count =
-                    Math.max(
-
-                        0,
-
-                        Number(
-
-                            row
-                                .querySelector(
-                                    ".party-count"
-                                )
-                                .value
-
-                        ) || 0
-
-                    );
-
-
-
-                if (
-                    count > 0
-                ) {
-
-
-                    partyCount +=
-                        count;
-
-
-                    low +=
-                        XP_BUDGETS[level]
-                            .low *
-                        count;
-
-
-                    moderate +=
-                        XP_BUDGETS[level]
-                            .moderate *
-                        count;
-
-
-                    high +=
-                        XP_BUDGETS[level]
-                            .high *
-                        count;
-
-
-                    lowestLevel =
-                        Math.min(
-                            lowestLevel,
-                            level
-                        );
-
-
-                }
-
-
-            }
-        );
-
-
-
-    /* -----------------------------------------
-       ENEMY XP
-       ----------------------------------------- */
-
-    const enemyXp =
-        encounterMonsters.reduce(
-
-            (
-                total,
-                monster
-            ) =>
-
-                total
-
-                +
-
-                (
-                    monster.xp *
-                    monster.count
-                ),
-
-            0
-
-        );
-
-
-
-    /* -----------------------------------------
-       ENEMY COUNT
-       ----------------------------------------- */
-
-    const enemyCount =
-        encounterMonsters.reduce(
-
-            (
-                total,
-                monster
-            ) =>
-
-                total +
-                monster.count,
-
-            0
-
-        );
-
-
-
-    /* -----------------------------------------
-       HIGHEST CR
-       ----------------------------------------- */
-
-    const highestCR =
-        encounterMonsters.reduce(
-
-            (
-                highest,
-                monster
-            ) =>
-
-                Math.max(
-
-                    highest,
-
-                    Number(
-                        monster.crNumber
-                    ) || 0
-
-                ),
-
-            0
-
-        );
-
-
-
-    /* -----------------------------------------
-       NUMBER OF DIFFERENT STAT BLOCKS
-       ----------------------------------------- */
-
-    const statBlockCount =
-        encounterMonsters.length;
-
-
-
-    /* -----------------------------------------
-       DISPLAY VALUES
-       ----------------------------------------- */
-
-    document
-        .getElementById(
-            "partySizeResult"
-        )
-        .textContent =
-            formatNumber(
-                partyCount
-            );
-
-
-    document
-        .getElementById(
-            "enemyXpResult"
-        )
-        .textContent =
-            formatNumber(
-                enemyXp
-            );
-
-
-    document
-        .getElementById(
-            "lowBudgetResult"
-        )
-        .textContent =
-            formatNumber(
-                low
-            );
-
-
-    document
-        .getElementById(
-            "moderateBudgetResult"
-        )
-        .textContent =
-            formatNumber(
-                moderate
-            );
-
-
-    document
-        .getElementById(
-            "highBudgetResult"
-        )
-        .textContent =
-            formatNumber(
-                high
-            );
-
-
-    document
-        .getElementById(
-            "enemyCountResult"
-        )
-        .textContent =
-            formatNumber(
-                enemyCount
-            );
-
-
-
-    /* -----------------------------------------
-       DIFFICULTY
-       ----------------------------------------- */
-
-    let difficulty =
-        "Not Calculated";
-
-
-    let detail =
-
-        "Add at least one adventurer " +
-
-        "to calculate encounter difficulty.";
-
-
-
-    if (
-        partyCount > 0
-    ) {
-
-
-        if (
-            enemyXp <= 0
-        ) {
-
-
-            difficulty =
-                "No XP Threat";
-
-
-            detail =
-
-                "The listed opposition " +
-
-                "contributes no encounter XP.";
-
-
+    let partyCount = 0;
+    let low = 0;
+    let moderate = 0;
+    let high = 0;
+    let lowestLevel = 20;
+
+    const partyGroups = [];
+
+    document.querySelectorAll(".party-row").forEach(row => {
+        const level = Number(row.querySelector(".party-level").value);
+        const count = Math.max(0, Number(row.querySelector(".party-count").value) || 0);
+
+        if (count > 0) {
+            partyCount += count;
+            low += XP_BUDGETS[level].low * count;
+            moderate += XP_BUDGETS[level].moderate * count;
+            high += XP_BUDGETS[level].high * count;
+            lowestLevel = Math.min(lowestLevel, level);
+            partyGroups.push({ level, count });
         }
-
-
-        else if (
-            enemyXp <= low
-        ) {
-
-
-            difficulty =
-                "Low";
-
-
-            detail =
-
-                `${formatNumber(
-                    low - enemyXp
-                )} XP remains in the Low budget.`;
-
-
-        }
-
-
-        else if (
-            enemyXp <= moderate
-        ) {
-
-
-            difficulty =
-                "Moderate";
-
-
-            detail =
-
-                `${formatNumber(
-                    moderate - enemyXp
-                )} XP remains in the Moderate budget.`;
-
-
-        }
-
-
-        else if (
-            enemyXp <= high
-        ) {
-
-
-            difficulty =
-                "High";
-
-
-            detail =
-
-                `${formatNumber(
-                    high - enemyXp
-                )} XP remains in the High budget.`;
-
-
-        }
-
-
-        else {
-
-
-            difficulty =
-                "Above High";
-
-
-            detail =
-
-                `${formatNumber(
-                    enemyXp - high
-                )} XP above the party's ` +
-
-                "High-difficulty budget.";
-
-
-        }
-
-
-    }
-
-
-
-    document
-        .getElementById(
-            "difficultyResult"
-        )
-        .textContent =
-            difficulty;
-
-
-
-    document
-        .getElementById(
-            "difficultyDetail"
-        )
-        .textContent =
-            detail;
-
-
-
-    /* -----------------------------------------
-       WARNINGS
-       ----------------------------------------- */
-
-    const warnings =
-        [];
-
-
-
-    /* MANY CREATURES */
-
-    if (
-
-        partyCount > 0
-
-        &&
-
-        enemyCount >
-        partyCount * 2
-
-    ) {
-
-
-        warnings.push(
-
-            "There are more than two creatures per character. " +
-
-            "Large groups can be more dangerous than the XP budget suggests; " +
-
-            "consider making many of them fragile creatures."
-
-        );
-
-
-    }
-
-
-
-    /* POWERFUL CREATURE */
-
-    if (
-
-        partyCount > 0
-
-        &&
-
-        highestCR >
-        lowestLevel
-
-    ) {
-
-
-        warnings.push(
-
-            `At least one creature is CR ${highestCR}, ` +
-
-            "above the level of part of the party. " +
-
-            "A powerful creature may be able to take out " +
-
-            "a lower-level character with a single action."
-
-        );
-
-
-    }
-
-
-
-    /* TOO MANY STAT BLOCKS */
-
-    if (
-        statBlockCount > 3
-    ) {
-
-
-        warnings.push(
-
-            `This encounter uses ${statBlockCount} different creature stat blocks. ` +
-
-            "Running more than two or three different stat blocks " +
-
-            "can become difficult to manage at the table."
-
-        );
-
-
-    }
-
-
-
-    /* -----------------------------------------
-       DISPLAY WARNINGS
-       ----------------------------------------- */
-
-    const warningsBox =
-        document.getElementById(
-            "combatWarnings"
-        );
-
-
-    const warningList =
-        document.getElementById(
-            "warningList"
-        );
-
-
-    warningList.innerHTML =
-        "";
-
-
-
-    warnings.forEach(
-        text => {
-
-
-            const li =
-                document.createElement(
-                    "li"
-                );
-
-
-            li.textContent =
-                text;
-
-
-            warningList.appendChild(
-                li
-            );
-
-
-        }
+    });
+
+    const enemyXp = encounterMonsters.reduce(
+        (total, monster) => total + (monster.xp * monster.count),
+        0
     );
 
+    const enemyCount = encounterMonsters.reduce(
+        (total, monster) => total + monster.count,
+        0
+    );
 
-    warningsBox.hidden =
-        warnings.length === 0;
+    const highestCR = encounterMonsters.reduce(
+        (highest, monster) => Math.max(highest, Number(monster.crNumber) || 0),
+        0
+    );
 
+    const statBlockCount = encounterMonsters.length;
+
+    document.getElementById("partySizeResult").textContent = formatNumber(partyCount);
+    document.getElementById("enemyXpResult").textContent = formatNumber(enemyXp);
+    document.getElementById("lowBudgetResult").textContent = formatNumber(low);
+    document.getElementById("moderateBudgetResult").textContent = formatNumber(moderate);
+    document.getElementById("highBudgetResult").textContent = formatNumber(high);
+    document.getElementById("enemyCountResult").textContent = formatNumber(enemyCount);
+
+    let difficulty = "Not Calculated";
+    let detail = "Add at least one adventurer to calculate encounter difficulty.";
+
+    if (partyCount > 0) {
+        if (enemyXp <= 0) {
+            difficulty = "No XP Threat";
+            detail = "The listed opposition contributes no encounter XP.";
+        } else if (enemyXp <= low) {
+            difficulty = "Low";
+            detail = `${formatNumber(low - enemyXp)} XP remains in the Low budget.`;
+        } else if (enemyXp <= moderate) {
+            difficulty = "Moderate";
+            detail = `${formatNumber(moderate - enemyXp)} XP remains in the Moderate budget.`;
+        } else if (enemyXp <= high) {
+            difficulty = "High";
+            detail = `${formatNumber(high - enemyXp)} XP remains in the High budget.`;
+        } else {
+            difficulty = "Above High";
+            detail = `${formatNumber(enemyXp - high)} XP above the party's High-difficulty budget.`;
+        }
+    }
+
+    document.getElementById("difficultyResult").textContent = difficulty;
+    document.getElementById("difficultyDetail").textContent = detail;
+
+    const warnings = [];
+
+    if (partyCount > 0 && enemyCount > partyCount * 2) {
+        warnings.push(
+            "There are more than two creatures per character. Large groups can be more dangerous " +
+            "than the XP budget suggests; consider making many of them fragile creatures."
+        );
+    }
+
+    if (partyCount > 0 && highestCR > lowestLevel) {
+        warnings.push(
+            `At least one creature is CR ${highestCR}, above the level of part of the party. ` +
+            "A powerful creature may be able to take out a lower-level character with a single action."
+        );
+    }
+
+    if (statBlockCount > 3) {
+        warnings.push(
+            `This encounter uses ${statBlockCount} different creature stat blocks. ` +
+            "Running more than two or three different stat blocks can become difficult to manage at the table."
+        );
+    }
+
+    const warningsBox = document.getElementById("combatWarnings");
+    const warningList = document.getElementById("warningList");
+    warningList.innerHTML = "";
+
+    warnings.forEach(text => {
+        const li = document.createElement("li");
+        li.textContent = text;
+        warningList.appendChild(li);
+    });
+
+    warningsBox.hidden = warnings.length === 0;
+
+    currentEncounterCalculation = {
+        partyCount,
+        partyGroups,
+        low,
+        moderate,
+        high,
+        enemyXp,
+        enemyCount,
+        difficulty,
+        detail,
+        warnings
+    };
+
+    updateEncounterReference();
 }
 
 
+/* =====================================================
+   ENCOUNTER REFERENCE OUTPUT
+   ===================================================== */
+
+function buildEncounterReference() {
+    const calc = currentEncounterCalculation;
+
+    if (!calc) {
+        return "No encounter built yet.";
+    }
+
+    const title = encounterTitle.value.trim() || "UNTITLED ENCOUNTER";
+    const lines = [];
+
+    lines.push(title.toUpperCase());
+    lines.push("=".repeat(title.length || 18));
+    lines.push("");
+    lines.push("PARTY");
+
+    if (calc.partyGroups.length === 0) {
+        lines.push("No adventurers entered.");
+    } else {
+        calc.partyGroups.forEach(group => {
+            lines.push(`${group.count} × Level ${group.level}`);
+        });
+    }
+
+    lines.push("");
+    lines.push(`Difficulty: ${calc.difficulty}`);
+    lines.push(`Enemy XP: ${formatNumber(calc.enemyXp)}`);
+    lines.push(`Low Budget: ${formatNumber(calc.low)}`);
+    lines.push(`Moderate Budget: ${formatNumber(calc.moderate)}`);
+    lines.push(`High Budget: ${formatNumber(calc.high)}`);
+    lines.push(`Total Creatures: ${formatNumber(calc.enemyCount)}`);
+    lines.push("");
+    lines.push("CREATURES");
+
+    if (encounterMonsters.length === 0) {
+        lines.push("No creatures added.");
+    } else {
+        encounterMonsters.forEach((monster, index) => {
+            const shownName = displayMonsterName(monster);
+
+            lines.push("");
+            lines.push(`${index + 1}. ${monster.count} × ${shownName}`);
+            lines.push(`   Base Creature: ${monster.baseName}`);
+            lines.push(
+                `   CR ${monster.cr} — ${formatNumber(monster.xp)} XP each — ` +
+                `${formatNumber(monster.xp * monster.count)} XP total`
+            );
+            lines.push(`   Source: ${monster.source}`);
+            lines.push(`   Ruleset: ${monster.ruleset}`);
+
+            const note = String(monster.note || "").trim();
+
+            if (note) {
+                lines.push(`   Note: ${note}`);
+            }
+        });
+    }
+
+    if (calc.warnings.length > 0) {
+        lines.push("");
+        lines.push("DM WARNINGS");
+
+        calc.warnings.forEach(warning => {
+            lines.push(`- ${warning}`);
+        });
+    }
+
+    lines.push("");
+    lines.push("Generated with the Ozyleme DM Tools combat calculator.");
+
+    return lines.join("\n");
+}
+
+function updateEncounterReference() {
+    encounterOutputPreview.textContent = buildEncounterReference();
+}
+
+async function copyTextToClipboard(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+    }
+
+    const textarea = document.createElement("textarea");
+
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+
+    document.body.appendChild(textarea);
+
+    textarea.select();
+
+    const copied =
+        document.execCommand("copy");
+
+    textarea.remove();
+
+    if (!copied) {
+        throw new Error("Clipboard copy failed.");
+    }
+}
+
+async function copyEncounterReference() {
+    const text =
+        buildEncounterReference();
+
+    try {
+        await copyTextToClipboard(text);
+
+        copyStatus.textContent =
+            "Encounter copied to clipboard.";
+    }
+
+    catch (error) {
+        console.error(
+            "Encounter copy failed.",
+            error
+        );
+
+        copyStatus.textContent =
+            "Copy was blocked by the browser. Select the reference text below and copy it manually.";
+    }
+}
+
 
 /* =====================================================
-   RESET ENCOUNTER
+   RESET / REFRESH
    ===================================================== */
 
 function resetEncounter() {
+    partyRows.innerHTML = "";
+    encounterMonsters = [];
+    encounterTitle.value = "";
 
-
-    partyRows.innerHTML =
-        "";
-
-
-    encounterMonsters =
-        [];
-
-
-
-    /* DEFAULT PARTY */
-
-    addPartyRow(
-        5,
-        4
-    );
-
-
+    addPartyRow(5, 4);
 
     renderEncounterMonsters();
 
+    monsterSearch.value = "";
+    monsterRulesetFilter.value = "";
 
+    refreshSourceFilter();
 
-    /* RESET SEARCH */
+    monsterSourceFilter.value = "";
+    monsterCRFilter.value = "";
 
-    monsterSearch.value =
-        "";
-
-
-    monsterTypeFilter.value =
-        "";
-
-
-    monsterCRFilter.value =
-        "";
-
-
-
-    if (
-        monsterDatabase.length > 0
-    ) {
-
+    if (monsterDatabase.length > 0) {
         renderMonsterSearchResults();
-
     }
 
-
+    copyStatus.textContent = "";
 
     calculateEncounter();
+}
 
+function refreshMonsterArchive() {
+    if (
+        typeof window.clearOzylemeMonsterCache ===
+        "function"
+    ) {
+        window.clearOzylemeMonsterCache();
+    }
+
+    window.location.reload();
 }
 
 
-
 /* =====================================================
-   BUILD CUSTOM CR DROPDOWN
+   INITIALIZE CONTROLS
    ===================================================== */
 
 document
-    .getElementById(
-        "customMonsterCR"
-    )
+    .getElementById("customMonsterCR")
     .innerHTML =
-        customCROptions(
-            "1"
-        );
+        customCROptions("1");
 
-
-
-/* =====================================================
-   PARTY BUTTON
-   ===================================================== */
 
 document
-    .getElementById(
-        "addPartyGroup"
-    )
+    .getElementById("addPartyGroup")
     .addEventListener(
         "click",
         () => {
-
 
             addPartyRow(
                 5,
                 1
             );
 
-
             calculateEncounter();
-
 
         }
     );
 
 
-
-/* =====================================================
-   CUSTOM MONSTER BUTTON
-   ===================================================== */
-
 document
-    .getElementById(
-        "addCustomMonster"
-    )
+    .getElementById("addCustomMonster")
     .addEventListener(
-
         "click",
-
         addCustomMonster
-
     );
 
 
-
-/* =====================================================
-   CALCULATE BUTTON
-   ===================================================== */
-
 document
-    .getElementById(
-        "calculateEncounter"
-    )
+    .getElementById("calculateEncounter")
     .addEventListener(
-
         "click",
-
         calculateEncounter
-
     );
 
-
-
-/* =====================================================
-   RESET BUTTON
-   ===================================================== */
 
 document
-    .getElementById(
-        "resetEncounter"
-    )
+    .getElementById("copyEncounter")
     .addEventListener(
-
         "click",
-
-        resetEncounter
-
+        copyEncounterReference
     );
 
 
+document
+    .getElementById("copyEncounterReference")
+    .addEventListener(
+        "click",
+        copyEncounterReference
+    );
 
-/* =====================================================
-   PARTY LIVE UPDATES
-   ===================================================== */
+
+document
+    .getElementById("resetEncounter")
+    .addEventListener(
+        "click",
+        resetEncounter
+    );
+
+
+document
+    .getElementById("refreshMonsterArchive")
+    .addEventListener(
+        "click",
+        refreshMonsterArchive
+    );
+
 
 partyRows.addEventListener(
-
     "input",
-
     calculateEncounter
-
 );
 
 
 partyRows.addEventListener(
-
     "change",
-
     calculateEncounter
-
 );
 
 
+encounterTitle.addEventListener(
+    "input",
+    updateEncounterReference
+);
 
-/* =====================================================
-   MONSTER SEARCH
-   ===================================================== */
 
 monsterSearch.addEventListener(
-
     "input",
-
     renderMonsterSearchResults
-
 );
 
 
-
-monsterTypeFilter.addEventListener(
-
+monsterRulesetFilter.addEventListener(
     "change",
+    () => {
 
-    renderMonsterSearchResults
+        refreshSourceFilter();
 
+        renderMonsterSearchResults();
+
+    }
 );
 
+
+monsterSourceFilter.addEventListener(
+    "change",
+    renderMonsterSearchResults
+);
 
 
 monsterCRFilter.addEventListener(
-
     "change",
-
     renderMonsterSearchResults
-
 );
 
 
-
 /* =====================================================
-   START PAGE
+   START
    ===================================================== */
 
 resetEncounter();
 
 initializeMonsterDatabase();
 
-
 </script>
 
-
 </body>
-
 </html>
