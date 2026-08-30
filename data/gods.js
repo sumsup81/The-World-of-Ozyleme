@@ -33,6 +33,10 @@ window.godsData = {
 
         element: "Unknown",
 
+        majorCircle: "Conjuration",
+
+        minorCircle: "Transmutation",
+
         domains: [
             "Life",
             "Peace",
@@ -93,6 +97,10 @@ window.godsData = {
 
         element: "Shadow",
 
+        majorCircle: "Illusion",
+
+        minorCircle: "Necromancy",
+
         domains: [
             "Twilight",
             "Trickery",
@@ -152,6 +160,10 @@ window.godsData = {
 
         element: "Fire",
 
+        majorCircle: "Enchantment",
+
+        minorCircle: "Illusion",
+
         domains: [
             "Light",
             "Trickery"
@@ -209,6 +221,10 @@ window.godsData = {
         role: "Master of Radiance",
 
         element: "Radiance",
+
+        majorCircle: "Evocation",
+
+        minorCircle: "Divination",
 
         domains: [
             "Knowledge",
@@ -274,6 +290,10 @@ window.godsData = {
 
         element: "Nature",
 
+        majorCircle: "Necromancy",
+
+        minorCircle: "Transmutation",
+
         domains: [
             "Nature",
             "Death",
@@ -296,8 +316,10 @@ window.godsData = {
             natural cycle by which living things grow, consume,
             reproduce, decay, die, and return to the world.
 
-            Nature is the Harvester's element, while death remains
-            one of the inevitable consequences of that natural order.
+            While the dead belong to no god in Ozyleme, the Harvester
+            bears responsibility to the Dark Dragon King for seeing
+            that restless souls complete their passage to the
+            Land Under.
         `,
 
         lore: `
@@ -308,12 +330,28 @@ window.godsData = {
             Animals consume other living things to survive.
             Bodies decay and nourish what grows afterward.
 
+            Death does not place a soul beneath the ownership of
+            the Harvester. The Harvester's duty is instead to see
+            that the dead do not remain where they no longer belong.
+
+            Undeath is not the exclusive gift of the Harvester.
+            Every devotional sect may petition its god for the means
+            to summon, bind, command, question, or otherwise manipulate
+            the dead who have not yet returned to the Land Under.
+
+            The form such rites take depends upon the god being invoked,
+            but restless dead remain outside the proper order until
+            they are released, destroyed, or finally returned below.
+
             Nature, Death, and Grave clerics may therefore all serve
             the Harvester while interpreting the god differently.
 
             Gluttony represents nature's endless appetite.
             Everything alive must consume something else simply
             to continue existing.
+
+            The Harvester does not rule the dead.
+            The Harvester sees that the dead do not remain.
         `
 
     },
@@ -335,6 +373,10 @@ window.godsData = {
 
         element: "Water",
 
+        majorCircle: "Divination",
+
+        minorCircle: "Conjuration",
+
         domains: [
             "Knowledge",
             "Tempest",
@@ -351,7 +393,7 @@ window.godsData = {
 
         offering: "TBD",
 
-        taboo: "Taking a creatures eyes",
+        taboo: "Taking a creature's eyes",
 
         outline: `
             The Seer is associated with Hook, deep waters,
@@ -398,6 +440,10 @@ window.godsData = {
 
         element: "Earth",
 
+        majorCircle: "Transmutation",
+
+        minorCircle: "Abjuration",
+
         domains: [
             "Order",
             "War",
@@ -413,7 +459,7 @@ window.godsData = {
 
         offering: "TBD",
 
-        taboo: "Admiting defeat without death",
+        taboo: "Admitting defeat without death",
 
         outline: `
             The Dominator is associated with Bell, mountains,
@@ -456,6 +502,10 @@ window.godsData = {
         role: "Master of Skies",
 
         element: "Air",
+
+        majorCircle: "Abjuration",
+
+        minorCircle: "Evocation",
 
         domains: [
             "Tempest",
