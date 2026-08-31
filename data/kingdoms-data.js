@@ -1,6 +1,315 @@
+/* =========================================================
+   OZYLEME — KINGDOM DATA
+   =========================================================
+   This is the only file that should normally be edited
+   when kingdom lore changes.
+   kingdoms.html builds the page from this data.
+   ========================================================= */
+
+
+const loreKeeper =
+    "It will be recorded here by the Lore Keeper.";
+
+
+const kingdoms = [
+
+
+    /* =====================================================
+       PLUME
+       ===================================================== */
+
+    {
+        id: "plume",
+
+        name: "Plume",
+
+        symbol: "The Feather",
+
+        image: "images/kingdoms/Plume Navi Button.jpg",
+
+        tagline:
+            "The kingdom that learned too much.",
+
+        seat:
+            loreKeeper,
+
+        sovereign:
+            loreKeeper,
+
+        keeper:
+            "The Giver",
+
+        land:
+            "Plume was once a prosperous human kingdom along the coast of Ozyleme. Its cities, libraries, cathedrals, ships, and blue crystal towers were destroyed when Ozyleme commanded the Seer to act. Survivors scattered toward Crook, Kettle, and other lands.",
+
+        faith:
+            "Plume was kept by the Giver. Most of Ozyleme now believes the Giver is lost, absent, or dead, although secret worship still survives.",
+
+        achievements:
+            "Plume was one of the greatest centers of learning, scholarship, invention, and preserved knowledge in Ozyleme. Its scholars discovered something that crossed the limit permitted by the Dragon King, and the kingdom paid for that knowledge with its destruction.",
+
+        politics:
+            loreKeeper,
+
+        economics:
+            "Plume's greatest wealth was knowledge: libraries, scholars, craftsmen, techniques, and discoveries. Much of that wealth was destroyed or scattered during the fall of the kingdom.",
+
+        society:
+            "The people of Plume were primarily human. Its surviving people now live among other kingdoms, carrying fragments of Plume's culture, knowledge, and fear with them.",
+
+        notes: [
+            "Plume was destroyed by the Seer at Ozyleme's command.",
+            "The exact discovery that doomed Plume remains deliberately unrecorded."
+        ]
+    },
+
+
+    /* =====================================================
+       KETTLE
+       ===================================================== */
+
+    {
+        id: "kettle",
+
+        name: "Kettle",
+
+        symbol: "The Cauldron",
+
+        image: "images/kingdoms/Kettle Navi Button.jpg",
+
+        tagline:
+            "Where the forest keeps what it takes.",
+
+        seat:
+            loreKeeper,
+
+        sovereign:
+            loreKeeper,
+
+        keeper:
+            "The Ravager",
+
+        land:
+            "Kettle is a heavily forested kingdom dominated by enormous and ancient woods. Paths disappear beneath the canopy, borders become uncertain, and travelers are rarely certain whether they are being watched.",
+
+        faith:
+            "Kettle is kept by the Ravager, Master of Shadows. In Ozyleme, the Ravager's shadow is a taking force: something is removed, and darkness is what remains.",
+
+        achievements:
+            loreKeeper,
+
+        politics:
+            loreKeeper,
+
+        economics:
+            "Kettle's forests provide rare materials and hidden resources, but the full nature of its trade has not yet been recorded.",
+
+        society:
+            "Forest Elves inhabit much of Kettle. Their relationship with outsiders is often hostile, and workers who venture too deeply into their territory have been known to disappear or be taken.",
+
+        notes: []
+    },
+
+
+    /* =====================================================
+       LOOP
+       ===================================================== */
+
+    {
+        id: "loop",
+
+        name: "Loop",
+
+        symbol: "The Ring",
+
+        image: "images/kingdoms/Loop Navi Button.jpg",
+
+        tagline:
+            "The revel must continue.",
+
+        seat:
+            loreKeeper,
+
+        sovereign:
+            "Quintsara, the Carnival Queen",
+
+        keeper:
+            "The Tormentor",
+
+        land:
+            "Three great calderas dominate Loop. The kingdom is shaped by spectacle, illusion, ritual, revelry, and ceaseless celebration. Festivals can resemble funerals as readily as carnivals.",
+
+        faith:
+            "Loop is kept by the Tormentor, Master of Flame. The Tormentor demands sensation, excess, performance, and celebration, and his revelers are driven to continue the festivities whether they desire rest or not.",
+
+        achievements:
+            "Loop is renowned for carnivals, masks, illusions, performance, grotesque pageantry, macabre humor, mourning rites, and celebrations that transform death itself into spectacle.",
+
+        politics:
+            "Loop is ruled by the Carnival Queen, presently Quintsara. A Carnival Queen may reign for one hundred years. At the end of each century, all of Loop must stage the Grand Circus Tormentus for the Tormentor. If the Tormentor judges the spectacle unsatisfactory, he chooses his favorite performer to become the next ruler. The failed ruler is given as tribute to the Banisher and forgotten, preventing an uprising beneath the memory of the old reign.",
+
+        economics:
+            "Entertainment, spectacle, celebration, performance, and the crafts that support them form an important part of Loop's value to Ozyleme.",
+
+        society:
+            "Fae and Elves are common in Loop. Masks, mourning, grotesque humor, revelry, remembrance, and public performance shape daily life. The boundary between festival and funeral is intentionally thin.",
+
+        notes: [
+            "Quintsara is the current Carnival Queen.",
+            "The Grand Circus Tormentus occurs every one hundred years."
+        ]
+    },
+
+
+    /* =====================================================
+       TORCH
+       ===================================================== */
+
+    {
+        id: "torch",
+
+        name: "Torch",
+
+        symbol: "The Lantern",
+
+        image: "images/kingdoms/Torch Navi Button.jpg",
+
+        tagline:
+            "Brilliance without mercy.",
+
+        seat:
+            loreKeeper,
+
+        sovereign:
+            loreKeeper,
+
+        keeper:
+            "The Inflictor",
+
+        land:
+            "Torch is a wealthy High Elven kingdom with little productive agricultural land. Its cities and estates stand in sharp contrast to the lands that must feed them.",
+
+        faith:
+            "Torch is kept by the Inflictor, Master of Radiance. Radiance is understood less as holy light than as a dangerous, almost radioactive force: brilliant, technological, mutagenic, and harmful through exposure.",
+
+        achievements:
+            "The High Elves of Torch are renowned for magic, technology, invention, weapons, disease-making, and other forms of knowledge that allow suffering to be inflicted at a comfortable distance. The Dragon Forged are among the creations associated with the High Elves.",
+
+        politics:
+            loreKeeper,
+
+        economics:
+            "Torch possesses tremendous magical and technological wealth but little agriculture. It therefore trades heavily with Vial for food, wine, fruit, and other products of the harvest.",
+
+        society:
+            "Torch's High Elves are wealthy, indolent, and heavily reliant on magic and technology. Their architecture and material culture favor an Art Deco character, while their comfort often depends on systems that prevent them from having to perform difficult labor themselves.",
+
+        notes: []
+    },
+
+
+    /* =====================================================
+       VIAL
+       ===================================================== */
+
+    {
+        id: "vial",
+
+        name: "Vial",
+
+        symbol: "The Flagon",
+
+        image: "images/kingdoms/Vial Navi Button.jpg",
+
+        tagline:
+            "Everything ripens. Everything is reaped.",
+
+        seat:
+            "Harvestok",
+
+        sovereign:
+            "Gronok, King of Blood and Vine",
+
+        keeper:
+            "The Harvester",
+
+        land:
+            "Vial contains some of the most fruitful lands in Ozyleme. Vineyards, berry fields, orchards, farms, groves, and dark forests spread across the kingdom. Great cultivated fields tended by Goliaths frequently meet deep woodland inhabited by Forest Orcs. Wicker men and agricultural tributes made from dulled, worn, rusted, and broken farm tools dot both field and forest.",
+
+        faith:
+            "Vial is kept by the Harvester, Master of Death. The people of Vial see little separation between growth, ripening, reaping, decay, and renewal. Farm tools that can no longer serve the harvest are often surrendered back to the land and incorporated into wicker offerings and roadside tributes.",
+
+        achievements:
+            "Vial produces some of the most prized wines and spirits in Ozyleme. Goliaths traditionally crush grapes and berries beneath their enormous bare feet as part of the ritual of winemaking. Harvestok is both a fortress and a vast repository protecting the kingdom's agricultural bounty.",
+
+        politics:
+            "Vial is ruled by Gronok, King of Blood and Vine. The crown follows the lesson of grapes upon the vine: the fullest, ripest, and most able is expected to rise above the others and watch over the kingdom. A ruler remains upon the throne only while capable of bearing that burden. As the grape eventually withers and dies, so too must a ruler eventually surrender the throne, allowing another judged ripe and able enough to take their place.",
+
+        economics:
+            "Harvestok protects great stores of grain, fruit, seed, wine, spirits, and other valuable agricultural bounty. Vial's wine is especially precious to High King Ozyleme and is used in his dealings with the Gnomes who guard his central kingdom. Vial trades heavily with Torch, where agriculture is scarce, while merchants and inhabitants of Hook and Bell also trade for Vial's wines and spirits.",
+
+        society:
+            "Goliaths tend much of Vial's open farmland, vineyards, orchards, and berry fields. Forest Orcs inhabit the groves and forests, where they can remain hidden from their kin in Hook. Some assist the Goliaths during planting and harvest, but many prefer to remain beneath the trees and trade forest goods with their enormous neighbors. Field and forest remain distinct, but each depends upon the other.",
+
+        notes: [
+            "Gronok bears the title King of Blood and Vine.",
+            "Harvestok is the seat of rule and a fortified repository of agricultural wealth.",
+            "Forest Orcs of Vial often remain hidden from their Hook kin."
+        ]
+    },
+
+
+    /* =====================================================
+       HOOK
+       ===================================================== */
+
+    {
+        id: "hook",
+
+        name: "Hook",
+
+        symbol: "The Hook",
+
+        image: "images/kingdoms/Hook Navi Button.jpg",
+
+        tagline:
+            "The sea remembers its exiles.",
+
+        seat:
+            loreKeeper,
+
+        sovereign:
+            loreKeeper,
+
+        keeper:
+            "The Seer",
+
+        land:
+            "Hook is strongly associated with water, coastlines, sailors, and the old maritime history of the Orcs. Its deeper geography has not yet been fully recorded.",
+
+        faith:
+            "Hook is kept by the Seer, Master of Depths. The Seer is both watcher and keeper, associated with dangerous knowledge and the things that wait below.",
+
+        achievements:
+            loreKeeper,
+
+        politics:
+            loreKeeper,
+
+        economics:
+            "Sea travel, coastal trade, fishing, piracy, and exchange with neighboring kingdoms all shape Hook, although its full economy has not yet been recorded.",
+
+        society:
+            "Orcs were once widely regarded as a people of the sea. Orc tribes still maintain settlements along the coasts of Hook, preserving a connection to an older Orcish identity that predates many inland communities.",
+
+        notes: []
+    },
+
+
     /* =====================================================
        BELL
        ===================================================== */
+
     {
         id: "bell",
 
@@ -26,7 +335,7 @@
             "Bell is a kingdom of high mountains, ancient caverns, and enormous subterranean Vaults carved deep beneath the stone. It is said that in an age when the Elves concerned themselves with the lands above, the Dwarves ruled much of what lay below. There is still much to be found beneath the deepest graves, where darkness conceals forgotten passages, old dangers, mysteries, and treasure. Vault Ozobell is the seat of the kingdom and the greatest of the Dwarven Vaults. Its chambers descend deep into the mountains through halls, galleries, foundries, refineries, fortifications, and passages whose oldest reaches predate living memory. Throughout Bell, the pounding of metal carries through the stone. Hammer strikes, great presses, refinery works, and the casting of metal ring through the subterranean chambers until even distant parts of the kingdom seem to answer with echoes. To the south lie shattered islands believed to be the remains of a once-great southern Dwarven kingdom. A cataclysmic event is said to have destroyed that realm and driven much of the Dwarven population into Bell. Dwarven colonies still survive elsewhere in Ozyleme, including settlements in northern Plume, but the vast majority of Dwarves now reside within Bell.",
 
         faith:
-            "No kingdom in all of Ozyleme is more devoted to the Keeper of its realm than the Dwarven Houses of Bell. The Dominator, Master of Mountains, is woven into nearly every aspect of Dwarven life: ancestry, rank, labor, law, defense, and the permanence of stone. Some traditions hold that Bell itself is not merely the Dominator's realm, but a physical expression of the Dominator itself. To the Dwarves, the mountain does not simply shelter them. It establishes where everything belongs.",
+            "No kingdom in all of Ozyleme is more devoted to the Keeper of its realm than the Dwarven Houses of Bell. The Dominator, Master of Mountains, is woven into nearly every aspect of Dwarven life: ancestry, rank, labor, law, defense, and the permanence of stone. Some Dwarven traditions go further, holding that Bell itself is not merely the Dominator's realm, but the Dominator itself. To the Dwarves, the mountain does not simply shelter them. It establishes where everything belongs.",
 
         achievements:
             "The Dwarves of Bell once commanded vast underground territories and are remembered among the greatest miners, smiths, refiners, engineers, and stoneworkers in Ozyleme. The richest veins of precious metal were harvested long ago, and gemstones are now said to be rarer than a stone's sweat. Rather than abandon their craft, the Dwarves became masters of reclamation. Enormous refineries within the mountains melt, separate, purify, and reuse metals gathered from the surface world. Day and night, the refineries resound with the pounding of hammers and the ringing of cast metal. Bell transforms the discarded works of other kingdoms into material that can be forged and used again.",
@@ -43,16 +352,79 @@
         notes: [
             "Bell is predominantly Dwarven.",
             "Dwarven castles and mountain fortresses are called Vaults.",
-            "The royal seat is Vault Ozobell.",
+            "Vault Ozobell is the royal seat of Bell.",
             "The Dwarven Houses are Ozythril, Platinum, Gold, Silver, Copper, Iron, Lead, and Stone.",
             "The monarch is always chosen from House Ozythril.",
             "The current ruler is King Trofin Ozyhammer the 290th.",
             "House Iron guards the upper approaches of the mountain Vaults.",
             "Precious metals within Bell were largely exhausted long ago.",
             "Gemstones are said to be rarer than a stone's sweat.",
-            "Bell's massive refineries specialize in reclaiming and recycling metal from the surface.",
+            "Bell's massive refineries specialize in reclaiming and recycling metal gathered from the surface.",
             "The pounding of hammers and ringing of cast metal can be heard throughout much of the subterranean kingdom.",
             "The shattered southern islands are associated with a lost Dwarven kingdom and an ancient catastrophe.",
             "Dwarven colonies remain outside Bell, including settlements in northern Plume."
         ]
     },
+
+
+    /* =====================================================
+       CROOK
+       ===================================================== */
+
+    {
+        id: "crook",
+
+        name: "Crook",
+
+        symbol: "The Staff",
+
+        image: "images/kingdoms/Crook Navi Button.jpg",
+
+        tagline:
+            "Beneath the open sky, the flock survives.",
+
+        seat:
+            "Sheepfold",
+
+        sovereign:
+            "The Gray Shepherd, King Olean Peele",
+
+        keeper:
+            "The Banisher",
+
+        land:
+            "Crook is a kingdom of broad grasslands, rough fields, treacherous wetlands, deep mines, and wild open country beneath dangerous skies. Palisade-protected villages dot the countryside, many built near or above mines of Dark Dragon Coal. The fires used to burn this black fuel can often be seen glowing upon the distant horizon, and travelers use the smoke and furnace-light as landmarks when navigating the open country. The land is also scattered with enormous ruins believed to be the remains of a lost tribe of Giants. Sheepfold, the seat of the Gray Shepherd, is a great fortress surrounded by treacherous and devouring marshlands. Some survivors of Plume fled into Crook following the destruction of their kingdom.",
+
+        faith:
+            "Crook is kept by the Banisher, Master of Skies. The Banisher is associated with wrath, force, eradication, and the proper departure of what must be removed. Wanderers who show little fear of the beasts and dangers of Crook often become terrified when speaking of the land itself and especially of the Banisher.",
+
+        achievements:
+            "The people of Crook have learned to survive in a land where little can afford to be wasted. Livestock are used for far more than food and labor. Hide, bone, horn, sinew, teeth, hooves, and other remains of beasts of burden are worked into homes, tools, furniture, containers, fittings, weapons, and everyday goods. Crook is also well known for practical medicines used to treat the parasites common among livestock, travelers, miners, and those living near the kingdom's marshes.",
+
+        politics:
+            "Crook is ruled from Sheepfold by the Gray Shepherd, King Olean Peele. He is said to have been personally chosen by Ozyleme himself to tend the kingdom and has ruled Crook for more than ten yearturns. The title of Shepherd King remains associated with the ruler of Crook, while Olean Peele is commonly called the Gray Shepherd.",
+
+        economics:
+            "Livestock and hardy root vegetables form the foundation of Crook's trade. Herd animals are raised throughout the safer grasslands, while root crops are cultivated wherever the soil can support them. Medicines for worms, parasites, and other infestations are another valued export. Dark Dragon Coal is mined beneath many settlements and burned throughout the kingdom. Crook's culture of using nearly every part of its animals also supports a trade in bone, horn, hide, sinew, and goods crafted from them.",
+
+        society:
+            "Humans form much of Crook's settled population and commonly live within fortified villages surrounded by heavy wooden palisades. Feral Halfling communities inhabit the grasslands and wild places beyond them. According to old Crook legend, the Halflings descend from a lost tribe of Giants who committed some forgotten misdeed and were struck into quarters for their crimes, leaving their scattered descendants diminished and feral. Whether the story is history, religious warning, or merely an old insult has been lost. Wanderers are also occasionally seen crossing Crook's fields alone or in ragged groups. They appear to exist in a perpetual state of madness, speaking in fragments, warnings, and half-remembered stories. Strangely, the creatures of Crook tend to leave them alone. Wanderers may know secrets concerning forgotten roads, hidden places, buried entrances, and ruins no longer marked upon any map.",
+
+        notes: [
+            "Sheepfold is the fortified seat of power in Crook.",
+            "The Gray Shepherd is King Olean Peele.",
+            "King Olean Peele is said to have been chosen by Ozyleme himself.",
+            "Olean Peele has ruled for more than ten yearturns.",
+            "Wanderers are commonly regarded as mad, yet may possess knowledge of hidden places.",
+            "The creatures of Crook strangely tend to leave Wanderers alone.",
+            "Wanderers show a particular fear of the Banisher.",
+            "Crook's countryside contains ruins attributed to a lost Giant tribe.",
+            "Old legend claims the feral Halflings descend from Giants who were struck into quarters.",
+            "Many palisade villages are connected to mines of Dark Dragon Coal.",
+            "The glow of burning Dark Dragon Coal is used as a landmark by travelers.",
+            "Livestock and root vegetables are among Crook's primary exports.",
+            "Crook is known for medicines used against parasites."
+        ]
+    }
+
+];
