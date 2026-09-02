@@ -17,6 +17,96 @@
         href="style.css"
     >
 
+    <style>
+
+        /* =========================================================
+           PLAYER GUIDE DIRECTORY CARDS
+           ========================================================= */
+
+        .player-guide-cards {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 28px;
+        }
+
+        .player-guide-card {
+            display: block;
+            min-height: 155px;
+            padding: 28px 24px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(44, 43, 35, 0.92),
+                    rgba(15, 15, 13, 0.96)
+                );
+
+            border: 1px solid #4c493d;
+            border-radius: 4px;
+
+            color: #d8d0bc;
+            text-decoration: none;
+
+            transition:
+                transform 0.2s ease,
+                border-color 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .player-guide-card h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+
+            color: #d2c59e;
+            font-size: 1.3rem;
+        }
+
+        .player-guide-card p {
+            margin: 0;
+
+            color: #aaa48f;
+            line-height: 1.6;
+        }
+
+        .player-guide-card:hover,
+        .player-guide-card:focus-visible {
+            transform: translateY(-3px);
+
+            border-color: #70352f;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(55, 49, 39, 0.96),
+                    rgba(20, 18, 15, 0.98)
+                );
+        }
+
+        .player-guide-card:focus-visible {
+            outline: 2px solid #7a4840;
+            outline-offset: 3px;
+        }
+
+
+        /* =========================================================
+           MOBILE
+           ========================================================= */
+
+        @media (max-width: 700px) {
+
+            .player-guide-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .player-guide-card {
+                min-height: 125px;
+            }
+
+        }
+
+    </style>
+
 </head>
 
 
@@ -112,6 +202,118 @@
 
 
     <!-- ================================
+         INTRODUCTION
+         ================================ -->
+
+    <section>
+
+        <h2>
+            Player Guide to Ozyleme
+        </h2>
+
+        <p>
+            This guide contains the knowledge, customs, beliefs,
+            and rules needed to create a character who belongs
+            beneath the hollow sun of Ozyleme.
+        </p>
+
+        <p>
+            You do not need to know every kingdom, god, creature,
+            or piece of history before playing. Begin with what
+            your character would reasonably know and allow the
+            darker mysteries of Ozyleme to reveal themselves
+            during play.
+        </p>
+
+    </section>
+
+
+    <!-- ================================
+         PLAYER GUIDE CARDS
+         ================================ -->
+
+    <section>
+
+        <div class="player-guide-cards">
+
+
+            <a
+                class="player-guide-card"
+                href="character-builder.html"
+            >
+
+                <h3>
+                    Character Builder
+                </h3>
+
+                <p>
+                    Create, save, load, and export your
+                    Ozyleme character.
+                </p>
+
+            </a>
+
+
+            <a
+                class="player-guide-card"
+                href="#common-knowledge"
+            >
+
+                <h3>
+                    Things Everyone Knows
+                </h3>
+
+                <p>
+                    The world, kingdoms, gods, customs,
+                    and beliefs known by ordinary people.
+                </p>
+
+            </a>
+
+
+            <a
+                class="player-guide-card"
+                href="#roleplay"
+            >
+
+                <h3>
+                    How to Roleplay
+                </h3>
+
+                <p>
+                    Build a character who feels like they
+                    were actually raised in Ozyleme.
+                </p>
+
+            </a>
+
+
+            <a
+                class="player-guide-card"
+                href="#dragon-king"
+            >
+
+                <h3>
+                    The Dragon King
+                </h3>
+
+                <p>
+                    What the people of Ozyleme know,
+                    believe, and fear about their King.
+                </p>
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- ================================
          CHARACTER BUILDER
          ================================ -->
 
@@ -139,36 +341,6 @@
 
         <p>
             Create, save, load, and export your Ozyleme character.
-        </p>
-
-    </section>
-
-
-    <div class="divider"></div>
-
-
-    <!-- ================================
-         PLAYER GUIDE INTRODUCTION
-         ================================ -->
-
-    <section>
-
-        <h2>
-            Player Guide to Ozyleme
-        </h2>
-
-        <p>
-            This guide contains the knowledge, customs, beliefs,
-            and rules needed to create a character who belongs
-            beneath the hollow sun of Ozyleme.
-        </p>
-
-        <p>
-            You do not need to know every kingdom, god, creature,
-            or piece of history before playing. Begin with what
-            your character would reasonably know and allow the
-            darker mysteries of Ozyleme to reveal themselves
-            during play.
         </p>
 
     </section>
@@ -590,7 +762,7 @@
          ROLEPLAY
          ================================ -->
 
-    <section>
+    <section id="roleplay">
 
         <h2>
             How to Roleplay in Ozyleme
@@ -702,7 +874,7 @@
          DRAGON KING
          ================================ -->
 
-    <section>
+    <section id="dragon-king">
 
         <h2>
             The Dragon King
