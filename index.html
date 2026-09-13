@@ -32,6 +32,150 @@
 
 
         /* =====================================================
+           HOME INTRODUCTION
+           ===================================================== */
+
+        .home-intro {
+
+            max-width: 860px;
+
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+
+
+        .home-intro p {
+
+            line-height: 1.75;
+
+        }
+
+
+        .home-intro-opening {
+
+            font-size: 1.08rem;
+
+        }
+
+
+        .friend-line {
+
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+
+            padding-left: 1.25rem;
+
+            border-left: 3px solid #8d7338;
+
+        }
+
+
+        .essence-ending {
+
+            margin-top: 2rem;
+
+            text-align: center;
+
+        }
+
+
+        .essence-ending p {
+
+            margin: 0.25rem 0;
+
+        }
+
+
+        .essence-ending strong {
+
+            font-size: 1.15rem;
+
+            letter-spacing: 0.04em;
+
+        }
+
+
+        /* =====================================================
+           HOME SECTION NAVIGATION
+           ===================================================== */
+
+        .home-paths {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(0, 1fr)
+                );
+
+            gap: 1.25rem;
+
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+
+        }
+
+
+        .home-path {
+
+            display: block;
+
+            padding: 1.35rem;
+
+            color: inherit;
+
+            text-decoration: none;
+
+            background:
+                rgba(15, 15, 15, 0.42);
+
+            border:
+                1px solid
+                rgba(160, 140, 90, 0.32);
+
+            transition:
+                transform 0.2s ease,
+                border-color 0.2s ease,
+                background 0.2s ease;
+
+        }
+
+
+        .home-path:hover {
+
+            transform: translateY(-2px);
+
+            border-color:
+                rgba(170, 145, 80, 0.60);
+
+            background:
+                rgba(25, 25, 25, 0.52);
+
+        }
+
+
+        .home-path h3 {
+
+            margin-top: 0;
+            margin-bottom: 0.55rem;
+
+        }
+
+
+        .home-path p {
+
+            margin-bottom: 0;
+
+            line-height: 1.55;
+
+            opacity: 0.88;
+
+        }
+
+
+        /* =====================================================
            ESSENCE OF EXPERIENCE
            ===================================================== */
 
@@ -349,6 +493,21 @@
         }
 
 
+        /* =====================================================
+           MOBILE
+           ===================================================== */
+
+        @media (max-width: 700px) {
+
+            .home-paths {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
         @media (max-width: 600px) {
 
             .dm-secret-button img {
@@ -470,32 +629,153 @@
 <main>
 
 
-    <!-- ================================
-         WELCOME
-         ================================ -->
+    <!-- =====================================================
+         WELCOME TO OZYLEME
+         ===================================================== -->
 
-    <section>
+    <section class="home-intro">
 
         <h2>
             Welcome to Ozyleme
         </h2>
 
 
+        <p class="home-intro-opening">
+
+            Well, it seems you have made it this far.
+
+        </p>
+
+
+        <div class="friend-line">
+
+            <p>
+
+                <strong>
+                    Lucky for you, you have a Friend in a Hat.
+                </strong>
+
+            </p>
+
+
+            <p>
+
+                He is a good friend, and somehow he has managed to see you
+                safely this far into the world of Ozyleme.
+
+                You may see him from time to time.
+
+                He may offer advice.
+
+                He may lend a hand.
+
+                He may even appear when you need him most.
+
+            </p>
+
+
+            <p>
+
+                After all, he is a good friend.
+
+            </p>
+
+        </div>
+
+
         <p>
 
-            Beneath a sickly sky and the light of a hollow white sun lies Ozyleme,
-            a world divided among eight kingdoms and watched by ancient gods.
+            And friends are difficult things to come by in Ozyleme.
 
         </p>
 
 
         <p>
 
-            Beyond their borders lie black deserts, mist-shrouded wilderness,
-            strange peoples, forgotten ruins, and the distant shadow of the
-            Dragon King.
+            This world follows rules of its own.
+
+            To someone peering in from beyond it, those rules might seem
+            dark, sinister, and at times even terrifying.
+
+            Yet fear not, Adventurer of the Realm.
+
+            There are still places where life is permitted to carry on
+            in relative peace.
 
         </p>
+
+
+        <p>
+
+            Ozyleme, the Dragon King, does not trouble himself with every
+            mortal affair.
+
+            Across much of the realm, he has entrusted dominion to his
+            ancient minions:
+
+            <strong>the Gods</strong>,
+
+            who rule the lands beneath him and shape the lives of those
+            who dwell there.
+
+        </p>
+
+
+        <p>
+
+            Perhaps somewhere among their kingdoms you will find purpose.
+
+        </p>
+
+
+        <p>
+
+            Perhaps you will simply find a way to survive.
+
+        </p>
+
+
+        <p>
+
+            In a cruel world, even small comforts are worth remembering:
+
+            a few drops of sweet wine,
+
+            the passing warmth of a gentle breeze,
+
+            a quiet room,
+
+            or even a brief pause in the relentless noises beyond the door.
+
+        </p>
+
+
+        <div class="essence-ending">
+
+            <p>
+                But there is something greater within every living creature.
+            </p>
+
+            <p>
+                Something that drives ambition, growth, violence, discovery,
+                and power.
+            </p>
+
+            <p>
+                Your source.
+            </p>
+
+            <p>
+                Your Essence.
+            </p>
+
+            <p>
+                <strong>
+                    The Essence of Experience.
+                </strong>
+            </p>
+
+        </div>
 
     </section>
 
@@ -504,13 +784,225 @@
 
 
     <!-- =====================================================
-         ESSENCE OF EXPERIENCE
+         CHOOSE A PATH
          ===================================================== -->
 
-    <section class="essence-section">
+    <section>
 
         <h2>
-            The Essence of Experience
+            Begin Here
+        </h2>
+
+
+        <div class="home-paths">
+
+
+            <a class="home-path"
+               href="#explore-ozyleme">
+
+                <h3>
+                    Explore Ozyleme
+                </h3>
+
+                <p>
+
+                    Learn about the kingdoms, peoples, gods, creatures,
+                    and paths found throughout the Realm of the Dark Dragon.
+
+                </p>
+
+            </a>
+
+
+            <a class="home-path"
+               href="#unique-rules">
+
+                <h3>
+                    Unique Rules of the Realm
+                </h3>
+
+                <p>
+
+                    Learn how Experience, treasure, multiclassing,
+                    Soul Deeds, and other strange laws work in Ozyleme.
+
+                </p>
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- =====================================================
+         EXPLORE OZYLEME
+         ===================================================== -->
+
+    <section id="explore-ozyleme">
+
+        <h2>
+            Explore Ozyleme
+        </h2>
+
+
+        <div class="cards">
+
+
+            <!-- KINGDOMS -->
+
+            <a class="card"
+               href="kingdoms.html">
+
+                <h3>
+                    The Eight Kingdoms
+                </h3>
+
+                <p>
+
+                    Plume, Kettle, Loop, Torch, Vial, Hook, Bell, and Crook.
+
+                </p>
+
+            </a>
+
+
+            <!-- SPECIES -->
+
+            <a class="card"
+               href="species.html">
+
+                <h3>
+                    Species
+                </h3>
+
+                <p>
+
+                    The mortal, created, transformed, and Umbral inhabitants
+                    of Ozyleme.
+
+                </p>
+
+            </a>
+
+
+            <!-- PEOPLE -->
+
+            <a class="card"
+               href="people.html">
+
+                <h3>
+                    People of Ozyleme
+                </h3>
+
+                <p>
+
+                    Important figures, rulers, wanderers, villains, and other
+                    inhabitants of the world.
+
+                </p>
+
+            </a>
+
+
+            <!-- GODS -->
+
+            <a class="card"
+               href="gods.html">
+
+                <h3>
+                    The Gods
+                </h3>
+
+                <p>
+
+                    The ancient powers who rule beneath the Dragon King
+                    and shape the lives of mortals.
+
+                </p>
+
+            </a>
+
+
+            <!-- BESTIARY -->
+
+            <a class="card"
+               href="bestiary.html">
+
+                <h3>
+                    Bestiary
+                </h3>
+
+                <p>
+
+                    Creatures, horrors, beasts, and nightmares found
+                    throughout Ozyleme.
+
+                </p>
+
+            </a>
+
+
+            <!-- CLASSES -->
+
+            <a class="card"
+               href="classes.html">
+
+                <h3>
+                    Classes
+                </h3>
+
+                <p>
+
+                    The paths of adventurers and how they are altered
+                    by the gods, magic, and strange laws of Ozyleme.
+
+                </p>
+
+            </a>
+
+
+            <!-- PLAYER GUIDE -->
+
+            <a class="card"
+               href="player-guide.html">
+
+                <h3>
+                    Player Guide
+                </h3>
+
+                <p>
+
+                    Customs, calendars, character creation, and the things
+                    every adventurer should know before entering the realm.
+
+                </p>
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- =====================================================
+         UNIQUE RULES
+         ===================================================== -->
+
+    <section
+        class="essence-section"
+        id="unique-rules">
+
+        <h2>
+            Unique Rules of the Realm
         </h2>
 
 
@@ -518,67 +1010,30 @@
 
             <p>
 
-                In the world of Ozyleme, all creatures carry the
-                <strong>Essence of Experience</strong>.
+                Ozyleme does not always obey the rules of other worlds.
 
-                It is the source of their animation, their motivations,
-                their struggles, and their growth.
+                Experience is more than a measure of accomplishment.
 
-            </p>
-
-
-            <p>
-
-                When a creature is dispatched, some measure of that essence
-                is released into the world for others to claim.
-
-                Those who train in the skilled classes of occupation learn
-                to turn that essence into something greater.
+                It is an Essence carried by living creatures and released
+                through struggle, death, discovery, and survival.
 
             </p>
 
 
             <p>
 
-                A sorcerer may draw it deep into the bones until new power
-                ignites within them.
-
-                A barbarian may feed it into rage until flesh and fury become
-                terrible strength.
-
-                However it is used, Experience is more than a tally of deeds.
-
-                It is power carried by the living.
+                Adventurers may gather it, save it, spend it, bargain with it,
+                and sometimes surrender it for things that ordinary coin
+                cannot buy.
 
             </p>
-
-
-            <div class="friend-in-hat">
-
-                <p>
-
-                    <strong>Your Friend in a Hat knows this very well.</strong>
-
-                </p>
-
-                <p>
-
-                    He is quite willing to take certain treasures from your
-                    hands, particularly magical ones, and return something
-                    considerably more useful:
-
-                    <strong>Experience.</strong>
-
-                </p>
-
-            </div>
 
         </div>
 
 
 
         <!-- ===============================================
-             TREASURE EXCHANGE
+             TRADING TREASURE
              =============================================== -->
 
         <div class="rule-card">
@@ -589,6 +1044,25 @@
 
 
             <p class="rule-card-intro">
+
+                Your Friend in a Hat understands the value of Experience
+                better than most.
+
+            </p>
+
+
+            <p>
+
+                He is quite willing to take certain treasures from your hands,
+                particularly magical ones, and return something considerably
+                more useful:
+
+                <strong>Experience.</strong>
+
+            </p>
+
+
+            <p>
 
                 The greater the treasure surrendered, the less efficiently
                 its value can be drawn out as Experience.
@@ -729,8 +1203,10 @@
                 <strong>The exchange is progressive.</strong>
 
                 Each portion of a treasure's value is exchanged at the rate
-                belonging to that portion. A costly relic therefore does not
-                suddenly lose the value of its first few hundred gold pieces.
+                belonging to that portion.
+
+                A costly relic therefore does not suddenly lose the value
+                of its first few hundred gold pieces.
 
             </div>
 
@@ -740,8 +1216,10 @@
                 Gemstones and other treasures with an established gold-piece
                 value use the same exchange.
 
-                Ordinary coinage is not enough. The Friend in a Hat is
-                interested in treasures worthy of the exchange.
+                Ordinary coinage is not enough.
+
+                Your Friend in a Hat is interested in treasures worthy of
+                the exchange.
 
             </div>
 
@@ -771,9 +1249,10 @@
 
             <p>
 
-                Experience may be used to advance in a class, pursue another class,
-                strengthen equipment, awaken new properties in an item, purchase a
-                Soul Deed, or take part in other bargains where Experience is accepted.
+                Experience may be used to advance in a class, pursue another
+                class, strengthen equipment, awaken new properties in an item,
+                purchase a Soul Deed, or take part in other bargains where
+                Experience is accepted.
 
             </p>
 
@@ -809,22 +1288,28 @@
                 This permission may come from the appropriate God of Ozyleme,
                 or from Ozyleme himself.
 
-                It may be sought through ritual, prayer, sacrifice, pilgrimage,
-                service, or another act suited to the power being petitioned.
+                It may be sought through ritual, prayer, sacrifice,
+                pilgrimage, service, or another act suited to the power
+                being petitioned.
 
             </p>
 
 
             <p>
 
-                What is demanded, and whether permission is granted, is determined
-                through play.
+                What is demanded, and whether permission is granted, is
+                determined through play.
 
                 Experience provides the power to walk the new path.
 
                 The gods decide whether the path is opened.
 
             </p>
+
+
+            <h4>
+                Altering Equipment
+            </h4>
 
 
             <p>
@@ -840,7 +1325,9 @@
 
             <div class="rule-note">
 
-                <strong>Experience is yours to spend.</strong>
+                <strong>
+                    Experience is yours to spend.
+                </strong>
 
                 Characters may save or use their earned XP as they wish,
                 provided they meet any requirements attached to what they
@@ -851,7 +1338,9 @@
 
             <div class="rule-note danger-rule">
 
-                <strong>A character can never lose a level by spending XP.</strong>
+                <strong>
+                    A character can never lose a level by spending XP.
+                </strong>
 
                 Only Experience earned beyond the minimum required for the
                 character's current level may be spent.
@@ -885,9 +1374,10 @@
             <p>
 
                 Your Friend in a Hat can provide a
-                <strong>Soul Deed</strong>, a peculiar contract protecting
-                its bearer when death reaches farther than ordinary death
-                saves can follow.
+                <strong>Soul Deed</strong>,
+
+                a peculiar contract protecting its bearer when death reaches
+                farther than ordinary death saves can follow.
 
             </p>
 
@@ -988,167 +1478,13 @@
 
             <div class="rule-note">
 
-                An unused Soul Deed may be traded in when its bearer outgrows
-                it.
+                An unused Soul Deed may be traded in when its bearer
+                outgrows it.
 
                 The value already paid is credited toward the stronger deed,
                 and only the difference in XP must be surrendered.
 
             </div>
-
-        </div>
-
-    </section>
-
-
-    <div class="divider"></div>
-
-
-    <!-- ================================
-         EXPLORE THE WORLD
-         ================================ -->
-
-    <section>
-
-        <h2>
-            Explore the World
-        </h2>
-
-
-        <div class="cards">
-
-
-            <!-- KINGDOMS -->
-
-            <a class="card"
-               href="kingdoms.html">
-
-                <h3>
-                    The Eight Kingdoms
-                </h3>
-
-                <p>
-
-                    Plume, Kettle, Loop, Torch, Vial, Hook, Bell, and Crook.
-
-                </p>
-
-            </a>
-
-
-            <!-- SPECIES -->
-
-            <a class="card"
-               href="species.html">
-
-                <h3>
-                    Species
-                </h3>
-
-                <p>
-
-                    The mortal, created, transformed, and Umbral inhabitants
-                    of Ozyleme.
-
-                </p>
-
-            </a>
-
-
-            <!-- PEOPLE -->
-
-            <a class="card"
-               href="people.html">
-
-                <h3>
-                    People of Ozyleme
-                </h3>
-
-                <p>
-
-                    Important figures, rulers, wanderers, villains, and other
-                    inhabitants of the world.
-
-                </p>
-
-            </a>
-
-
-            <!-- GODS -->
-
-            <a class="card"
-               href="gods.html">
-
-                <h3>
-                    The Gods
-                </h3>
-
-                <p>
-
-                    The powers that watch over the kingdoms and shape mortal
-                    existence.
-
-                </p>
-
-            </a>
-
-
-            <!-- BESTIARY -->
-
-            <a class="card"
-               href="bestiary.html">
-
-                <h3>
-                    Bestiary
-                </h3>
-
-                <p>
-
-                    Creatures, horrors, beasts, and nightmares found throughout
-                    Ozyleme.
-
-                </p>
-
-            </a>
-
-
-            <!-- CLASSES -->
-
-            <a class="card"
-               href="classes.html">
-
-                <h3>
-                    Classes
-                </h3>
-
-                <p>
-
-                    How the familiar paths of adventurers are altered by the
-                    gods, magic, and strange laws of Ozyleme.
-
-                </p>
-
-            </a>
-
-
-            <!-- PLAYER GUIDE -->
-
-            <a class="card"
-               href="player-guide.html">
-
-                <h3>
-                    Player Guide
-                </h3>
-
-                <p>
-
-                    Everything needed to create a character who belongs in
-                    Ozyleme, including its calendar, customs, and rules of play.
-
-                </p>
-
-            </a>
-
 
         </div>
 
